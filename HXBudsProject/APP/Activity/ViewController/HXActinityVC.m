@@ -11,6 +11,7 @@
 #import "HXActivityOneVC.h"
 #import "HXActivityTwoVC.h"
 #import "HXActivityThreeVC.h"
+
 @interface HXActinityVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
 @property(nonatomic,strong)SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
@@ -21,6 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
+    if (self.isHomeEntrance) {
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:[UIButton lh_buttonWithFrame:CGRectMake(0, 0, 40, 40) target:self action:@selector(backAction) image:kImageNamed(@"back")]];
+    }
+    
     
     self.navigationItem.titleView = [UILabel lh_labelWithFrame:CGRectMake(0, 0, 50, 44) text:@"活动专区" textColor:kWhiteColor font:FONT(20) textAlignment:NSTextAlignmentCenter backgroundColor:kClearColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -33,6 +39,11 @@
 
 
 }
+- (void)backAction{
+
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)setupSegmentedControl {
     
     NSArray *title_arr = @[@"演出音乐会", @"艺术比赛", @"考级报名"];

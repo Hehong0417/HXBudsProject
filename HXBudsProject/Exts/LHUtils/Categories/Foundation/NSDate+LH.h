@@ -61,4 +61,7 @@
 + (NSDate *)getCustomDateWithHour:(NSInteger)hour minute:(NSInteger)minute;
 
 +(int)compareDate:(NSString*)date01 withDate:(NSString*)date02;
+
++ (NSInteger)getAgeFromBirthDay:(NSDate *)birthday;
+
 @end

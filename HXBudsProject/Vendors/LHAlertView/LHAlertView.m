@@ -48,9 +48,9 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-//        [self defaulInit];
+        [self defaulInit];
     }
-    return self;
+    return self;   
 }
 
 - (void)defaulInit {

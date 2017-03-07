@@ -10,4 +10,6 @@
 
 @interface HXCourseListVC : UIViewController
 
+@property(nonatomic,assign) BOOL isHomeEntrance;
+
 @end

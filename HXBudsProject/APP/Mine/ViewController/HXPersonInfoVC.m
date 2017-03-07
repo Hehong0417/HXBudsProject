@@ -7,9 +7,10 @@
 //
 
 #import "HXPersonInfoVC.h"
-
+#import "HXCommonPickView.h"
 @interface HXPersonInfoVC ()
 @property(nonatomic,strong)NSMutableArray *testArr;
+
 @end
 
 @implementation HXPersonInfoVC
@@ -22,6 +23,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:saveBtn];
 
     self.testArr = [NSMutableArray arrayWithObjects:@"2",@"3",@"4", nil];
+    
     
 }
 
@@ -97,12 +99,29 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if (indexPath.row == 4) {
+        //性别
+        HXCommonPickView *pickView = [[HXCommonPickView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        pickView.style = HXCommonPickViewStyleSex;
+        [pickView showPickViewAnimation:YES];
         
+        pickView.completeBlock = ^(NSString *selectedItem){
+        
+        
+        
+        };
         
     }else if(indexPath.row == 5){
-    
-    
-    
+        //年龄
+        HXCommonPickView *pickView = [[HXCommonPickView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        pickView.style = HXCommonPickViewStyleDate;
+        [pickView showPickViewAnimation:YES];
+        
+        pickView.completeBlock = ^(NSString *selectedItem){
+            
+            
+            
+        };
+
     }
 
 }

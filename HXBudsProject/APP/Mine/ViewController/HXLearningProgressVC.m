@@ -7,8 +7,10 @@
 //
 
 #import "HXLearningProgressVC.h"
+#import "UIScrollView+EmptyDataSet.h"
+#import "HXCourseListVC.h"
 
-@interface HXLearningProgressVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface HXLearningProgressVC ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property(nonatomic,strong)UITableView *tabView;
 
@@ -22,33 +24,66 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    UIView *view = [UIView lh_viewWithFrame:CGRectMake(0, 0, 180, 30) backColor:kClearColor];
-    UIImageView *couponImageV = [UIImageView lh_imageViewWithFrame:view.bounds image:[UIImage imageNamed:@"segment"]];
-    [view addSubview:couponImageV];
+    NSArray *titles  = @[@"  正在学习",@"学习历程"];
+    //112 198 199
+    UISegmentedControl *segment = [[UISegmentedControl alloc]initWithItems:titles];
     
-    NSArray *titleColors= @[APP_COMMON_COLOR,kWhiteColor];
-    NSArray *titles  = @[@"可用优惠券",@"历史优惠券"];
+    [segment lh_setCornerRadius:15 borderWidth:1 borderColor:kWhiteColor];
+    segment.tintColor = kWhiteColor ;
+    segment.selectedSegmentIndex = 0;
+    NSDictionary *selectedTextAttributes = @{NSFontAttributeName :FONT(14),NSForegroundColorAttributeName:RGB(112, 198,199)};
+    [segment setTitleTextAttributes:selectedTextAttributes forState:UIControlStateSelected];
+    NSDictionary *unselectedTextAttributes = @{NSFontAttributeName :FONT(14),NSForegroundColorAttributeName:kWhiteColor};
+    [segment setTitleTextAttributes:unselectedTextAttributes forState:UIControlStateNormal];
+    [segment setBackgroundImage:[UIImage imageWithColor:kWhiteColor] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [segment setBackgroundImage:[UIImage imageWithColor:RGB(112, 198,199)] forState:UIControlStateNormal barMetrics:UIBarMetricsCompact];
+    [segment addTarget:self action:@selector(segmentSelectAction:) forControlEvents:UIControlEventValueChanged];
     
-    for (NSInteger i=0; i<2; i++) {
-        
-        UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(1+i*85, 1, 85, 30) target:self action:@selector(counponAction:) title:titles[i] titleColor:titleColors[i] font:FONT(14) backgroundColor:kClearColor];
-        btn.tag = i + 1;
-        [view addSubview:btn];
-    }
-    self.navigationItem.titleView = view;
-
+    self.navigationItem.titleView = segment;
+    
+    self.tabView = [UITableView lh_tableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableViewStyle:UITableViewStyleGrouped delegate:self dataSourec:self];
+    [self.view addSubview:self.tabView];
+    self.tabView.emptyDataSetSource = self;
+    self.tabView.emptyDataSetDelegate = self;
 
 }
-- (void)counponAction:(UIButton *)btn{
+- (void)segmentSelectAction:(UISegmentedControl *)segment {
     
-    if (btn.tag == 1) {
-        //正在学习
-    }
-    if (btn.tag == 2) {
-        //学习历程
-        
-    }
+    NSLog(@"%ld",segment.selectedSegmentIndex);
     
+}
+//
+#pragma mark --- emptyDataSet delegate
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    
+    
+    return [UIImage imageNamed:@"placeholder"];
+    
+}
+
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state{
+
+    NSString *text = @"找课程去>>";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor blueColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+
+}
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return - 62.0f;
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button {
+
+    HXCourseListVC *vc = [HXCourseListVC new];
+    vc.isHomeEntrance = YES;
+    [self.navigationController pushVC:vc];
+
+
 }
 
 #pragma mark --- tableView delegate
@@ -60,6 +95,8 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         
     }
+    cell.textLabel.text = [NSString stringWithFormat:@"课程%ld",indexPath.row];
+    
     return cell;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -69,7 +106,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return 0;
     
 }
 

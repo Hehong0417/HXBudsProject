@@ -34,6 +34,7 @@
 		0D6D72081E68FDB800DFCC68 /* HXMyAccountInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6D72071E68FDB800DFCC68 /* HXMyAccountInfoVC.m */; };
 		0D6D720F1E68FE7F00DFCC68 /* HXMyAccountInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D6D720E1E68FE7F00DFCC68 /* HXMyAccountInfoVC.xib */; };
 		0D6D72121E690E3300DFCC68 /* HXCouponVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6D72111E690E3300DFCC68 /* HXCouponVC.m */; };
+		0D6EDFF51E6D47F10093F6CC /* HXCommonPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6EDFF41E6D47F10093F6CC /* HXCommonPickView.m */; };
 		0D710EDC1E4C3C6300DA30FD /* HXMineLearnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D710EDB1E4C3C6300DA30FD /* HXMineLearnCell.m */; };
 		0D710EEA1E4C5A3D00DA30FD /* HXCourseListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D710EE91E4C5A3D00DA30FD /* HXCourseListVC.m */; };
 		0D710EED1E4C5A7200DA30FD /* HXHomePageTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D710EEC1E4C5A7200DA30FD /* HXHomePageTVC.m */; };
@@ -258,6 +259,8 @@
 		0D6D720E1E68FE7F00DFCC68 /* HXMyAccountInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXMyAccountInfoVC.xib; sourceTree = "<group>"; };
 		0D6D72101E690E3300DFCC68 /* HXCouponVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCouponVC.h; sourceTree = "<group>"; };
 		0D6D72111E690E3300DFCC68 /* HXCouponVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCouponVC.m; sourceTree = "<group>"; };
+		0D6EDFF31E6D47F10093F6CC /* HXCommonPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCommonPickView.h; sourceTree = "<group>"; };
+		0D6EDFF41E6D47F10093F6CC /* HXCommonPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCommonPickView.m; sourceTree = "<group>"; };
 		0D710EDA1E4C3C6300DA30FD /* HXMineLearnCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMineLearnCell.h; sourceTree = "<group>"; };
 		0D710EDB1E4C3C6300DA30FD /* HXMineLearnCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMineLearnCell.m; sourceTree = "<group>"; };
 		0D710EE81E4C5A3D00DA30FD /* HXCourseListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCourseListVC.h; sourceTree = "<group>"; };
@@ -873,6 +876,8 @@
 				0D93F0771E69417300CD9450 /* HXMyLikeVC.m */,
 				0D93F0791E69461800CD9450 /* HXMyQuestionVC.h */,
 				0D93F07A1E69461800CD9450 /* HXMyQuestionVC.m */,
+				0D6EDFF31E6D47F10093F6CC /* HXCommonPickView.h */,
+				0D6EDFF41E6D47F10093F6CC /* HXCommonPickView.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1789,6 +1794,7 @@
 				0D7F947D1E5BE26800D21D27 /* HXSearchView.m in Sources */,
 				0DCC4F601E67C72300B7294B /* HXMineHeadView.m in Sources */,
 				0DEA90521E4877BC0052C459 /* WBTableViewDelegate.m in Sources */,
+				0D6EDFF51E6D47F10093F6CC /* HXCommonPickView.m in Sources */,
 				0D83ADEC1E5ABE2C003717B3 /* HXCourseClassifyVC.m in Sources */,
 				0D74454A1E6033C5000798BE /* HXPianoDetailVC.m in Sources */,
 				0D710EDC1E4C3C6300DA30FD /* HXMineLearnCell.m in Sources */,

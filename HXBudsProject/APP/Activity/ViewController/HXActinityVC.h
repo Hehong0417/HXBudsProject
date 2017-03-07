@@ -10,4 +10,6 @@
 
 @interface HXActinityVC : UIViewController
 
+@property(nonatomic,assign) BOOL isHomeEntrance;
+
 @end

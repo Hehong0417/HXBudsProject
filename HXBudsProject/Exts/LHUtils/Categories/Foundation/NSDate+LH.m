@@ -137,9 +137,9 @@
 + (NSDate *)getCustomDateWithHour:(NSInteger)hour minute:(NSInteger)minute {
     //获取当前时间
     NSDate *currentDate = [NSDate date];
-    NSCalendar *currentCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *currentCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *currentComps = [[NSDateComponents alloc] init];
-    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay| NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     
     currentComps = [currentCalendar components:unitFlags fromDate:currentDate];
     
@@ -150,7 +150,7 @@
     [resultComps setDay:[currentComps day]];
     [resultComps setHour:hour];
     [resultComps setMinute:minute];
-    NSCalendar *resultCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *resultCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     return [resultCalendar dateFromComponents:resultComps];
 }
 +(NSString *)getGoodsTimeBetweenFromHour:(NSInteger)fromHour fromMinute:(NSInteger)fromMinute toHour:(NSInteger)toHour  toMinute:(NSInteger)toMinute{
@@ -190,5 +190,18 @@
     }
     return ci;
 }
++ (NSInteger)getAgeFromBirthDay:(NSDate *)birthday{
 
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *birthDate = birthday;
+    
+    unsigned int unitFlags =  NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond;
+    NSDateComponents *componnents = [calendar components:unitFlags fromDate:birthDate toDate:[NSDate date] options:0];
+    if (componnents.year > 0) {
+        
+        return componnents.year;
+        
+    }
+    return 0;
+}
 @end

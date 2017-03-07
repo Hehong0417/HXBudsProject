@@ -25,7 +25,7 @@
 
    self.title = @"我的账户";
     
-    [self.rechargeBtn lh_setCornerRadius:5 borderWidth:0 borderColor:nil];
+    [self.rechargeBtn lh_setCornerRadius:WidthScaleSize_H(20) borderWidth:0 borderColor:nil];
 
 }
 

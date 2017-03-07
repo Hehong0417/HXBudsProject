@@ -7,9 +7,12 @@
 //
 
 #import "HXCouponVC.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface HXCouponVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface HXCouponVC ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 @property(nonatomic,strong)UITableView *tabView;
+@property(nonatomic,strong) UIButton *currentSelectBtn;
+
 @end
 
 @implementation HXCouponVC
@@ -20,20 +23,24 @@
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    UIView *view = [UIView lh_viewWithFrame:CGRectMake(0, 0, 180, 30) backColor:kClearColor];
-    UIImageView *couponImageV = [UIImageView lh_imageViewWithFrame:view.bounds image:[UIImage imageNamed:@"segment"]];
-    [view addSubview:couponImageV];
-    
-    NSArray *titleColors= @[APP_COMMON_COLOR,kWhiteColor];
+
     NSArray *titles  = @[@"可用优惠券",@"历史优惠券"];
+
+    //112 198 199
+    UISegmentedControl *segment = [[UISegmentedControl alloc]initWithItems:titles];
     
-    for (NSInteger i=0; i<2; i++) {
-        
-        UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(1+i*85, 1, 85, 30) target:self action:@selector(counponAction:) title:titles[i] titleColor:titleColors[i] font:FONT(14) backgroundColor:kClearColor];
-        btn.tag = i + 1;
-        [view addSubview:btn];
-    }
-    self.navigationItem.titleView = view;
+    [segment lh_setCornerRadius:15 borderWidth:1 borderColor:kWhiteColor];
+    segment.tintColor = kWhiteColor ;
+    segment.selectedSegmentIndex = 0;
+    NSDictionary *selectedTextAttributes = @{NSFontAttributeName :FONT(14),NSForegroundColorAttributeName:RGB(112, 198,199)};
+    [segment setTitleTextAttributes:selectedTextAttributes forState:UIControlStateSelected];
+    NSDictionary *unselectedTextAttributes = @{NSFontAttributeName :FONT(14),NSForegroundColorAttributeName:kWhiteColor};
+    [segment setTitleTextAttributes:unselectedTextAttributes forState:UIControlStateNormal];
+    [segment setBackgroundImage:[UIImage imageWithColor:kWhiteColor] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [segment setBackgroundImage:[UIImage imageWithColor:RGB(112, 198,199)] forState:UIControlStateNormal barMetrics:UIBarMetricsCompact];
+    [segment addTarget:self action:@selector(segmentSelectAction:) forControlEvents:UIControlEventValueChanged];
+    
+    self.navigationItem.titleView = segment;
     
     //兑换框
     UITextField *convert_box = [UITextField lh_textFieldWithFrame:CGRectMake(15, 15, SCREEN_WIDTH - 30, 38) placeholder:@"输入活动优惠码" font:FONT(14) textAlignment:NSTextAlignmentLeft backgroundColor:nil];
@@ -52,19 +59,43 @@
     
 //    //tabView
     self.tabView = [UITableView lh_tableViewWithFrame:CGRectMake(0, 62, SCREEN_WIDTH, SCREEN_HEIGHT - 62) tableViewStyle:UITableViewStyleGrouped delegate:self dataSourec:self];
+    [self.view addSubview:self.tabView];
+    self.tabView.emptyDataSetSource = self;
+    self.tabView.emptyDataSetDelegate = self;
 
 }
-- (void)counponAction:(UIButton *)btn{
 
-    if (btn.tag == 1) {
-        //可用优惠券
-    }
-    if (btn.tag == 2) {
-        //历史优惠券
-        
-    }
+- (void)segmentSelectAction:(UISegmentedControl *)segment {
+
+    NSLog(@"%ld",segment.selectedSegmentIndex);
 
 }
+
+
+
+#pragma mark --- emptyDataSet delegate
+//
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+
+    
+    return [UIImage imageNamed:@"placeholder"];
+
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"没有优惠券!";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return - 62.0f;
+}
+
 #pragma mark --- tableView delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -74,6 +105,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         
     }
+    cell.textLabel.text = [NSString stringWithFormat:@"优惠券%ld",indexPath.row];
     return cell;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -83,7 +115,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return 0;
     
 }
 

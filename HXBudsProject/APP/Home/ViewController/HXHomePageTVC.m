@@ -289,6 +289,7 @@
     }else if(index == 3){
         //演出活动
         HXActinityVC *vc = [[HXActinityVC alloc]init];
+        vc.isHomeEntrance = YES;
         [self.navigationController pushVC:vc];
         
     }else if(index == 4){

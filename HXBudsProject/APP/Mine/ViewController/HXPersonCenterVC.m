@@ -13,6 +13,8 @@
 #import "HXCouponVC.h"
 #import "HXMyLikeVC.h"
 #import "HXMyQuestionVC.h"
+#import "HXLearningProgressVC.h"
+
 
 @interface HXPersonCenterVC ()<HXMineLearnCellDelegate>
 
@@ -37,6 +39,7 @@
     mineHeadView.nav = self.navigationController;
     mineHeadView.titleLab.text = @"我的";
     self.tableV.tableHeaderView = mineHeadView;
+
     
 }
 - (NSArray *)groupTitles {
@@ -72,6 +75,7 @@
             cell = [HXMineLearnCell initMineCellWithXib];
             
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.leftBtn.tag = indexPath.row;
         cell.rightBtn.tag = indexPath.row;
         [cell.leftBtn addTarget:self action:@selector(leftBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -110,8 +114,9 @@
         
         
     }else if(btn.tag == 1){
-    
-    
+      
+        HXLearningProgressVC *vc = [HXLearningProgressVC new];
+        [self.navigationController pushVC:vc];
     
     }
     
@@ -157,6 +162,7 @@
         }
         
     }
+    
 
 
 }
