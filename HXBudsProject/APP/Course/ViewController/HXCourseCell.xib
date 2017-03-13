@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,25 +27,21 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钢琴基础即兴伴奏教学" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iox-jY-uV9">
-                        <rect key="frame" x="10" y="213" width="365" height="36"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="36" id="etx-s6-yvW"/>
-                        </constraints>
+                        <rect key="frame" x="10" y="221" width="365" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBF-W8-Dmq">
-                        <rect key="frame" x="10" y="245" width="97" height="27"/>
+                        <rect key="frame" x="10" y="245" width="97" height="26"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="27" id="5jh-v4-FPn"/>
                             <constraint firstAttribute="width" constant="97" id="MJh-L5-k53"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时长：20分钟" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4VW-4W-dEX">
-                        <rect key="frame" x="138" y="248" width="117" height="21"/>
+                        <rect key="frame" x="138" y="248.5" width="117" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="h3F-il-1ck"/>
+                            <constraint firstAttribute="height" constant="25" id="h3F-il-1ck"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="117" id="o05-bX-PvI"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -54,9 +49,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1666666人看过" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BFG-sl-wIh">
-                        <rect key="frame" x="255" y="248" width="108" height="21"/>
+                        <rect key="frame" x="255" y="248.5" width="108" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="0DJ-yP-cl3"/>
+                            <constraint firstAttribute="height" constant="25" id="0DJ-yP-cl3"/>
                             <constraint firstAttribute="width" constant="108" id="XT9-ni-exF"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -72,11 +67,12 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="lBF-W8-Dmq" firstAttribute="top" secondItem="Iox-jY-uV9" secondAttribute="bottom" constant="-4" id="4pi-TD-fhg"/>
+                    <constraint firstItem="lBF-W8-Dmq" firstAttribute="top" secondItem="Iox-jY-uV9" secondAttribute="bottom" constant="2" id="4pi-TD-fhg"/>
                     <constraint firstAttribute="trailingMargin" secondItem="BFG-sl-wIh" secondAttribute="trailing" constant="4" id="6Dn-Oo-8So"/>
-                    <constraint firstItem="4VW-4W-dEX" firstAttribute="top" secondItem="Iox-jY-uV9" secondAttribute="bottom" constant="-1" id="77S-gT-7q0"/>
+                    <constraint firstItem="4VW-4W-dEX" firstAttribute="top" secondItem="Iox-jY-uV9" secondAttribute="bottom" constant="5.5" id="77S-gT-7q0"/>
                     <constraint firstItem="4VW-4W-dEX" firstAttribute="leading" secondItem="lBF-W8-Dmq" secondAttribute="trailing" constant="31" id="8GW-iN-GIQ"/>
-                    <constraint firstItem="Iox-jY-uV9" firstAttribute="top" secondItem="4Fh-lM-mN4" secondAttribute="bottom" constant="3" id="8hS-49-Uzp"/>
+                    <constraint firstItem="Iox-jY-uV9" firstAttribute="top" secondItem="4Fh-lM-mN4" secondAttribute="bottom" constant="11" id="8hS-49-Uzp"/>
+                    <constraint firstItem="4VW-4W-dEX" firstAttribute="bottom" secondItem="lBF-W8-Dmq" secondAttribute="bottom" constant="2.5" id="AWb-9L-s0a"/>
                     <constraint firstAttribute="trailing" secondItem="Iox-jY-uV9" secondAttribute="trailing" id="BnH-r1-d6H"/>
                     <constraint firstAttribute="trailing" secondItem="4Fh-lM-mN4" secondAttribute="trailing" constant="8" id="Bwx-qa-80Z"/>
                     <constraint firstItem="BFG-sl-wIh" firstAttribute="top" secondItem="4VW-4W-dEX" secondAttribute="top" id="Dvf-fj-x91"/>
@@ -86,11 +82,11 @@
                     <constraint firstItem="4Fh-lM-mN4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Zwh-aU-dVt"/>
                     <constraint firstItem="4ur-Ha-P3h" firstAttribute="centerY" secondItem="4Fh-lM-mN4" secondAttribute="centerY" constant="1" id="o36-JN-Tru"/>
                     <constraint firstItem="4Fh-lM-mN4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="u9R-g8-ftF"/>
-                    <constraint firstItem="4Fh-lM-mN4" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="75:56" constant="-16" id="x2c-Ow-mOw"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="playBgImageV" destination="4Fh-lM-mN4" id="7nT-ev-IbF"/>
+                <outlet property="playBgViewConstraint" destination="uGQ-tZ-aVb" id="MG7-af-oeW"/>
                 <outlet property="playImgV" destination="4ur-Ha-P3h" id="2Ad-mI-bb7"/>
                 <outlet property="starView" destination="lBF-W8-Dmq" id="v1o-VN-kuE"/>
                 <outlet property="timeLab" destination="4VW-4W-dEX" id="Dp9-Tu-sHa"/>

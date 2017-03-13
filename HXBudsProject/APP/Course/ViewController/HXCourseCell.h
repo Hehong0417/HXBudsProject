@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UILabel *viewsLab;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *playBgViewConstraint;
 
 
 + (instancetype)initCourseCellWithXib;

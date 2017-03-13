@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HXInformationCommentView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAR-bv-3dn">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入你的评论....." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QDB-Kk-F7H">
+                            <rect key="frame" x="13" y="8" width="244" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQZ-aG-bwc">
+                            <rect key="frame" x="320" y="0.0" width="55" height="47"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="47" id="Zrq-bH-86K"/>
+                                <constraint firstAttribute="width" constant="55" id="oqm-0l-GaP"/>
+                            </constraints>
+                            <state key="normal" image="share"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tS-Uf-WAG">
+                            <rect key="frame" x="265" y="0.0" width="55" height="47"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="47" id="8pu-ms-sTT"/>
+                                <constraint firstAttribute="width" constant="55" id="nDy-mu-HVI"/>
+                            </constraints>
+                            <state key="normal" image="collect"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="uQZ-aG-bwc" firstAttribute="leading" secondItem="6tS-Uf-WAG" secondAttribute="trailing" id="JOB-Ze-51l"/>
+                        <constraint firstItem="6tS-Uf-WAG" firstAttribute="leading" secondItem="QDB-Kk-F7H" secondAttribute="trailing" constant="8" id="NRr-R8-Hv8"/>
+                        <constraint firstItem="QDB-Kk-F7H" firstAttribute="top" secondItem="LAR-bv-3dn" secondAttribute="top" constant="8" id="PUG-ba-DBE"/>
+                        <constraint firstItem="uQZ-aG-bwc" firstAttribute="top" secondItem="LAR-bv-3dn" secondAttribute="top" id="SHz-zd-0FR"/>
+                        <constraint firstItem="QDB-Kk-F7H" firstAttribute="leading" secondItem="LAR-bv-3dn" secondAttribute="leading" constant="13" id="UVK-yg-IWq"/>
+                        <constraint firstItem="6tS-Uf-WAG" firstAttribute="top" secondItem="LAR-bv-3dn" secondAttribute="top" id="YzG-Oq-gAn"/>
+                        <constraint firstItem="uQZ-aG-bwc" firstAttribute="leading" secondItem="6tS-Uf-WAG" secondAttribute="trailing" id="kPw-FA-UDW"/>
+                        <constraint firstAttribute="trailing" secondItem="uQZ-aG-bwc" secondAttribute="trailing" id="lyO-u4-rlF"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="LAR-bv-3dn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5V2-7P-V3g"/>
+                <constraint firstAttribute="trailing" secondItem="LAR-bv-3dn" secondAttribute="trailing" id="9xP-8e-nXe"/>
+                <constraint firstItem="LAR-bv-3dn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LkJ-dJ-FGJ"/>
+                <constraint firstAttribute="bottom" secondItem="LAR-bv-3dn" secondAttribute="bottom" id="Zma-fW-e4G"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="24.5" y="52.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="collect" width="24" height="22"/>
+        <image name="share" width="23" height="19"/>
+    </resources>
+</document>

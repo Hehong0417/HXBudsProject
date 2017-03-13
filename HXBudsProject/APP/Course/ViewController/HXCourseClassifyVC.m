@@ -48,28 +48,28 @@
     
     self.tableView.tableHeaderView = head;
     self.tableView.showsVerticalScrollIndicator = NO;
-    [self fetchVideoListData];
+//    [self fetchVideoListData];
 
 }
 #pragma mark - network
 
-- (void)fetchVideoListData {
-    
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:videoListUrl parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-                NSLog(@"%@", responseObject);
-        NSArray *dataArray = responseObject[@"VAP4BFR16"];
-        
-        for (NSDictionary *dict in dataArray) {
-            [self.videoArray addObject:[XLVideoItem mj_objectWithKeyValues:dict]];
-            
-        }
-        [self.tableView reloadData];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-    }];
-}
+//- (void)fetchVideoListData {
+//    
+//    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    [manager GET:videoListUrl parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+//                NSLog(@"%@", responseObject);
+//        NSArray *dataArray = responseObject[@"VAP4BFR16"];
+//        
+//        for (NSDictionary *dict in dataArray) {
+//            [self.videoArray addObject:[XLVideoItem mj_objectWithKeyValues:dict]];
+//            
+//        }
+//        [self.tableView reloadData];
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"%@", error);
+//    }];
+//}
 
 #pragma mark - Table view data source
 
@@ -119,7 +119,7 @@
 //    XLVideoItem *item = self.videoArray[indexPath.row];
 
     HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
-    vc.URLString = @"";
+    vc.URLString = @"http://yycloudvod2109130935.bs2dl.yy.com/djhmZjcyZTExZDRiZmY1Yzg0NzhlM2Q5MWVjZjRhYzY1MTUzNDQxMjM1Mg";
     [self.navigationController pushVC:vc];
 
 }

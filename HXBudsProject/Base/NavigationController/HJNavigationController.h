@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 /**
  *  @author hejing
  *
@@ -15,6 +16,7 @@
  */
 
 @interface UINavigationController (Extension)
+
 
 - (void)pushViewControllerWithStoryBoardName:(NSString *)storyBoardName identifier:(NSString *)identifier;
 
@@ -29,6 +31,19 @@
 @end
 
 @interface HJNavigationController : UINavigationController
+
+
+//**************视频屏幕旋转相关********************//
+
+
+@property (strong ,nonatomic) NSMutableArray *arrayScreenshot;
+
+@property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
+
+
+//**********************************************//
+
+
 
 + (void)setupNavigationBarTheme ;
 

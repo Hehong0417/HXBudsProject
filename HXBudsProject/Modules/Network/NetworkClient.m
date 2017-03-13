@@ -336,7 +336,10 @@
         return;
     }
     
-//    !finishedBlock ?: finishedBlock(bAPIModel, nil);
+    if (finishedBlock) {
+        
+        finishedBlock(bAPIModel, nil);
+    }
 }
 
 - (void)requestSucces:(id)responseObject successBlock:(APISuccessBlock)successBlock {
@@ -344,8 +347,9 @@
     if (!bAPIModel) {
         return;
     }
-    
-//    !successBlock ?: successBlock(bAPIModel);
+    if (successBlock) {
+        successBlock(bAPIModel);
+    }
 }
 
 - (void)requestSucces:(id)responseObject successJCBlock:(APISuccessJushCodeBlock)successJCBlock {
@@ -354,14 +358,18 @@
         return;
     }
     
+    if (successJCBlock) {
+        successJCBlock(bAPIModel);
+    }
     
-    
-//    !successJCBlock ?: successJCBlock(bAPIModel);
+//    !successJCBlock ?: ;
 }
 
 - (void)requestFailure:(NSError *)error failurBlock:(APIFailureBlock)failurBlock {
     [self dealWhileFailure:error];
-    
+    if (failurBlock) {
+        failurBlock(error);
+    }
 //    !failurBlock ?: failurBlock(error);
 }
 
@@ -375,6 +383,7 @@
 #pragma mark - Get Request
 
 - (void)getRequestInView:(UIView *)containerView finishedBlock:(APIFinishedBlock)finishedBlock {
+    
     [self readyForRequest:containerView];
     
     // 开始请求

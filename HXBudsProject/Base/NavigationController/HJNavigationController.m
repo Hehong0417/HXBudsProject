@@ -7,6 +7,8 @@
 //
 
 #import "HJNavigationController.h"
+#import "AppDelegate.h"
+
 
 @implementation UINavigationController (Extension)
 
@@ -39,11 +41,13 @@
 
 @end
 
-@interface HJNavigationController () 
-
+@interface HJNavigationController ()
 @end
 
+
+
 @implementation HJNavigationController
+
 
 //第一次使用这个类的时候调用1次
 + (void)initialize
@@ -123,6 +127,7 @@
     //将返回按钮的文字position设置不在屏幕上显示
     [appearance setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin) forBarMetrics:UIBarMetricsDefault];
      */
+    
 }
 
 /**
@@ -140,13 +145,12 @@
 {
 //    [self.frostedViewController presentMenuViewController];
 }
-
 #pragma mark Gesture recognizer
 
-- (void)panGestureRecognized:(UIPanGestureRecognizer *)sender
-{
-//    [self.frostedViewController panGestureRecognized:sender];
-}
+//- (void)panGestureRecognized:(UIPanGestureRecognizer *)sender
+//{
+////    [self.frostedViewController panGestureRecognized:sender];
+//}
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
@@ -169,9 +173,6 @@
     [self popViewControllerAnimated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end

@@ -31,7 +31,7 @@
             XYQButton *btn = [XYQButton ButtonWithFrame:CGRectMake(rowMargin+line*btnW,lineMargin+row*(btnH+lineMargin), btnW, btnH) imgaeName:imageArr[i] titleName:titleArr[i] contentType:TopImageBottomTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:FontLightGrayColor fontsize:15]tapAction:^(XYQButton *button) {
                 
                 HXCourseListVC *courseVC = [HXCourseListVC new];
-                
+                courseVC.isHomeEntrance = YES;
                 [self.vc pushVC:courseVC];
                 
             }];

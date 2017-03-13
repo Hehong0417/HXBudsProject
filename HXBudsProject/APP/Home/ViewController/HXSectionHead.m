@@ -8,6 +8,8 @@
 
 #import "HXSectionHead.h"
 
+
+
 @implementation HXSectionHead
 
 
@@ -24,7 +26,6 @@
             
             [head.delegate rightBtnActionWithSection:section];
         }
-      
     }];
     
     [head addSubview:changeBtn];
@@ -33,5 +34,8 @@
     return head;
 
 }
+- (void)testAction{
 
+
+}
 @end

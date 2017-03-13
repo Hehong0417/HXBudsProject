@@ -59,7 +59,6 @@
     search_box.userInteractionEnabled = YES;
     search_box.centerX = navgation.centerX+5;
     search_box.centerY = navgation.centerY + 10;
-    [search_box becomeFirstResponder];
     [navgation addSubview:search_box];
     
     
@@ -71,10 +70,10 @@
     _searchText = [[UITextField alloc]initWithFrame:CGRectMake(20+WidthScaleSize_W(18), 0, WidthScaleSize_W(250) - 30 - WidthScaleSize_W(18), 30)];
     _searchText.font = FONT(14);
     _searchText.textAlignment = NSTextAlignmentLeft;
+
     UIColor *fontNameColor = [UIColor colorWithHexString:@"#69C6B6"];
     NSAttributedString *attributePlaceholder = [[NSAttributedString alloc]initWithString:@"想学什么" attributes:@{NSForegroundColorAttributeName:fontNameColor}];
     _searchText.attributedPlaceholder = attributePlaceholder;
-    [_searchText becomeFirstResponder];
     [search_box addSubview:_searchText];
     _searchText.keyboardType = UIKeyboardTypeWebSearch;
     
@@ -93,7 +92,6 @@
 
 
 - (void)showAnimated:(BOOL)animated {
-    
     
     [self av_addSuperViews];
     
@@ -123,7 +121,9 @@
 
 }
 - (void)av_addSuperViews {
+    
     [kKeyWindow addSubview:self];
+    [_searchText becomeFirstResponder];
 
 }
 

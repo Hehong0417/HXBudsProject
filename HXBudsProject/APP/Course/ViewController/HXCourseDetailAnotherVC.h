@@ -6,11 +6,9 @@
 //  Copyright © 2017年 n. All rights reserved.
 //
 
-//#import <UIKit/UIKit.h>
+#import <UIKit/UIKit.h>
 
-#import "BaseViewController.h"
-
-@interface HXCourseDetailAnotherVC : BaseViewController
+@interface HXCourseDetailAnotherVC : UIViewController
 
 @property (nonatomic, retain)NSString * URLString;
 

@@ -89,6 +89,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
+    vc.URLString = @"http://yycloudvod2109130935.bs2dl.yy.com/djhmZjcyZTExZDRiZmY1Yzg0NzhlM2Q5MWVjZjRhYzY1MTUzNDQxMjM1Mg";
     [self.navigationController pushVC:vc];
 
 

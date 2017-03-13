@@ -23,9 +23,11 @@
 #import "HXSearchView.h"
 #import "HXInformationTVC.h"
 #import "HXCourseClassifyVC.h"
+#import <BlocksKit/A2DynamicDelegate.h>
+#import "HXInformationDetailVC.h"
+
 
 @interface HXHomePageTVC ()<SDCycleScrollViewDelegate,HXModuleListDelegate,HXSectionHeadDalegate,HXHomePerformanceCellDelegate>
-
 
 @end
 
@@ -38,6 +40,9 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+    
+    
+    [self.navigationController setNavigationBarHidden:YES];
     
     
     XYQButton *locateBtn = [XYQButton ButtonWithFrame:CGRectMake(20, 4, 44, 60) imgaeName:@"locate" titleName:@"番禺区" contentType:TopTitleBottomImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
@@ -63,7 +68,6 @@
     [search_box addSubview:searchText];
     searchText.enabled = NO;
     
-    
     [search_box setTapActionWithBlock:^{
        
         HXSearchView *searchView = [[HXSearchView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -77,6 +81,19 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.backgroundColor = KVCBackGroundColor ;
     self.tableView.tableHeaderView = [[HJHomePageHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, WidthScaleSize_H(200))];
+    
+    NSArray *titles = @[@"1",@"2",@"3",@"4",@"5",@"6"];
+    BOOL objs = [titles bk_all:^BOOL(id obj) {
+        
+        return [obj intValue] > 2;
+        
+   }];
+    NSLog(@"objs:%d",objs);
+    [self bk_performBlock:^(id obj) {
+        
+        NSLog(@"perform:%@",((HXHomePageTVC *)obj).view);
+        
+    } afterDelay:3];
     
 }
 
@@ -245,11 +262,22 @@
         titleName = @"换一换";
     }
        HXSectionHead *sectionHead = [[[HXSectionHead alloc] init] createSectionHeadWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, WidthScaleSize_H(35)) section:(NSInteger)section headTitle:headTitle contenType:contentType rightBtnTitle:titleName imageName:imageName labFont:FONT(18) buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:FontLightGrayColor fontsize:14]];
-       sectionHead.delegate = self;
+    
+        sectionHead.delegate = self;
+
     return sectionHead;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    if (indexPath.section == 4) {
+        
+        HXInformationDetailVC *detailVc = [HXInformationDetailVC new];
+        [self.navigationController pushVC:detailVc];
+        
+    }
+
+}
 #pragma mark --- sectionHead delegate
 
 - (void)rightBtnActionWithSection:(NSInteger)section {

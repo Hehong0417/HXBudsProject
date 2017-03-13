@@ -141,6 +141,10 @@
     // 2.把对应的标题选中
     [self.SG titleBtnSelectedWithScrollView:scrollView];
 }
+- (void)backAction{
 
+    [self.navigationController popVC];
+
+}
 
 @end

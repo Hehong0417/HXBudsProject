@@ -17,6 +17,9 @@
 @property (nonatomic,strong) NSArray *tabBarItemSelectedImages;
 @property (nonatomic,strong) NSArray *tabBarStoryBoardItems;
 
+
+
+
 @end
 
 @implementation HJTabBarController

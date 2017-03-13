@@ -70,6 +70,7 @@
 #pragma mark - Getter
 
 - (UIView *)containerView {
+    //_cmd 直接使用该方法的名称 containerView
     UIView *containerView = objc_getAssociatedObject(self, _cmd);
 
     return containerView ?: [UIApplication sharedApplication].keyWindow;

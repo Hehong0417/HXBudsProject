@@ -53,6 +53,7 @@
         
     }];
     
+    
     self.tableView.tableHeaderView = head;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

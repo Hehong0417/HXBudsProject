@@ -11,7 +11,6 @@
 
 @interface HXCouponVC ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 @property(nonatomic,strong)UITableView *tabView;
-@property(nonatomic,strong) UIButton *currentSelectBtn;
 
 @end
 

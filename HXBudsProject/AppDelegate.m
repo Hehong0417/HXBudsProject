@@ -16,18 +16,6 @@
 
 @implementation AppDelegate
 
--(BOOL)shouldAutorotate{
-    return NO;
-}
-- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
-{
-    return UIInterfaceOrientationMaskPortrait;
-}
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return YES;
-}
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -37,11 +25,8 @@
 
     
     self.window.rootViewController= [[HJTabBarController alloc]init];
-    self.screenshotView = [[ScreenShotView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height)];
-   
-    [self.window insertSubview:self.screenshotView atIndex:0];
-    self.screenshotView.hidden = YES;
     
+       
     return YES;
 }
 
@@ -71,8 +56,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-+(AppDelegate *)shareAppDelegate{
-    return (AppDelegate *) [UIApplication sharedApplication].delegate;
-}
+
 
 @end

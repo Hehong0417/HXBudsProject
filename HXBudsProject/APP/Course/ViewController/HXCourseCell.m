@@ -15,7 +15,7 @@
     // Initialization code
     [self.playBgImageV lh_setCornerRadius:5 borderWidth:0 borderColor:nil];
     
-    
+    self.playBgViewConstraint.constant = WidthScaleSize_H(200);
     
     for (NSInteger i = 0; i < 5; i++) {
         

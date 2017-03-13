@@ -50,6 +50,8 @@ static CGFloat const headViewHeight = 200.0f;
     
     _notScroll = YES;
     
+    
+    
 }
 
 - (void)leaveTop:(NSNotification *)notification{

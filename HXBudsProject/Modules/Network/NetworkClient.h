@@ -52,9 +52,7 @@ typedef void (^APISuccessJushCodeBlock)(id responseObject);
 typedef void(^APIFinishedBlock)(id responseObject, NSError *error);
 
 
-/**
- *  Network客户端
- */
+#pragma mark-- Network客户端
 
 @interface NetworkClient : NSObject
 
