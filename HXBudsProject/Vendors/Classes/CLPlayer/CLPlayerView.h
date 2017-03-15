@@ -28,6 +28,12 @@ typedef NS_ENUM(NSInteger,VideoFillMode){
     ResizeAspectFill,    //按照原比例拉伸占满整个播放器，但视频内容超出部分会被剪切
 };
 
+//方向枚举
+typedef NS_ENUM(NSInteger,Direction){
+    Letf = 0,
+    Right,
+};
+
 typedef void(^BackButtonBlock)(UIButton *button);
 typedef void(^EndBolck)();
 typedef void(^BeyondBlock)();
@@ -56,7 +62,12 @@ typedef void(^BeyondBlock)();
 
 @property (nonatomic,strong) UIView        *contentView;
 
--(CGAffineTransform)getCurrentDeviceOrientation;
+- (CGAffineTransform)getCurrentDeviceOrientation;
+- (CGAffineTransform)fullScreenWithDirection:(UIInterfaceOrientation)direction;
+- (CGAffineTransform)originalscreen;
+
+@property (nonatomic,strong) UIViewController *vc;
+
 
 //******************//
 
@@ -71,7 +82,6 @@ typedef void(^BeyondBlock)();
 @property (nonatomic,assign) BOOL isLandscape;
 /**拉伸方式，默认全屏填充*/
 @property (nonatomic,assign) VideoFillMode fillMode;
-
 
 
 /**播放*/
@@ -95,7 +105,6 @@ typedef void(^BeyondBlock)();
  @param beyond 超出后的回调
  */
 - (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell topOffset:(CGFloat)topOffset bottomOffset:(CGFloat)bottomOffset beyond:(BeyondBlock) beyond;
-
 
 
 

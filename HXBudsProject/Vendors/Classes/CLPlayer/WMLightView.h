@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WMLightView : UIView
+@interface WMLightView : UIVisualEffectView
 @property (strong, nonatomic)  UIView *lightBackView;
 @property (strong, nonatomic)  UIImageView *centerLightIV;
 
 @property (nonatomic, strong) NSMutableArray * lightViewArr;
 
-+ (instancetype)sharedLightView;
+//+ (instancetype)sharedLightView;
 @end

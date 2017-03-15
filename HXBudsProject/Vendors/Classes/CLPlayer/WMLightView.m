@@ -17,20 +17,21 @@
 @end
 
 @implementation WMLightView
-+ (instancetype)sharedLightView{
-     WMLightView *lightView = [[WMLightView alloc] init];
-        lightView.backgroundColor = [UIColor whiteColor];
-    return lightView;
-}
-- (instancetype)init
+//+ (instancetype)sharedLightView{
+//     WMLightView *lightView = [[WMLightView alloc] init];
+//        lightView.backgroundColor = [UIColor whiteColor];
+//    return lightView;
+//}
+- (instancetype)initWithEffect:(UIVisualEffect *)effect
 {
-    self = [super init];
+    self = [super initWithEffect:effect];
     if (self) {
-        self.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width) * 0.5, ([UIScreen mainScreen].bounds.size.height) * 0.5, 155, 155);
-        NSLog(@"WMLightView*****%@******",NSStringFromCGRect(self.frame));
-        self.layer.cornerRadius  = 10;
-        
+        self.frame = CGRectMake(0, 0, 155, 155);
+//        self.backgroundColor = [UIColor whiteColor];
+        [self lh_setCornerRadius:10 borderWidth:0 borderColor:nil];
+
         {
+        
             UILabel *titleLabel      = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, self.bounds.size.width, 30)];
             titleLabel.font          = [UIFont boldSystemFontOfSize:16.0];
             titleLabel.textColor     = [UIColor colorWithRed:0.25f green:0.22f blue:0.21f alpha:1.00f];
@@ -91,10 +92,11 @@
                        context:(void *)context {
     
     CGFloat sound = [change[@"new"] floatValue];
+    
     if (self.alpha == 0.0) {
         self.alpha = 1.0;
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self hideLightView];
         });
     }
@@ -104,7 +106,9 @@
 
 - (void)onOrientationDidChange:(NSNotification *)notify {
 
-    self.alpha = 0.0;
+//    self.alpha = 0.0;
+//    self.transform = [[CLPlayerView alloc] getCurrentDeviceOrientation];
+
 }
 - (void)hideLightView{
     if (self.alpha == 1.0) {
@@ -131,13 +135,13 @@
     [self setNeedsLayout];
 
 }
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.center = CGPointMake(([UIScreen mainScreen].bounds.size.height) * 0.5, ([UIScreen mainScreen].bounds.size.width) * 0.5);
-    self.transform = CGAffineTransformIdentity;
-    
-    self.transform = [[CLPlayerView alloc] getCurrentDeviceOrientation];
-}
+//- (void)layoutSubviews {
+//    [super layoutSubviews];
+//    self.center = CGPointMake(([UIScreen mainScreen].bounds.size.height) * 0.5, ([UIScreen mainScreen].bounds.size.width) * 0.5);
+//    self.transform = CGAffineTransformIdentity;
+//    
+//    self.transform = [[CLPlayerView alloc] getCurrentDeviceOrientation];
+//}
 - (void)dealloc {
     self.lightViewArr = nil;
     self.lightBackView = nil;

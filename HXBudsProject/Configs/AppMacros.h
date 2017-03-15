@@ -40,6 +40,8 @@
 #define NavigationBar_HEIGHT 44
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+#define SCREEN_CENTER  CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+
 #define WidthScaleSize_H(x) ((x/667.0)*SCREEN_HEIGHT)
 #define WidthScaleSize_W(x) ((x/375.0)*SCREEN_WIDTH)
 

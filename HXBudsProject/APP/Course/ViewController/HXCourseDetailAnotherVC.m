@@ -25,6 +25,8 @@
 @property(nonatomic,strong) UIView *headView;
 @property(nonatomic,strong) HXBuyBottomView *buyBottomView;
 @property(nonatomic,strong) UIImageView *playImgV;
+@property(nonatomic,strong) CLPlayerView *playerView;
+
 @end
 
 static CGFloat const headViewHeight = WidthScaleSize_H(200);
@@ -32,8 +34,18 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 
 @implementation HXCourseDetailAnotherVC
 
-- (BOOL)shouldAutorotate{
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+-(BOOL)prefersStatusBarHidden{
+//    if (isHiddenStatusBar) {//隐藏
+//        return YES;
+//    }
+    return NO;
+}
+//视图控制器实现的方法
+-(BOOL)shouldAutorotate{       //iOS6.0之后,要想让状态条可以旋转,必须设置视图不能自动旋转
     return NO;
 }
 // 支持哪些屏幕方向
@@ -47,6 +59,9 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 {
     return UIInterfaceOrientationPortrait;
 }
+
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -96,14 +111,15 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
     [self.playImgV bk_whenTapped:^{
         
-        //*****播放器*****//
+    //**********播放器**************//
         
-        CLPlayerView *playerView = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
+        self.playerView = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
         
-        playerView.url = [NSURL URLWithString:self.URLString];
-        [self.view addSubview:playerView];
+        self.playerView.url = [NSURL URLWithString:self.URLString];
+        self.playerView.vc = self;
+        [self.view addSubview:self.playerView];
         
-        //**********//
+    //***************************//
 
         
     }];
@@ -193,5 +209,111 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     return _buyBottomView;
     
 }
-    
+//***********添加*********//
+
+//- (void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    //获取设备旋转方向的通知,即使关闭了自动旋转,一样可以监测到设备的旋转方向
+//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+//    //旋转屏幕通知
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(orientChange:)
+//                                                 name:UIDeviceOrientationDidChangeNotification
+//                                               object:nil
+//     ];
+//    self.navigationController.navigationBarHidden = YES;
+//}
+
+/**
+ *  旋转屏幕通知
+ */
+//- (void)onDeviceOrientationChange:(NSNotification *)notification{
+//   
+//    
+//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+//    UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)orientation;
+//    switch (interfaceOrientation) {
+//        case UIInterfaceOrientationPortraitUpsideDown:{
+//            NSLog(@"第3个旋转方向---电池栏在下");
+//        }
+//            break;
+//        case UIInterfaceOrientationPortrait:{
+//      
+//            
+//            
+//        }
+//            break;
+//        case UIInterfaceOrientationLandscapeLeft:{
+//            NSLog(@"第2个旋转方向---电池栏在左");
+//            if (wmPlayer.isFullscreen==NO) {
+//                [wmPlayer removeFromSuperview];
+//                [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
+//                [self toOrientation:UIInterfaceOrientationLandscapeLeft];
+//                wmPlayer.isFullscreen = YES;
+//                isInCell = NO;
+//                isHiddenStatusBar = YES;
+//                wmPlayer.closeBtnStyle = CloseBtnStylePop;
+//            }
+//            
+//        }
+//            break;
+//        case UIInterfaceOrientationLandscapeRight:{
+//            NSLog(@"第1个旋转方向---电池栏在右");
+//            if (wmPlayer.isFullscreen==NO) {
+//                [wmPlayer removeFromSuperview];
+//                [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
+//                [self toOrientation:UIInterfaceOrientationLandscapeRight];
+//                wmPlayer.isFullscreen = YES;
+//                isInCell = NO;
+//                isHiddenStatusBar = YES;
+//                wmPlayer.closeBtnStyle = CloseBtnStylePop;
+//            }
+//            
+//        }
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//}
+#pragma mark - 屏幕旋转通知
+//- (void)orientChange:(NSNotification *)notification{
+//    if (self.playerView == nil||self.playerView.superview==nil){
+//        return;
+//    }
+//    if (self.playerView.autoFullScreen == NO){
+//        return;
+//    }
+//    [self getCurrentDeviceOrientation];
+//    
+//}
+
+//- (void)getCurrentDeviceOrientation{
+//    
+//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+//    
+//    UIInterfaceOrientation currentOrientation = (UIInterfaceOrientation)orientation;
+//    
+//    if (orientation == UIDeviceOrientationLandscapeLeft){
+//         self.playerView.transform =  [self.playerView fullScreenWithDirection:Letf];
+//        
+//        
+//    }else if (orientation == UIDeviceOrientationLandscapeRight){
+//
+//        self.playerView.transform = [self.playerView fullScreenWithDirection:Right];
+//
+//    }else if (orientation == UIDeviceOrientationPortrait){
+//
+//        self.playerView.transform =  [self.playerView originalscreen];
+//    }
+//      [[UIApplication sharedApplication] setStatusBarOrientation:currentOrientation animated:YES];
+//    [self setNeedsStatusBarAppearanceUpdate];
+//
+////    return self.transform;
+//}
+
+//***********************//
+
+
+
 @end

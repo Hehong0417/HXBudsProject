@@ -24,6 +24,24 @@
 
 @implementation HJTabBarController
 
+
+-(BOOL)shouldAutorotate{
+    UINavigationController *nav = self.viewControllers[self.Index];
+    return [nav.topViewController shouldAutorotate];
+}
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    UINavigationController *nav = self.viewControllers[self.Index];
+    return [nav.topViewController supportedInterfaceOrientations];
+}
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    UINavigationController *nav = self.viewControllers[self.Index];
+    return [nav.topViewController preferredInterfaceOrientationForPresentation];
+}
+
+
+
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -33,6 +51,9 @@
     
     self.delegate = self;
     self.tabBar.tintColor=APP_COMMON_COLOR;
+    
+
+   
 }
 
 - (void)addAllChildVcs
@@ -44,10 +65,12 @@
         
         [self addOneChildVc:childVC title:self.tabBarItemTitles[i] imageName:self.tabBarItemNormalImages[i] selectedImageName:self.tabBarItemSelectedImages[i]];
     }
+
 }
 
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     
+    self.Index = self.selectedIndex;
 }
 
 - (UIViewController *)viewControllerWithStoryBoardItem:(HJStoryBoardItem *)storyBoardItem {

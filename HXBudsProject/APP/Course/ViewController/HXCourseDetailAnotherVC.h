@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface HXCourseDetailAnotherVC : UIViewController
 
 @property (nonatomic, retain)NSString * URLString;

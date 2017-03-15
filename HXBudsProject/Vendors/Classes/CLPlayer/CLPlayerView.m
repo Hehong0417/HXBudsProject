@@ -11,7 +11,7 @@
 //#import "WMPlayer.h"
 #import "WMLightView.h"
 //消失时间
-#define DisappearTime  100
+#define DisappearTime  7
 /**UIScreen width*/
 #define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
 /**UIScreen height*/
@@ -40,11 +40,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 
 
 
-//方向枚举
-typedef NS_ENUM(NSInteger,Direction){
-    Letf = 0,
-    Right,
-};
+
 
 // 播放器的几种状态
 typedef NS_ENUM(NSInteger, CLPlayerState) {
@@ -155,10 +151,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                 selector:@selector(disappear)
                                                 userInfo:nil
                                                  repeats:NO];
-    }
+            }
     return _maskView;
 }
-
 #pragma mark - 初始化
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]){
@@ -170,7 +165,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _isDisappear    = NO;
         self.dragEnable = NO;
         self.maskView.topToolBar.hidden = YES;
-        //开启
+        
+        
+        
+        
+//        //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:)
@@ -286,25 +285,25 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 创建播放器UI
 - (void)creatUI{
     self.backgroundColor = [UIColor blackColor];
+
+    //**********添加***********//
     
     WEAK_SELF();
     self.BackBlock = ^(UIButton *backButton){
-    
+        
         [weakSelf originalscreen];
-    
+        [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+        weakSelf.lightView.transform =  CGAffineTransformMakeRotation( - M_PI / 2);
+        [weakSelf.vc setNeedsStatusBarAppearanceUpdate];
+        [weakSelf.vc.navigationController setNavigationBarHidden:NO];
     };
-    
-    //**********添加***********//
+
     
     //wmplayer内部的一个view，用来管理子视图
     self.contentView = [[UIView alloc]init];
     self.contentView.backgroundColor = [UIColor blackColor];
     [self addSubview:self.contentView];
     
-    //autoLayout contentView
-//    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(self);
-//    }];
     
     //最上面的View
     [self.contentView addSubview:self.maskView];
@@ -312,10 +311,16 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     //创建fastForwardView
     [self creatFF_View];
     
-    self.lightView = [WMLightView sharedLightView];
-    
+    self.lightView = [[WMLightView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
     [kKeyWindow addSubview:self.lightView];
+ 
+    [self.lightView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(kKeyWindow);
+        make.width.equalTo(@(155));
+        make.height.equalTo(@155);
+    }];
     
+
     NSLog(@"sharedLightView*****%@******",NSStringFromCGRect(self.lightView.frame));
     
     
@@ -334,10 +339,19 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     panTap.delegate = self;
     [self.contentView addGestureRecognizer:panTap];
     
+    
+    if(self.isFullScreen){
+    
+        self.maskView.topToolBarHeight = WidthScaleSize_H(50);
+        self.maskView.bottomToolBarHeight = WidthScaleSize_H(45);
+        
+    }else{
+    
+        self.maskView.bottomToolBarHeight = WidthScaleSize_H(35);
+    }
+    
     //**********************//
 }
-
-
 
 
 #pragma mark - 隐藏或者显示状态栏方法
@@ -347,6 +361,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     //设置是否隐藏
     statusBar.hidden  = hidden;
 }
+
+
 #pragma mark - 监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"status"]) {
@@ -431,6 +447,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                             userInfo:nil
                                              repeats:NO];
 }
+//CGPoint touchLocation = [sender locationInView:self.progressSlider];
+//CGFloat value = (self.progressSlider.maximumValue - self.progressSlider.minimumValue) * (touchLocation.x/self.progressSlider.frame.size.width);
+//[self.progressSlider setValue:value animated:YES];
 
 //拖拽中
 -(void)cl_progressSliderValueChanged:(CLSlider *)slider{
@@ -461,21 +480,16 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)actionPanTapGesture:(UIPanGestureRecognizer *)sender{
     
     CGPoint locationPoint = [sender locationInView:self];
-    
-    CGPoint translatedPoint = [sender translationInView:self];
-    
-    
+
     if (sender.state == UIGestureRecognizerStateBegan) {
         
         CGPoint startPoint = [sender locationInView:self];
         //触摸开始, 初始化一些值
         _hasMoved = NO;
-        _touchBeginValue = self.maskView.slider.value;
-        
+        _touchBeginValue = (NSInteger)CMTimeGetSeconds([_player currentTime]);
+
         //位置
         _touchBeginPoint = startPoint;
-        //        NSLog(@"_touchBeginPoint:%@",NSStringFromCGPoint(_touchBeginPoint));
-        
         
         //亮度
         _touchBeginLightValue = [UIScreen mainScreen].brightness;
@@ -545,7 +559,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
             
             NSLog(@"lightControl*****%.2f******",self.lightView.frame.size.width);
 
-            //显示音量控制的view
             [self hideTheLightViewWithHidden:NO];
 //            if (_isFullScreen) {
                 //根据触摸开始时的亮度, 和触摸开始时的点来计算出现在的亮度
@@ -640,19 +653,24 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
             
         }];
         
-        
     }
 }
 
 //#pragma mark - 用来控制移动过程中计算手指划过的时间
 -(float)moveProgressControllWithTempPoint:(CGPoint)tempPoint{
     //90代表整个屏幕代表的时间
-    float tempValue = _touchBeginValue + TotalScreenTime * ((tempPoint.x - _touchBeginPoint.x)/([UIScreen mainScreen].bounds.size.width));
+    
+    float value = TotalScreenTime * ((tempPoint.x - _touchBeginPoint.x)/([UIScreen mainScreen].bounds.size.width));
+    
+    float tempValue = _touchBeginValue +value;
     if (tempValue > [self duration]) {
         tempValue = [self duration];
     }else if (tempValue < 0){
+        
         tempValue = 0.0f;
     }
+
+
     return tempValue;
 }
 ///获取视频长度
@@ -691,11 +709,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     
     self.FF_View.hidden = NO;
-//    NSLog(@"----%@-----",[self convertTime:value]);
     self.FF_View.sheetTimeLabel.text = [NSString stringWithFormat:@"%@/%@", [self convertTime:value], [self convertTime:totalTime]];
-//    self.leftTimeLabel.text = [self convertTime:value];
-//    [self showControlView];
-//    [self.progressSlider setValue:value animated:YES];
+    self.maskView.currentTimeLabel.text = [self convertTime:value];
+    CGFloat sliderValue = value/totalTime;
+    [self.maskView.slider setValue:sliderValue animated:YES];
 }
 
 NSString * calculateTimeWithTimeFormatter(long long timeSecond){
@@ -746,6 +763,7 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
         self.maskView.slider.maximumValue = 1;
         //当前进度
         self.maskView.slider.value        = CMTimeGetSeconds([_playerItem currentTime]) / (_playerItem.duration.value / _playerItem.duration.timescale);
+
         //当前时长进度progress
         NSInteger proMin     = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
         NSInteger proSec     = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
@@ -770,10 +788,15 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
 -(void)cl_fullButtonAction:(UIButton *)button{
     _isLandscape = NO;
     if (_isFullScreen == NO){
-        [self fullScreenWithDirection:Letf];
+        [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
     }
     else{
+        [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+        
+        [self.vc setNeedsStatusBarAppearanceUpdate];
+        [self.vc.navigationController setNavigationBarHidden:NO];
         [self originalscreen];
+
     }
     _isLandscape = _landscape;
 }
@@ -785,25 +808,46 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
 }
 #pragma mark - 点击响应
 - (void)disappearAction:(UIButton *)button{
+    
     //取消定时消失
     [self destroyTimer];
     if (_isDisappear == NO){
-        [UIView animateWithDuration:0.5 animations:^{
+        //*******消失******
+        [UIView animateWithDuration:3 animations:^{
+
+        if (!self.isFullScreen) {
+            
+            [self setStatusBarHidden:NO];
+
+        }else{
+            
+         [self setStatusBarHidden:YES];
+            
+             }
+        }];
+        [UIView animateWithDuration:0.25 animations:^{
             self.maskView.topToolBar.alpha    = 0;
             self.maskView.bottomToolBar.alpha = 0;
+
         }];
     }
     else{
-        //添加定时消失
+        //********出现********
+        [UIView animateWithDuration:3 animations:^{
+          [self setStatusBarHidden:NO];
+        }];
+        
+//        //添加定时消失
         _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
                                                   target:self
                                                 selector:@selector(disappear)
                                                 userInfo:nil
                                                  repeats:NO];
         
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.1 animations:^{
             self.maskView.topToolBar.alpha    = 1.0;
             self.maskView.bottomToolBar.alpha = 1.0;
+
         }];
     }
     _isDisappear = !_isDisappear;
@@ -813,6 +857,16 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
     [UIView animateWithDuration:0.5 animations:^{
         self.maskView.topToolBar.alpha    = 0;
         self.maskView.bottomToolBar.alpha = 0;
+        
+        if (!self.isFullScreen) {
+            
+            [self setStatusBarHidden:NO];
+            
+        }else{
+            
+            [self setStatusBarHidden:YES];
+            
+        }
     }];
 }
 #pragma mark - 播放完成
@@ -883,88 +937,50 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
     _timer = nil;
 }
 #pragma mark - 屏幕旋转通知
+
 - (void)orientChange:(NSNotification *)notification{
     if (_autoFullScreen == NO){
         return;
     }
+    
     [self getCurrentDeviceOrientation];
-   
 }
 
--(CGAffineTransform)getCurrentDeviceOrientation{
+- (CGAffineTransform)getCurrentDeviceOrientation{
 
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-//    UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
+    UIInterfaceOrientation currentOrientation = (UIInterfaceOrientation)orientation;
 
     if (orientation == UIDeviceOrientationLandscapeLeft){
         if (_isFullScreen == NO){
-         self.transform =  [self fullScreenWithDirection:Letf];
-//      [[UIApplication sharedApplication] setStatusBarOrientation:(UIInterfaceOrientation)orientation animated:YES];
-            self.volumeView.transform =  CGAffineTransformMakeRotation(M_PI / 2);
+        self.transform = [self fullScreenWithDirection:currentOrientation];
+
         }
     }
     else if (orientation == UIDeviceOrientationLandscapeRight){
         if (_isFullScreen == NO){
-           self.transform = [self fullScreenWithDirection:Right];
-            self.volumeView.transform =  CGAffineTransformMakeRotation( - M_PI / 2);
+         self.transform =  [self fullScreenWithDirection:currentOrientation];
         }
     }
     else if (orientation == UIDeviceOrientationPortrait){
         if (_isFullScreen == YES){
-        self.transform =  [self originalscreen];
-        [[UIApplication sharedApplication] setStatusBarOrientation:(UIInterfaceOrientation)orientation animated:NO];
+            
+        self.transform = [self originalscreen];
+        self.lightView.transform =  [self originalscreen];;
+
+         [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+         [self.vc setNeedsStatusBarAppearanceUpdate];
+         [self.vc.navigationController setNavigationBarHidden:NO];
         }
     }
 
+    
     return self.transform;
 }
+
 #pragma mark - 全屏
 
-
-//************添加*************//
-
-//点击进入,退出全屏,或者监测到屏幕旋转去调用的方法
-//-(void)toOrientation:(UIInterfaceOrientation)orientation{
-//    //获取到当前状态条的方向
-//    UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
-//    //判断如果当前方向和要旋转的方向一致,那么不做任何操作
-//    if (currentOrientation == orientation) {
-//        return;
-//    }
-//    
-//    //根据要旋转的方向,使用Masonry重新修改限制
-////    if (orientation ==UIInterfaceOrientationPortrait) {//
-////        [self.player mas_remakeConstraints:^(MASConstraintMaker *make) {
-////            make.top.equalTo(self.view).with.offset(0);
-////            make.left.equalTo(self.view).with.offset(0);
-////            make.right.equalTo(self.view).with.offset(0);
-////            make.height.equalTo(@(playerFrame.size.height));
-////        }];
-////    }else{
-////        //这个地方加判断是为了从全屏的一侧,直接到全屏的另一侧不用修改限制,否则会出错;
-////        if (currentOrientation ==UIInterfaceOrientationPortrait) {
-////            [self.player mas_remakeConstraints:^(MASConstraintMaker *make) {
-////                make.width.equalTo(@([UIScreen mainScreen].bounds.size.height));
-////                make.height.equalTo(@([UIScreen mainScreen].bounds.size.width));
-////                make.center.equalTo(wmPlayer.superview);
-////            }];
-////        }
-////    }
-//    //iOS6.0之后,设置状态条的方法能使用的前提是shouldAutorotate为NO,也就是说这个视图控制器内,旋转要关掉;
-//    //也就是说在实现这个方法的时候-(BOOL)shouldAutorotate返回值要为NO
-//    [[UIApplication sharedApplication] setStatusBarOrientation:orientation animated:NO];
-//    //获取旋转状态条需要的时间:
-//    [UIView beginAnimations:nil context:nil];
-//    //更改了状态条的方向,但是设备方向UIInterfaceOrientation还是正方向的,这就要设置给你播放视频的视图的方向设置旋转
-//    //给你的播放视频的view视图设置旋转
-////    wmPlayer.transform = CGAffineTransformIdentity;
-////    wmPlayer.transform = [WMPlayer getCurrentDeviceOrientation];
-//    [UIView setAnimationDuration:2.0];
-//    //开始旋转
-//    [UIView commitAnimations];
-//}
-//****************************//
-- (CGAffineTransform)fullScreenWithDirection:(Direction)direction{
+- (CGAffineTransform)fullScreenWithDirection:(UIInterfaceOrientation)direction{
     
     //隐藏顶部工具条
     self.maskView.topToolBar.hidden = NO;
@@ -974,39 +990,51 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
     //记录原始大小
     _customFarme = self.frame;
     _isFullScreen = YES;
+    [self.vc.navigationController setNavigationBarHidden:YES];
     [self setStatusBarHidden:NO];
+
     //添加到Window上
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-    [keyWindow addSubview:self];
+//    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    [self.vc.view addSubview:self];
     
+    
+    //*******************//
+//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    NSLog(@"currentOrientation:::::%ld",direction);
 
     if (_isLandscape == YES){
-        self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
+        self.frame = CGRectMake(0, 0, CLscreenWidth,CLscreenHeight);
         
     }
     else{
 
-        if (direction == Letf){
+        if (direction == UIInterfaceOrientationLandscapeRight){
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation(M_PI / 2);
-            
+                self.lightView.transform =  CGAffineTransformMakeRotation(M_PI / 2);
             }];
         }
         else{
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
+                self.lightView.transform =  CGAffineTransformMakeRotation( - M_PI / 2);
+
             }];
         }
     }
-    self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
+    self.frame = CGRectMake(0, 0,CLscreenWidth,CLscreenHeight);
     
-
     self.maskView.fullButton.selected = YES;
+
+    [[UIApplication sharedApplication] setStatusBarOrientation:direction animated:NO];
+    
+    [self.vc setNeedsStatusBarAppearanceUpdate];
     [self setNeedsLayout];
     [self layoutIfNeeded];
     
     return self.transform;
 }
+
 #pragma mark - 原始大小
 - (CGAffineTransform)originalscreen{
     [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
@@ -1089,6 +1117,7 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
+    [self destroyAllTimer];
     NSLog(@"播放器被销毁了");
     
     //**********添加**********//
@@ -1098,6 +1127,12 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
             [aLightView removeFromSuperview];
         }
     }
+    [self.effectView removeFromSuperview];
+    self.effectView = nil;
+    [self.playerLayer removeFromSuperlayer];
+    self.playerLayer = nil;
+    [self.player replaceCurrentItemWithPlayerItem:nil];
+
     
     //************************//
 }

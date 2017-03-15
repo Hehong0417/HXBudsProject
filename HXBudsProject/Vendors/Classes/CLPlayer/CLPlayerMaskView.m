@@ -59,7 +59,7 @@
     //顶部工具条
     [self.topToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self);
-        make.height.mas_equalTo(ToolBarHeight);
+        make.height.mas_equalTo(WidthScaleSize_H(50));
     }];
     //底部工具条
     [self .bottomToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,7 +72,8 @@
     }];
     //返回按钮
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(Padding);
+        make.left.mas_equalTo(Padding);
+        make.top.mas_equalTo(Padding+10);
         make.bottom.mas_equalTo(-Padding);
         make.width.equalTo(self.backButton.mas_height);
     }];

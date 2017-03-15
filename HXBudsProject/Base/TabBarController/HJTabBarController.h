@@ -10,4 +10,6 @@
 
 @interface HJTabBarController : UITabBarController
 
+@property(nonatomic,assign) NSInteger Index;
+
 @end

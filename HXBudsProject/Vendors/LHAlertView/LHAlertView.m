@@ -19,7 +19,7 @@
 
     if (self = [super init]) {
         [self setFrame:kMainScreenBounds];
-        self.backgroundColor = [UIColor colorWithWhite:0.3 alpha:0.3];
+        self.backgroundColor = rgba(229, 229, 229, 0.3);
         UIView *contentView = [self alertViewContentView];
         self.contentView = contentView;
         [self addSubview:contentView];

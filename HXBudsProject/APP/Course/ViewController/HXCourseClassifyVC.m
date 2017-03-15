@@ -10,6 +10,7 @@
 #import "HXCourseHeadView.h"
 #import "HXCourseCell.h"
 #import "HXCourseDetailAnotherVC.h"
+
 #import <AFNetworking.h>
 
 #import "XLVideoItem.h"

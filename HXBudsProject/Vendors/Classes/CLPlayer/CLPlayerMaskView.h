@@ -52,4 +52,12 @@
 /**代理人*/
 @property (nonatomic,weak) id<CLPlayerMaskViewDelegate> delegate;
 
+//顶部工具条高度
+@property (nonatomic,assign)  CGFloat topToolBarHeight;
+
+//底部工具条高度
+@property (nonatomic,assign)  CGFloat bottomToolBarHeight;
+
+
+
 @end
