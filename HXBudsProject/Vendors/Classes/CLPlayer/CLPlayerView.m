@@ -243,7 +243,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     //放到最下面，防止遮挡
     [self.contentView.layer insertSublayer:_playerLayer atIndex:0];
-    self.playerLayer.backgroundColor = [UIColor orangeColor].CGColor;
 }
 -(void)setPlayerItem:(AVPlayerItem *)playerItem{
     
