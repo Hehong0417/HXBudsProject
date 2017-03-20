@@ -26,7 +26,6 @@
         [self.mainImageView addSubview:self.teacherLab];
         [self.mainImageView addSubview:self.priceLab];
         
-        
     }
     
     return self;

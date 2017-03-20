@@ -26,7 +26,7 @@
 
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        for (int index = 1; index < 6; index++) {
+        for (int index = 1; index < 4; index++) {
             
             UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%02d",index]];
             
@@ -45,7 +45,6 @@
 
 - (void)setupUI {
 
-    
     NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 8, SCREEN_WIDTH, WidthScaleSize_H(220))];
     pageFlowView.backgroundColor = [UIColor whiteColor];
     pageFlowView.delegate = self;

@@ -11,7 +11,7 @@
 #import "FastForwardView.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
-#import "WMDragView.h"
+//#import "WMDragView.h"
 
 
 //手势操作的类型
@@ -38,7 +38,7 @@ typedef void(^BackButtonBlock)(UIButton *button);
 typedef void(^EndBolck)();
 typedef void(^BeyondBlock)();
 
-@interface CLPlayerView : WMDragView
+@interface CLPlayerView : UIView
 
 //*******添加********//
 

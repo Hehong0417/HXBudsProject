@@ -89,8 +89,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic, strong)NSDateFormatter *dateFormatter;
 //监听播放起状态的监听者
 
-//***********************//
 
+//***********************//
 
 /**控件原始Farme*/
 @property (nonatomic,assign) CGRect        customFarme;
@@ -163,7 +163,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _isLandscape    = NO;
         _landscape      = NO;
         _isDisappear    = NO;
-        self.dragEnable = NO;
+//        self.dragEnable = NO;
         self.maskView.topToolBar.hidden = YES;
         
         
@@ -243,8 +243,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     //放到最下面，防止遮挡
     [self.contentView.layer insertSublayer:_playerLayer atIndex:0];
-
-
+    self.playerLayer.backgroundColor = [UIColor orangeColor].CGColor;
 }
 -(void)setPlayerItem:(AVPlayerItem *)playerItem{
     
@@ -336,7 +335,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
    
     
     UIPanGestureRecognizer *panTap = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(actionPanTapGesture:)];
-    panTap.delegate = self;
+//    panTap.delegate = self;
     [self.contentView addGestureRecognizer:panTap];
     
     

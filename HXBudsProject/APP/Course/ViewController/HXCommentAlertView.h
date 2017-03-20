@@ -12,4 +12,6 @@
 
 @interface HXCommentAlertView :LHAlertView
 
+
+
 @end

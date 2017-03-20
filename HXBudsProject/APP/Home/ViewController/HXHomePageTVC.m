@@ -171,7 +171,7 @@
         return cell;
         
     }else if(indexPath.section == 5){
-        //艺考资讯
+        //猜你喜欢
         HXYourLikeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXYourLikeCell"];
         
         if (!cell) {
