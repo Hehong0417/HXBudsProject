@@ -86,7 +86,7 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - FMDB
   - FXBlurView
-  - IQKeyboardManager (~> 3.0.0)
+  - IQKeyboardManager
   - JSONModel (~> 1.1.2)
   - Masonry
   - MBProgressHUD
@@ -122,6 +122,6 @@ SPEC CHECKSUMS:
   UMengUShare: fc0a98b8d5297632e82874318fd72a10d17da228
   YYCategories: 3c7e012ac4573b1fc432f9a2eac15109857391d2
 
-PODFILE CHECKSUM: b1c4c26c8c40798d17b3fe28a637c3304561bd87
+PODFILE CHECKSUM: f1bf402571e5b9d26b953a546cec4ba701d1115c
 
 COCOAPODS: 1.2.0

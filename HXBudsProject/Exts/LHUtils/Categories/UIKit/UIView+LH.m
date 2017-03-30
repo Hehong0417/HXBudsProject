@@ -173,6 +173,27 @@
     self.layer.masksToBounds = YES;
 }
 
+- (CAShapeLayer *)lh_addStokeLineWithColor:(UIColor *)strokeColor lineWidth:(CGFloat)lineWidth lineCap:(NSString *)lineCap lineDashPattern:(NSArray *)lineDashPattern{
+
+    CAShapeLayer *border = [CAShapeLayer layer];
+    
+    border.strokeColor = strokeColor.CGColor;
+    
+    border.fillColor = nil;
+    
+    border.path = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+    
+    border.frame = self.bounds;
+    
+    border.lineWidth = lineWidth;
+    
+    border.lineCap = lineCap;
+    
+    border.lineDashPattern = lineDashPattern;
+
+    return border;
+}
+
 @end
 
 

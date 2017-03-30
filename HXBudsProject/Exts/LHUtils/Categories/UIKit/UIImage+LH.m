@@ -88,5 +88,10 @@
     
     return image;
 }
++(UIImage *)lh_getContentImageWithName:(NSString *)name{
 
+    NSString *path   = [[NSBundle mainBundle] pathForResource:name ofType:@"png"];
+    
+    return [UIImage imageWithContentsOfFile:path];
+}
 @end

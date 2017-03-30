@@ -12,8 +12,14 @@
 #import "HXMyAccountInfoVC.h"
 #import "HXCouponVC.h"
 #import "HXMyLikeVC.h"
-#import "HXMyQuestionVC.h"
-#import "HXLearningProgressVC.h"
+#import "HXMineLoginHeadView.h"
+#import "HXMyArticleVC.h"
+#import "HXMyAttetionVC.h"
+#import "HXFriendDynamicStateVC.h"
+#import "HXAdviceFaceBackVC.h"
+#import "HXBrowserRecordVC.h"
+#import "HXMessageVC.h"
+#import "HXMyVideoVC.h"
 
 
 @interface HXPersonCenterVC ()<HXMineLearnCellDelegate>
@@ -34,35 +40,46 @@
     [super viewDidLoad];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    
     HXMineHeadView *mineHeadView = [HXMineHeadView initmineHeadViewWithXib];
-    mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(257));
+    mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
     mineHeadView.nav = self.navigationController;
-    mineHeadView.titleLab.text = @"我的";
+
+//    HXMineLoginHeadView *mineHeadView = [HXMineLoginHeadView initMineLoginHeadViewWithXib];
+//    mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
+//    mineHeadView.nav = self.navigationController;
+//    
+//    [mineHeadView setTapActionWithBlock:^{
+//        
+//        HXMyLikeVC *vc = [HXMyLikeVC new];
+//        [self.navigationController pushVC:vc];
+//        
+//    }];
     self.tableV.tableHeaderView = mineHeadView;
 
     
 }
 - (NSArray *)groupTitles {
 
-    return @[@[@" ",@" "],@[@"分享有礼",@"我喜欢的",@"我的提问",@"历史记录"],@[@"操作指引",@"关于我们",@"仅在WI-Fi下播放"]];
+    return @[@[@""],@[@"我的资产",@"我的消息",@"我关注的",@"好友动态"],@[@"浏览记录",@"分享萌芽APP",@"意见反馈",@"给我们好评~~"],@[@"仅在WI-Fi下播放"]];
 }
 
 - (NSArray *)groupIcons {
     
-    return @[@[@" ",@" "],@[@"sharegift",@"mylike",@"question",@"historyRecord"],@[@"operatioGuide",@"about_me",@"ic_tab_04"]];
-
+    return @[@[@""],@[@"mine_0",@"mine_1",@"mine_2",@"mine_3"],@[@"mine_4",@"mine_5",@"mine_6",@"mine_7"],@[@""]];
+    
 }
 
 - (NSArray *)rightViewSwitchIndexPaths {
     
-    NSIndexPath *indexpath = [NSIndexPath indexPathForRow:2 inSection:2];
+    NSIndexPath *indexpath = [NSIndexPath indexPathForRow:0 inSection:3];
     
     return @[indexpath];
 }
 - (NSArray *)groupDetials {
     
-    return @[@[@"",@" "],@[@"",@"",@"",@""],@[@"",@"",@""]];
-    
+    return @[@[@""],@[@"",@"",@"",@""],@[@"",@"",@"",@""],@[@""]];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -76,23 +93,9 @@
             
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.leftBtn.tag = indexPath.row;
-        cell.rightBtn.tag = indexPath.row;
-        [cell.leftBtn addTarget:self action:@selector(leftBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.rightBtn addTarget:self action:@selector(rightBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        if (indexPath.row == 0) {
-             cell.leftImageStr = @"coupon";
-             cell.rightImageStr = @"buy";
-             cell.leftTitleLab.text = @"   优惠券";
-             cell.rightTitleLab.text = @"   已购买";
-           
-        }else{
-            cell.leftImageStr = @"learning";
-            cell.rightImageStr = @"my_account";
-            cell.leftTitleLab.text = @"  学习进程";
-            cell.rightTitleLab.text = @"  我的账户";
-        }
         
+        [cell.leftBtn addTarget:self action:@selector(leftBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+         [cell.rightBtn addTarget:self action:@selector(rightBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
         
     }else {
@@ -106,64 +109,81 @@
 }
 
 - (void)leftBtnAction:(UIButton *)btn {
-    
-    if (btn.tag == 0) {
-        
-        HXCouponVC *couponVC = [HXCouponVC new];
-        [self.navigationController pushVC:couponVC];
-        
-        
-    }else if(btn.tag == 1){
-      
-        HXLearningProgressVC *vc = [HXLearningProgressVC new];
-        [self.navigationController pushVC:vc];
-    
-    }
-    
+
+    NSLog(@"left");
+    //我的文章
+    HXMyArticleVC *vc = [HXMyArticleVC new];
+    [self.navigationController pushVC:vc];
     
 }
 - (void)rightBtnAction:(UIButton *)btn {
     
-    
-    if (btn.tag == 0) {
-        
-        
-    }else if(btn.tag == 1){
-        
-        HXMyAccountInfoVC *myAccount = [[[NSBundle mainBundle] loadNibNamed:@"HXMyAccountInfoVC" owner:nil options:nil] lastObject];
-        [self.navigationController pushVC:myAccount];
-    }
-    
+    NSLog(@"right");
+    //我的视频
+    HXMyVideoVC *vc = [HXMyVideoVC new];
+    [self.navigationController pushVC:vc];
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.section == 0) {
-        
-        return WidthScaleSize_H(100);
-    }else {
     
         return WidthScaleSize_H(44);
     
-    }
 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if (indexPath.section == 1) {
         
-        if (indexPath.row == 1) {
-           //我喜欢的
-            [self.navigationController pushVC:[HXMyLikeVC new]];
-        }else if(indexPath.row == 2){
-          //我的提问
-            [self.navigationController pushVC:[HXMyQuestionVC new]];
-        }
+        [self didSelectRowAtSection0:indexPath.row];
+        
+    }else if (indexPath.section == 2){
+    
+        [self didSelectRowAtSection1:indexPath.row];
+    }
+
+}
+
+- (void)didSelectRowAtSection0:(NSInteger )row{
+   
+    if (row == 0) {
+        
+        HXMyAccountInfoVC *vc = [HXMyAccountInfoVC new];
+        [self.navigationController pushVC:vc];
+
+    }else if (row == 1){
+        HXMessageVC *vc = [HXMessageVC new];
+        [self.navigationController pushVC:vc];
+
+    }else if (row == 2){
+        HXMyAttetionVC *vc = [HXMyAttetionVC new];
+        [self.navigationController pushVC:vc];
+
+    }else if (row == 3){
+        HXFriendDynamicStateVC *vc = [HXFriendDynamicStateVC new];
+        [self.navigationController pushVC:vc];
+    
+    }
+}
+- (void)didSelectRowAtSection1:(NSInteger)row{
+    
+    if (row == 0) {
+        HXBrowserRecordVC *vc = [HXBrowserRecordVC new];
+        [self.navigationController pushVC:vc];
+        
+    }else if (row == 1){
+        
+        
+    }else if (row == 2){
+        HXAdviceFaceBackVC *vc = [HXAdviceFaceBackVC new];
+        [self.navigationController pushVC:vc];
+        
+    }else if (row == 3){
+       
+        
         
     }
-    
-
 
 }
 - (void)LearnBtnActionWithIndex:(NSInteger)index {

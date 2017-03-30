@@ -20,8 +20,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self.iconImgV lh_setCornerRadius:5 borderWidth:0 borderColor:nil];
-    
+    [self.iconImgV lh_setCornerRadius:37 borderWidth:0 borderColor:nil];
+    [self.attentionBtn lh_setCornerRadius:3 borderWidth:0 borderColor:nil];
     
     
 }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="HXMessageCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小萌萌" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnN-QR-UW2">
+                        <rect key="frame" x="18" y="8" width="139" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="fTI-3N-R8o"/>
+                            <constraint firstAttribute="width" constant="139" id="t5t-0H-R54"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eX6-g9-ZAy">
+                        <rect key="frame" x="18" y="64" width="291" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="42" id="9Xx-1Z-pUn"/>
+                            <constraint firstAttribute="width" constant="291" id="gAJ-3z-he0"/>
+                        </constraints>
+                        <string key="text">听听超级玛利亚的《一点就通透》，重新定义身边的
+音乐世界，入园体现&gt;&gt;</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4p7-sQ-d3p">
+                        <rect key="frame" x="18" y="39" width="220" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="220" id="njD-hh-A1t"/>
+                            <constraint firstAttribute="height" constant="20" id="p3W-cx-tf7"/>
+                        </constraints>
+                        <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w4m-y4-SHZ">
+                        <rect key="frame" x="264" y="30" width="56" height="33"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="56" id="bSx-CV-r9w"/>
+                            <constraint firstAttribute="height" constant="33" id="nWD-al-LN1"/>
+                        </constraints>
+                        <state key="normal" image="right_arrow"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3月21日  08:36:12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXX-qm-IgW">
+                        <rect key="frame" x="18" y="38" width="214" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="ajW-BO-Zgh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="DnN-QR-UW2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="2w8-l9-zyA"/>
+                    <constraint firstItem="w4m-y4-SHZ" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="8" id="4JF-uo-Vbj"/>
+                    <constraint firstAttribute="trailing" secondItem="eX6-g9-ZAy" secondAttribute="trailing" constant="11" id="6a6-ib-ujw"/>
+                    <constraint firstItem="4p7-sQ-d3p" firstAttribute="top" secondItem="DnN-QR-UW2" secondAttribute="bottom" constant="8" id="BdH-w6-ndy"/>
+                    <constraint firstItem="eX6-g9-ZAy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="CNd-kv-bQS"/>
+                    <constraint firstItem="bXX-qm-IgW" firstAttribute="leading" secondItem="DnN-QR-UW2" secondAttribute="leading" id="EII-EC-9io"/>
+                    <constraint firstItem="eX6-g9-ZAy" firstAttribute="top" secondItem="w4m-y4-SHZ" secondAttribute="bottom" constant="1" id="U1T-w9-SRV"/>
+                    <constraint firstAttribute="bottom" secondItem="eX6-g9-ZAy" secondAttribute="bottom" constant="3.5" id="WX4-p2-kBI"/>
+                    <constraint firstItem="w4m-y4-SHZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="22" id="YaW-5e-ppw"/>
+                    <constraint firstItem="DnN-QR-UW2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="aQa-2A-BKZ"/>
+                    <constraint firstItem="eX6-g9-ZAy" firstAttribute="top" secondItem="bXX-qm-IgW" secondAttribute="bottom" constant="3" id="ceP-j5-5Ol"/>
+                    <constraint firstItem="eX6-g9-ZAy" firstAttribute="leading" secondItem="DnN-QR-UW2" secondAttribute="leading" id="em2-k7-tPm"/>
+                    <constraint firstItem="4p7-sQ-d3p" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="gos-IB-LXL"/>
+                    <constraint firstItem="w4m-y4-SHZ" firstAttribute="leading" secondItem="bXX-qm-IgW" secondAttribute="trailing" constant="32" id="hiS-zg-2yb"/>
+                    <constraint firstItem="bXX-qm-IgW" firstAttribute="top" secondItem="DnN-QR-UW2" secondAttribute="bottom" constant="7" id="hrm-5h-eEX"/>
+                    <constraint firstItem="4p7-sQ-d3p" firstAttribute="leading" secondItem="DnN-QR-UW2" secondAttribute="leading" id="tPR-xc-WKO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="28" y="48"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="right_arrow" width="8" height="16"/>
+    </resources>
+</document>

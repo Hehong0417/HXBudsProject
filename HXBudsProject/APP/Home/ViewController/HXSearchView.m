@@ -7,7 +7,6 @@
 //
 
 #import "HXSearchView.h"
-#import "HXCourseOneVC.h"
 
 
 

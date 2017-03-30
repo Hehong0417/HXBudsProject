@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="HXSearchVideoCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subjctVideo" translatesAutoresizingMaskIntoConstraints="NO" id="CYk-CG-qGN">
+                        <rect key="frame" x="14" y="14" width="120" height="60"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="XDK-i1-4Ym"/>
+                            <constraint firstAttribute="height" constant="60" id="xQH-r1-rP8"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图图老师教你学绘画" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyM-7x-3iw">
+                        <rect key="frame" x="149" y="14" width="199" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="29" id="UHx-CR-ISK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="蜜蜜" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFg-jN-nog">
+                        <rect key="frame" x="183" y="45" width="165" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="165" id="G1E-pf-QTU"/>
+                            <constraint firstAttribute="height" constant="25" id="x2t-iK-oOI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="1" green="0.78823529410000004" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="yfx-3S-rSO">
+                        <rect key="frame" x="149" y="45" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="6hh-dt-d3k"/>
+                            <constraint firstAttribute="width" constant="25" id="cAc-oK-z0F"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jyM-7x-3iw" firstAttribute="top" secondItem="CYk-CG-qGN" secondAttribute="top" id="9GJ-gk-fN8"/>
+                    <constraint firstItem="yfx-3S-rSO" firstAttribute="top" secondItem="jyM-7x-3iw" secondAttribute="bottom" constant="2" id="Dux-p5-Add"/>
+                    <constraint firstItem="jyM-7x-3iw" firstAttribute="leading" secondItem="CYk-CG-qGN" secondAttribute="trailing" constant="15" id="OOP-9H-WgS"/>
+                    <constraint firstItem="yfx-3S-rSO" firstAttribute="leading" secondItem="jyM-7x-3iw" secondAttribute="leading" id="QIV-xS-4pv"/>
+                    <constraint firstItem="CYk-CG-qGN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="Xh5-3n-fnl"/>
+                    <constraint firstItem="CYk-CG-qGN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="Y0P-JB-zrO"/>
+                    <constraint firstItem="aFg-jN-nog" firstAttribute="leading" secondItem="yfx-3S-rSO" secondAttribute="trailing" constant="9" id="fl1-fM-9f5"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="jyM-7x-3iw" secondAttribute="trailing" constant="19" id="s7b-h8-Dcb"/>
+                    <constraint firstItem="aFg-jN-nog" firstAttribute="top" secondItem="yfx-3S-rSO" secondAttribute="top" id="vK4-XM-3we"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="24.5" y="52"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon" width="25" height="25"/>
+        <image name="subjctVideo" width="120" height="58"/>
+    </resources>
+</document>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="HXCourseDetailIntroduceCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="109"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程简介" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Emh-5l-dMQ">
+                        <rect key="frame" x="11" y="6" width="350" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="27" id="SUL-PM-Phj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钢琴是极具表现力的乐器，现代钢琴为88个钢琴是极具表现力的乐器，现代钢琴为88个" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hiW-vW-Rrj">
+                        <rect key="frame" x="11" y="37" width="350" height="33.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="EfD-PD-r1a"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.49019607843137253" green="0.49019607843137253" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKo-FW-eAL">
+                        <rect key="frame" x="283" y="73" width="78" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="BzC-BM-KpI"/>
+                            <constraint firstAttribute="height" constant="24" id="PfU-Ou-bpr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal">
+                            <color key="titleColor" red="0.49019607840000001" green="0.49019607840000001" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="dKo-FW-eAL" firstAttribute="top" secondItem="hiW-vW-Rrj" secondAttribute="bottom" constant="2.5" id="2vV-gV-OAC"/>
+                    <constraint firstItem="hiW-vW-Rrj" firstAttribute="leading" secondItem="Emh-5l-dMQ" secondAttribute="leading" id="5On-Rh-JE7"/>
+                    <constraint firstAttribute="trailing" secondItem="Emh-5l-dMQ" secondAttribute="trailing" constant="14" id="Bjc-bY-KrB"/>
+                    <constraint firstItem="dKo-FW-eAL" firstAttribute="trailing" secondItem="hiW-vW-Rrj" secondAttribute="trailing" id="SrC-9I-Bnu"/>
+                    <constraint firstItem="hiW-vW-Rrj" firstAttribute="trailing" secondItem="Emh-5l-dMQ" secondAttribute="trailing" id="TZ4-KC-yw1"/>
+                    <constraint firstItem="hiW-vW-Rrj" firstAttribute="top" secondItem="Emh-5l-dMQ" secondAttribute="bottom" constant="4" id="XaV-xc-gLI"/>
+                    <constraint firstItem="Emh-5l-dMQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="o2q-FT-Mew"/>
+                    <constraint firstItem="Emh-5l-dMQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="zHs-GX-iTI"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="showAllBtn" destination="dKo-FW-eAL" id="lyU-wl-LhH"/>
+                <outlet property="titleLab" destination="Emh-5l-dMQ" id="hsi-Al-gk7"/>
+            </connections>
+            <point key="canvasLocation" x="26.5" y="52"/>
+        </tableViewCell>
+    </objects>
+</document>

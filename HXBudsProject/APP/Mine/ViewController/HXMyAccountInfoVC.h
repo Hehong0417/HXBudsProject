@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HJStaticGroupTableVC.h"
 
-@interface HXMyAccountInfoVC : UIViewController
+@interface HXMyAccountInfoVC : HJStaticGroupTableVC
 
 @end

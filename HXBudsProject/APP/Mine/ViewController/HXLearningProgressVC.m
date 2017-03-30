@@ -8,7 +8,6 @@
 
 #import "HXLearningProgressVC.h"
 #import "UIScrollView+EmptyDataSet.h"
-#import "HXCourseListVC.h"
 
 @interface HXLearningProgressVC ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
@@ -78,10 +77,10 @@
 }
 
 - (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button {
-
-    HXCourseListVC *vc = [HXCourseListVC new];
-    vc.isHomeEntrance = YES;
-    [self.navigationController pushVC:vc];
+//
+//    HXCourseListVC *vc = [HXCourseListVC new];
+//    vc.isHomeEntrance = YES;
+//    [self.navigationController pushVC:vc];
 
 
 }

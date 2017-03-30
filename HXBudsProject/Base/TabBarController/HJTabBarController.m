@@ -9,15 +9,16 @@
 #import "HJTabBarController.h"
 #import "HJNavigationController.h"
 #import "HJStoryBoardItem.h"
+#import "HXTabBar.h"
+#import "HXPublishVC.h"
 
-@interface HJTabBarController () <UITabBarControllerDelegate>
+
+@interface HJTabBarController () <UITabBarControllerDelegate,HXTabBarDelegate>
 
 @property (nonatomic,strong) NSArray *tabBarItemTitles;
 @property (nonatomic,strong) NSArray *tabBarItemNormalImages;
 @property (nonatomic,strong) NSArray *tabBarItemSelectedImages;
 @property (nonatomic,strong) NSArray *tabBarStoryBoardItems;
-
-
 
 
 @end
@@ -49,10 +50,14 @@
     //1.添加所有的自控制器
     [self addAllChildVcs];
     
+    
     self.delegate = self;
     self.tabBar.tintColor=APP_COMMON_COLOR;
     
-
+    HXTabBar *tabBar = [[HXTabBar alloc] init];
+    tabBar.customDelegate = self;
+    /** KVC */
+    [self setValue:tabBar forKey:@"tabBar"];
    
 }
 
@@ -124,7 +129,7 @@
 {
     //设置底部tabbar的主题样式
     UITabBarItem *appearance = [UITabBarItem appearance];
-//    [appearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:JDCommonColor, NSForegroundColorAttributeName,nil] forState:UIControlStateSelected];
+    [appearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:APP_COMMON_COLOR, NSForegroundColorAttributeName,nil] forState:UIControlStateSelected];
 }
 
 #pragma mark - Setter&Getter
@@ -134,8 +139,8 @@
     if (!_tabBarItemTitles) {
         
         _tabBarItemTitles = @[ @"首页",
-                               @"课程",
-                               @"活动",
+                               @"文章",
+                               @"视频",
                                @"我的"];
     }
     
@@ -146,10 +151,10 @@
     
     if (!_tabBarItemNormalImages) {
         
-        _tabBarItemNormalImages = @[ @"home",
-                                     @"course",
-                                     @"activity",
-                                     @"mine"];
+        _tabBarItemNormalImages = @[ @"t1",
+                                     @"t2",
+                                     @"t3",
+                                     @"t4"];
     }
     
     return _tabBarItemNormalImages;
@@ -159,10 +164,10 @@
     
     if (!_tabBarItemSelectedImages) {
         
-        _tabBarItemSelectedImages =  @[@"home_pre",
-                                       @"course_pre",
-                                       @"activity_pre",
-                                       @"mine_pre"];    }
+        _tabBarItemSelectedImages =  @[@"t1_pre",
+                                       @"t2_pre",
+                                       @"t3_pre",
+                                       @"t4_pre"];    }
     
     return _tabBarItemSelectedImages;
 }
@@ -173,8 +178,8 @@
         
         //
         HJStoryBoardItem *item1 = [HJStoryBoardItem itemWithStroyBoardName:@"HomePage" identifier:@"HXHomePageTVC" viewControllerNonExist:YES];
-        HJStoryBoardItem *item2 = [HJStoryBoardItem itemWithStroyBoardName:@"Course" identifier:@"HXCourseListVC" viewControllerNonExist:YES];
-        HJStoryBoardItem *item3 = [HJStoryBoardItem itemWithStroyBoardName:@"Activity" identifier:@"HXActinityVC" viewControllerNonExist:YES];
+        HJStoryBoardItem *item2 = [HJStoryBoardItem itemWithStroyBoardName:@"Course" identifier:@"HXArticleVC" viewControllerNonExist:YES];
+        HJStoryBoardItem *item3 = [HJStoryBoardItem itemWithStroyBoardName:@"Activity" identifier:@"HXVideoCVC" viewControllerNonExist:YES];
         HJStoryBoardItem *item4 = [HJStoryBoardItem itemWithStroyBoardName:@"PersonCenter" identifier:@"HXPersonCenterVC" viewControllerNonExist:YES];
 
         _tabBarStoryBoardItems = @[ item1,
@@ -186,10 +191,12 @@
     return _tabBarStoryBoardItems;
 }
 
+- (void)tabBarDidClickPlusButton:(HXTabBar *)tabBar{
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSLog(@"发布");
+    HXPublishVC  *vc = [HXPublishVC new];
+    [self presentViewController:vc animated:YES completion:nil];
+
 }
 
 @end

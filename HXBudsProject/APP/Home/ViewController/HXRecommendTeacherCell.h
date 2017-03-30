@@ -12,6 +12,9 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconImgV;
 
+@property (weak, nonatomic) IBOutlet UIButton *attentionBtn;
+
+
 +(instancetype)initTeacherCellWithXib;
 
 

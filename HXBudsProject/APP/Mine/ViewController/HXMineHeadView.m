@@ -8,7 +8,8 @@
 
 #import "HXMineHeadView.h"
 #import "HXPersonInfoVC.h"
-#import "HXPayDetailTVC.h"
+#import "HXLoginVC.h"
+#import "HXRegisterVC.h"
 
 @implementation HXMineHeadView
 
@@ -22,18 +23,11 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
+    [self.loginBtnView lh_setCornerRadius:15 borderWidth:0 borderColor:nil];
+    [self.registerBtnView lh_setCornerRadius:15 borderWidth:0 borderColor:nil];
+    self.loginBtnView.userInteractionEnabled = NO;;
+    self.registerBtnView.userInteractionEnabled = NO;
     
-    [self.icon_imgV lh_setRoundImageViewWithBorderWidth:0 borderColor:nil];
-    
-    CAGradientLayer *layer = [CAGradientLayer layer];
-    layer.colors = @[(__bridge id)RGB(118, 198, 170).CGColor,(__bridge id)RGB(107, 199, 225).CGColor];
-    layer.locations = @[@0.2,@0.9];
-    layer.startPoint = CGPointMake(0, 0);
-    layer.endPoint = CGPointMake(0, 1.0);
-    layer.frame = CGRectMake(0, 0, SCREEN_WIDTH, WidthScaleSize_H(257));
-
-    [self.bgView.layer addSublayer:layer];
-     
 
 }
 
@@ -45,6 +39,16 @@
     
 }
 
+- (IBAction)loginAction:(UIButton *)sender {
+    
+    [self.nav pushVC:[HXLoginVC new]];
+    
+}
+- (IBAction)registerAction:(UIButton *)sender {
+    
+    [self.nav pushVC:[HXRegisterVC new]];
+    
+}
 
 
 @end

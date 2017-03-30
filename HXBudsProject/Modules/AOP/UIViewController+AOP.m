@@ -8,6 +8,8 @@
 
 #import "UIViewController+AOP.h"
 #import <Aspects/Aspects.h>
+#import "HXMessageVC.h"
+
 
 @implementation UIViewController (AOP)
 
@@ -19,8 +21,8 @@
 + (XYQButton *)aopBackButton {
     
     XYQButton *backButton = [XYQButton buttonWithType:UIButtonTypeCustom];
-    [backButton setFrame:CGRectMake(0, 0, 32, 44)];
-    UIImage *image = [UIImage imageNamed:@"back"];
+    [backButton setFrame:CGRectMake(0, 0, 30, 44)];
+    UIImage *image = [UIImage imageNamed:@"back_gray"];
     [backButton setImage:image forState:UIControlStateNormal];
     CGFloat imageWidth = image.size.width;
     CGFloat imageHeight = image.size.height;
@@ -72,6 +74,25 @@
             
             controller.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
         }
+        if ([NSStringFromClass([controller class]) hasPrefix:@"HX"] && ([controller isKindOfClass:NSClassFromString(@"HXHomePageTVC")]||[controller isKindOfClass:NSClassFromString(@"HXArticleVC")]||[controller isKindOfClass:NSClassFromString(@"HXPersonCenterVC")]||[controller isKindOfClass:NSClassFromString(@"HXVideoCVC")])) {
+            
+            XYQButton *searchBtn = [XYQButton ButtonWithFrame:CGRectMake(20, 0, 44, 60) imgaeName:@"search" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
+                
+                
+            }];
+            
+            controller.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:searchBtn];
+            
+            XYQButton *messageBtn = [XYQButton ButtonWithFrame:CGRectMake(20, 0, 44, 60) imgaeName:@"message" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
+                
+                [controller.navigationController pushVC:[HXMessageVC new]];
+
+            }];
+            
+            controller.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:messageBtn];
+
+        }
+        
         
     } error:NULL];
     
@@ -80,7 +101,7 @@
         
         UIViewController *controller = [info instance];
         
-        if ([NSStringFromClass([controller class]) hasPrefix:@"HX"] && ([controller isKindOfClass:NSClassFromString(@"HXOrganizationDetailTVC")]||[controller isKindOfClass:NSClassFromString(@"HJLoginVC")]||[controller isKindOfClass:NSClassFromString(@"HXCourseClassifyVC")]||[controller isKindOfClass:NSClassFromString(@"HXActivityDetailVC")]||[controller isKindOfClass:NSClassFromString(@"HXPersonCenterVC")])) {
+        if ([NSStringFromClass([controller class]) hasPrefix:@"HX"] && ([controller isKindOfClass:NSClassFromString(@"HXRegisterVC")]||[controller isKindOfClass:NSClassFromString(@"HXLoginVC")]||[controller isKindOfClass:NSClassFromString(@"HXCommitPassWordVC")]||[controller isKindOfClass:NSClassFromString(@"HXActivityDetailVC")]||[controller isKindOfClass:NSClassFromString(@"HXPersonCenterVC")])) {
             
             [controller.navigationController setNavigationBarHidden:YES animated:YES];
             

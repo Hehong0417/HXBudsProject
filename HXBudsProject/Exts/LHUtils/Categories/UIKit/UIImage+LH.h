@@ -37,4 +37,15 @@
  */
 + (UIImage *)lh_imageWithColor:(UIColor *)color;
 
+
+
+/**
+ 通过图片名字返回图片
+
+ @param name 名字
+ @return 图片
+ */
++ (UIImage *)lh_getContentImageWithName:(NSString *)name;
+
+
 @end

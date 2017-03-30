@@ -21,6 +21,8 @@
 #import <UIImageView+WebCache.h>
 #import <UIButton+WebCache.h>
 #import <SVProgressHUD.h>
+#import <SVProgressHUD.h>
+#import "IQKeyboardManager.h"
 
 
 #import <Foundation/Foundation.h>

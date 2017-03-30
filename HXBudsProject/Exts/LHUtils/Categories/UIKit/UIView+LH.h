@@ -100,8 +100,20 @@
  */
 - (void)lh_setCornerRadius:(float)Radius borderWidth:(float)Width borderColor:(UIColor *)BorderColor;
 
-@end
 
+
+
+/**
+ 设置虚线框
+ 
+ @param lineWidth 线框
+ @param lineCap 虚线形状
+ @param lineDashPattern  lineDashPattern description
+ */
+- (CAShapeLayer *)lh_addStokeLineWithColor:(UIColor *)strokerColor lineWidth:(CGFloat)lineWidth lineCap:(NSString *)lineCap lineDashPattern:(NSArray *)lineDashPattern;
+
+
+@end
 
 
 #pragma mark - 动画

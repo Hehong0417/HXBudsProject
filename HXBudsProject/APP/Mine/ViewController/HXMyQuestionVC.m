@@ -8,8 +8,6 @@
 
 #import "HXMyQuestionVC.h"
 #import "SGSegmentedControl.h"
-#import "HXTeacherListVC.h"
-#import "HXPianoDetailVC.h"
 
 @interface HXMyQuestionVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
 
@@ -76,12 +74,7 @@
 - (void)setupChildViewController {
     
     // 已解决
-    HXTeacherListVC *oneVC = [[HXTeacherListVC alloc] init];
-    [self addChildViewController:oneVC];
-    
-    // 未解决
-    HXPianoDetailVC *twoVC = [[HXPianoDetailVC alloc] init];
-    [self addChildViewController:twoVC];
+ 
     
     
     

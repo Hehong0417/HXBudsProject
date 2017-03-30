@@ -86,30 +86,29 @@
 + (void)setupNavigationBarTheme {
     
     UINavigationBar *appearance = [UINavigationBar appearance];
-    [[UINavigationBar appearance] setBarTintColor:APP_COMMON_COLOR
-     ];
-    
+
     //设置文字属性
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-    textAttrs[NSForegroundColorAttributeName] = kWhiteColor;
+    textAttrs[NSForegroundColorAttributeName] = kBlackColor;
     textAttrs[NSFontAttributeName] = JDNavigationFont;
+    
     
     //设置导航栏背景
 
     //导航栏背景图片
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.colors = @[(__bridge id)RGB(118,198,170).CGColor,(__bridge id)RGB(107,199,225).CGColor];
-    gradientLayer.locations = @[@0.2,@0.9];
-    gradientLayer.startPoint = CGPointMake(0, 0);
-    gradientLayer.endPoint = CGPointMake(0, 1.0);
-    gradientLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
-    UIView *navView  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
-    [navView.layer addSublayer:gradientLayer];
+//    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+//    gradientLayer.colors = @[(__bridge id)RGB(118,198,170).CGColor,(__bridge id)RGB(107,199,225).CGColor];
+//    gradientLayer.locations = @[@0.2,@0.9];
+//    gradientLayer.startPoint = CGPointMake(0, 0);
+//    gradientLayer.endPoint = CGPointMake(0, 1.0);
+//    gradientLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
+//    UIView *navView  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+//    [navView.layer addSublayer:gradientLayer];
+//    
+//   UIImage *navImage = [navView lh_toImage];
     
-    UIImage *navImage = [navView lh_toImage];
-    
-    
-    //    设置导航栏背景
+    UIImage *navImage = [UIImage imageWithColor:kWhiteColor];
+    //设置导航栏背景
     if (!iOS7){
         [appearance setBackgroundImage:navImage forBarMetrics:UIBarMetricsDefault];
         textAttrs[NSShadowAttributeName] = [[NSShadow alloc] init];
@@ -120,6 +119,7 @@
         textAttrs[NSShadowAttributeName] = [[NSShadow alloc] init];
 
     }
+    [appearance setShadowImage:[UIImage new]];
 
     [appearance setTitleTextAttributes:textAttrs];
 }
@@ -132,7 +132,7 @@
     
     /**设置文字属性**/
     // 设置普通状态的文字属性
-    [appearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kWhiteColor, NSForegroundColorAttributeName,[UIFont systemFontOfSize:18],NSFontAttributeName,nil] forState:UIControlStateNormal];
+    [appearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kBlackColor, NSForegroundColorAttributeName,[UIFont systemFontOfSize:18],NSFontAttributeName,nil] forState:UIControlStateNormal];
     
     // 设置高亮状态的文字属性
     //    [appearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:SWCommonColor, NSForegroundColorAttributeName,[UIFont systemFontOfSize:15],NSFontAttributeName,nil] forState:UIControlStateHighlighted];

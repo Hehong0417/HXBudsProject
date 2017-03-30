@@ -8,14 +8,15 @@
 
 #import "HXMyLikeVC.h"
 #import "SGSegmentedControl.h"
-#import "HXTeacherListVC.h"
-#import "HXPianoDetailVC.h"
-#import "HXOrganizationVC.h"
-#import "HXInformationTVC.h"
-
+#import "HXMyHomeHeadView.h"
+#import "HXSubjectListTVC.h"
 
 @interface HXMyLikeVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
+{
 
+    HXMyHomeHeadView  *mineHeadView;
+
+}
 @property(nonatomic,strong)SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
 
@@ -27,7 +28,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-     self.title = @"我喜欢的";
+    self.title = @"我的主页";
+    self.view.backgroundColor = kWhiteColor;
+    mineHeadView = [HXMyHomeHeadView initMyHomeHeadViewWithXib];
+    mineHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 224);
+    
+    mineHeadView.nav = self.navigationController;
+    
+    [self.view addSubview:mineHeadView];
+    
     
     // 1.添加所有子控制器
     [self setupChildViewController];
@@ -36,13 +45,14 @@
     
 
 }
+
 - (void)setupSegmentedControl {
     
-    NSArray *title_arr = @[@"老师", @"课程", @"机构",@"文章"];
+    NSArray *title_arr = @[@"文章", @"收藏", @"视频",@"关注"];
     
     // 创建底部滚动视图
     self.mainScrollView = [[UIScrollView alloc] init];
-    _mainScrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    _mainScrollView.frame = CGRectMake(0, 204, self.view.frame.size.width, self.view.frame.size.height- 165);
     _mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width * title_arr.count, 0);
     _mainScrollView.backgroundColor = [UIColor whiteColor];
     // 开启分页
@@ -56,8 +66,7 @@
     [self.view addSubview:_mainScrollView];
     
     
-    
-    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) delegate:self segmentedControlType:(SGSegmentedControlTypeStatic) titleArr:title_arr];
+    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 160, self.view.frame.size.width, 44) delegate:self segmentedControlType:(SGSegmentedControlTypeStatic) titleArr:title_arr];
     self.SG.titleColorStateNormal = kBlackColor;
     self.SG.titleColorStateSelected = APP_COMMON_COLOR;
     self.SG.indicatorColor = kRedColor;
@@ -78,31 +87,13 @@
 // 添加所有子控制器
 - (void)setupChildViewController {
     
-    // 老师
-    HXTeacherListVC *oneVC = [[HXTeacherListVC alloc] init];
-    oneVC.isMyLike = YES;
-    
-    [self addChildViewController:oneVC];
-    
-    // 课程
-    HXPianoDetailVC *twoVC = [[HXPianoDetailVC alloc] init];
-    twoVC.isMyLike = YES;
+    for (NSInteger i = 0; i<4; i++) {
+        
+        HXSubjectListTVC *vc = [HXSubjectListTVC new];
+        
+        [self addChildViewController:vc];
 
-    [self addChildViewController:twoVC];
-    
-    // 机构
-    HXOrganizationVC *threeVC = [[HXOrganizationVC alloc] init];
-    threeVC.isMyLike = YES;
-
-    [self addChildViewController:threeVC];
-
-    // 文章
-    HXInformationTVC *fourVC = [[HXInformationTVC alloc] init];
-    fourVC.isMyLike = YES;
-
-    [self addChildViewController:fourVC];
-
-    
+    }
     
 }
 
