@@ -12,7 +12,7 @@
 #import "HXCourseDetailTwoVC.h"
 #import "HXCourseDetailThreeVC.h"
 #import "HXBuyBottomView.h"
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 #import "CLPlayerView.h"
 
 
@@ -101,7 +101,7 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
     
     self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, headViewHeight, self.view.frame.size.width, WidthScaleSize_H(44)) delegate:self segmentedControlType:(SGSegmentedControlTypeStatic) titleArr:title_arr];
-    self.SG.titleColorStateNormal = [UIColor colorWithHexString:@"#2D6B6D"];
+    self.SG.titleColorStateNormal = [UIColor blackColor];
     self.SG.titleColorStateSelected = APP_COMMON_COLOR;
     self.SG.indicatorColor = APP_COMMON_COLOR;
     [self.view addSubview:_SG];

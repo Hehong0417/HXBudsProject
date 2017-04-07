@@ -17,7 +17,6 @@
 
 @interface HXVideoSectionHead : UICollectionReusableView
 
-
 @property(nonatomic,copy)NSString *headtitle;
 @property(nonatomic,copy)NSString *discribText;
 @property(nonatomic,copy)NSString *rightBtnTitle;
@@ -29,6 +28,7 @@
 @property(nonatomic,strong)XYQButton *rightBtn;
 @property(nonatomic,weak) id<HXSectionHeadDalegate>delegate;
 
+@property(nonatomic,strong)UINavigationController *nav;
 
 
 @end

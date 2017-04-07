@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    self.title = @"我的主页";
+    self.title = self.titleStr;
     self.view.backgroundColor = kWhiteColor;
     mineHeadView = [HXMyHomeHeadView initMyHomeHeadViewWithXib];
     mineHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 224);

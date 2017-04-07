@@ -272,69 +272,69 @@ static const CGFloat kNormalCellHeight = 44;
 
 #pragma mark - 拍照 & 相册
 
-- (void)showPhotoSheetActionWithFinishSelectedBlock:(idBlock)finshiSelectedPhoto {
-    
-    self.finshiSelectedPhoto = finshiSelectedPhoto;
-    
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", @"拍照", nil];
-    [actionSheet bk_setWillDismissBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-        
-        if (buttonIndex == 0) {
-            // 相册
-            [self getMediaFromSource:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
-        }else if (buttonIndex == 1) {
-            // 拍照
-            [self getMediaFromSource:UIImagePickerControllerSourceTypeCamera];
-        }
-        
-    }];
-    [actionSheet showInView:self.view];
-}
-- (void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType {
-    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
-        UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
-        ipc.sourceType = sourceType;
-        ipc.allowsEditing = YES;
-        ipc.delegate = self;
-        [self presentViewController:ipc animated:YES completion:nil];
-    }else {
-        [UIAlertView lh_showWithMessage:@"当前设备不支持拍摄功能"];
-    }
-}
-
-
-#pragma mark - UIImagePickerControllerDelegate
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSString *type = info[UIImagePickerControllerMediaType];
-    //当选择的类型是图片
-    if ([type isEqualToString:(NSString *)kUTTypeImage]) {
-        UIImage *image = nil;
-        // 判断，图片是否允许修改
-        if ([picker allowsEditing]) {
-            //获取用户编辑之后的图像
-            image = [info objectForKey:UIImagePickerControllerEditedImage];
-        } else {
-            // 照片的元数据参数
-            image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        }
-        
-        //关闭相册界面
-        [picker dismissViewControllerAnimated:YES completion:^{
-
-            self.finshiSelectedPhoto(image);
-            
-        }];
-    }
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    picker.delegate = nil;
-    picker = nil;
-}
-
+//- (void)showPhotoSheetActionWithFinishSelectedBlock:(idBlock)finshiSelectedPhoto {
+//    
+//    self.finshiSelectedPhoto = finshiSelectedPhoto;
+//    
+//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", @"拍照", nil];
+//    [actionSheet bk_setWillDismissBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+//        
+//        if (buttonIndex == 0) {
+//            // 相册
+//            [self getMediaFromSource:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+//        }else if (buttonIndex == 1) {
+//            // 拍照
+//            [self getMediaFromSource:UIImagePickerControllerSourceTypeCamera];
+//        }
+//        
+//    }];
+//    [actionSheet showInView:self.view];
+//}
+//- (void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType {
+//    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+//        UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+//        ipc.sourceType = sourceType;
+//        ipc.allowsEditing = YES;
+//        ipc.delegate = self;
+//        [self presentViewController:ipc animated:YES completion:nil];
+//    }else {
+//        [UIAlertView lh_showWithMessage:@"当前设备不支持拍摄功能"];
+//    }
+//}
+//
+//
+//#pragma mark - UIImagePickerControllerDelegate
+//
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+//    NSString *type = info[UIImagePickerControllerMediaType];
+//    //当选择的类型是图片
+//    if ([type isEqualToString:(NSString *)kUTTypeImage]) {
+//        UIImage *image = nil;
+//        // 判断，图片是否允许修改
+//        if ([picker allowsEditing]) {
+//            //获取用户编辑之后的图像
+//            image = [info objectForKey:UIImagePickerControllerEditedImage];
+//        } else {
+//            // 照片的元数据参数
+//            image = [info objectForKey:UIImagePickerControllerOriginalImage];
+//        }
+//        
+//        //关闭相册界面
+//        [picker dismissViewControllerAnimated:YES completion:^{
+//
+//            self.finshiSelectedPhoto(image);
+//            
+//        }];
+//    }
+//}
+//
+//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+//    [picker dismissViewControllerAnimated:YES completion:nil];
+//    
+//    picker.delegate = nil;
+//    picker = nil;
+//}
+//
 
 - (NSMutableArray *)groups
 {

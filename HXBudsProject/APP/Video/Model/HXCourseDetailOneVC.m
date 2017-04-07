@@ -32,6 +32,7 @@
     _tableView.dataSource = self;
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     _tableView.rowHeight = 44;
+    _tableView.backgroundColor = kWhiteColor;
     [self.view addSubview:_tableView];
 }
 
@@ -54,6 +55,15 @@
         return  WidthScaleSize_H(110);
     }
 
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+
+    return 0.01;
+
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+
+    return 0.01;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     

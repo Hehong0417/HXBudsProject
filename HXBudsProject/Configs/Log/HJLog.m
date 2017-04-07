@@ -8,6 +8,8 @@
 
 #import "HJLog.h"
 #import "HJLogFormatter.h"
+#import <CocoaLumberjack/DDASLLogger.h>
+
 
 @implementation HJLog
 
@@ -52,10 +54,10 @@
 #else
     NSColor *pink = [NSColor colorWithCalibratedRed:(255/255.0) green:(58/255.0) blue:(159/255.0) alpha:1.0];
 #endif
-    
+     int  DDLogFlagInfo = 1;
     [[DDTTYLogger sharedInstance] setForegroundColor:pink backgroundColor:nil forFlag:DDLogFlagInfo];
     
-    DDLogInfo(@"Warming up printer (post-customization)"); // Pink !
+//    DDLogInfo(@"Warming up printer (post-customization)"); // Pink !
     
     // Now let's get crazy
     

@@ -87,6 +87,57 @@ strip_invalid_archs() {
   fi
 }
 
+
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/AFNetworking/AFNetworking.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Aspects/Aspects.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BlocksKit/BlocksKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/CocoaLumberjack/CocoaLumberjack.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DZNEmptyDataSet/DZNEmptyDataSet.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FMDB/FMDB.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FXBlurView/FXBlurView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManager/IQKeyboardManager.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/JSONModel/JSONModel.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJExtension/MJExtension.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJRefresh/MJRefresh.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Masonry/Masonry.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/NSObject-SafeExpectations/NSObject_SafeExpectations.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SDCycleScrollView/SDCycleScrollView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/UIAlertView+Blocks/UIAlertView_Blocks.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/WYPopoverController/WYPopoverController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/WordPress-Editor-iOS-Extension/WordPress_Editor_iOS_Extension.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/WordPress-iOS-Shared/WordPress_iOS_Shared.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/WordPressCom-Analytics-iOS/WordPressComAnalytics.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYCategories/YYCategories.framework"
+fi
+if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/AFNetworking/AFNetworking.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Aspects/Aspects.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BlocksKit/BlocksKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/CocoaLumberjack/CocoaLumberjack.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DZNEmptyDataSet/DZNEmptyDataSet.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FMDB/FMDB.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FXBlurView/FXBlurView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManager/IQKeyboardManager.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/JSONModel/JSONModel.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJExtension/MJExtension.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJRefresh/MJRefresh.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Masonry/Masonry.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/NSObject-SafeExpectations/NSObject_SafeExpectations.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SDCycleScrollView/SDCycleScrollView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/UIAlertView+Blocks/UIAlertView_Blocks.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/WYPopoverController/WYPopoverController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/WordPress-Editor-iOS-Extension/WordPress_Editor_iOS_Extension.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/WordPress-iOS-Shared/WordPress_iOS_Shared.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/WordPressCom-Analytics-iOS/WordPressComAnalytics.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYCategories/YYCategories.framework"
+fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
 fi

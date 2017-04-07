@@ -10,4 +10,6 @@
 
 @interface HXSearchArticleCell : UITableViewCell
 
++(instancetype)initSearchArticleCellWithXib;
+
 @end

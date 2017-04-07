@@ -25,9 +25,8 @@
     return self;
 }
 
-- (void)setSubjectArr:(NSArray *)subjectArr {
+- (void)setSubjectArr:(NSArray *)subjectArr isViewMore:(BOOL) isViewMore cellHeight:(float) cellHeight{
 
-    _subjectArr = subjectArr;
     float butX = 15;
     float butY = 10;
     for(int i = 0; i < subjectArr.count; i++){
@@ -51,33 +50,27 @@
         but.layer.borderColor = APP_COMMON_COLOR.CGColor;
         but.layer.borderWidth = 1;
         but.tag = i+1;
+        //10 + 30 + 15 = 55;
+        if (!isViewMore &&(butY>55)) {
+            
+            but.hidden = YES;
+        
+        }else{
+            
+            but.hidden = NO;
+        }
         [but addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:but];
         
         butX = CGRectGetMaxX(but.frame)+10;
         
-        if (i == subjectArr.count -1) {
-            
-            //按钮与线的间距10 与屏幕的间距为15
-            
-            UIView *leftLine = [UIView lh_viewWithFrame:CGRectMake(15, CGRectGetMaxY(but.frame)+6,(SCREEN_WIDTH - 100)/2 , 1) backColor:LineLightColor];
-        
-            XYQButton *moreBtn = [XYQButton ButtonWithFrame:CGRectMake(15+leftLine.width, CGRectGetMaxY(but.frame), 50, 10) imgaeName:@"down" titleName:@"查看更多" contentType:LeftImageRightTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:LineLightColor fontsize:10] tapAction:^(XYQButton *button) {
-                
-            }];
-            UIView *rightLine = [UIView lh_viewWithFrame:CGRectMake(SCREEN_WIDTH - 15 - leftLine.width, CGRectGetMaxY(but.frame)+6, leftLine.width, 1) backColor:LineLightColor];
-            [self.contentView addSubview:leftLine];
-            [self.contentView addSubview:rightLine];
-            [self.contentView addSubview:moreBtn];
-        }
-
     }
 
 }
 - (void)btnClick:(UIButton *)btn{
 
     HXSubjectListTVC *vc = [HXSubjectListTVC new];
-    vc.titleStr = self.subjectArr[btn.tag - 1];
+//    vc.titleStr = self.subjectArr[btn.tag - 1];
     [self.vc pushVC:vc];
 
 }

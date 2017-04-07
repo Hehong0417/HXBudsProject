@@ -10,7 +10,10 @@
 
 @interface HXArticleCellOne : UITableViewCell
 
-@property(nonatomic,strong) NSArray *subjectArr;
 @property(nonatomic,strong) UINavigationController *vc;
+
+- (void)setSubjectArr:(NSArray *)subjectArr isViewMore:(BOOL) isViewMore cellHeight:(float)cellHeight;
+
+
 
 @end

@@ -10,4 +10,6 @@
 
 @interface HXMyLikeVC : UIViewController
 
+@property(nonatomic,copy) NSString *titleStr;
+
 @end

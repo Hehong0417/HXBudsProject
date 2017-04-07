@@ -1,7 +1,6 @@
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+use_frameworks!
 target 'HXBudsProject' do
-pod 'AFNetworking', '~>2.6.3'
+pod 'AFNetworking'
 pod 'Masonry'
 pod 'CocoaLumberjack'
 pod 'Aspects'
@@ -18,6 +17,7 @@ pod 'SDCycleScrollView’
 pod 'JSONModel', '~> 1.1.2'
 pod 'DZNEmptyDataSet'
 pod 'FMDB'
+pod 'WordPress-Editor-iOS-Extension'
 
  # U-Share SDK UI模块（分享面板，建议添加）
 pod 'UMengUShare/UI'
@@ -29,7 +29,6 @@ pod 'UMengUShare/Social/WeChat'
 pod 'UMengUShare/Social/QQ'
 # 集成支付宝
 pod 'UMengUShare/Social/AlipayShare'
-
 
 
 end

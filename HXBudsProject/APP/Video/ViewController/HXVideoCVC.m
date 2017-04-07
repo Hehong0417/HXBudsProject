@@ -111,7 +111,9 @@ static NSString * const reuseIdentifier = @"Cell";
         FontAttributes *attrbutes = [FontAttributes fontAttributesWithFontColor:FontLightGrayColor fontsize:14];
         sectionHead.btnFontAttributes = attrbutes;
         [sectionHead setTapActionWithBlock:^{
+            
             [self rightBtnActionWithSection:indexPath.section];
+            
         }];    
         
         return sectionHead;

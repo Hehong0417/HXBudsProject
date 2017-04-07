@@ -18,16 +18,15 @@
 #import <Masonry/Masonry.h>
 #import <Aspects/Aspects.h>
 #import <MBProgressHUD/MBProgressHUD.h>
-#import <UIImageView+WebCache.h>
-#import <UIButton+WebCache.h>
-#import <SVProgressHUD.h>
-#import <SVProgressHUD.h>
+#import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
+#import "SVProgressHUD.h"
 #import "IQKeyboardManager.h"
-
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+#import <CocoaLumberjack/CocoaLumberjack-umbrella.h>
 
 
 // config
@@ -42,6 +41,7 @@
 #import "HJLog.h"
 #import "HJTabBarController.h"
 #import "HJNavigationController.h"
+#import <AFNetworking/AFNetworking.h>
 
 
 //#import <YYCategories/YYCategories.h>
@@ -55,4 +55,14 @@
 #import "LHUtils.h"
 #import "UIaddition.h"
 #import "Encryption.h"
+
+
+#import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+
 #endif /* Buds_pch */
+
+#define Domain                          @"api.ougohome.com"
+#define BASEURL                         @"http://api.ougohome.com/index.php/"
+
+

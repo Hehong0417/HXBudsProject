@@ -13,6 +13,7 @@
 #import "DES3Util.h"
 #import "MD5Encryption.h"
 
+
 #define kTimeoutInterval 8
 
 @interface NetworkClient ()
@@ -111,10 +112,10 @@
     NSString *paramStr = [NSString stringWithFormat:@"\n%@", self.parameters];
     
     if (!error) {
-        DDLogInfo(@"------------接口地址：------------\n%@\n请求参数：%@\n拼接url：%@\n------------请求成功：------------\n%@\n  msg=%@",self.subUrl, paramStr,[self urlStringAppendingParameters] , response ,[response objectForKey:@"msg"]);
+//        DDLogInfo(@"------------接口地址：------------\n%@\n请求参数：%@\n拼接url：%@\n------------请求成功：------------\n%@\n  msg=%@",self.subUrl, paramStr,[self urlStringAppendingParameters] , response ,[response objectForKey:@"msg"]);
     }
     else {
-        DDLogError(@"------------接口地址：------------\n%@\n请求参数：%@\n拼接url：%@\n------------请求失败：------------\n%@",self.subUrl, paramStr,[self urlStringAppendingParameters] ,error);
+//        DDLogError(@"------------接口地址：------------\n%@\n请求参数：%@\n拼接url：%@\n------------请求失败：------------\n%@",self.subUrl, paramStr,[self urlStringAppendingParameters] ,error);
     }
     
 #endif

@@ -7,10 +7,10 @@
  **/
 @implementation HJLogFormatter
 
-- (NSString *)formatLogMessage:(DDLogMessage *)logMessage
-{
-    return [NSString stringWithFormat:@"%@\nClass:%@ \nMethod:%@ \nLine: %@\n%@",logMessage->_timestamp,
-            [logMessage fileName], logMessage->_function, @(logMessage->_line), logMessage->_message];
-}
+//- (NSString *)formatLogMessage:(DDLogMessage *)logMessage
+//{
+//    return [NSString stringWithFormat:@"%@\nClass:%@ \nMethod:%@ \nLine: %@\n%@",logMessage->timestamp,
+//            [logMessage fileName], logMessage->function, @(logMessage->_line), logMessage->_message];
+//}
 
 @end

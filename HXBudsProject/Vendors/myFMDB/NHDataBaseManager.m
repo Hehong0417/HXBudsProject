@@ -7,7 +7,7 @@
 //
 
 #import "NHDataBaseManager.h"
-#import <FMDB.h>
+#import "FMDB.h"
 #import <objc/runtime.h>
 
 // 通过实体获取类名

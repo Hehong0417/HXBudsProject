@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol HXGradeCommentCellDelegate <NSObject>
+
+- (void)gradeCommentStarAction:(UIButton *)button;
+
+@end
+
 @interface HXGradeCommentCell : UITableViewCell
+
+@property(nonatomic,weak) id <HXGradeCommentCellDelegate> delegate;
 
 @end

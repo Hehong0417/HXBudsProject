@@ -48,7 +48,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self defaulInit];
+//        [self defaulInit];
     }
     return self;   
 }
@@ -88,7 +88,7 @@
     if (animated) {
         self.contentView.lh_top = self.lh_bottom;
         [UIView animateWithDuration:0.3 animations:^{
-            self.contentView.lh_top = self.lh_centerY;
+            self.contentView.lh_centerY = self.lh_centerY;
         } completion:^(BOOL finished) {
             
         }];

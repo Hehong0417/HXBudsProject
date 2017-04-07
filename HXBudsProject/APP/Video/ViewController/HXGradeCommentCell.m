@@ -30,6 +30,7 @@
             CGFloat btn_w =  bgView.mj_w/5;
             
             UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(i*btn_w, 0, btn_w, 40) target:self action:@selector(btnAction:) image:[UIImage imageNamed:@"Star_comment"]];
+            
             [bgView addSubview:btn];
         }
         
@@ -41,8 +42,9 @@
 
 }
 - (void)btnAction:(UIButton *)btn{
-
-
+   
+    [self.delegate gradeCommentStarAction:btn];
+    
 
 }
 

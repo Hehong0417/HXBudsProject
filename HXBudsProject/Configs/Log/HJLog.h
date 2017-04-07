@@ -12,22 +12,20 @@
 #ifdef EnableCocoaLumberjack
 
 
-#import <CocoaLumberjack/CocoaLumberjack.h>
-
 #ifdef DEBUG
 
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+//static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
-//#define MethodTag @"MethodTag"
+#define MethodTag @"MethodTag"
 //
 //#define LHLog(xx, ...)  DDLogInfo(@"%s(%d): " xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 //#define LHLogWarn(xx, ...)  DDLogWarn(@"%s(%d): " xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 //#define LHLogError(xx, ...)  DDLogError(@"%s(%d): " xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 //#define LHLogMethod() LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagVerbose, 0, MethodTag, __PRETTY_FUNCTION__, @"%s(%d) ----- class = %@", __PRETTY_FUNCTION__, __LINE__, self)
 
-#else
-
-static const DDLogLevel ddLogLevel = DDLogLevelOff;
+//#else
+//
+//static const DDLogLevel ddLogLevel = DDLogLevelOff;
 
 //#define LHLog(xx, ...)  ((void)0)
 //#define LHLogWarn(xx, ...)  ((void)0)

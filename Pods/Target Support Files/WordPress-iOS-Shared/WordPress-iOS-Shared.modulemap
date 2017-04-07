@@ -1,0 +1,6 @@
+framework module WordPress_iOS_Shared {
+  umbrella header "WordPress-iOS-Shared-umbrella.h"
+
+  export *
+  module * { export * }
+}

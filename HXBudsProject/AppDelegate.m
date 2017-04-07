@@ -33,12 +33,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
-    [manager setEnable:YES];
-    manager.shouldResignOnTouchOutside = YES;
-    manager.enableAutoToolbar =YES; // 控制是否显示键盘上的工具条
-    manager.keyboardDistanceFromTextField = 50;
-    [IQKeyboardManager sharedManager].canAdjustTextView=YES;
+//    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+//    [manager setEnable:YES];
+//    manager.shouldResignOnTouchOutside = YES;
+//    manager.enableAutoToolbar =YES; // 控制是否显示键盘上的工具条
+//    manager.keyboardDistanceFromTextField = 50;
+//    [IQKeyboardManager sharedManager].canAdjustTextView=YES;
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];

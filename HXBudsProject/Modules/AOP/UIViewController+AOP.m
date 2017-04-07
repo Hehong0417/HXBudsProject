@@ -9,7 +9,8 @@
 #import "UIViewController+AOP.h"
 #import <Aspects/Aspects.h>
 #import "HXMessageVC.h"
-
+#import "HXSearchViewController.h"
+#import "HXSearchVC.h"
 
 @implementation UIViewController (AOP)
 
@@ -26,9 +27,25 @@
     [backButton setImage:image forState:UIControlStateNormal];
     CGFloat imageWidth = image.size.width;
     CGFloat imageHeight = image.size.height;
-    [backButton setTitleRectForContentRect:CGRectZero imageRectForContentRect:CGRectMake((backButton.lh_width-imageWidth)/2.0, (backButton.lh_height-imageHeight)/2.0, imageWidth, imageHeight)];
-    
+    [backButton setTitleRectForContentRect:CGRectZero imageRectForContentRect:CGRectMake(-5, (backButton.lh_height-imageHeight)/2.0, imageWidth, imageHeight)];
     return backButton;
+}
+#pragma mark - PYSearchViewControllerDelegate
+- (void)searchViewController:(HXSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
+{
+    if (searchText.length) { // 与搜索条件再搜索
+        // 根据条件发送查询（这里模拟搜索）
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 搜素完毕
+            // 显示建议搜索结果
+            NSMutableArray *searchSuggestionsM = [NSMutableArray array];
+            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
+                NSString *searchSuggestion = [NSString stringWithFormat:@"搜索建议 %d", i];
+                [searchSuggestionsM addObject:searchSuggestion];
+            }
+            // 返回
+            searchViewController.searchSuggestions = searchSuggestionsM;
+        });
+    }
 }
 
 + (void)load{
@@ -42,16 +59,17 @@
 
         //导航栏返回按钮设置
         if ([NSStringFromClass([controller class]) hasPrefix:@"HX"] &&
-            ![controller isKindOfClass:NSClassFromString(@"HXHomePageTVC")] &&
+            ![controller isKindOfClass:NSClassFromString(@"HXHomeCVC")] &&
             ![controller isKindOfClass:NSClassFromString(@"HXCourseListVC")] &&
             ![controller isKindOfClass:NSClassFromString(@"HXPersonCenterVC")] &&
             ![controller isKindOfClass:NSClassFromString(@"HJNavigationController")] &&
             ![controller isKindOfClass:NSClassFromString(@"HXOrganizationDetailTVC")] &&
             ![controller isKindOfClass:NSClassFromString(@"HJTabBarController")] &&
-            ![controller isKindOfClass:NSClassFromString(@"HXActinityVC")]) {
-            
+            ![controller isKindOfClass:NSClassFromString(@"HXActinityVC")]&&
+            ![controller isKindOfClass:NSClassFromString(@"HXSearchViewController")]) {
+        
             //Log 视图加载
-            DDLogInfo(@"%@-------------视图加载完毕------------",controller);
+//            DDLogInfo(@"%@-------------视图加载完毕------------",controller);
             
             //tableViewController尾部设置
             if ([controller isKindOfClass:[UITableViewController class]]) {
@@ -74,20 +92,50 @@
             
             controller.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
         }
-        if ([NSStringFromClass([controller class]) hasPrefix:@"HX"] && ([controller isKindOfClass:NSClassFromString(@"HXHomePageTVC")]||[controller isKindOfClass:NSClassFromString(@"HXArticleVC")]||[controller isKindOfClass:NSClassFromString(@"HXPersonCenterVC")]||[controller isKindOfClass:NSClassFromString(@"HXVideoCVC")])) {
+        if ([NSStringFromClass([controller class]) hasPrefix:@"HX"] && ([controller isKindOfClass:NSClassFromString(@"HXHomeCVC")]||[controller isKindOfClass:NSClassFromString(@"HXArticleVC")]||[controller isKindOfClass:NSClassFromString(@"HXPersonCenterVC")]||[controller isKindOfClass:NSClassFromString(@"HXVideoCVC")])) {
             
-            XYQButton *searchBtn = [XYQButton ButtonWithFrame:CGRectMake(20, 0, 44, 60) imgaeName:@"search" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
+            XYQButton *searchBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, 44, 60) imgaeName:@"search" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
+              
+         //*************搜 索************//
+                // 1.创建热门搜索
+                NSArray *hotSeaches = @[@"Java", @"Python", @"Objective-C", @"Swift", @"C", @"C++", @"PHP", @"C#", @"Perl", @"Go", @"JavaScript", @"R", @"Ruby", @"MATLAB"];
+                // 2. 创建控制器
+                HXSearchViewController *searchViewController = [HXSearchViewController searchViewControllerWithHotSearches:hotSeaches searchBarPlaceholder:@"搜索" didSearchBlock:^(HXSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
+                    // 开始搜索执行以下代码
+                    // 如：跳转到指定控制器
+//                    [searchViewController.navigationController pushViewController:[[HXSearchVC alloc] init] animated:YES];
+                }];
+               //3.设置风格
+                searchViewController.hotSearchStyle = PYHotSearchStyleDefault; // 热门搜索风格根据选择
+                searchViewController.searchHistoryStyle = PYSearchHistoryStyleDefault;
+                // 4. 设置代理
+                searchViewController.delegate = self;
+                searchViewController.searchSuggestions = @[@[@"视频1",@"视频2"],@[@"文章1",@"文章2"]];
                 
-                
+                [controller.navigationController pushVC:searchViewController];
+
+          //****************************//
+    
             }];
             
+            UIImage *image = [UIImage imageNamed:@"search"];
+            [searchBtn setImage:image forState:UIControlStateNormal];
+            CGFloat imageWidth = image.size.width;
+            CGFloat imageHeight = image.size.height;
+             [searchBtn setTitleRectForContentRect:CGRectZero imageRectForContentRect:CGRectMake(-5, (searchBtn.lh_height-imageHeight)/2.0, imageWidth, imageHeight)];
+           
             controller.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:searchBtn];
             
-            XYQButton *messageBtn = [XYQButton ButtonWithFrame:CGRectMake(20, 0, 44, 60) imgaeName:@"message" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
+            XYQButton *messageBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, 44, 60) imgaeName:@"message" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
                 
                 [controller.navigationController pushVC:[HXMessageVC new]];
 
             }];
+            UIImage *image2 = [UIImage imageNamed:@"message"];
+            [messageBtn setImage:image2 forState:UIControlStateNormal];
+            CGFloat imageWidth2 = image2.size.width;
+            CGFloat imageHeight2 = image2.size.height;
+            [messageBtn setTitleRectForContentRect:CGRectZero imageRectForContentRect:CGRectMake(10, (messageBtn.lh_height-imageHeight)/2.0+5, imageWidth2, imageHeight2)];
             
             controller.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:messageBtn];
 
@@ -121,7 +169,7 @@
         if ([NSStringFromClass([controller class]) hasPrefix:@"HX"]) {
             
             //Log 控制器释放
-            DDLogInfo(@"%@-------------控制器释放完毕------------",controller);
+//            DDLogInfo(@"%@-------------控制器释放完毕------------",controller);
         }
         
     } error:NULL];

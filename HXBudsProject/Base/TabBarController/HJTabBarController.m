@@ -10,7 +10,7 @@
 #import "HJNavigationController.h"
 #import "HJStoryBoardItem.h"
 #import "HXTabBar.h"
-#import "HXPublishVC.h"
+#import "WPViewController.h"
 
 
 @interface HJTabBarController () <UITabBarControllerDelegate,HXTabBarDelegate>
@@ -177,7 +177,7 @@
     if (!_tabBarStoryBoardItems) {
         
         //
-        HJStoryBoardItem *item1 = [HJStoryBoardItem itemWithStroyBoardName:@"HomePage" identifier:@"HXHomePageTVC" viewControllerNonExist:YES];
+        HJStoryBoardItem *item1 = [HJStoryBoardItem itemWithStroyBoardName:@"HomePage" identifier:@"HXHomeCVC" viewControllerNonExist:YES];
         HJStoryBoardItem *item2 = [HJStoryBoardItem itemWithStroyBoardName:@"Course" identifier:@"HXArticleVC" viewControllerNonExist:YES];
         HJStoryBoardItem *item3 = [HJStoryBoardItem itemWithStroyBoardName:@"Activity" identifier:@"HXVideoCVC" viewControllerNonExist:YES];
         HJStoryBoardItem *item4 = [HJStoryBoardItem itemWithStroyBoardName:@"PersonCenter" identifier:@"HXPersonCenterVC" viewControllerNonExist:YES];
@@ -194,8 +194,10 @@
 - (void)tabBarDidClickPlusButton:(HXTabBar *)tabBar{
 
     NSLog(@"发布");
-    HXPublishVC  *vc = [HXPublishVC new];
-    [self presentViewController:vc animated:YES completion:nil];
+    WPViewController  *vc = [WPViewController new];
+
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
 
 }
 

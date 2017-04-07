@@ -56,6 +56,9 @@
                         <view alpha="0.46999999999999997" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wps-pq-Aw4">
                             <rect key="frame" x="200" y="76" width="81" height="30"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="81" id="YU1-KR-t2l"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="0.0078431372549019607" green="0.75294117647058822" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
@@ -66,7 +69,6 @@
                         <constraint firstItem="9pZ-wG-oCH" firstAttribute="trailing" secondItem="Wps-pq-Aw4" secondAttribute="trailing" id="FW7-J8-tC9"/>
                         <constraint firstItem="HFr-re-c5F" firstAttribute="top" secondItem="Wps-pq-Aw4" secondAttribute="top" id="Le4-sB-3K2"/>
                         <constraint firstItem="Wps-pq-Aw4" firstAttribute="leading" secondItem="HFr-re-c5F" secondAttribute="trailing" constant="23" id="N5e-To-bUe"/>
-                        <constraint firstAttribute="trailing" secondItem="9pZ-wG-oCH" secondAttribute="trailing" constant="94" id="SRb-mt-Ued"/>
                         <constraint firstAttribute="trailing" secondItem="LB4-xO-PIe" secondAttribute="trailing" id="Vt8-Ke-dfV"/>
                         <constraint firstItem="LB4-xO-PIe" firstAttribute="leading" secondItem="m0t-DW-9AD" secondAttribute="leading" id="aix-Jy-F2l"/>
                         <constraint firstItem="t18-ET-Y5b" firstAttribute="top" secondItem="HFr-re-c5F" secondAttribute="top" id="cg2-cx-f7N"/>

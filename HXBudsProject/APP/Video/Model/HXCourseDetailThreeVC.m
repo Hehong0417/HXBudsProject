@@ -9,10 +9,11 @@
 #import "HXCourseDetailThreeVC.h"
 #import "HXCourseDetailCommentCell.h"
 #import "HXGradeCommentCell.h"
+#import "HXGradeCommentView.h"
 
-@interface HXCourseDetailThreeVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface HXCourseDetailThreeVC ()<UITableViewDelegate, UITableViewDataSource,HXGradeCommentCellDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic,strong) UITableView *tableView;
 
 @end
 
@@ -33,6 +34,8 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.rowHeight = 44;
+    _tableView.backgroundColor = kWhiteColor;
+
     [self.view addSubview:_tableView];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -73,7 +76,7 @@
             cell = [[HXGradeCommentCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HXGradeCommentCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        
+        cell.delegate = self;
         return cell;
         
     }else {
@@ -90,6 +93,25 @@
     }
     
     return nil;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+
+    return 0.01;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+
+    return 0.01;
+}
+
+#pragma mark - HXGradeCommentCellDelegate 
+
+- (void)gradeCommentStarAction:(UIButton *)button {
+
+  //弹框
+    HXGradeCommentView *commentView = [[HXGradeCommentView alloc]init];
+    [commentView showAnimated:YES];
+
+
 }
 
 
