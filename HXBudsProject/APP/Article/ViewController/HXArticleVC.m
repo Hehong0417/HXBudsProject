@@ -31,8 +31,9 @@
     self.tabView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tabView];
     self.tabView.showsVerticalScrollIndicator = NO;
-    self.tabView.backgroundColor = kWhiteColor;
-    
+    //2e282a
+    self.tabView.backgroundColor = RGB(46, 40, 42);
+    self.tabView.separatorColor = LineDeepColor;
     NSArray *arr = @[@"#智商·情商#",@"#叶文有话要说#",@"#单田方#",@"#城市#",@"#美女#",@"#社交恐惧#",@"#家庭矛盾#",@"#社交恐惧#",@"#家庭矛盾#"];
     [self.subjectArr addObjectsFromArray:arr];
     
@@ -51,6 +52,8 @@
             [cell setSubjectArr:self.subjectArr isViewMore:self.isViewMore cellHeight:90];
 
         }
+        cell.backgroundColor =   RGB(46, 40, 42);
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.vc = self.navigationController;
@@ -62,8 +65,9 @@
         
         cell = [HXArticleCellTwo initArticleCellTwoWithXib];
     }
+    cell.backgroundColor =   RGB(46, 40, 42);
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    cell.nav = self.navigationController;
     return cell;
   
 }
@@ -86,10 +90,10 @@
         
         return nil;
     }
-    UIView *footView  = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20) backColor:kWhiteColor];
+    UIView *footView  = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20) backColor:RGB(46, 40, 42)];
     //按钮与线的间距10 与屏幕的间距为15
     
-    UIView *leftLine = [UIView lh_viewWithFrame:CGRectMake(15, 8,(SCREEN_WIDTH - 100)/2 , 1) backColor:LineLightColor];
+    UIView *leftLine = [UIView lh_viewWithFrame:CGRectMake(15, 8,(SCREEN_WIDTH - 100)/2 , 1) backColor:kWhiteColor];
     
     XYQButton *moreBtn = [XYQButton ButtonWithFrame:CGRectMake(15+leftLine.width+5, 5, 58, 10) imgaeName:@"down" titleName:@"查看更多" contentType:LeftImageRightTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:LineDeepColor fontsize:10] tapAction:^(XYQButton *button) {
         
@@ -97,7 +101,7 @@
         [self.tabView reloadSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
 
     }];
-    UIView *rightLine = [UIView lh_viewWithFrame:CGRectMake(SCREEN_WIDTH - 15 - leftLine.width, 8, leftLine.width, 1) backColor:LineLightColor];
+    UIView *rightLine = [UIView lh_viewWithFrame:CGRectMake(SCREEN_WIDTH - 15 - leftLine.width, 8, leftLine.width, 1) backColor:kWhiteColor];
     [footView addSubview:leftLine];
     [footView addSubview:rightLine];
     [footView addSubview:moreBtn];
@@ -124,7 +128,7 @@
     }
     
     HXSectionHead *sectionHead = [[[HXSectionHead alloc] init] createSectionHeadWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, WidthScaleSize_H(35)) section:(NSInteger)section headTitle:headTitle discrib:@"为你的梦想保驾护航" contenType:contentType rightBtnTitle:titleName imageName:imageName labFont:FONT(14) buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:FontLightGrayColor fontsize:14]];
-    
+    sectionHead.backgroundColor = RGB(46, 40, 42);
     return sectionHead;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

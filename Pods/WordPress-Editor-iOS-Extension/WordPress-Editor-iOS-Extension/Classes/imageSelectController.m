@@ -49,9 +49,9 @@
     
     WPEditorConfiguration *_WPEditorConfiguration = [WPEditorConfiguration sharedWPEditorConfiguration];
     
-    NSArray *textData = @[CustomLocalisedString(@"photoLibrary",@"从相册中选择"),CustomLocalisedString(@"takePhoto",@"拍照"),CustomLocalisedString(@"insertImageFromInternet",@"插入网络图片")];
+    NSArray *textData = @[CustomLocalisedString(@"photoLibrary",@"从相册中选择"),CustomLocalisedString(@"takePhoto",@"拍照")];
     
-    NSArray *imageSelect = @[@(ZSSRichTextEditorImageSelectPhotoLibrary),@(ZSSRichTextEditorImageSelectTakePhoto),@(ZSSRichTextEditorImageSelectInsertNetwork)];
+    NSArray *imageSelect = @[@(ZSSRichTextEditorImageSelectPhotoLibrary),@(ZSSRichTextEditorImageSelectTakePhoto)];
     
     for (int i =0; i<imageSelect.count; i++) {
         

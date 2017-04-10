@@ -13,6 +13,7 @@
 #import "moreItmsController.h"
 #import "imageSelectController.h"
 
+
 CGFloat const EPVCStandardOffset = 10.0;
 NSInteger const WPImageAlertViewTag = 91;
 NSInteger const WPLinkAlertViewTag = 92;
@@ -915,14 +916,37 @@ NSInteger const WPLinkAlertViewTag = 92;
     NSString* accessibilityLabel = NSLocalizedString(@"HTML",
                                                      @"Accessibility label for HTML button on formatting toolbar.");
     
-    ZSSBarButtonItem *barButtonItem = [self barButtonItemWithTag:kWPEditorViewControllerElementShowSourceBarButton
-													htmlProperty:@"source"
-													   imageName:@"icon_format_html"
-														  target:self
-														selector:@selector(showHTMLSource:)
-											  accessibilityLabel:accessibilityLabel];
-	
+//    ZSSBarButtonItem *barButtonItem = [self barButtonItemWithTag:kWPEditorViewControllerElementShowSourceBarButton
+//													htmlProperty:@"source"
+//													   imageName:@"icon_format_activity"
+//														  target:self
+//														selector:@selector(showHTMLSource:)
+//											  accessibilityLabel:accessibilityLabel];
+  ZSSBarButtonItem *barButtonItem =  [[ZSSBarButtonItem alloc] initWithImage:nil
+                                      style:UIBarButtonItemStylePlain
+                                     target:nil
+                                     action:nil];
+    UIImage *image = [UIImage imageNamed:@"icon_format_subject"];
+    
+    UIImage* buttonImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+    CGRect buttonSize;
+ 
+    buttonSize = CGRectMake(0.0, 0.0, 44.0, 44.0);
+    WPEditorToolbarButton* customButton = [[WPEditorToolbarButton alloc] initWithFrame:buttonSize];
+    [customButton setImage:buttonImage forState:UIControlStateNormal];
+    [customButton addTarget:self action:@selector(chooseSubjectAction) forControlEvents:UIControlEventTouchUpInside];
+    customButton.normalTintColor = self.itemTintColor;
+    customButton.selectedTintColor = [UIColor blueColor];
+    customButton.disabledTintColor = [UIColor blueColor];
+    barButtonItem.customView = customButton;
+    
 	return barButtonItem;
+}
+//选择话题圈
+- (void)chooseSubjectAction {
+   
+
 }
 
 - (UIBarButtonItem*)strikeThroughBarButton

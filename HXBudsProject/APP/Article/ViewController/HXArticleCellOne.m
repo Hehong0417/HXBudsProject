@@ -43,6 +43,7 @@
         }
         
         UIButton *but = [[UIButton alloc]initWithFrame:CGRectMake(butX, butY, frame_W.size.width+20, 30)];
+        but.backgroundColor = RGB(46, 40, 42);
         [but setTitle:subjectArr[i] forState:UIControlStateNormal];
         [but setTitleColor:APP_COMMON_COLOR forState:UIControlStateNormal];
         but.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -70,7 +71,7 @@
 - (void)btnClick:(UIButton *)btn{
 
     HXSubjectListTVC *vc = [HXSubjectListTVC new];
-//    vc.titleStr = self.subjectArr[btn.tag - 1];
+    vc.titleStr = btn.titleLabel.text;
     [self.vc pushVC:vc];
 
 }

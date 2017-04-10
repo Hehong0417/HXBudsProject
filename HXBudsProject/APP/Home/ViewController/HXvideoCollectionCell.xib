@@ -90,7 +90,12 @@
                 <constraint firstItem="omX-bf-aRG" firstAttribute="top" secondItem="pkQ-XX-BbN" secondAttribute="bottom" constant="3" id="vd1-wr-TlK"/>
             </constraints>
             <connections>
+                <outlet property="commentLab" destination="U0e-wM-w9E" id="PPt-Tw-rqi"/>
+                <outlet property="teacherNameLab" destination="5mE-1t-vb3" id="iEF-zw-V8Z"/>
+                <outlet property="videoIconImgV" destination="rl0-Va-ji4" id="T6O-R5-cgF"/>
                 <outlet property="videoImagV" destination="U1q-rb-rDz" id="1GZ-Vl-Qdf"/>
+                <outlet property="videoTitleLab" destination="pkQ-XX-BbN" id="vaL-xX-ab4"/>
+                <outlet property="viewsLab" destination="omX-bf-aRG" id="KTW-sm-b78"/>
             </connections>
             <point key="canvasLocation" x="25.5" y="52"/>
         </collectionViewCell>

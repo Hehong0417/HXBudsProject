@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *messageBtn;
 
+@property(nonatomic,assign) BOOL isMyHomeInfo;
 
 + (instancetype)initMyHomeHeadViewWithXib;
 

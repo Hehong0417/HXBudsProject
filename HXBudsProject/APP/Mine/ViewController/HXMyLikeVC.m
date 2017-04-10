@@ -19,7 +19,7 @@
 }
 @property(nonatomic,strong)SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
-
+@property(nonatomic,assign) BOOL isMyHomeInfo;
 
 @end
 
@@ -30,12 +30,24 @@
    
     self.title = self.titleStr;
     self.view.backgroundColor = kWhiteColor;
+    
+    if ([self.titleStr isEqualToString:@"我的主页"]) {
+        
+        self.isMyHomeInfo = YES;
+    }else {
+        
+        self.isMyHomeInfo = NO;
+    }
+    
     mineHeadView = [HXMyHomeHeadView initMyHomeHeadViewWithXib];
     mineHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 224);
-    
+    mineHeadView.isMyHomeInfo = self.isMyHomeInfo;
     mineHeadView.nav = self.navigationController;
     
+    
     [self.view addSubview:mineHeadView];
+    
+  
     
     
     // 1.添加所有子控制器

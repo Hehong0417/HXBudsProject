@@ -19,28 +19,28 @@
     [super viewDidLoad];
     
    self.title = @"个人信息";
-    UIButton *saveBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 80, 80) target:self action:@selector(saveAction:) title:@"保存" titleColor:kWhiteColor font:FONT(16) backgroundColor:kClearColor];
+    UIButton *saveBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 80, 80) target:self action:@selector(saveAction:) title:@"保存" titleColor:APP_COMMON_COLOR font:FONT(16) backgroundColor:kClearColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:saveBtn];
 
     self.testArr = [NSMutableArray arrayWithObjects:@"2",@"3",@"4", nil];
     
-    
+    self.tableV.backgroundColor = LineLightColor;
 }
 
 - (void)saveAction:(UIButton *)btn{
  
-//    [self.navigationController popVC];
+    [self.navigationController popVC];
 
 
 }
 - (NSArray *)groupTitles {
     
-    return @[@[@"头像",@"昵称",@"手机",@"姓名",@"性别",@"年龄"]];
+    return @[@[@"头像",@"昵称",@"手机",@"姓名",@"性别",@"年龄"],@[@""]];
 }
 
 - (NSArray *)groupIcons {
     
-    return @[@[@" ",@" ",@" ",@" ",@" ",@" "]];
+    return @[@[@" ",@" ",@" ",@" ",@" ",@" "],@[@""]];
     
 }
 - (NSArray *)textFieldTitles{
@@ -52,7 +52,7 @@
 
 - (NSArray *)groupDetials {
     
-    return @[@[@" ",@" ",@" ",@" ",@" ",@" "]];
+    return @[@[@" ",@" ",@" ",@" ",@" ",@" "],@[@""]];
 }
 - (NSArray *)textFieldCellIndexPaths{
     
@@ -70,30 +70,59 @@
     return indexpath;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-   
-    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     
-    return cell;
-
+    if (indexPath.section == 0) {
+        UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        
+        return cell;
+    }else{
+        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        UITextView *introduce = [UITextView lh_textViewWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, WidthScaleSize_H(100)) font:FONT(14) backgroundColor:kWhiteColor];
+        [cell addSubview:introduce];
+        return cell;
+    }
+    
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if (indexPath.row == 0) {
+    if (indexPath.section == 0&&indexPath.row == 0) {
+        
         return WidthScaleSize_H(70);
-    }
+
+    }else if (indexPath.section == 1&&indexPath.row == 0){
     
-   return  WidthScaleSize_H(44);
+        return WidthScaleSize_H(100);
+
+    }else{
+        
+        return  WidthScaleSize_H(44);
+    }
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    if (section == 1) {
+        UIView *head = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20) backColor:LineLightColor];
+        UILabel *Label = [UILabel lh_labelWithFrame:CGRectMake(15, 0, 100, 20) text:@"个人概述" textColor:FontLightGrayColor font:FONT(13) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
+        [head addSubview:Label];
+        return head;
+
+    }else{
+   
+     return nil;
+        
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 
     return 0.001;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-
-    return 0.01;
-
+    if (section == 0) {
+        return 0.001;
+    }else{
+        return 20;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

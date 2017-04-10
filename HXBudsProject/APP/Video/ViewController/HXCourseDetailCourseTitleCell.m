@@ -7,6 +7,8 @@
 //
 
 #import "HXCourseDetailCourseTitleCell.h"
+#import "HXMyLikeVC.h"
+
 
 @implementation HXCourseDetailCourseTitleCell
 
@@ -14,11 +16,20 @@
     [super awakeFromNib];
     // Initialization code
 
-    XYQButton *iconBtn = [XYQButton ButtonWithFrame:CGRectMake(0,0, self.starView.mj_w, self.starView.mj_h) imgaeName:@"videoIcon" titleName:@"图图老师" contentType:LeftImageRightTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kYellwColor fontsize:13] tapAction:^(XYQButton *button) {
-        
+    UIImageView *iconImgV = [UIImageView lh_imageViewWithFrame:CGRectMake(0,0,30, self.starView.mj_h) image:[UIImage imageNamed:@"videoIcon"] userInteractionEnabled:YES];
+
+    UILabel *teacherNameLab = [UILabel lh_labelWithFrame:CGRectMake(CGRectGetMaxX(iconImgV.frame)+6, 0, self.starView.mj_w - 30 - 6, 27) text:@"图图老师" textColor:kYellwColor font:FONT(13) textAlignment:NSTextAlignmentLeft backgroundColor:kWhiteColor];
+    [self.starView addSubview:iconImgV];
+    [self.starView addSubview:teacherNameLab];
+    self.starView.userInteractionEnabled = YES;
+    [self.starView setTapActionWithBlock:^{
+        HXMyLikeVC *vc = [HXMyLikeVC new];
+        [self.nav pushVC:vc];
+        vc.titleStr = @"他的主页";
+
     }];
-    
-    [self.starView addSubview:iconBtn];
+
+
 }
 + (instancetype)initCourseDetailCourseTitleCellWithXib{
 

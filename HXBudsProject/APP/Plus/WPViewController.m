@@ -11,8 +11,9 @@
 #import "WPImageMetaViewController.h"
 #import "imageSelectController.h"
 #import "LNNotificationsUI.h"
+#import "HXChooseSujectVC.h"
 
-@interface WPViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, WPImageMetaViewControllerDelegate>
+@interface WPViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, WPImageMetaViewControllerDelegate,PYSearchViewControllerDelegate>
 {
     CGFloat keyboardValue;
     
@@ -100,13 +101,40 @@
 //                                                                             target:self
 //                                                                             action:@selector(publishedAction:)];
     
-    
 //    self.title = NSLocalizedString(@"publishedArticle", @"发表文章");
 
     self.bodyPlaceholderText = NSLocalizedString(@"pleaseInputMessage",@"写点什么吧");
     self.titlePlaceholderText = NSLocalizedString(@"pleaseInputTitle",@"请输入标题");
+    
+    
+    UIButton *btn =   (UIButton *)self.toolbarView.htmlBarButtonItem.customView;
+    
+    [btn addTarget:self action:@selector(chooseSubjectAction) forControlEvents:UIControlEventTouchUpInside];
 
 }
+
+- (void)chooseSubjectAction {
+
+        // 1.创建热门搜索
+        NSArray *hotSeaches = @[@"Java", @"Python", @"Objective-C", @"Swift", @"C", @"C++", @"PHP", @"C#", @"Perl", @"Go", @"JavaScript", @"R", @"Ruby", @"MATLAB", @"Perl", @"Go", @"JavaScript", @"R", @"Ruby", @"MATLAB"];
+        // 2. 创建控制器
+        HXChooseSujectVC *searchViewController = [HXChooseSujectVC searchViewControllerWithHotSearches:hotSeaches searchBarPlaceholder:@"搜索" didSearchBlock:^(HXChooseSujectVC *searchViewController, UISearchBar *searchBar, NSString *searchText) {
+            // 开始搜索执行以下代码
+            // 如：跳转到指定控制器
+            //                    [searchViewController.navigationController pushViewController:[[HXSearchVC alloc] init] animated:YES];
+        }];
+        //3.设置风格
+        searchViewController.hotSearchStyle = PYHotSearchStyleDefault; // 热门搜索风格根据选择
+        searchViewController.searchHistoryStyle = PYSearchHistoryStyleDefault;
+        // 4. 设置代理
+        searchViewController.delegate = self;
+        searchViewController.searchSuggestions = @[@[@"视频1",@"视频2"],@[@"文章1",@"文章2"]];
+    
+        [self.navigationController pushVC:searchViewController];
+    
+
+}
+
 -(void)backAction:(UIButton *)back{
 
     [self.view endEditing:YES];
@@ -143,9 +171,13 @@
 
 -(void)publishedMethod{
     
-   
+ 
+    
 }
-- (IBAction)publishedAction:(id)sender {
+
+
+
+- (void)publishedAction:(id)sender {
     
     [self.view endEditing:YES];
     
@@ -195,12 +227,7 @@
     [super prepareForSegue:segue sender:sender];
 }
 
-#pragma mark - IBActions
 
-- (IBAction)exit:(UIStoryboardSegue*)segue
-{
-    
-}
 
 #pragma mark - WPEditorViewControllerDelegate
 

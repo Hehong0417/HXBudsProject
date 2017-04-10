@@ -42,7 +42,29 @@
   
     
 }
+- (void)setIsMyHomeInfo:(BOOL)isMyHomeInfo {
+
+    _isMyHomeInfo = isMyHomeInfo;
+    if (isMyHomeInfo) {
+
+        [self setBtnInfoWithMyHomeInfo];
+        
+    }
+
+}
+- (void)setBtnInfoWithMyHomeInfo{
+
+    
+    //编辑按钮
+    [self.editBtn lh_setCornerRadius:3 borderWidth:1 borderColor:APP_COMMON_COLOR];
+    [self.editBtn setTitle:@"编辑" forState:UIControlStateNormal];
+    [self.editBtn setTitleColor:APP_COMMON_COLOR forState:UIControlStateNormal];
+    
+    [self.messageBtn lh_setCornerRadius:3 borderWidth:1 borderColor:APP_COMMON_COLOR];
+    [self.messageBtn setTitle:@"消息" forState:UIControlStateNormal];
+    [self.messageBtn setTitleColor:APP_COMMON_COLOR forState:UIControlStateNormal];
 
 
+}
 
 @end

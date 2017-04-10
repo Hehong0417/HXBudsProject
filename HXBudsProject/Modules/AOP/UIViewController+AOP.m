@@ -66,7 +66,8 @@
             ![controller isKindOfClass:NSClassFromString(@"HXOrganizationDetailTVC")] &&
             ![controller isKindOfClass:NSClassFromString(@"HJTabBarController")] &&
             ![controller isKindOfClass:NSClassFromString(@"HXActinityVC")]&&
-            ![controller isKindOfClass:NSClassFromString(@"HXSearchViewController")]) {
+            ![controller isKindOfClass:NSClassFromString(@"HXSearchViewController")]&&
+              ![controller isKindOfClass:NSClassFromString(@"HXChooseSujectVC")]) {
         
             //Log 视图加载
 //            DDLogInfo(@"%@-------------视图加载完毕------------",controller);

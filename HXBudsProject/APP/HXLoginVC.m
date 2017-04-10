@@ -68,6 +68,7 @@
    
     UITextField *phoneNumTextFiled = [UITextField lh_textFieldWithFrame:CGRectZero placeholder:nil font:FONT(15) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
        phoneNumTextFiled.attributedPlaceholder = [[NSAttributedString alloc]initWithString:@"请输入手机号码" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    phoneNumTextFiled.textColor = kWhiteColor;
     phoneNumTextFiled.leftViewMode = UITextFieldViewModeAlways;
     UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 40, WidthScaleSize_H(45)) target:self action:nil image:[UIImage imageNamed:@"phoneNum"]];
    // btn.backgroundColor = kClearColor;
@@ -101,6 +102,7 @@
     UITextField *passWordTextFiled = [UITextField lh_textFieldWithFrame:CGRectZero placeholder:nil font:FONT(15) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
     [bgView addSubview:passWordTextFiled];
     passWordTextFiled.attributedPlaceholder = [[NSAttributedString alloc]initWithString:@"请输入密码" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    passWordTextFiled.textColor = kWhiteColor;
     passWordTextFiled.leftViewMode = UITextFieldViewModeAlways;
     passWordTextFiled.leftView = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 40, WidthScaleSize_H(45)) target:self action:nil image:[UIImage imageNamed:@"passWord"]];
     [passWordTextFiled mas_makeConstraints:^(MASConstraintMaker *make) {

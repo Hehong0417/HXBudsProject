@@ -1,22 +1,26 @@
 //
-//  代码地址: https://github.com/iphone5solo/PYSearch
-//  代码地址: http://www.code4app.com/thread-11175-1-1.html
-//  Created by CoderKo1o.
-//  Copyright © 2016年 iphone5solo. All rights reserved.
+//  HXChooseSujectVC.m
+//  HXBudsProject
+//
+//  Created by n on 2017/4/8.
+//  Copyright © 2017年 n. All rights reserved.
 //
 
-#import "HXSearchViewController.h"
+#import "HXChooseSujectVC.h"
+
 #import "PYSearchConst.h"
 #import "PYSearchSuggestionViewController.h"
-#import "HXSearchVC.h"
-#import "HXSearchVideoCell.h"
-#import "HXSearchArticleCell.h"
+#import "HXSearchSubjectVC.h"
+
+
+#define HotSearchText @"推荐话题"
+#define Search_PlaceHolder @"搜索话题"
 
 #define PYRectangleTagMaxCol 3 // 矩阵标签时，最多列数
 #define PYTextColor PYColor(113, 113, 113)  // 文本字体颜色
 #define PYColorPolRandomColor self.colorPol[arc4random_uniform((uint32_t)self.colorPol.count)] // 随机选取颜色池中的颜色
 
-@interface HXSearchViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, PYSearchSuggestionViewDataSource>
+@interface HXChooseSujectVC () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, PYSearchSuggestionViewDataSource>
 
 /** 头部内容view */
 @property (nonatomic, weak) UIView *headerContentView;
@@ -54,7 +58,7 @@
 
 @end
 
-@implementation HXSearchViewController
+@implementation HXChooseSujectVC
 
 - (instancetype)init
 {
@@ -72,18 +76,18 @@
     return self;
 }
 
-+ (HXSearchViewController *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches searchBarPlaceholder:(NSString *)placeholder
++ (HXChooseSujectVC *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches searchBarPlaceholder:(NSString *)placeholder
 {
-    HXSearchViewController *searchVC = [[HXSearchViewController alloc] init];
+    HXChooseSujectVC *searchVC = [[HXChooseSujectVC alloc] init];
     searchVC.hotSearches = hotSearches;
     searchVC.searchBar.placeholder = placeholder;
     return searchVC;
 }
 
-+ (HXSearchViewController *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches searchBarPlaceholder:(NSString *)placeholder didSearchBlock:(PYDidSearchBlock)block
++ (HXChooseSujectVC *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches searchBarPlaceholder:(NSString *)placeholder didSearchBlock:(PYDidSearchBlock)block
 {
-    HXSearchViewController *searchVC = [self searchViewControllerWithHotSearches:hotSearches searchBarPlaceholder:placeholder];
-  
+    HXChooseSujectVC *searchVC = [self searchViewControllerWithHotSearches:hotSearches searchBarPlaceholder:placeholder];
+    
     searchVC.didSearchBlock = [block copy];
     return searchVC;
 }
@@ -102,11 +106,16 @@
     return _baseSearchTableView;
 }
 
-- (HXSearchVC *)searchResultController
+- (HXSearchSubjectVC *)searchResultController
 {
     if (!_searchResultController) {
-        _searchResultController = [[HXSearchVC alloc] init];
-        self.searchResultTableView = _searchResultController.tableView;
+        _searchResultController = [[HXSearchSubjectVC alloc] init];
+//        _searchResultController.view.frame = CGRectMake(0, 64, self.view.py_width, self.view.py_height);
+        _searchResultController.searchResults = @[@"Java", @"Python", @"Objective-C", @"Swift", @"C", @"C++", @"PHP", @"C#", @"Perl"];
+        _searchResultController.view.hidden = NO;
+        [self.view addSubview:_searchResultController.view];
+        [self addChildViewController:_searchResultController];
+
     }
     return _searchResultController;
 }
@@ -125,7 +134,7 @@
                 
                 // 获取下标
                 NSIndexPath *indexPath = [_weakSelf.searchSuggestionVC.tableView indexPathForCell:didSelectCell];
-               
+                
                 [self.delegate searchViewController:_weakSelf didSelectSearchSuggestionAtIndex:indexPath.row searchText:_weakSelf.searchBar.text];
                 
             } else {
@@ -234,10 +243,10 @@
 {
     [super viewWillDisappear:animated];
     
-//    // 根据输入文本显示建议搜索条件
-//    self.searchSuggestionVC.view.hidden = YES;
-//   // 如果有搜索文本且显示搜索建议，则隐藏
-//    self.baseSearchTableView.hidden = NO;
+    //    // 根据输入文本显示建议搜索条件
+    //    self.searchSuggestionVC.view.hidden = YES;
+    //   // 如果有搜索文本且显示搜索建议，则隐藏
+    //    self.baseSearchTableView.hidden = NO;
     // 回收键盘
     [self.searchBar resignFirstResponder];
 }
@@ -270,6 +279,9 @@
     self.searchSuggestionHidden = NO;
     // 搜索历史缓存路径
     self.searchHistoriesCachePath = PYSearchHistoriesPath;
+    self.navigationItem.hidesBackButton = YES;
+
+    
     
     // 创建搜索框
     UIView *titleView = [[UIView alloc] init];
@@ -277,14 +289,18 @@
     titleView.py_y = 7;
     titleView.py_width = self.view.py_width - 64 - titleView.py_x * 2;
     titleView.py_height = 30;
+    
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:titleView.bounds];
     searchBar.py_width -= PYMargin * 1.5;
-    searchBar.placeholder = PYSearchPlaceholderText;
+    searchBar.placeholder = Search_PlaceHolder;
     searchBar.backgroundImage = [UIImage imageNamed:@"search_box"];
     [searchBar lh_setCornerRadius:3 borderWidth:1 borderColor:LineLightColor];
+    [searchBar setImage:[UIImage imageNamed:@"choose_Subject"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     searchBar.delegate = self;
+    
     [titleView addSubview:searchBar];
     self.searchBar = searchBar;
+
     self.navigationItem.titleView = titleView;
     self.navigationItem.hidesBackButton = YES;
     // 设置头部（热门搜索）
@@ -294,7 +310,7 @@
     contentView.py_x = PYMargin * 1.5;
     contentView.py_width = PYScreenW - contentView.py_x * 2;
     [headerView addSubview:contentView];
-    UILabel *titleLabel = [self setupTitleLabel:PYHotSearchText];
+    UILabel *titleLabel = [self setupTitleLabel:HotSearchText];
     self.hotSearchHeader = titleLabel;
     [contentView addSubview:titleLabel];
     // 创建热门搜索标签容器
@@ -320,7 +336,7 @@
     emptySearchHistoryLabel.py_width = PYScreenW;
     [footerView addSubview:emptySearchHistoryLabel];
     footerView.py_height = 30;
-//    self.baseSearchTableView.tableFooterView = footerView;
+    //    self.baseSearchTableView.tableFooterView = footerView;
     
     // 默认没有热门搜索
     self.hotSearches = nil;
@@ -801,11 +817,12 @@
 /** 选中标签 */
 - (void)tagDidCLick:(UITapGestureRecognizer *)gr
 {
+//    
+//    UILabel *label = (UILabel *)gr.view;
+//    self.searchBar.text = label.text;
+//    [self searchBar:self.searchBar textDidChange:self.searchBar.text];
+    [self.navigationController popVC];
     
-    UILabel *label = (UILabel *)gr.view;
-    self.searchBar.text = label.text;
-    [self searchBar:self.searchBar textDidChange:self.searchBar.text];
-
 }
 
 /** 添加标签 */
@@ -850,8 +867,8 @@
             break;
         case PYSearchResultShowModeEmbed: // 内嵌
             // 添加搜索结果的视图
-           
-            [self.view addSubview:self.searchResultController.tableView];
+            
+            [self.view addSubview:self.searchResultController.view];
             [self addChildViewController:self.searchResultController];
             break;
         case PYSearchResultShowModeCustom: // 自定义
@@ -875,14 +892,14 @@
     // 如果有搜索文本且显示搜索建议，则隐藏
     self.baseSearchTableView.hidden = searchText.length;
     // 根据输入文本显示建议搜索条件
-    self.searchSuggestionVC.view.hidden = self.searchSuggestionHidden || !searchText.length;
+    self.searchResultController.view.hidden = self.searchSuggestionHidden || !searchText.length;
     // 放在最上层
-    [self.view bringSubviewToFront:self.searchSuggestionVC.view];
+    [self.view bringSubviewToFront:self.searchResultController.view];
     
-    // 如果代理实现了代理方法则调用代理方法
-    if ([self.delegate respondsToSelector:@selector(searchViewController:searchTextDidChange:searchText:)]) {
-        [self.delegate searchViewController:self searchTextDidChange:searchBar searchText:searchText];
-    }
+//    // 如果代理实现了代理方法则调用代理方法
+//    if ([self.delegate respondsToSelector:@selector(searchViewController:searchTextDidChange:searchText:)]) {
+//        [self.delegate searchViewController:self searchTextDidChange:searchBar searchText:searchText];
+//    }
 }
 
 - (void)closeDidClick:(UIButton *)sender
@@ -969,5 +986,6 @@
     // 滚动时，回收键盘
     if (self.keyboardshowing) [self.searchBar resignFirstResponder];
 }
+
 
 @end

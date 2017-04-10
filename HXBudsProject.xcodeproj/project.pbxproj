@@ -31,6 +31,7 @@
 		0D65C3F71E4AB703009F07F1 /* HXRecommendTeacherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D65C3E91E4AB703009F07F1 /* HXRecommendTeacherCell.xib */; };
 		0D65C3F81E4AB703009F07F1 /* HXPersonCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D65C3EF1E4AB703009F07F1 /* HXPersonCenterVC.m */; };
 		0D6AF4271E5303530020D554 /* HXSectionHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6AF4261E5303530020D554 /* HXSectionHead.m */; };
+		0D6CFFDF1E9898890093B5FF /* HXSearchSubjectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CFFDE1E9898890093B5FF /* HXSearchSubjectVC.m */; };
 		0D6D72081E68FDB800DFCC68 /* HXMyAccountInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6D72071E68FDB800DFCC68 /* HXMyAccountInfoVC.m */; };
 		0D6D72121E690E3300DFCC68 /* HXCouponVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6D72111E690E3300DFCC68 /* HXCouponVC.m */; };
 		0D6EDFF51E6D47F10093F6CC /* HXCommonPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6EDFF41E6D47F10093F6CC /* HXCommonPickView.m */; };
@@ -73,6 +74,7 @@
 		0D7B22231E68091E000ABE4A /* HXPersonInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7B22221E68091E000ABE4A /* HXPersonInfoVC.m */; };
 		0D7D77831E52A5EB00CF8D47 /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D777F1E52A5EB00CF8D47 /* PGIndexBannerSubiew.m */; };
 		0D7D77841E52A5EB00CF8D47 /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D77821E52A5EB00CF8D47 /* NewPagedFlowView.m */; };
+		0D7F2EA91E9876C10050394E /* HXChooseSujectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F2EA81E9876C10050394E /* HXChooseSujectVC.m */; };
 		0D7F94781E5BCD1900D21D27 /* SGSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F94731E5BCD1900D21D27 /* SGSegmentedControl.m */; };
 		0D7F94791E5BCD1900D21D27 /* SGImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F94751E5BCD1900D21D27 /* SGImageButton.m */; };
 		0D7F947A1E5BCD1900D21D27 /* UIView+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F94771E5BCD1900D21D27 /* UIView+SGExtension.m */; };
@@ -93,7 +95,6 @@
 		0D8CC8941E84F8D200982B39 /* HXMyArticleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC8931E84F8D200982B39 /* HXMyArticleVC.m */; };
 		0D8CC8971E84F90300982B39 /* HXMyAttetionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC8961E84F90300982B39 /* HXMyAttetionVC.m */; };
 		0D8CC89B1E84F97500982B39 /* HXAdviceFaceBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC8991E84F97500982B39 /* HXAdviceFaceBackVC.m */; };
-		0D8CC89C1E84F97500982B39 /* HXAdviceFaceBackVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D8CC89A1E84F97500982B39 /* HXAdviceFaceBackVC.xib */; };
 		0D8CC89F1E84F9F800982B39 /* HXFriendDynamicStateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC89E1E84F9F800982B39 /* HXFriendDynamicStateVC.m */; };
 		0D8CC8A21E84FA3D00982B39 /* HXBrowserRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC8A11E84FA3D00982B39 /* HXBrowserRecordVC.m */; };
 		0D8CC8A61E84FA8500982B39 /* HXMyArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC8A41E84FA8500982B39 /* HXMyArticleCell.m */; };
@@ -281,6 +282,8 @@
 		0D65C3EF1E4AB703009F07F1 /* HXPersonCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPersonCenterVC.m; sourceTree = "<group>"; };
 		0D6AF4251E5303530020D554 /* HXSectionHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSectionHead.h; sourceTree = "<group>"; };
 		0D6AF4261E5303530020D554 /* HXSectionHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXSectionHead.m; sourceTree = "<group>"; };
+		0D6CFFDD1E9898890093B5FF /* HXSearchSubjectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSearchSubjectVC.h; sourceTree = "<group>"; };
+		0D6CFFDE1E9898890093B5FF /* HXSearchSubjectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXSearchSubjectVC.m; sourceTree = "<group>"; };
 		0D6D72061E68FDB800DFCC68 /* HXMyAccountInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyAccountInfoVC.h; sourceTree = "<group>"; };
 		0D6D72071E68FDB800DFCC68 /* HXMyAccountInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyAccountInfoVC.m; sourceTree = "<group>"; };
 		0D6D72101E690E3300DFCC68 /* HXCouponVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCouponVC.h; sourceTree = "<group>"; };
@@ -365,6 +368,8 @@
 		0D7D777F1E52A5EB00CF8D47 /* PGIndexBannerSubiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGIndexBannerSubiew.m; sourceTree = "<group>"; };
 		0D7D77811E52A5EB00CF8D47 /* NewPagedFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPagedFlowView.h; sourceTree = "<group>"; };
 		0D7D77821E52A5EB00CF8D47 /* NewPagedFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPagedFlowView.m; sourceTree = "<group>"; };
+		0D7F2EA71E9876C10050394E /* HXChooseSujectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXChooseSujectVC.h; sourceTree = "<group>"; };
+		0D7F2EA81E9876C10050394E /* HXChooseSujectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXChooseSujectVC.m; sourceTree = "<group>"; };
 		0D7F94721E5BCD1900D21D27 /* SGSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSegmentedControl.h; sourceTree = "<group>"; };
 		0D7F94731E5BCD1900D21D27 /* SGSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSegmentedControl.m; sourceTree = "<group>"; };
 		0D7F94741E5BCD1900D21D27 /* SGImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageButton.h; sourceTree = "<group>"; };
@@ -401,7 +406,6 @@
 		0D8CC8961E84F90300982B39 /* HXMyAttetionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyAttetionVC.m; sourceTree = "<group>"; };
 		0D8CC8981E84F97500982B39 /* HXAdviceFaceBackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAdviceFaceBackVC.h; sourceTree = "<group>"; };
 		0D8CC8991E84F97500982B39 /* HXAdviceFaceBackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAdviceFaceBackVC.m; sourceTree = "<group>"; };
-		0D8CC89A1E84F97500982B39 /* HXAdviceFaceBackVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXAdviceFaceBackVC.xib; sourceTree = "<group>"; };
 		0D8CC89D1E84F9F800982B39 /* HXFriendDynamicStateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXFriendDynamicStateVC.h; sourceTree = "<group>"; };
 		0D8CC89E1E84F9F800982B39 /* HXFriendDynamicStateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXFriendDynamicStateVC.m; sourceTree = "<group>"; };
 		0D8CC8A01E84FA3D00982B39 /* HXBrowserRecordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBrowserRecordVC.h; sourceTree = "<group>"; };
@@ -861,7 +865,6 @@
 				0D8CC8AA1E84FCD400982B39 /* HXMyAttentionCell.xib */,
 				0D8CC8981E84F97500982B39 /* HXAdviceFaceBackVC.h */,
 				0D8CC8991E84F97500982B39 /* HXAdviceFaceBackVC.m */,
-				0D8CC89A1E84F97500982B39 /* HXAdviceFaceBackVC.xib */,
 				0D8CC89D1E84F9F800982B39 /* HXFriendDynamicStateVC.h */,
 				0D8CC89E1E84F9F800982B39 /* HXFriendDynamicStateVC.m */,
 				0D8CC8AD1E84FDB900982B39 /* HXFraiendDynamicStateCell.h */,
@@ -1070,6 +1073,10 @@
 				0DD36B1E1E8E4A5A00F817CF /* WPImageMetaViewController.m */,
 				0DD36B1F1E8E4A5A00F817CF /* WPViewController.h */,
 				0DD36B201E8E4A5A00F817CF /* WPViewController.m */,
+				0D7F2EA71E9876C10050394E /* HXChooseSujectVC.h */,
+				0D7F2EA81E9876C10050394E /* HXChooseSujectVC.m */,
+				0D6CFFDD1E9898890093B5FF /* HXSearchSubjectVC.h */,
+				0D6CFFDE1E9898890093B5FF /* HXSearchSubjectVC.m */,
 			);
 			path = Plus;
 			sourceTree = "<group>";
@@ -1760,7 +1767,6 @@
 				0D7286B21E83BDE600025AF0 /* HXArticleCellTwo.xib in Resources */,
 				0D8B00941E890C30000BF2EA /* HXSearchArticleCell.xib in Resources */,
 				0D9A1E021E84D346004457A8 /* HXBalanceRechargeVC.xib in Resources */,
-				0D8CC89C1E84F97500982B39 /* HXAdviceFaceBackVC.xib in Resources */,
 				0D7B22201E67FD54000ABE4A /* HXMineLearnCell.xib in Resources */,
 				0DD36B241E8E4A5A00F817CF /* Images.xcassets in Resources */,
 				0D3A01541E4C05840038D62C /* HXOrganizationCell.xib in Resources */,
@@ -1873,6 +1879,7 @@
 				0D7F94791E5BCD1900D21D27 /* SGImageButton.m in Sources */,
 				0D7286CA1E83BDE600025AF0 /* HXSubjectVideoVC.m in Sources */,
 				0D7286B31E83BDE600025AF0 /* HXArticleVC.m in Sources */,
+				0D6CFFDF1E9898890093B5FF /* HXSearchSubjectVC.m in Sources */,
 				0DF4902C1E779B7900C567B0 /* WMDragView.m in Sources */,
 				0DEA903D1E4877BC0052C459 /* NetworkClient.m in Sources */,
 				0DF490221E7799E600C567B0 /* CLSlider.m in Sources */,
@@ -2003,6 +2010,7 @@
 				0D851B2A1E87B8FD000D1B3C /* HXRegisterVC.m in Sources */,
 				0DEA901A1E4877BB0052C459 /* CALayer+LH.m in Sources */,
 				0D93F0781E69417300CD9450 /* HXMyLikeVC.m in Sources */,
+				0D7F2EA91E9876C10050394E /* HXChooseSujectVC.m in Sources */,
 				0D7286D01E83BE1B00025AF0 /* HXSujectVideoListCell.m in Sources */,
 				0DBA4D5D1E5E8CDE00E549A5 /* HXPayWaysCell.m in Sources */,
 				0DEA90161E4877BB0052C459 /* NSMutableArray+LH.m in Sources */,
@@ -2179,7 +2187,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HXBudsProject/Buds.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = HXBudsProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2210,7 +2218,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HXBudsProject/Buds.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = HXBudsProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

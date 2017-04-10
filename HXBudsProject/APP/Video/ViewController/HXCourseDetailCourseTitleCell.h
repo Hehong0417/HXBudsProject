@@ -10,7 +10,7 @@
 
 @interface HXCourseDetailCourseTitleCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *starView;
-
+@property(nonatomic,strong) UINavigationController *nav;
 + (instancetype)initCourseDetailCourseTitleCellWithXib;
 
 @end

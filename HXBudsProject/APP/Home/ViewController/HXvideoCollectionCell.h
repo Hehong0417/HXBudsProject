@@ -10,5 +10,12 @@
 
 @interface HXvideoCollectionCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *videoImagV;
+@property(nonatomic,strong) UINavigationController *nav;
+@property (weak, nonatomic) IBOutlet UIImageView *videoIconImgV;
+@property (weak, nonatomic) IBOutlet UILabel *teacherNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *videoTitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *viewsLab;
+@property (weak, nonatomic) IBOutlet UILabel *commentLab;
+
 
 @end

@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="123"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钢琴基础即兴伴奏教学" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AG9-gj-glw">
@@ -34,18 +34,18 @@
                             <constraint firstAttribute="height" constant="27" id="ev4-Nf-1wl"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="时长：20分钟" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WId-zb-568">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时长：20分钟" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WId-zb-568">
                         <rect key="frame" x="157" y="48" width="97" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="iDv-TL-LZo"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="117" id="zvk-UT-bD0"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="97" id="zvk-UT-bD0"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1666666人看过" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0PS-8v-DSY">
-                        <rect key="frame" x="274" y="48" width="108" height="21"/>
+                        <rect key="frame" x="259" y="48" width="108" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="108" id="Rj0-eO-vN2"/>
                             <constraint firstAttribute="height" constant="21" id="q4L-Id-ab9"/>
@@ -66,7 +66,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="0PS-8v-DSY" firstAttribute="leading" secondItem="WId-zb-568" secondAttribute="trailing" id="3Bz-wu-ebA"/>
+                    <constraint firstItem="0PS-8v-DSY" firstAttribute="leading" secondItem="WId-zb-568" secondAttribute="trailing" constant="5" id="3Bz-wu-ebA"/>
                     <constraint firstAttribute="trailing" secondItem="AG9-gj-glw" secondAttribute="trailing" constant="1" id="HHR-Zm-hvh"/>
                     <constraint firstItem="0PS-8v-DSY" firstAttribute="top" secondItem="WId-zb-568" secondAttribute="top" id="IeZ-T5-bHs"/>
                     <constraint firstItem="WId-zb-568" firstAttribute="top" secondItem="AG9-gj-glw" secondAttribute="bottom" constant="8" id="PLn-BY-0Fy"/>

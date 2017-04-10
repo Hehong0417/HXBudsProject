@@ -28,11 +28,11 @@
     
     CGSize nameSize = [headtitle lh_sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(SCREEN_WIDTH, 30)];
     //标题
-    UILabel *headTitleLab = [UILabel lh_labelWithFrame:CGRectMake(10, 4, nameSize.width, frame.size.height-4) text:headtitle textColor:kBlackColor font:labFont textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
+    UILabel *headTitleLab = [UILabel lh_labelWithFrame:CGRectMake(10, 4, nameSize.width, frame.size.height-4) text:headtitle textColor:kWhiteColor font:labFont textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
     [head addSubview:headTitleLab];
     
     //描述
-    UILabel *discribLab = [UILabel lh_labelWithFrame:CGRectMake(CGRectGetMaxX(headTitleLab.frame)+10, 4, 200, frame.size.height-4) text:discribText textColor:[UIColor colorWithHexString:@"#BABABA"] font:FONT(12) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
+    UILabel *discribLab = [UILabel lh_labelWithFrame:CGRectMake(CGRectGetMaxX(headTitleLab.frame)+10, 4, 200, frame.size.height-4) text:discribText textColor:RGB(186, 186, 186) font:FONT(12) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
     [head addSubview:discribLab];
     
     XYQButton *changeBtn = [XYQButton ButtonWithFrame:CGRectMake(SCREEN_WIDTH - WidthScaleSize_W(80), 2, WidthScaleSize_W(80), frame.size.height-2) imgaeName:imageName titleName:rightBtnTitle contentType:contentType buttonFontAttributes:btnFontAttributes tapAction:^(XYQButton *button) {

@@ -55,6 +55,7 @@
     self.tabBar.tintColor=APP_COMMON_COLOR;
     
     HXTabBar *tabBar = [[HXTabBar alloc] init];
+    tabBar.backgroundColor = RGB(46, 40, 42);
     tabBar.customDelegate = self;
     /** KVC */
     [self setValue:tabBar forKey:@"tabBar"];
@@ -113,8 +114,13 @@
         selectedImage = [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     }
     childVc.tabBarItem.selectedImage = selectedImage;
-    //设置背景
-    self.tabBar.backgroundImage = [UIImage imageNamed:@"tabBar_bg"];
+    
+
+//    self.tabBar.backgroundColor =     RGB(46, 40, 42);
+    
+   
+//    //设置背景
+//    self.tabBar.backgroundImage = navImage;
     //添加导航控制器
     if ([childVc isKindOfClass:[UINavigationController class]]) {
         
@@ -130,6 +136,10 @@
     //设置底部tabbar的主题样式
     UITabBarItem *appearance = [UITabBarItem appearance];
     [appearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:APP_COMMON_COLOR, NSForegroundColorAttributeName,nil] forState:UIControlStateSelected];
+    UITabBar *appearance1 = [UITabBar appearance];
+    UIImage *navImage = [UIImage imageWithColor:RGB(46, 40, 42)];
+    [appearance1 setBackgroundImage:navImage];
+    
 }
 
 #pragma mark - Setter&Getter

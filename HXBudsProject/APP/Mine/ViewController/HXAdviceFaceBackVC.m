@@ -19,8 +19,22 @@
 
     self.title = @"意见反馈";
 
+    IQTextView  *adviceTextView = [[IQTextView alloc]initWithFrame:CGRectMake(20, 64, SCREEN_WIDTH - 40, 300)];
+    adviceTextView.placeholder = @"意见";
+    
+    
+    UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, CGRectGetMaxY(adviceTextView.frame)+10, SCREEN_WIDTH ,30 ) target:self action:@selector(adviceFacebackAction) title:@"意见反馈" titleColor:kGrayColor font:FONT(14) backgroundColor:kWhiteColor];
+    
+    [self.view addSubview:btn];
+    
+    [self.view addSubview:adviceTextView];
+}
+
+- (void)adviceFacebackAction {
+
 
 }
+
 
 
 @end

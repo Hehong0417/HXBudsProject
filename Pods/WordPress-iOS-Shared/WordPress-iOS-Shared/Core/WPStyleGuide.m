@@ -177,7 +177,7 @@
 
 + (UIColor *)grey
 {
-    return [self colorWithR:135 G:166 B:188 alpha:1.0];
+    return [self colorWithR:166 G:166 B:166 alpha:1.0];
 }
 
 + (UIColor *)lightGrey

@@ -195,4 +195,9 @@ typedef enum
 @property (nonatomic, assign) ZSSRichTextEditorToolbar enabledToolbarItems;
 - (ZSSRichTextEditorToolbar)defaultToolbarItems;
 - (void)reloadItems;
+
+
+@property (nonatomic, strong) UIBarButtonItem * htmlBarButtonItem;
+
+
 @end

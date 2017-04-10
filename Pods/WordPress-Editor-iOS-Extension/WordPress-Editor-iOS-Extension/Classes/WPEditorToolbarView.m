@@ -32,8 +32,8 @@ static const CGFloat WPEditorToolbarDividerLineWidth = 0.6;
 @property (nonatomic, weak) UIView *rightToolbarHolder;
 @property (nonatomic, weak) UIView *rightToolbarDivider;
 
-#pragma mark - Properties: Toolbar items
-@property (nonatomic, strong, readwrite) UIBarButtonItem* htmlBarButtonItem;
+//#pragma mark - Properties: Toolbar items
+//@property (nonatomic, strong, readwrite) UIBarButtonItem* htmlBarButtonItem;
 
 @end
 
@@ -66,9 +66,9 @@ static const CGFloat WPEditorToolbarDividerLineWidth = 0.6;
     [self buildToolbarScroll];
     [self buildLeftToolbar];
     
-//    if (!IS_IPAD) {
-//        [self.contentView addSubview:[self rightToolbarHolder]];
-//    }
+    if (!IS_IPAD) {
+        [self.contentView addSubview:[self rightToolbarHolder]];
+    }
 }
 
 - (void)reloadItems
@@ -240,6 +240,7 @@ static const CGFloat WPEditorToolbarDividerLineWidth = 0.6;
     barButtonItem.accessibilityLabel = accessibilityLabel;
     
     NSString *path = [[NSBundle bundleForClass:[WPEditorToolbarView class]] pathForResource:imageName ofType:@"png"];
+    
     UIImage *image = [UIImage imageWithContentsOfFile:path];
     
     UIImage* buttonImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -392,12 +393,38 @@ static const CGFloat WPEditorToolbarDividerLineWidth = 0.6;
         NSString* accessibilityLabel = NSLocalizedString(@"Display HTML",
                                                          @"Accessibility label for display HTML button on formatting toolbar.");
         
-        ZSSBarButtonItem *htmlButton = [self barButtonItemWithTag:kWPEditorViewControllerElementiPhoneShowSourceBarButton
-                                                        htmlProperty:@""
-                                                           imageName:@"icon_format_html"
-                                                              target:self
-                                                            selector:@selector(showHTMLSource:)
-                                                  accessibilityLabel:accessibilityLabel];
+//        ZSSBarButtonItem *htmlButton = [self barButtonItemWithTag:kWPEditorViewControllerElementiPhoneShowSourceBarButton
+//                                                        htmlProperty:@""
+//                                                           imageName:@"icon_format_html"
+//                                                              target:self
+//                                                            selector:@selector(showHTMLSource:)
+//                                                  accessibilityLabel:accessibilityLabel];
+        // ********//
+        
+        ZSSBarButtonItem *htmlButton = [[ZSSBarButtonItem alloc] initWithImage:nil
+                                                                            style:UIBarButtonItemStylePlain
+                                                                           target:nil
+                                                                           action:nil];
+        UIImage *image = [UIImage imageNamed:@"icon_format_subject"];
+        
+        UIImage* buttonImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        CGRect buttonSize;
+        if (IS_IPAD) {
+            buttonSize = CGRectMake(0.0, 0.0, WPEditorToolbarButtonWidthiPad, WPEditorToolbarButtonHeightiPad);
+        } else {
+            buttonSize = CGRectMake(0.0, 0.0, WPEditorToolbarButtonWidth, WPEditorToolbarButtonHeight);
+        }
+        WPEditorToolbarButton* customButton = [[WPEditorToolbarButton alloc] initWithFrame:buttonSize];
+        [customButton setImage:buttonImage forState:UIControlStateNormal];
+        customButton.normalTintColor = self.itemTintColor;
+        customButton.selectedTintColor = self.selectedItemTintColor;
+        customButton.disabledTintColor = self.disabledItemTintColor;
+      
+        htmlButton.customView = customButton;
+        
+       
+        //*********//
         _htmlBarButtonItem = htmlButton;
     }
     

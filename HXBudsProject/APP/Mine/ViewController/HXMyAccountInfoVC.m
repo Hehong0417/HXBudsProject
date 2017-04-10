@@ -23,7 +23,7 @@
    self.title = @"我的资产";
   
     HXAccountHead *headView = [[HXAccountHead alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 169)];
-    headView.backgroundColor = [UIColor colorWithHexString:@"#02C0BA"];
+    headView.backgroundColor = RGB(2, 192, 186);
     self.tableV.tableHeaderView = headView;
 
 }

@@ -75,7 +75,7 @@
             cell = [HXCourseDetailCourseTitleCell initCourseDetailCourseTitleCellWithXib];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        
+        cell.nav = self.navigationController;
         return cell;
         
     }else {

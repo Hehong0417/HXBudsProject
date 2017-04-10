@@ -41,13 +41,13 @@
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    HXMineHeadView *mineHeadView = [HXMineHeadView initmineHeadViewWithXib];
-    mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
-    mineHeadView.nav = self.navigationController;
-
-//    HXMineLoginHeadView *mineHeadView = [HXMineLoginHeadView initMineLoginHeadViewWithXib];
+//    HXMineHeadView *mineHeadView = [HXMineHeadView initmineHeadViewWithXib];
 //    mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
 //    mineHeadView.nav = self.navigationController;
+//
+    HXMineLoginHeadView *mineHeadView = [HXMineLoginHeadView initMineLoginHeadViewWithXib];
+    mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
+    mineHeadView.nav = self.navigationController;
     
     [mineHeadView setTapActionWithBlock:^{
         

@@ -59,6 +59,7 @@ static NSString * const reuseIdentifier = @"Cell";
     HXvideoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXvideoCollectionCell" forIndexPath:indexPath];
      NSArray *imagNameArr = @[@"video_01",@"video_02",@"video_03",@"video_04"];
     cell.videoImagV.image = [UIImage imageNamed:imagNameArr[indexPath.row]];
+    cell.nav = self.navigationController;
     return cell;
 }
 
@@ -124,9 +125,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    HXCourseDetailAnotherVC *courseVC = [HXCourseDetailAnotherVC new];
-   
-    [self.navigationController pushVC:courseVC];
+
 }
 #pragma mark --- sectionHead delegate
 

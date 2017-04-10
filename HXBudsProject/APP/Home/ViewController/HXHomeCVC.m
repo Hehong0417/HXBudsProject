@@ -13,6 +13,8 @@
 #import "HXHomeReusableHeadView.h"
 #import "HXVideoSectionHead.h"
 #import "HXSubjectVideoVC.h"
+#import "HXMyLikeVC.h"
+
 
 @interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 
@@ -52,6 +54,7 @@
         HXvideoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXvideoCollectionCell" forIndexPath:indexPath];
         NSArray *imagNameArr = @[@"video_01",@"video_02",@"video_03",@"video_04"];
         cell.videoImagV.image = [UIImage imageNamed:imagNameArr[indexPath.item]];
+        cell.nav = self.navigationController;
         return cell;
     }
     
@@ -105,9 +108,18 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
-    [self.navigationController pushVC:vc];
+    if (indexPath.section == 0) {
+        
+        HXMyLikeVC *vc = [HXMyLikeVC new];
+        vc.titleStr = @"他的主页";
+        [self.navigationController pushVC:vc];
+        
+    }else{
+        
+//        HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
+//        [self.navigationController pushVC:vc];
     
+    }
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
 

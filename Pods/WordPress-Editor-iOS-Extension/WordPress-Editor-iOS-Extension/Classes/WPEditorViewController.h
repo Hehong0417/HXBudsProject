@@ -192,6 +192,8 @@ WPEditorViewControllerMode;
  */
 - (void)showInsertImageAlternatePicker;
 
+- (void)choose;
+
 #pragma mark - Properties: Toolbar
 @property (nonatomic, strong, readwrite) WPEditorToolbarView* toolbarView;
 
