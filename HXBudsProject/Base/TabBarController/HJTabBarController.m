@@ -5,7 +5,6 @@
 //  Created by SYETC02 on 15/6/12.
 //  Copyright (c) 2015年 SYETC02. All rights reserved.
 //
-
 #import "HJTabBarController.h"
 #import "HJNavigationController.h"
 #import "HJStoryBoardItem.h"
@@ -55,11 +54,10 @@
     self.tabBar.tintColor=APP_COMMON_COLOR;
     
     HXTabBar *tabBar = [[HXTabBar alloc] init];
-    tabBar.backgroundColor = RGB(46, 40, 42);
     tabBar.customDelegate = self;
     /** KVC */
     [self setValue:tabBar forKey:@"tabBar"];
-   
+    
 }
 
 - (void)addAllChildVcs
@@ -71,7 +69,7 @@
         
         [self addOneChildVc:childVC title:self.tabBarItemTitles[i] imageName:self.tabBarItemNormalImages[i] selectedImageName:self.tabBarItemSelectedImages[i]];
     }
-
+    
 }
 
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
@@ -91,12 +89,12 @@
         
         return controller;
     }
-
+    
     
     controller = [UIViewController createFromStoryboardName:((HJStoryBoardItem *)storyBoardItem).storyBoardName WithIdentifier:((HJStoryBoardItem *)storyBoardItem).Identifier];
     
     return controller;
-            
+    
 }
 
 - (void)addOneChildVc:(UIViewController *)childVc title:(NSString *)title imageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName {
@@ -106,7 +104,7 @@
     //设置图标
     childVc.tabBarItem.image = [UIImage imageNamed:imageName];
     
-     [childVc.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -5)];
+    [childVc.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -5)];
     //设置选中图标
     UIImage *selectedImage = [UIImage imageNamed:selectedImageName];
     if (iOS7) {
@@ -115,12 +113,6 @@
     }
     childVc.tabBarItem.selectedImage = selectedImage;
     
-
-//    self.tabBar.backgroundColor =     RGB(46, 40, 42);
-    
-   
-//    //设置背景
-//    self.tabBar.backgroundImage = navImage;
     //添加导航控制器
     if ([childVc isKindOfClass:[UINavigationController class]]) {
         
@@ -136,10 +128,10 @@
     //设置底部tabbar的主题样式
     UITabBarItem *appearance = [UITabBarItem appearance];
     [appearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:APP_COMMON_COLOR, NSForegroundColorAttributeName,nil] forState:UIControlStateSelected];
-    UITabBar *appearance1 = [UITabBar appearance];
-    UIImage *navImage = [UIImage imageWithColor:RGB(46, 40, 42)];
-    [appearance1 setBackgroundImage:navImage];
-    
+    //    UITabBar *appearance1 = [UITabBar appearance];
+    //    UIImage *navImage = [UIImage imageWithColor:RGB(46, 40, 42)];
+    //    [appearance1 setBackgroundImage:navImage];
+    //
 }
 
 #pragma mark - Setter&Getter
@@ -191,7 +183,7 @@
         HJStoryBoardItem *item2 = [HJStoryBoardItem itemWithStroyBoardName:@"Course" identifier:@"HXArticleVC" viewControllerNonExist:YES];
         HJStoryBoardItem *item3 = [HJStoryBoardItem itemWithStroyBoardName:@"Activity" identifier:@"HXVideoCVC" viewControllerNonExist:YES];
         HJStoryBoardItem *item4 = [HJStoryBoardItem itemWithStroyBoardName:@"PersonCenter" identifier:@"HXPersonCenterVC" viewControllerNonExist:YES];
-
+        
         _tabBarStoryBoardItems = @[ item1,
                                     item2,
                                     item3,
@@ -202,13 +194,13 @@
 }
 
 - (void)tabBarDidClickPlusButton:(HXTabBar *)tabBar{
-
+    
     NSLog(@"发布");
     WPViewController  *vc = [WPViewController new];
-
+    
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
-
+    
 }
 
 @end

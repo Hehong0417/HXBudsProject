@@ -84,12 +84,9 @@
             __weak UIViewController *weakController = controller;
             // 返回按钮
             XYQButton * backButton = [self aopBackButton];
-            
-            [backButton bk_addEventHandler:^(id sender) {
-                
-                [weakController.navigationController popViewControllerAnimated:YES];
-                
-            } forControlEvents:UIControlEventTouchUpInside];
+            [backButton setTapActionWithBlock:^{
+                  [weakController.navigationController popViewControllerAnimated:YES];
+            }];
             
             controller.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
         }

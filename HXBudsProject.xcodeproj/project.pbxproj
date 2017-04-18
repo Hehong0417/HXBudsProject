@@ -11,6 +11,8 @@
 		0D0369661E8E3BF800F3DC92 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0369651E8E3BF800F3DC92 /* UIKit.framework */; };
 		0D0369681E8E3C0200F3DC92 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0369671E8E3C0200F3DC92 /* CoreGraphics.framework */; };
 		0D03696A1E8E3C0B00F3DC92 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0369691E8E3C0B00F3DC92 /* CoreText.framework */; };
+		0D15870D1E9DC54700C2160C /* UI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D15870C1E9DC54700C2160C /* UI.xcassets */; };
+		0D1587101E9DC6C800C2160C /* HXCollectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D15870F1E9DC6C800C2160C /* HXCollectVC.m */; };
 		0D27AFED1E94D07800E93EC0 /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D27AFEC1E94D07800E93EC0 /* HCSStarRatingView.m */; };
 		0D27B0121E94D84A00E93EC0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0D27B0101E94D84A00E93EC0 /* InfoPlist.strings */; };
 		0D27B0131E94D84A00E93EC0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0D27B0111E94D84A00E93EC0 /* Localizable.strings */; };
@@ -78,9 +80,22 @@
 		0D7F94781E5BCD1900D21D27 /* SGSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F94731E5BCD1900D21D27 /* SGSegmentedControl.m */; };
 		0D7F94791E5BCD1900D21D27 /* SGImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F94751E5BCD1900D21D27 /* SGImageButton.m */; };
 		0D7F947A1E5BCD1900D21D27 /* UIView+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F94771E5BCD1900D21D27 /* UIView+SGExtension.m */; };
+		0D82D10E1E9F7B9B005B8A3E /* HXHomeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82D10D1E9F7B9B005B8A3E /* HXHomeAPI.m */; };
 		0D851B271E879648000D1B3C /* HXLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D851B261E879648000D1B3C /* HXLoginVC.m */; };
 		0D851B2A1E87B8FD000D1B3C /* HXRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D851B291E87B8FD000D1B3C /* HXRegisterVC.m */; };
 		0D851B2D1E87C51E000D1B3C /* HXCommitPassWordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D851B2C1E87C51E000D1B3C /* HXCommitPassWordVC.m */; };
+		0D87BAF01E9E0AC300FC2678 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0D87BAEE1E9E0AC300FC2678 /* AlipaySDK.bundle */; };
+		0D87BAF11E9E0AC300FC2678 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D87BAEF1E9E0AC300FC2678 /* AlipaySDK.framework */; };
+		0D87BAF31E9E0B4900FC2678 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D87BAF21E9E0B4900FC2678 /* SystemConfiguration.framework */; };
+		0D87BAF51E9E0B5400FC2678 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D87BAF41E9E0B5400FC2678 /* CoreTelephony.framework */; };
+		0D87BAF71E9E0B5F00FC2678 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D87BAF61E9E0B5F00FC2678 /* QuartzCore.framework */; };
+		0D87BAF91E9E0B8800FC2678 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D87BAF81E9E0B8800FC2678 /* CFNetwork.framework */; };
+		0D87BAFB1E9E0B9A00FC2678 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D87BAFA1E9E0B9A00FC2678 /* CoreMotion.framework */; };
+		0D87BAFD1E9E0BB300FC2678 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D87BAFC1E9E0BB300FC2678 /* libc++.tbd */; };
+		0D87BAFF1E9E0BBB00FC2678 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D87BAFE1E9E0BBB00FC2678 /* libz.tbd */; };
+		0D87BB041E9E17A000FC2678 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D87BB011E9E17A000FC2678 /* libWeChatSDK.a */; };
+		0D87BB061E9E19ED00FC2678 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D87BB051E9E19ED00FC2678 /* libsqlite3.0.tbd */; };
+		0D87BB081E9E1A0E00FC2678 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D87BB071E9E1A0E00FC2678 /* Security.framework */; };
 		0D8854961E6E81AC00E4132B /* HXWebViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8854951E6E81AC00E4132B /* HXWebViewCell.m */; };
 		0D88549E1E6EAA1E00E4132B /* HXInformationCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D88549D1E6EAA1E00E4132B /* HXInformationCommentView.m */; };
 		0D8854A01E6EAA3500E4132B /* HXInformationCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D88549F1E6EAA3500E4132B /* HXInformationCommentView.xib */; };
@@ -117,6 +132,10 @@
 		0D9A1DFD1E84C853004457A8 /* HXAccountHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9A1DFC1E84C853004457A8 /* HXAccountHead.m */; };
 		0D9A1E011E84D346004457A8 /* HXBalanceRechargeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9A1DFF1E84D346004457A8 /* HXBalanceRechargeVC.m */; };
 		0D9A1E021E84D346004457A8 /* HXBalanceRechargeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D9A1E001E84D346004457A8 /* HXBalanceRechargeVC.xib */; };
+		0D9BC2841EA4AC5900EC2315 /* UITableViewCell+WHC_AutoHeightForCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC27D1EA4AC5900EC2315 /* UITableViewCell+WHC_AutoHeightForCell.m */; };
+		0D9BC2851EA4AC5900EC2315 /* UIView+WHC_AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC27F1EA4AC5900EC2315 /* UIView+WHC_AutoLayout.m */; };
+		0D9BC2861EA4AC5900EC2315 /* UIView+WHC_Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC2811EA4AC5900EC2315 /* UIView+WHC_Frame.m */; };
+		0D9BC2871EA4AC5900EC2315 /* WHC_StackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC2831EA4AC5900EC2315 /* WHC_StackView.m */; };
 		0DAE95B31E8D03E800A8C0A2 /* HXSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE95B21E8D03E800A8C0A2 /* HXSearchVC.m */; };
 		0DB3051C1E8223E700DDBCD2 /* HXSubjectVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB3051B1E8223E700DDBCD2 /* HXSubjectVideoCell.m */; };
 		0DB305201E8226EC00DDBCD2 /* HXvideoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB3051E1E8226EC00DDBCD2 /* HXvideoCollectionCell.m */; };
@@ -143,11 +162,9 @@
 		0DD36B2A1E8E4A5A00F817CF /* WPImageMetaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD36B1E1E8E4A5A00F817CF /* WPImageMetaViewController.m */; };
 		0DD36B2B1E8E4A5A00F817CF /* WPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD36B201E8E4A5A00F817CF /* WPViewController.m */; };
 		0DD36B2D1E8E4E8B00F817CF /* WordPress_Editor_iOS_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD36B2C1E8E4E8B00F817CF /* WordPress_Editor_iOS_Extension.framework */; };
-		0DE5FAF41E49CB400090F833 /* UI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DE5FAF31E49CB400090F833 /* UI.xcassets */; };
 		0DEA8EFB1E486FC10052C459 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEA8EFA1E486FC10052C459 /* main.m */; };
 		0DEA8EFE1E486FC10052C459 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEA8EFD1E486FC10052C459 /* AppDelegate.m */; };
 		0DEA8F011E486FC10052C459 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEA8F001E486FC10052C459 /* ViewController.m */; };
-		0DEA8F041E486FC10052C459 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DEA8F021E486FC10052C459 /* Main.storyboard */; };
 		0DEA8F061E486FC10052C459 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DEA8F051E486FC10052C459 /* Assets.xcassets */; };
 		0DEA8F091E486FC10052C459 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DEA8F071E486FC10052C459 /* LaunchScreen.storyboard */; };
 		0DEA8F141E486FC10052C459 /* HXBudsProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEA8F131E486FC10052C459 /* HXBudsProjectTests.m */; };
@@ -247,6 +264,9 @@
 		0D0369651E8E3BF800F3DC92 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0D0369671E8E3C0200F3DC92 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0D0369691E8E3C0B00F3DC92 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		0D15870C1E9DC54700C2160C /* UI.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = UI.xcassets; path = HXBudsProject/UI.xcassets; sourceTree = SOURCE_ROOT; };
+		0D15870E1E9DC6C800C2160C /* HXCollectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCollectVC.h; sourceTree = "<group>"; };
+		0D15870F1E9DC6C800C2160C /* HXCollectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCollectVC.m; sourceTree = "<group>"; };
 		0D27AFEB1E94D07800E93EC0 /* HCSStarRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSStarRatingView.h; sourceTree = "<group>"; };
 		0D27AFEC1E94D07800E93EC0 /* HCSStarRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSStarRatingView.m; sourceTree = "<group>"; };
 		0D27B0101E94D84A00E93EC0 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
@@ -376,12 +396,28 @@
 		0D7F94751E5BCD1900D21D27 /* SGImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImageButton.m; sourceTree = "<group>"; };
 		0D7F94761E5BCD1900D21D27 /* UIView+SGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SGExtension.h"; sourceTree = "<group>"; };
 		0D7F94771E5BCD1900D21D27 /* UIView+SGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SGExtension.m"; sourceTree = "<group>"; };
+		0D82D10C1E9F7B9B005B8A3E /* HXHomeAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXHomeAPI.h; sourceTree = "<group>"; };
+		0D82D10D1E9F7B9B005B8A3E /* HXHomeAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXHomeAPI.m; sourceTree = "<group>"; };
 		0D851B251E879648000D1B3C /* HXLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXLoginVC.h; sourceTree = "<group>"; };
 		0D851B261E879648000D1B3C /* HXLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXLoginVC.m; sourceTree = "<group>"; };
 		0D851B281E87B8FD000D1B3C /* HXRegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXRegisterVC.h; sourceTree = "<group>"; };
 		0D851B291E87B8FD000D1B3C /* HXRegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXRegisterVC.m; sourceTree = "<group>"; };
 		0D851B2B1E87C51E000D1B3C /* HXCommitPassWordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCommitPassWordVC.h; sourceTree = "<group>"; };
 		0D851B2C1E87C51E000D1B3C /* HXCommitPassWordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCommitPassWordVC.m; sourceTree = "<group>"; };
+		0D87BAEE1E9E0AC300FC2678 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		0D87BAEF1E9E0AC300FC2678 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		0D87BAF21E9E0B4900FC2678 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0D87BAF41E9E0B5400FC2678 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		0D87BAF61E9E0B5F00FC2678 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0D87BAF81E9E0B8800FC2678 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		0D87BAFA1E9E0B9A00FC2678 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		0D87BAFC1E9E0BB300FC2678 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		0D87BAFE1E9E0BBB00FC2678 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		0D87BB011E9E17A000FC2678 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		0D87BB021E9E17A000FC2678 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		0D87BB031E9E17A000FC2678 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		0D87BB051E9E19ED00FC2678 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		0D87BB071E9E1A0E00FC2678 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0D8854941E6E81AC00E4132B /* HXWebViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXWebViewCell.h; sourceTree = "<group>"; };
 		0D8854951E6E81AC00E4132B /* HXWebViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXWebViewCell.m; sourceTree = "<group>"; };
 		0D88549C1E6EAA1E00E4132B /* HXInformationCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXInformationCommentView.h; sourceTree = "<group>"; };
@@ -445,6 +481,14 @@
 		0D9A1DFE1E84D346004457A8 /* HXBalanceRechargeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBalanceRechargeVC.h; sourceTree = "<group>"; };
 		0D9A1DFF1E84D346004457A8 /* HXBalanceRechargeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBalanceRechargeVC.m; sourceTree = "<group>"; };
 		0D9A1E001E84D346004457A8 /* HXBalanceRechargeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXBalanceRechargeVC.xib; sourceTree = "<group>"; };
+		0D9BC27C1EA4AC5900EC2315 /* UITableViewCell+WHC_AutoHeightForCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+WHC_AutoHeightForCell.h"; sourceTree = "<group>"; };
+		0D9BC27D1EA4AC5900EC2315 /* UITableViewCell+WHC_AutoHeightForCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+WHC_AutoHeightForCell.m"; sourceTree = "<group>"; };
+		0D9BC27E1EA4AC5900EC2315 /* UIView+WHC_AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WHC_AutoLayout.h"; sourceTree = "<group>"; };
+		0D9BC27F1EA4AC5900EC2315 /* UIView+WHC_AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WHC_AutoLayout.m"; sourceTree = "<group>"; };
+		0D9BC2801EA4AC5900EC2315 /* UIView+WHC_Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WHC_Frame.h"; sourceTree = "<group>"; };
+		0D9BC2811EA4AC5900EC2315 /* UIView+WHC_Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WHC_Frame.m"; sourceTree = "<group>"; };
+		0D9BC2821EA4AC5900EC2315 /* WHC_StackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHC_StackView.h; sourceTree = "<group>"; };
+		0D9BC2831EA4AC5900EC2315 /* WHC_StackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHC_StackView.m; sourceTree = "<group>"; };
 		0DAE95B11E8D03E800A8C0A2 /* HXSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSearchVC.h; sourceTree = "<group>"; };
 		0DAE95B21E8D03E800A8C0A2 /* HXSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXSearchVC.m; sourceTree = "<group>"; };
 		0DB3051A1E8223E700DDBCD2 /* HXSubjectVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSubjectVideoCell.h; sourceTree = "<group>"; };
@@ -488,14 +532,12 @@
 		0DD36B201E8E4A5A00F817CF /* WPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPViewController.m; sourceTree = "<group>"; };
 		0DD36B2C1E8E4E8B00F817CF /* WordPress_Editor_iOS_Extension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WordPress_Editor_iOS_Extension.framework; path = "../../../Library/Developer/Xcode/DerivedData/HXBudsProject-gvjbafszzdwylreimcztgedbknco/Build/Products/Debug-iphonesimulator/WordPress-Editor-iOS-Extension/WordPress_Editor_iOS_Extension.framework"; sourceTree = "<group>"; };
 		0DE5FAE71E49BE530090F833 /* Encryption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Encryption.h; sourceTree = "<group>"; };
-		0DE5FAF31E49CB400090F833 /* UI.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = UI.xcassets; path = ../UI.xcassets; sourceTree = "<group>"; };
 		0DEA8EF61E486FC10052C459 /* HXBudsProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HXBudsProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DEA8EFA1E486FC10052C459 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0DEA8EFC1E486FC10052C459 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0DEA8EFD1E486FC10052C459 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0DEA8EFF1E486FC10052C459 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		0DEA8F001E486FC10052C459 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		0DEA8F031E486FC10052C459 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0DEA8F051E486FC10052C459 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0DEA8F081E486FC10052C459 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0DEA8F0A1E486FC10052C459 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -658,16 +700,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D87BB081E9E1A0E00FC2678 /* Security.framework in Frameworks */,
+				0D87BAFD1E9E0BB300FC2678 /* libc++.tbd in Frameworks */,
+				0D87BB061E9E19ED00FC2678 /* libsqlite3.0.tbd in Frameworks */,
+				0D87BAFF1E9E0BBB00FC2678 /* libz.tbd in Frameworks */,
+				0D87BAFB1E9E0B9A00FC2678 /* CoreMotion.framework in Frameworks */,
+				0D87BAF91E9E0B8800FC2678 /* CFNetwork.framework in Frameworks */,
+				0D0369641E8E3BEF00F3DC92 /* Foundation.framework in Frameworks */,
+				0D0369661E8E3BF800F3DC92 /* UIKit.framework in Frameworks */,
+				0D0369681E8E3C0200F3DC92 /* CoreGraphics.framework in Frameworks */,
+				0D03696A1E8E3C0B00F3DC92 /* CoreText.framework in Frameworks */,
+				0D87BAF71E9E0B5F00FC2678 /* QuartzCore.framework in Frameworks */,
+				0D87BAF51E9E0B5400FC2678 /* CoreTelephony.framework in Frameworks */,
+				0D87BAF31E9E0B4900FC2678 /* SystemConfiguration.framework in Frameworks */,
 				0DD00F1F1E8E56FD00823BDA /* MobileCoreServices.framework in Frameworks */,
 				0DD00F1D1E8E569600823BDA /* Photos.framework in Frameworks */,
 				0DD36B2D1E8E4E8B00F817CF /* WordPress_Editor_iOS_Extension.framework in Frameworks */,
-				0D03696A1E8E3C0B00F3DC92 /* CoreText.framework in Frameworks */,
-				0D0369681E8E3C0200F3DC92 /* CoreGraphics.framework in Frameworks */,
-				0D0369661E8E3BF800F3DC92 /* UIKit.framework in Frameworks */,
-				0D0369641E8E3BEF00F3DC92 /* Foundation.framework in Frameworks */,
+				0D87BB041E9E17A000FC2678 /* libWeChatSDK.a in Frameworks */,
 				0DCC4F5A1E67B5DA00B7294B /* CoreMedia.framework in Frameworks */,
 				0DCC4F561E67B4D500B7294B /* AVFoundation.framework in Frameworks */,
 				0DCC4F541E67B4C800B7294B /* MediaPlayer.framework in Frameworks */,
+				0D87BAF11E9E0AC300FC2678 /* AlipaySDK.framework in Frameworks */,
 				0D78A7971E5EC1B90032F135 /* WebKit.framework in Frameworks */,
 				0F9C01FB15DEE37B1DE4C7A8 /* Pods_HXBudsProject.framework in Frameworks */,
 			);
@@ -723,7 +776,7 @@
 		0D65C3D21E4AA92C009F07F1 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				0DE5FAF31E49CB400090F833 /* UI.xcassets */,
+				0D15870C1E9DC54700C2160C /* UI.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -731,17 +784,10 @@
 		0D65C3DF1E4AB703009F07F1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				0D65C3E01E4AB703009F07F1 /* Model */,
+				0D82D1081E9F7A17005B8A3E /* Models */,
 				0D65C3E11E4AB703009F07F1 /* ViewController */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		0D65C3E01E4AB703009F07F1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		0D65C3E11E4AB703009F07F1 /* ViewController */ = {
@@ -928,6 +974,8 @@
 				0D7286781E83BDE600025AF0 /* HXArticleCellTwo.h */,
 				0D7286791E83BDE600025AF0 /* HXArticleCellTwo.m */,
 				0D72867A1E83BDE600025AF0 /* HXArticleCellTwo.xib */,
+				0D15870E1E9DC6C800C2160C /* HXCollectVC.h */,
+				0D15870F1E9DC6C800C2160C /* HXCollectVC.m */,
 				0D72867B1E83BDE600025AF0 /* HXArticleVC.h */,
 				0D72867C1E83BDE600025AF0 /* HXArticleVC.m */,
 				0D72867D1E83BDE600025AF0 /* HXSubjectListTVC.h */,
@@ -1062,6 +1110,59 @@
 			path = NewPagedFlowView;
 			sourceTree = "<group>";
 		};
+		0D82D1081E9F7A17005B8A3E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0D82D10C1E9F7B9B005B8A3E /* HXHomeAPI.h */,
+				0D82D10D1E9F7B9B005B8A3E /* HXHomeAPI.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0D87BAEB1E9E0AB700FC2678 /* pay */ = {
+			isa = PBXGroup;
+			children = (
+				0D87BB001E9E17A000FC2678 /* wechatPay */,
+				0D87BAEC1E9E0AB700FC2678 /* alipay */,
+			);
+			path = pay;
+			sourceTree = "<group>";
+		};
+		0D87BAEC1E9E0AB700FC2678 /* alipay */ = {
+			isa = PBXGroup;
+			children = (
+				0D87BAEE1E9E0AC300FC2678 /* AlipaySDK.bundle */,
+				0D87BAEF1E9E0AC300FC2678 /* AlipaySDK.framework */,
+			);
+			path = alipay;
+			sourceTree = "<group>";
+		};
+		0D87BB001E9E17A000FC2678 /* wechatPay */ = {
+			isa = PBXGroup;
+			children = (
+				0D87BB011E9E17A000FC2678 /* libWeChatSDK.a */,
+				0D87BB021E9E17A000FC2678 /* WXApi.h */,
+				0D87BB031E9E17A000FC2678 /* WXApiObject.h */,
+			);
+			path = wechatPay;
+			sourceTree = "<group>";
+		};
+		0D9BC27B1EA4AC5900EC2315 /* WHC_AutoLayoutKit(OC) */ = {
+			isa = PBXGroup;
+			children = (
+				0D9BC27C1EA4AC5900EC2315 /* UITableViewCell+WHC_AutoHeightForCell.h */,
+				0D9BC27D1EA4AC5900EC2315 /* UITableViewCell+WHC_AutoHeightForCell.m */,
+				0D9BC27E1EA4AC5900EC2315 /* UIView+WHC_AutoLayout.h */,
+				0D9BC27F1EA4AC5900EC2315 /* UIView+WHC_AutoLayout.m */,
+				0D9BC2801EA4AC5900EC2315 /* UIView+WHC_Frame.h */,
+				0D9BC2811EA4AC5900EC2315 /* UIView+WHC_Frame.m */,
+				0D9BC2821EA4AC5900EC2315 /* WHC_StackView.h */,
+				0D9BC2831EA4AC5900EC2315 /* WHC_StackView.m */,
+			);
+			name = "WHC_AutoLayoutKit(OC)";
+			path = "Classes/WHC_AutoLayoutKit(OC)";
+			sourceTree = "<group>";
+		};
 		0DD36B0D1E8E4A5A00F817CF /* Plus */ = {
 			isa = PBXGroup;
 			children = (
@@ -1143,7 +1244,6 @@
 				0DEA8EFA1E486FC10052C459 /* main.m */,
 				0DEA8EFF1E486FC10052C459 /* ViewController.h */,
 				0DEA8F001E486FC10052C459 /* ViewController.m */,
-				0DEA8F021E486FC10052C459 /* Main.storyboard */,
 				0DEA8F051E486FC10052C459 /* Assets.xcassets */,
 				0DEA8F071E486FC10052C459 /* LaunchScreen.storyboard */,
 				0D27B0101E94D84A00E93EC0 /* InfoPlist.strings */,
@@ -1479,6 +1579,7 @@
 		0DEA8FCF1E4877BB0052C459 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				0D87BAEB1E9E0AB700FC2678 /* pay */,
 				0DEA8FDD1E4877BB0052C459 /* JKAlertView */,
 				0DEA8FE31E4877BB0052C459 /* LHAlertView */,
 				0DEA8FE61E4877BB0052C459 /* LHVerifyCodeButton */,
@@ -1492,6 +1593,7 @@
 				0DF490171E7799A500C567B0 /* CLPlayer */,
 				0D56EDFB1E8DE5C500CB8E1C /* PYSearch */,
 				0D27AFEA1E94D07800E93EC0 /* HCSStarRatingView */,
+				0D9BC27B1EA4AC5900EC2315 /* WHC_AutoLayoutKit(OC) */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -1612,6 +1714,15 @@
 		57C56E307684BBA6F087C06A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0D87BB071E9E1A0E00FC2678 /* Security.framework */,
+				0D87BB051E9E19ED00FC2678 /* libsqlite3.0.tbd */,
+				0D87BAFE1E9E0BBB00FC2678 /* libz.tbd */,
+				0D87BAFC1E9E0BB300FC2678 /* libc++.tbd */,
+				0D87BAFA1E9E0B9A00FC2678 /* CoreMotion.framework */,
+				0D87BAF81E9E0B8800FC2678 /* CFNetwork.framework */,
+				0D87BAF61E9E0B5F00FC2678 /* QuartzCore.framework */,
+				0D87BAF41E9E0B5400FC2678 /* CoreTelephony.framework */,
+				0D87BAF21E9E0B4900FC2678 /* SystemConfiguration.framework */,
 				0DD00F1E1E8E56FD00823BDA /* MobileCoreServices.framework */,
 				0DD00F1C1E8E569600823BDA /* Photos.framework */,
 				0DD36B2C1E8E4E8B00F817CF /* WordPress_Editor_iOS_Extension.framework */,
@@ -1760,6 +1871,7 @@
 				0D8CC8AC1E84FCD400982B39 /* HXMyAttentionCell.xib in Resources */,
 				0D91681D1E9623D0002D8296 /* HXTeacherCollectionCell.xib in Resources */,
 				0DCC4F621E67C73A00B7294B /* HXMineHeadView.xib in Resources */,
+				0D87BAF01E9E0AC300FC2678 /* AlipaySDK.bundle in Resources */,
 				0DBA4D591E5E892D00E549A5 /* HXPayInformationCell.xib in Resources */,
 				0D65C3F71E4AB703009F07F1 /* HXRecommendTeacherCell.xib in Resources */,
 				0DEA8F091E486FC10052C459 /* LaunchScreen.storyboard in Resources */,
@@ -1770,7 +1882,6 @@
 				0D7B22201E67FD54000ABE4A /* HXMineLearnCell.xib in Resources */,
 				0DD36B241E8E4A5A00F817CF /* Images.xcassets in Resources */,
 				0D3A01541E4C05840038D62C /* HXOrganizationCell.xib in Resources */,
-				0DE5FAF41E49CB400090F833 /* UI.xcassets in Resources */,
 				0D27B0131E94D84A00E93EC0 /* Localizable.strings in Resources */,
 				0DEA8F061E486FC10052C459 /* Assets.xcassets in Resources */,
 				0D8854A01E6EAA3500E4132B /* HXInformationCommentView.xib in Resources */,
@@ -1787,7 +1898,7 @@
 				0D72866A1E83A76400025AF0 /* HXMineLoginHeadView.xib in Resources */,
 				0D8CC8A71E84FA8500982B39 /* HXMyArticleCell.xib in Resources */,
 				0D27B0121E94D84A00E93EC0 /* InfoPlist.strings in Resources */,
-				0DEA8F041E486FC10052C459 /* Main.storyboard in Resources */,
+				0D15870D1E9DC54700C2160C /* UI.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1875,6 +1986,7 @@
 				0DEA90111E4877BB0052C459 /* HJStoryBoardItem.m in Sources */,
 				0DB3051C1E8223E700DDBCD2 /* HXSubjectVideoCell.m in Sources */,
 				0D9A1DFD1E84C853004457A8 /* HXAccountHead.m in Sources */,
+				0D1587101E9DC6C800C2160C /* HXCollectVC.m in Sources */,
 				0DEA90471E4877BC0052C459 /* LHVerifyCodeButton.m in Sources */,
 				0D7F94791E5BCD1900D21D27 /* SGImageButton.m in Sources */,
 				0D7286CA1E83BDE600025AF0 /* HXSubjectVideoVC.m in Sources */,
@@ -1944,10 +2056,12 @@
 				0D8CC8CA1E851EAC00982B39 /* LWActiveIncatorAnimationView.m in Sources */,
 				0D56EE091E8DE5C600CB8E1C /* PYSearchConst.m in Sources */,
 				0D7286B41E83BDE600025AF0 /* HXSubjectListTVC.m in Sources */,
+				0D9BC2861EA4AC5900EC2315 /* UIView+WHC_Frame.m in Sources */,
 				0DEA90351E4877BC0052C459 /* UIViewController+Create.m in Sources */,
 				0D7D77831E52A5EB00CF8D47 /* PGIndexBannerSubiew.m in Sources */,
 				0DF490211E7799E600C567B0 /* CLPlayerView.m in Sources */,
 				0D7286BC1E83BDE600025AF0 /* HXBuyBottomView.m in Sources */,
+				0D82D10E1E9F7B9B005B8A3E /* HXHomeAPI.m in Sources */,
 				0D56EE0B1E8DE5C600CB8E1C /* HXSearchViewController.m in Sources */,
 				0DEA900C1E4877BB0052C459 /* DES3Util.m in Sources */,
 				0D8CC8AB1E84FCD400982B39 /* HXMyAttentionCell.m in Sources */,
@@ -1955,10 +2069,13 @@
 				0DEA904F1E4877BC0052C459 /* WBPopMenuView.m in Sources */,
 				0D7F94781E5BCD1900D21D27 /* SGSegmentedControl.m in Sources */,
 				0D27AFED1E94D07800E93EC0 /* HCSStarRatingView.m in Sources */,
+				0D9BC2871EA4AC5900EC2315 /* WHC_StackView.m in Sources */,
 				0DEA90171E4877BB0052C459 /* NSNumber+LH.m in Sources */,
+				0D9BC2841EA4AC5900EC2315 /* UITableViewCell+WHC_AutoHeightForCell.m in Sources */,
 				0D8CC88D1E84EA3300982B39 /* HXMessageCell.m in Sources */,
 				0D7286C61E83BDE600025AF0 /* HXGradeCommentCell.m in Sources */,
 				0D7286B61E83BDE600025AF0 /* HXCourseDetailThreeVC.m in Sources */,
+				0D9BC2851EA4AC5900EC2315 /* UIView+WHC_AutoLayout.m in Sources */,
 				0DEA8EFE1E486FC10052C459 /* AppDelegate.m in Sources */,
 				0DEA903E1E4877BC0052C459 /* NSObject+NC.m in Sources */,
 				0DEA90331E4877BC0052C459 /* UIView+LayoutConstraintHelper.m in Sources */,
@@ -2062,14 +2179,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0DEA8F021E486FC10052C459 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0DEA8F031E486FC10052C459 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0DEA8F071E486FC10052C459 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2182,12 +2291,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/Extend/QQConnectSDK",
+					"$(PROJECT_DIR)/HXBudsProject/Vendors/pay/alipay",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HXBudsProject/Buds.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = HXBudsProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2195,8 +2305,9 @@
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/JPushLib",
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/Extend/SinaWeiboSDK",
+					"$(PROJECT_DIR)/HXBudsProject/Vendors/pay/wechatPay",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Owater.HXBudsProject;
+				PRODUCT_BUNDLE_IDENTIFIER = DuoYiMeng.MengYa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -2213,12 +2324,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/Extend/QQConnectSDK",
+					"$(PROJECT_DIR)/HXBudsProject/Vendors/pay/alipay",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HXBudsProject/Buds.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = HXBudsProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2226,8 +2338,9 @@
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/JPushLib",
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/Extend/SinaWeiboSDK",
+					"$(PROJECT_DIR)/HXBudsProject/Vendors/pay/wechatPay",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Owater.HXBudsProject;
+				PRODUCT_BUNDLE_IDENTIFIER = DuoYiMeng.MengYa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
 			};

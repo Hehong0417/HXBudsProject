@@ -12,5 +12,6 @@
 
 @property(nonatomic,strong) UIButton *consultBtn;
 @property(nonatomic,strong) UIButton *buyCourseBtn;
+@property(nonatomic,strong) UIViewController *vc;
 
 @end

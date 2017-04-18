@@ -8,6 +8,12 @@
 
 #import "HXHomeReusableHeadView.h"
 #import "HXSubjectVideoVC.h"
+#import "JKCustomAlertView.h"
+
+@interface HXHomeReusableHeadView ()<SDCycleScrollViewDelegate>
+
+@end
+
 
 @implementation HXHomeReusableHeadView
 
@@ -17,7 +23,7 @@
 
     //滚动图
     _cycleSrollView = [self setCycleSrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, WidthScaleSize_H(152))];
-    
+    _cycleSrollView.delegate = self;
     [self addSubview:_cycleSrollView];
 
     UIView *categoryView = [UIView lh_viewWithFrame:CGRectMake(0, CGRectGetMaxY(_cycleSrollView.frame), SCREEN_WIDTH, 40) backColor:kWhiteColor];
@@ -71,6 +77,12 @@
     //        _cycleSrollView.imageURLStringsGroup = imagesURLStrings;
     //    });
     return scrollView;
+}
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    
+    JKCustomAlertView *jkAlert = [[JKCustomAlertView alloc]initWithJKAlertType:JKAlertTypeOneTextField contentView:self];
+    [jkAlert show];
+    
 }
 
 

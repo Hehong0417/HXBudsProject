@@ -206,11 +206,12 @@
         _viewModel.cover_image_url = [self.editorView getCoverImage];
         NSArray *allImage = [self.editorView getAllImage];
         
-        NSLog(@"Image Count:%ld",allImage.count);
-
+        NSLog(@"内容:%@",_viewModel.content);
+        
     }
     
 }
+
 #pragma mark - Navigation Bar
 
 - (void)editTouchedUpInside
@@ -281,6 +282,7 @@
     _viewModel.content =  self.bodyText;
     
     [self initSaveTimer];
+    
 }
 -(void)initSaveTimer{
 

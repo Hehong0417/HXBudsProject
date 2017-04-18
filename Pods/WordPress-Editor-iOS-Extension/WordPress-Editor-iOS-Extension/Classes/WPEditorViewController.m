@@ -1473,9 +1473,11 @@ NSInteger const WPLinkAlertViewTag = 92;
 
 - (void)linkBarButtonTapped:(WPEditorToolbarButton*)button
 {
+    
 	if ([self.editorView isSelectionALink]) {
 		[self removeLink];
 	} else {
+        
 		[self showInsertLinkDialogWithLink:self.editorView.selectedLinkURL
 									 title:[self.editorView selectedText]];
 		[WPAnalytics track:WPAnalyticsStatEditorTappedLink];
@@ -1494,14 +1496,14 @@ NSInteger const WPLinkAlertViewTag = 92;
 		url = [pasteboardUrl absoluteString];
 	}
 	
-	NSString *insertButtonTitle = isInsertingNewLink ? NSLocalizedString(@"Insert", nil) : NSLocalizedString(@"Update", nil);
-	NSString *removeButtonTitle = isInsertingNewLink ? nil : NSLocalizedString(@"Remove Link", nil);
+	NSString *insertButtonTitle = isInsertingNewLink ? NSLocalizedString(@"插入超链接", nil) : NSLocalizedString(@"编辑超链接", nil);
+	NSString *removeButtonTitle = isInsertingNewLink ? nil : NSLocalizedString(@"取消超链接", nil);
 	
 	self.alertView = [[UIAlertView alloc] initWithTitle:insertButtonTitle
 												message:nil
 											   delegate:self
-									  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-									  otherButtonTitles:insertButtonTitle, removeButtonTitle, nil];
+									  cancelButtonTitle:NSLocalizedString(@"放弃操作", nil)
+									  otherButtonTitles:@"确认", removeButtonTitle, nil];
 	
 	// The reason why we're setting a login & password style, is that it's the only style that
 	// supports having two edit fields.  We'll customize the password field to behave as we want.
@@ -1512,7 +1514,7 @@ NSInteger const WPLinkAlertViewTag = 92;
 	UITextField *linkURL = [self.alertView textFieldAtIndex:0];
 	
 	linkURL.clearButtonMode = UITextFieldViewModeAlways;
-	linkURL.placeholder = NSLocalizedString(@"URL", nil);
+	linkURL.placeholder = NSLocalizedString(@"超链接地址", nil);
 	
     if (url) {
         linkURL.text = url;
@@ -1521,7 +1523,7 @@ NSInteger const WPLinkAlertViewTag = 92;
 	UITextField *linkNameTextField = [self.alertView textFieldAtIndex:1];
 	
 	linkNameTextField.clearButtonMode = UITextFieldViewModeAlways;
-	linkNameTextField.placeholder = NSLocalizedString(@"Link Name", nil);
+	linkNameTextField.placeholder = NSLocalizedString(@"超链接标题", nil);
 	linkNameTextField.secureTextEntry = NO;
 	linkNameTextField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
 	linkNameTextField.autocorrectionType = UITextAutocorrectionTypeDefault;

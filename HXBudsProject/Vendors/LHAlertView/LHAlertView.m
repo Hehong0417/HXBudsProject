@@ -19,17 +19,17 @@
 
     if (self = [super init]) {
         [self setFrame:kMainScreenBounds];
-        self.backgroundColor = rgba(229, 229, 229, 0.3);
+        self.backgroundColor = rgba(185, 185, 185, 0.3);
         UIView *contentView = [self alertViewContentView];
         self.contentView = contentView;
         [self addSubview:contentView];
         //点击回收操作
         WEAK_SELF();
-        
-        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc]bk_initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-            
-            [weakSelf hideWithCompletion:NULL];
+        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id sender) {
+                       [weakSelf hideWithCompletion:NULL];
+
         }];
+
         tapGes.delegate = self;
         [self addGestureRecognizer:tapGes];
     }
@@ -58,11 +58,11 @@
     [self addSubview:backView];
     //点击回收操作
     WEAK_SELF();
-    [backView bk_whenTapped:^{
+    backView.userInteractionEnabled = YES;
+    [backView setTapActionWithBlock:^{
         
         [weakSelf hideWithCompletion:NULL];
     }];
-    
     UIView *contentView = [self alertViewContentView];
     self.contentView = contentView;
     [self addSubview:contentView];
@@ -89,6 +89,23 @@
         self.contentView.lh_top = self.lh_bottom;
         [UIView animateWithDuration:0.3 animations:^{
             self.contentView.lh_centerY = self.lh_centerY;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+}
+
+/**
+   上移
+ @param animated 是否启用动画
+ */
+- (void)contentViewUpperShift:(BOOL)animated{
+
+    self.animated = animated;
+
+    if (animated) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.contentView.lh_top = 75.0;
         } completion:^(BOOL finished) {
             
         }];

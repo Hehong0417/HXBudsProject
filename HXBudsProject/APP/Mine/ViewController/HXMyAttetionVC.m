@@ -8,7 +8,7 @@
 
 #import "HXMyAttetionVC.h"
 #import "HXMyAttentionCell.h"
-
+#import "HXMyLikeVC.h"
 
 @interface HXMyAttetionVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -24,7 +24,7 @@
     
     self.title = @"我关注的";
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-268) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
@@ -40,7 +40,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -56,7 +56,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return WidthScaleSize_H(104);
+    return 104;
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -73,8 +73,9 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
-    
+    HXMyLikeVC *vc = [HXMyLikeVC new];
+    vc.titleStr = @"他的网页";
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

@@ -58,11 +58,11 @@
     
     if (indexPath.section == 0) {
         
-        return WidthScaleSize_H(124);
+        return 124;
         
     }else {
         
-        return  WidthScaleSize_H(80);
+        return  80;
     }
     
 }

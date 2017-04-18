@@ -43,7 +43,7 @@
         }
         
         UIButton *but = [[UIButton alloc]initWithFrame:CGRectMake(butX, butY, frame_W.size.width+20, 30)];
-        but.backgroundColor = RGB(46, 40, 42);
+        but.backgroundColor = kWhiteColor;
         [but setTitle:subjectArr[i] forState:UIControlStateNormal];
         [but setTitleColor:APP_COMMON_COLOR forState:UIControlStateNormal];
         but.titleLabel.font = [UIFont systemFontOfSize:13];

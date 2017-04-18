@@ -17,4 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *introduceLab;
 @property (weak, nonatomic) IBOutlet UIButton *attentionBtn;
 
+@property (strong, nonatomic)  NSString *imageName;
+
+
 @end

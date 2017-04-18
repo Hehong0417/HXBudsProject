@@ -24,7 +24,7 @@
 
     self.testArr = [NSMutableArray arrayWithObjects:@"2",@"3",@"4", nil];
     
-    self.tableV.backgroundColor = LineLightColor;
+    self.tableV.backgroundColor = KVCBackGroundColor;
 }
 
 - (void)saveAction:(UIButton *)btn{
@@ -77,7 +77,10 @@
         return cell;
     }else{
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        UITextView *introduce = [UITextView lh_textViewWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, WidthScaleSize_H(100)) font:FONT(14) backgroundColor:kWhiteColor];
+        IQTextView *introduce = [[IQTextView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, WidthScaleSize_H(100))];
+        introduce.font = FONT(14);
+        introduce.placeholder = @"个人概述";
+        
         [cell addSubview:introduce];
         return cell;
     }
@@ -88,15 +91,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0&&indexPath.row == 0) {
         
-        return WidthScaleSize_H(70);
+        return 70;
 
     }else if (indexPath.section == 1&&indexPath.row == 0){
     
-        return WidthScaleSize_H(100);
+        return 100;
 
     }else{
         
-        return  WidthScaleSize_H(44);
+        return  44;
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -127,6 +130,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+
+    
     if (indexPath.row == 4) {
         //性别
         HXCommonPickView *pickView = [[HXCommonPickView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -150,7 +155,9 @@
             
             
         };
-
+    }else{
+    
+        [super  tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
 
 }

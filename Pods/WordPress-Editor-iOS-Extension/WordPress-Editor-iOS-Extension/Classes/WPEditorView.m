@@ -1453,7 +1453,9 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 - (void)saveSelection
 {
     if (self.isInVisualMode) {
+        
         [self.webView stringByEvaluatingJavaScriptFromString:@"ZSSEditor.backupRange();"];
+        
     } else {
         self.selectionBackup = self.sourceView.selectedRange;
     }
@@ -1735,6 +1737,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 - (void)showHTMLSource
 {
 	self.sourceView.text = [self.contentField html];
+    NSLog(@"HTML----%@",self.sourceView.text);
 	self.sourceView.hidden = NO;
     self.sourceViewTitleField.text = [self.titleField strippedHtml];
     self.sourceViewTitleField.hidden = NO;

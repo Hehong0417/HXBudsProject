@@ -5,12 +5,14 @@
 //  Created by n on 2017/3/22.
 //  Copyright © 2017年 n. All rights reserved.
 //
-
 #import "HXArticleVC.h"
 #import "HXSectionHead.h"
 #import "HXArticleCellTwo.h"
 #import "HXArticleCellOne.h"
 #import "HXArticleDetailVC.h"
+#import "UIView+WHC_AutoLayout.h"
+
+
 
 @interface HXArticleVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -26,14 +28,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.tabView = [UITableView lh_tableViewWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) tableViewStyle:UITableViewStyleGrouped delegate:self dataSourec:self];
+    self.tabView.backgroundColor = kWhiteColor;
     self.tabView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tabView];
     self.tabView.showsVerticalScrollIndicator = NO;
-    //2e282a
-    self.tabView.backgroundColor = RGB(46, 40, 42);
-    self.tabView.separatorColor = LineDeepColor;
     NSArray *arr = @[@"#智商·情商#",@"#叶文有话要说#",@"#单田方#",@"#城市#",@"#美女#",@"#社交恐惧#",@"#家庭矛盾#",@"#社交恐惧#",@"#家庭矛盾#"];
     [self.subjectArr addObjectsFromArray:arr];
     
@@ -47,29 +47,30 @@
         
         HXArticleCellOne *cell = [tableView dequeueReusableCellWithIdentifier:@"HXArticleCellOne"];
         if(!cell){
-        
+            
             cell = [[HXArticleCellOne alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HXArticleCellOne"];
             [cell setSubjectArr:self.subjectArr isViewMore:self.isViewMore cellHeight:90];
-
+            
         }
-        cell.backgroundColor =   RGB(46, 40, 42);
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.vc = self.navigationController;
         return cell;
         
-    }
+    }else{
     HXArticleCellTwo *cell = [tableView dequeueReusableCellWithIdentifier:@"HXArticleCellTwo"];
     if (!cell) {
         
         cell = [HXArticleCellTwo initArticleCellTwoWithXib];
     }
-    cell.backgroundColor =   RGB(46, 40, 42);
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.articleType = homeArticle;
+    cell.contentLab.text = @"如果您觉得本文非常有用，请随意打赏！鼓励鼓励!如果您觉得本文非常有用，请随意打赏！鼓励鼓励!如果您觉得本文非常有用，请随意打赏！鼓励鼓励!";
     cell.nav = self.navigationController;
     return cell;
-  
+    }
+    return nil;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
@@ -90,18 +91,18 @@
         
         return nil;
     }
-    UIView *footView  = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20) backColor:RGB(46, 40, 42)];
+    UIView *footView  = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20) backColor:kWhiteColor];
     //按钮与线的间距10 与屏幕的间距为15
     
-    UIView *leftLine = [UIView lh_viewWithFrame:CGRectMake(15, 8,(SCREEN_WIDTH - 100)/2 , 1) backColor:kWhiteColor];
+    UIView *leftLine = [UIView lh_viewWithFrame:CGRectMake(15, 8,(SCREEN_WIDTH - 100)/2 , 1) backColor:LineDeepColor];
     
     XYQButton *moreBtn = [XYQButton ButtonWithFrame:CGRectMake(15+leftLine.width+5, 5, 58, 10) imgaeName:@"down" titleName:@"查看更多" contentType:LeftImageRightTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:LineDeepColor fontsize:10] tapAction:^(XYQButton *button) {
         
         self.isViewMore = !self.isViewMore;
         [self.tabView reloadSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
-
+        
     }];
-    UIView *rightLine = [UIView lh_viewWithFrame:CGRectMake(SCREEN_WIDTH - 15 - leftLine.width, 8, leftLine.width, 1) backColor:kWhiteColor];
+    UIView *rightLine = [UIView lh_viewWithFrame:CGRectMake(SCREEN_WIDTH - 15 - leftLine.width, 8, leftLine.width, 1) backColor:LineDeepColor];
     [footView addSubview:leftLine];
     [footView addSubview:rightLine];
     [footView addSubview:moreBtn];
@@ -128,11 +129,10 @@
     }
     
     HXSectionHead *sectionHead = [[[HXSectionHead alloc] init] createSectionHeadWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, WidthScaleSize_H(35)) section:(NSInteger)section headTitle:headTitle discrib:@"为你的梦想保驾护航" contenType:contentType rightBtnTitle:titleName imageName:imageName labFont:FONT(14) buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:FontLightGrayColor fontsize:14]];
-    sectionHead.backgroundColor = RGB(46, 40, 42);
     return sectionHead;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     if (indexPath.section == 0) {
         
         if (self.isViewMore) {
@@ -141,18 +141,19 @@
             
         }else {
             
-        return 100;
+            return 100;
             
         }
     }else{
-    
-    return 135;
+        
+        CGFloat height = [HXArticleCellTwo whc_CellHeightForIndexPath:indexPath tableView:tableView];
+        return height;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-
-   return WidthScaleSize_H(40);
+    
+    return WidthScaleSize_H(40);
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -160,12 +161,12 @@
     if (section == 0) {
         return 20;
     }else{
-    
-    return 0.01;
+        
+        return 0.01;
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     if (indexPath.section == 1) {
         
         HXArticleDetailVC *vc = [HXArticleDetailVC new];
@@ -176,7 +177,7 @@
 }
 
 - (CGFloat)calculteCellHeightWithSubjectArr{
-
+    
     CGFloat cellHeight = 0.0;
     float butX = 15;
     float butY = 10 ;
@@ -205,18 +206,18 @@
         
         if (i == self.subjectArr.count -1 ) {
             
-         cellHeight = butY +45 ;
+            cellHeight = butY +45 ;
             
         }
         butX = CGRectGetMaxX(but.frame)+10;
-
+        
     }
     
     return cellHeight;
 }
 
 - (NSMutableArray *)subjectArr {
-
+    
     if (!_subjectArr) {
         
         _subjectArr = [NSMutableArray array];

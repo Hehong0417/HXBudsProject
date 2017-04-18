@@ -44,15 +44,15 @@
 
     if (indexPath.row == 0) {
         
-        return WidthScaleSize_H(124);
+        return 124;
         
     }else if(indexPath.row ==1){
     
-        return WidthScaleSize_H(110);
+        return 110;
         
     }else {
     
-        return  WidthScaleSize_H(110);
+        return  110;
     }
 
 }

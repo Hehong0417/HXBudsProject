@@ -9,13 +9,16 @@
 #import "HXMyLikeVC.h"
 #import "SGSegmentedControl.h"
 #import "HXMyHomeHeadView.h"
-#import "HXSubjectListTVC.h"
+#import "HXMyArticleVC.h"
+#import "HXCollectVC.h"
+#import "HXMyAttetionVC.h"
+#import "HXMyVideoVC.h"
 
 @interface HXMyLikeVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
 {
-
+    
     HXMyHomeHeadView  *mineHeadView;
-
+    
 }
 @property(nonatomic,strong)SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
@@ -27,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    
     self.title = self.titleStr;
     self.view.backgroundColor = kWhiteColor;
     
@@ -47,18 +50,17 @@
     
     [self.view addSubview:mineHeadView];
     
-  
-    
     
     // 1.添加所有子控制器
     [self setupChildViewController];
     
     [self setupSegmentedControl];
     
-
+    
 }
 
 - (void)setupSegmentedControl {
+    
     
     NSArray *title_arr = @[@"文章", @"收藏", @"视频",@"关注"];
     
@@ -95,17 +97,23 @@
     // 2.给对应位置添加对应子控制器
     [self showVc:index];
 }
-
 // 添加所有子控制器
 - (void)setupChildViewController {
     
-    for (NSInteger i = 0; i<4; i++) {
-        
-        HXSubjectListTVC *vc = [HXSubjectListTVC new];
-        
-        [self addChildViewController:vc];
-
-    }
+    HXMyArticleVC *vc1 = [HXMyArticleVC new];
+    vc1.articleType = homeInfoArticle;
+    [self addChildViewController:vc1];
+    
+    HXCollectVC *vc2 = [HXCollectVC new];
+    [self addChildViewController:vc2];
+    
+    HXMyVideoVC *vc3 = [HXMyVideoVC new];
+    
+    [self addChildViewController:vc3];
+    
+    HXMyAttetionVC *vc4 = [HXMyAttetionVC new];
+    [self addChildViewController:vc4];
+    
     
 }
 

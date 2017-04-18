@@ -33,6 +33,13 @@
 - (void)showAnimated:(BOOL)animated;
 
 /**
+ * 上移
+ *
+ *  @param animated 是否启用动画
+ */
+- (void)contentViewUpperShift:(BOOL)animated;
+
+/**
  *  隐藏
  *
  *  @param completionBlock 完成block

@@ -14,6 +14,7 @@
 #import "HXBuyBottomView.h"
 #import "AFNetworking.h"
 #import "CLPlayerView.h"
+#import <UShareUI/UShareUI.h>
 
 
 @interface HXCourseDetailAnotherVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>{
@@ -77,6 +78,16 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
     [self setupSegmentedControl];
 
+    //收藏、赞赏
+    self.buyBottomView.vc = self;
+    [self.view addSubview:self.buyBottomView];
+    
+    
+    
+    //rightBarButton、分享按钮
+    UIButton *rightBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 50, 50) target:self action:@selector(shareAction) image:[UIImage imageNamed:@"share"]];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
+
 }
 
 - (void)setupSegmentedControl {
@@ -105,22 +116,23 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     self.SG.titleColorStateSelected = APP_COMMON_COLOR;
     self.SG.indicatorColor = APP_COMMON_COLOR;
     [self.view addSubview:_SG];
-    [self.view addSubview:self.buyBottomView];
 
     
-    [self.playImgV bk_whenTapped:^{
+    WEAK_SELF();
+    [self.playImgV setTapActionWithBlock:^{
+        //**********播放器**************//
         
-    //**********播放器**************//
+        weakSelf.playerView = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
         
-        self.playerView = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
+        if (!weakSelf.URLString) {
+            weakSelf.URLString = @"error";
+        }
+        weakSelf.playerView.url = [NSURL URLWithString:weakSelf.URLString];
+        weakSelf.playerView.vc = weakSelf;
+        [weakSelf.view addSubview:weakSelf.playerView];
         
-        self.playerView.url = [NSURL URLWithString:self.URLString];
-        self.playerView.vc = self;
-        [self.view addSubview:self.playerView];
-        
-    //***************************//
+        //***************************//
 
-        
     }];
     
 }
@@ -180,7 +192,46 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     // 2.把对应的标题选中
     [self.SG titleBtnSelectedWithScrollView:scrollView];
 }
+//分享
+- (void)shareAction {
     
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        // 根据获取的platformType确定所选平台进行下一步操作
+        
+        [self shareVedioToPlatformType:platformType];
+        
+    }];
+    
+}
+//分享到不同平台
+- (void)shareVedioToPlatformType:(UMSocialPlatformType)platformType
+{
+    
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    //创建视频内容对象
+    UMShareVideoObject *shareObject = [UMShareVideoObject shareObjectWithTitle:@"分享标题" descr:@"分享内容描述" thumImage:[UIImage imageNamed:@"courseDetail"]];
+    
+    //设置视频网页播放地址
+    shareObject.videoUrl = video_testUrl;
+    
+    //            shareObject.videoStreamUrl = @"这里设置视频数据流地址（如果有的话，而且也要看所分享的平台支不支持）";
+    
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            NSLog(@"response data is %@",data);
+        }
+    }];
+}
+
 - (UIView *)headView{
     
     if (!_headView) {
@@ -208,110 +259,7 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     return _buyBottomView;
     
 }
-//***********添加*********//
 
-//- (void)viewWillAppear:(BOOL)animated{
-//    [super viewWillAppear:animated];
-//    //获取设备旋转方向的通知,即使关闭了自动旋转,一样可以监测到设备的旋转方向
-//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-//    //旋转屏幕通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(orientChange:)
-//                                                 name:UIDeviceOrientationDidChangeNotification
-//                                               object:nil
-//     ];
-//    self.navigationController.navigationBarHidden = YES;
-//}
-
-/**
- *  旋转屏幕通知
- */
-//- (void)onDeviceOrientationChange:(NSNotification *)notification{
-//   
-//    
-//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-//    UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)orientation;
-//    switch (interfaceOrientation) {
-//        case UIInterfaceOrientationPortraitUpsideDown:{
-//            NSLog(@"第3个旋转方向---电池栏在下");
-//        }
-//            break;
-//        case UIInterfaceOrientationPortrait:{
-//      
-//            
-//            
-//        }
-//            break;
-//        case UIInterfaceOrientationLandscapeLeft:{
-//            NSLog(@"第2个旋转方向---电池栏在左");
-//            if (wmPlayer.isFullscreen==NO) {
-//                [wmPlayer removeFromSuperview];
-//                [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
-//                [self toOrientation:UIInterfaceOrientationLandscapeLeft];
-//                wmPlayer.isFullscreen = YES;
-//                isInCell = NO;
-//                isHiddenStatusBar = YES;
-//                wmPlayer.closeBtnStyle = CloseBtnStylePop;
-//            }
-//            
-//        }
-//            break;
-//        case UIInterfaceOrientationLandscapeRight:{
-//            NSLog(@"第1个旋转方向---电池栏在右");
-//            if (wmPlayer.isFullscreen==NO) {
-//                [wmPlayer removeFromSuperview];
-//                [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
-//                [self toOrientation:UIInterfaceOrientationLandscapeRight];
-//                wmPlayer.isFullscreen = YES;
-//                isInCell = NO;
-//                isHiddenStatusBar = YES;
-//                wmPlayer.closeBtnStyle = CloseBtnStylePop;
-//            }
-//            
-//        }
-//            break;
-//        default:
-//            break;
-//    }
-//    
-//}
-#pragma mark - 屏幕旋转通知
-//- (void)orientChange:(NSNotification *)notification{
-//    if (self.playerView == nil||self.playerView.superview==nil){
-//        return;
-//    }
-//    if (self.playerView.autoFullScreen == NO){
-//        return;
-//    }
-//    [self getCurrentDeviceOrientation];
-//    
-//}
-
-//- (void)getCurrentDeviceOrientation{
-//    
-//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-//    
-//    UIInterfaceOrientation currentOrientation = (UIInterfaceOrientation)orientation;
-//    
-//    if (orientation == UIDeviceOrientationLandscapeLeft){
-//         self.playerView.transform =  [self.playerView fullScreenWithDirection:Letf];
-//        
-//        
-//    }else if (orientation == UIDeviceOrientationLandscapeRight){
-//
-//        self.playerView.transform = [self.playerView fullScreenWithDirection:Right];
-//
-//    }else if (orientation == UIDeviceOrientationPortrait){
-//
-//        self.playerView.transform =  [self.playerView originalscreen];
-//    }
-//      [[UIApplication sharedApplication] setStatusBarOrientation:currentOrientation animated:YES];
-//    [self setNeedsStatusBarAppearanceUpdate];
-//
-////    return self.transform;
-//}
-
-//***********************//
 
 
 

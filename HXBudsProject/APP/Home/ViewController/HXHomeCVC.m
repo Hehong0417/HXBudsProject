@@ -14,22 +14,42 @@
 #import "HXVideoSectionHead.h"
 #import "HXSubjectVideoVC.h"
 #import "HXMyLikeVC.h"
+#import "HXHomeAPI.h"
 
 
 @interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 
 @property (nonatomic,strong)UICollectionView *collectionView;
 
+@property (nonatomic, assign) NSInteger page;
+
 @end
 
 @implementation HXHomeCVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self getHomeInfoData];
+
+}
+- (void)getHomeInfoData{
+
+//    [[[HXHomeAPI getHomeInfoWithPage:@(_page) rows:@10] netWorkClient]postRequestInView:self.view successBlock:^(id responseObject) {
+//        
+//         HXHomeAPI *api = responseObject;
+//        
+//    } ];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.page = 1;
     
     UICollectionViewFlowLayout *flowout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:flowout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 ) collectionViewLayout:flowout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = kWhiteColor;
@@ -39,14 +59,43 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"HXTeacherCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXTeacherCollectionCell"];
     [self.collectionView registerClass:[HXHomeReusableHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXHomeReusableHeadView"];
     [self.collectionView registerClass:[HXVideoSectionHead class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead"];
+    self.view.backgroundColor = kWhiteColor;
+    
+    [self addHeaderRefresh];
+    [self addFooterRefresh];
 
 }
+- (void)addHeaderRefresh{
+
+    MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self.collectionView.mj_header endRefreshing];
+
+    }];
+    self.collectionView.mj_header = refreshHeader;
+
+}
+
+- (void)addFooterRefresh {
+    
+    MJRefreshAutoNormalFooter  *refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+       
+        [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+
+    }];
+    
+    self.collectionView.mj_footer = refreshFooter;
+    
+
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0) {
         
         HXTeacherCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXTeacherCollectionCell" forIndexPath:indexPath];
-        
+        NSArray *imagArr = @[@"testIcon",@"teacher2"];
+        cell.imageName = imagArr[indexPath.row];
         return cell;
   
     }else {
@@ -113,7 +162,7 @@
         HXMyLikeVC *vc = [HXMyLikeVC new];
         vc.titleStr = @"他的主页";
         [self.navigationController pushVC:vc];
-        
+      
     }else{
         
 //        HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
@@ -135,10 +184,8 @@
             sectionHead.imageName = @"change";
             sectionHead.labFont = 15;
             sectionHead.discribText = @"为你的梦想保驾护航的人";
-            [sectionHead setTapActionWithBlock:^{
-
+            [sectionHead.rightBtn setTapActionWithBlock:^{
                 NSLog(@"换一换");
-            
             }];
             return sectionHead;
         }else if (indexPath.section == 1){
@@ -160,6 +207,5 @@
     }
     return nil;
 }
-
 
 @end

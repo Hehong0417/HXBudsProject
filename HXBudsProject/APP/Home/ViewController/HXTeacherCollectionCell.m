@@ -39,5 +39,10 @@
     }
     
 }
-
+- (void)setImageName:(NSString *)imageName{
+    _imageName = imageName;
+    self.iconImagV.image = [UIImage imageNamed:imageName];
+    
+    
+}
 @end

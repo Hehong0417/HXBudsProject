@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '73157D92009D4F5147785E9E819282BA'
+               BlueprintIdentifier = 'B1764FD6F65218CC41666D53C52F52A4'
                BlueprintName = 'WordPress-iOS-Shared-WordPress-iOS-Shared'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'WordPress-iOS-Shared.bundle'>

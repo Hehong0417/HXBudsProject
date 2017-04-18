@@ -197,7 +197,8 @@ typedef enum
 - (void)reloadItems;
 
 
-@property (nonatomic, strong) UIBarButtonItem * htmlBarButtonItem;
+#pragma mark - Properties: Toolbar items
+@property (nonatomic, strong, readwrite) UIBarButtonItem* htmlBarButtonItem;
 
 
 @end

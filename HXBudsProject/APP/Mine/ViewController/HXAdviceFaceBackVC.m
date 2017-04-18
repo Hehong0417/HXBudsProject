@@ -19,7 +19,8 @@
 
     self.title = @"意见反馈";
 
-    IQTextView  *adviceTextView = [[IQTextView alloc]initWithFrame:CGRectMake(20, 64, SCREEN_WIDTH - 40, 300)];
+    IQTextView  *adviceTextView = [[IQTextView alloc]initWithFrame:CGRectMake(20, 10, SCREEN_WIDTH - 40, 300)];
+    adviceTextView.font= FONT(14);
     adviceTextView.placeholder = @"意见";
     
     

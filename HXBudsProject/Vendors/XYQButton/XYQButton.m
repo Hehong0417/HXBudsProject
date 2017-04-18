@@ -132,11 +132,9 @@
             break;
         
     }
-    [button bk_addEventHandler:^(id sender) {
-      
-    tapAction(sender);
-        
-    } forControlEvents:UIControlEventTouchUpInside];
+    [button setTapActionWithBlock:^{
+            tapAction(button);
+    }];
    
     
     return button;

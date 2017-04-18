@@ -27,7 +27,7 @@
 #import "WPEditorConfiguration.h"
 #import "TSLanguageManager.h"
 
-@import CocoaLumberjack;
+
 @import WordPress_iOS_Shared;
 @import WordPressComAnalytics;
 @import UIAlertView_Blocks;

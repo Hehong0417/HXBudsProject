@@ -32,8 +32,6 @@ static const CGFloat WPEditorToolbarDividerLineWidth = 0.6;
 @property (nonatomic, weak) UIView *rightToolbarHolder;
 @property (nonatomic, weak) UIView *rightToolbarDivider;
 
-//#pragma mark - Properties: Toolbar items
-//@property (nonatomic, strong, readwrite) UIBarButtonItem* htmlBarButtonItem;
 
 @end
 

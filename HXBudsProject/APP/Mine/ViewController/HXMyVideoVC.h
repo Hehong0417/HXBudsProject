@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, VideoType) {
+    myVideo,
+    homeInfoVideo,
+};
+
 @interface HXMyVideoVC : UIViewController
+
+@property(nonatomic,assign) VideoType videoType;
 
 @end
