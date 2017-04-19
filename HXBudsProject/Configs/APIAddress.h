@@ -9,9 +9,9 @@
 
 //#ifdef DEBUG
 //// 本地
-//#define API_HOST @"http://192.168.0.11:8090"
-//// 本地图片
-//#define API_IMAGE_HOST @"http://192.168.0.11:7080/"
+#define API_HOST @"http://192.168.0.128:8080"
+// 本地图片
+#define API_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/upload/task"
 //
 //#define API_IMAGE_HOST @"http://192.168.0.89:8080/"
 //#define API_IMAGE_HOST @"http://192.168.0.89:7080/"
@@ -20,8 +20,9 @@
 #define APP_scode @"15ca7554e8cb486f3b8cbe1fa166c75b"// [NSString md5:[APP_key stringByAppendingString:@"trans"]]
 
 //MD5加密（APP_key+”weicai”）
-#define API_APP_BASE_URL @"maicai"
-#define API_BASE_URL [NSString stringWithFormat:@"%@/%@", API_HOST, API_APP_BASE_URL]
+#define API_APP_BASE_URL @""
+#define API_BASE_URL [NSString stringWithFormat:@"%@%@", API_HOST, API_APP_BASE_URL]
+
 #define API_QR_BASE_URL [NSString stringWithFormat:@"%@/image", API_BASE_URL]
 
 // 接口
@@ -29,10 +30,9 @@
 #define API_SUB_URL(_url) [NSString stringWithFormat:@"%@/%@", API_BASE_URL, _url]
 
 // 图片
-#define kAPIImageFromUrl(url) [[NSString stringWithFormat:@"%@%@", API_IMAGE_HOST, url]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+#define kAPIImageFromUrl(url) [[NSString stringWithFormat:@"%@/%@", API_IMAGE_HOST, url]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 
 #define video_testUrl @"http://yycloudvod2109130935.bs2dl.yy.com/djhmZjcyZTExZDRiZmY1Yzg0NzhlM2Q5MWVjZjRhYzY1MTUzNDQxMjM1Mg"
-
 
 
 /**
@@ -57,6 +57,10 @@
 /**
  *  首页
  */
+//3.1获取轮播图
+#define API_GET_LIST_anon API_SUB_URL(@"goaling/advertisement/list_anon")
+
+
 //3.1获取城市列表
 #define API_GET_CITY_LIST API_SUB_URL(@"user/getCityList.do")
 //3.2根据城市获取区域列表

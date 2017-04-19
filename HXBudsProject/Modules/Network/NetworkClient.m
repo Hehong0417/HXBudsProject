@@ -332,14 +332,21 @@
 }
 
 - (void)requestSucces:(id)responseObject finishedBlock:(APIFinishedBlock)finishedBlock {
-    BaseAPI *bAPIModel = [self dealWhileSuccess:responseObject];
-    if (!bAPIModel) {
+    
+//    BaseAPI *bAPIModel = [self dealWhileSuccess:responseObject];
+//    if (!bAPIModel) {
+//        return;
+//    }
+    if (!responseObject) {
         return;
     }
-    
     if (finishedBlock) {
         
-        finishedBlock(bAPIModel, nil);
+        // 成功获取数据后，去掉HUD
+        [self.baseAPI hideHUDWhileFinish];
+        
+        finishedBlock(responseObject, nil);
+//        finishedBlock(bAPIModel, nil);
     }
 }
 
@@ -354,6 +361,8 @@
 }
 
 - (void)requestSucces:(id)responseObject successJCBlock:(APISuccessJushCodeBlock)successJCBlock {
+    
+    
     BaseAPI *bAPIModel = [self dealWhileSuccess:responseObject];
     if (!bAPIModel || bAPIModel.code != NetworkCodeTypeSuccess) {
         return;
@@ -403,14 +412,14 @@
 #pragma mark - Post Request
 
 - (void)postRequestInView:(UIView *)containerView successJCBlock:(APISuccessJushCodeBlock)successJCBlock {
-    [self readyForRequest:containerView];
+//    [self readyForRequest:containerView];
     
-#ifdef kNCLoaclResponse
-    
-    id responseObject = [self.bAPI localResponseJSON];
-    [self requestSucces:responseObject successJCBlock:successJCBlock];
-    
-#else
+//#ifdef kNCLoaclResponse
+//    
+//    id responseObject = [self.bAPI localResponseJSON];
+//    [self requestSucces:responseObject successJCBlock:successJCBlock];
+//    
+//#else
     
     // 开始请求
     [self.manager POST:self.subUrl parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -422,7 +431,7 @@
         [self requestFailure:error failurBlock:nil];
     }];
     
-#endif
+//#endif
 }
 
 - (void)postRequestInView:(UIView *)containerView successBlock:(APISuccessBlock)successBlock {
@@ -450,14 +459,14 @@
 }
 
 - (void)postRequestInView:(UIView *)containerView finishedBlock:(APIFinishedBlock)finishedBlock {
-    [self readyForRequest:containerView];
+//    [self readyForRequest:containerView];
     
-#ifdef kNCLoaclResponse
-    
-    id responseObject = [self.bAPI localResponseJSON];
-    [self requestSucces:responseObject finishedBlock:finishedBlock];
-    
-#else
+//#ifdef kNCLoaclResponse
+//    
+//    id responseObject = [self.bAPI localResponseJSON];
+//    [self requestSucces:responseObject finishedBlock:finishedBlock];
+//    
+//#else
     
     // 开始请求
     [self.manager POST:self.subUrl parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -469,7 +478,7 @@
         [self requestFailure:error finishedBlock:finishedBlock];
     }];
     
-#endif
+
 }
 
 #pragma mark - Upload Request

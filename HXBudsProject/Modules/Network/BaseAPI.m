@@ -178,7 +178,7 @@
 }
 
 - (void)showMsgWhileRequestError:(NSString *)msg {
-    [self mbShowText:msg];
+    [self mbShowText:@"连接失败！"];
 }
 
 

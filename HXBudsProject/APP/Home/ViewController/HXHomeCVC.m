@@ -15,13 +15,18 @@
 #import "HXSubjectVideoVC.h"
 #import "HXMyLikeVC.h"
 #import "HXHomeAPI.h"
-
+#import "HXAdvertisementAPI.h"
+#import "HXAdvListModel.h"
 
 @interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 
 @property (nonatomic,strong)UICollectionView *collectionView;
 
 @property (nonatomic, assign) NSInteger page;
+
+@property (nonatomic, strong) HXAdvListModel *advertiseModel;
+@property (nonatomic, strong) HXVarListModel *varListModel;
+@property (nonatomic, strong) NSMutableArray *varListArr;
 
 @end
 
@@ -30,6 +35,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self getList_online];
     [self getHomeInfoData];
 
 }
@@ -41,6 +47,28 @@
 //        
 //    } ];
 
+}
+- (void)getList_online {
+    
+    [[[HXAdvertisementAPI getAdvertisement] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        
+        HXAdvListModel *adv = [HXAdvListModel new];
+        
+        self.advertiseModel = [adv.class mj_objectWithKeyValues:responseObject];
+        
+        
+        NSLog(@"responseObject:%@",responseObject);
+        NSLog(@"advertiseModel:%@",self.advertiseModel.varList);
+        
+        for (HXVarListModel *model in self.advertiseModel.varList) {
+            
+            [self.varListArr addObject:kAPIImageFromUrl(model.picture)];
+            
+        }
+        [self.collectionView reloadData];
+    }];
+    
+   
 }
 
 - (void)viewDidLoad {
@@ -162,7 +190,6 @@
         HXMyLikeVC *vc = [HXMyLikeVC new];
         vc.titleStr = @"他的主页";
         [self.navigationController pushVC:vc];
-      
     }else{
         
 //        HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
@@ -177,6 +204,9 @@
         if (indexPath.section == 0) {
             
             HXHomeReusableHeadView *sectionHead = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXHomeReusableHeadView" forIndexPath:indexPath];
+            
+            sectionHead.imageURLStringsGroup = self.varListArr;
+
             sectionHead.headtitle = @"名师推荐";
             sectionHead.contentType = LeftImageRightTitle;
             sectionHead.rightBtnTitle = @"换一换";
@@ -207,5 +237,11 @@
     }
     return nil;
 }
+- (NSMutableArray *)varListArr {
+    if (!_varListArr) {
+        _varListArr = [NSMutableArray array];
+    }
 
+    return _varListArr;
+}
 @end

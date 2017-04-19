@@ -202,13 +202,16 @@ static NSNumberFormatter *numberFormatter_;
 
 + (instancetype)mj_objectWithKeyValues:(id)keyValues
 {
+    
     return [self mj_objectWithKeyValues:keyValues context:nil];
 }
 
 + (instancetype)mj_objectWithKeyValues:(id)keyValues context:(NSManagedObjectContext *)context
 {
+    
     // 获得JSON对象
     keyValues = [keyValues mj_JSONObject];
+    
     MJExtensionAssertError([keyValues isKindOfClass:[NSDictionary class]], nil, [self class], @"keyValues参数不是一个字典");
     
     if ([self isSubclassOfClass:[NSManagedObject class]] && context) {

@@ -72,6 +72,7 @@
 		0D7286D01E83BE1B00025AF0 /* HXSujectVideoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7286CE1E83BE1B00025AF0 /* HXSujectVideoListCell.m */; };
 		0D7286D11E83BE1B00025AF0 /* HXSujectVideoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D7286CF1E83BE1B00025AF0 /* HXSujectVideoListCell.xib */; };
 		0D78A7971E5EC1B90032F135 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D78A7961E5EC1B90032F135 /* WebKit.framework */; };
+		0D7960DC1EA601A10005A60A /* HXAdvListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7960DB1EA601A10005A60A /* HXAdvListModel.m */; };
 		0D7B22201E67FD54000ABE4A /* HXMineLearnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D7B221F1E67FD54000ABE4A /* HXMineLearnCell.xib */; };
 		0D7B22231E68091E000ABE4A /* HXPersonInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7B22221E68091E000ABE4A /* HXPersonInfoVC.m */; };
 		0D7D77831E52A5EB00CF8D47 /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D777F1E52A5EB00CF8D47 /* PGIndexBannerSubiew.m */; };
@@ -238,6 +239,7 @@
 		0DF4902C1E779B7900C567B0 /* WMDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF490271E779B7900C567B0 /* WMDragView.m */; };
 		0DF4902D1E779B7900C567B0 /* WMLightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF490291E779B7900C567B0 /* WMLightView.m */; };
 		0DF4902F1E779B8D00C567B0 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0DF4902E1E779B8D00C567B0 /* CLPlayer.bundle */; };
+		0DFB6AFB1EA5C3210006C6CF /* HXAdvertisementAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB6AFA1EA5C3210006C6CF /* HXAdvertisementAPI.m */; };
 		0F9C01FB15DEE37B1DE4C7A8 /* Pods_HXBudsProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AFF31D66BB17BF6D58CFC9 /* Pods_HXBudsProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -377,6 +379,8 @@
 		0D787B061E8CAC33000A1761 /* libWordPressCom-Analytics-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libWordPressCom-Analytics-iOS.a"; path = "../../../Library/Developer/Xcode/DerivedData/HXBudsProject-ggwmbxhojxrgjifrctogjljguxhx/Build/Products/Debug-iphonesimulator/WordPressCom-Analytics-iOS/libWordPressCom-Analytics-iOS.a"; sourceTree = "<group>"; };
 		0D787B0A1E8CAC85000A1761 /* libCocoaLumberjack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaLumberjack.a; path = "../../../Library/Developer/Xcode/DerivedData/HXBudsProject-ggwmbxhojxrgjifrctogjljguxhx/Build/Products/Debug-iphonesimulator/CocoaLumberjack/libCocoaLumberjack.a"; sourceTree = "<group>"; };
 		0D78A7961E5EC1B90032F135 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		0D7960DA1EA601A10005A60A /* HXAdvListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAdvListModel.h; sourceTree = "<group>"; };
+		0D7960DB1EA601A10005A60A /* HXAdvListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAdvListModel.m; sourceTree = "<group>"; };
 		0D7AB0E81E63D55F007B2740 /* SMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMenuButton.h; sourceTree = "<group>"; };
 		0D7AB0E91E63D55F007B2740 /* SMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMenuButton.m; sourceTree = "<group>"; };
 		0D7AB0EA1E63D55F007B2740 /* SPullDownMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPullDownMenuView.h; sourceTree = "<group>"; };
@@ -691,6 +695,8 @@
 		0DF490281E779B7900C567B0 /* WMLightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMLightView.h; sourceTree = "<group>"; };
 		0DF490291E779B7900C567B0 /* WMLightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMLightView.m; sourceTree = "<group>"; };
 		0DF4902E1E779B8D00C567B0 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
+		0DFB6AF91EA5C3210006C6CF /* HXAdvertisementAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAdvertisementAPI.h; sourceTree = "<group>"; };
+		0DFB6AFA1EA5C3210006C6CF /* HXAdvertisementAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAdvertisementAPI.m; sourceTree = "<group>"; };
 		1FB8498F25228EFA651EF216 /* Pods-HXBudsProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HXBudsProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HXBudsProject/Pods-HXBudsProject.debug.xcconfig"; sourceTree = "<group>"; };
 		E222DBD4DFBEACFCA4FD2995 /* Pods-HXBudsProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HXBudsProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-HXBudsProject/Pods-HXBudsProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1115,6 +1121,10 @@
 			children = (
 				0D82D10C1E9F7B9B005B8A3E /* HXHomeAPI.h */,
 				0D82D10D1E9F7B9B005B8A3E /* HXHomeAPI.m */,
+				0DFB6AF91EA5C3210006C6CF /* HXAdvertisementAPI.h */,
+				0DFB6AFA1EA5C3210006C6CF /* HXAdvertisementAPI.m */,
+				0D7960DA1EA601A10005A60A /* HXAdvListModel.h */,
+				0D7960DB1EA601A10005A60A /* HXAdvListModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1990,6 +2000,7 @@
 				0DEA90471E4877BC0052C459 /* LHVerifyCodeButton.m in Sources */,
 				0D7F94791E5BCD1900D21D27 /* SGImageButton.m in Sources */,
 				0D7286CA1E83BDE600025AF0 /* HXSubjectVideoVC.m in Sources */,
+				0D7960DC1EA601A10005A60A /* HXAdvListModel.m in Sources */,
 				0D7286B31E83BDE600025AF0 /* HXArticleVC.m in Sources */,
 				0D6CFFDF1E9898890093B5FF /* HXSearchSubjectVC.m in Sources */,
 				0DF4902C1E779B7900C567B0 /* WMDragView.m in Sources */,
@@ -2111,6 +2122,7 @@
 				0D7286B81E83BDE600025AF0 /* MainTouchTableTableView.m in Sources */,
 				0DEA900B1E4877BB0052C459 /* Base64Util.m in Sources */,
 				0D35498B1E5D90C200CFFD4A /* HJNavigationController.m in Sources */,
+				0DFB6AFB1EA5C3210006C6CF /* HXAdvertisementAPI.m in Sources */,
 				0D3549871E5D907500CFFD4A /* AppDelegate+AOP.m in Sources */,
 				0D8CC8891E84E90F00982B39 /* HXMessageVC.m in Sources */,
 				0D93F07B1E69461800CD9450 /* HXMyQuestionVC.m in Sources */,

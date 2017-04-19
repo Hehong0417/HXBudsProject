@@ -42,21 +42,21 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-//    HXMineHeadView *mineHeadView = [HXMineHeadView initmineHeadViewWithXib];
-//    mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
-//    mineHeadView.nav = self.navigationController;
+    HXMineHeadView *mineHeadView = [HXMineHeadView initmineHeadViewWithXib];
+    mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
+    mineHeadView.nav = self.navigationController;
     //
-        HXMineLoginHeadView *mineHeadView = [HXMineLoginHeadView initMineLoginHeadViewWithXib];
-        mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
-        mineHeadView.nav = self.navigationController;
-    
-        [mineHeadView setTapActionWithBlock:^{
-    
-            HXMyLikeVC *vc = [HXMyLikeVC new];
-            vc.titleStr = @"我的主页";
-            [self.navigationController pushVC:vc];
-    
-        }];
+//        HXMineLoginHeadView *mineHeadView = [HXMineLoginHeadView initMineLoginHeadViewWithXib];
+//        mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
+//        mineHeadView.nav = self.navigationController;
+//    
+//        [mineHeadView setTapActionWithBlock:^{
+//    
+//            HXMyLikeVC *vc = [HXMyLikeVC new];
+//            vc.titleStr = @"我的主页";
+//            [self.navigationController pushVC:vc];
+//    
+//        }];
     self.tableV.tableHeaderView = mineHeadView;
     
 }
