@@ -10,4 +10,6 @@
 
 @interface HXCourseDetailThreeVC : UIViewController
 
+@property (nonatomic, retain)NSString * curriculum_id;
+
 @end

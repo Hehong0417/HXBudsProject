@@ -12,6 +12,9 @@
 //#define KVCBackGroundColor RGB(240, 245, 249)
 #define KVCBackGroundColor RGB(250,250, 250)
 
+#define KPlaceHoldColor RGB(204, 204, 204)
+
+
 #define GrayBackGroudColor [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1]
 #define LineLightColor RGB(229, 229, 229)
 #define LineDeepColor RGB(204, 204, 204)

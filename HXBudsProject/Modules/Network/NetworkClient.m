@@ -112,10 +112,10 @@
     NSString *paramStr = [NSString stringWithFormat:@"\n%@", self.parameters];
     
     if (!error) {
-//        DDLogInfo(@"------------接口地址：------------\n%@\n请求参数：%@\n拼接url：%@\n------------请求成功：------------\n%@\n  msg=%@",self.subUrl, paramStr,[self urlStringAppendingParameters] , response ,[response objectForKey:@"msg"]);
+        NSLog(@"------------接口地址：------------\n%@\n请求参数：%@\n拼接url：%@\n------------请求成功：------------\n%@\n  msg=%@",self.subUrl, paramStr,[self urlStringAppendingParameters] , response ,[response objectForKey:@"msg"]);
     }
     else {
-//        DDLogError(@"------------接口地址：------------\n%@\n请求参数：%@\n拼接url：%@\n------------请求失败：------------\n%@",self.subUrl, paramStr,[self urlStringAppendingParameters] ,error);
+        NSLog(@"------------接口地址：------------\n%@\n请求参数：%@\n拼接url：%@\n------------请求失败：------------\n%@",self.subUrl, paramStr,[self urlStringAppendingParameters] ,error);
     }
     
 #endif
@@ -163,46 +163,46 @@
     return urlStr;
 }
 - (NSString *)urlStringAppendingSign {
-    HJLoginModel *userModel = [HJUser sharedUser].loginModel;
-    if (userModel) {
-        
-        NSLog(@"pwd=%@",userModel.pwd);
-        NSString *pwd = [userModel.pwd substringWithRange:NSMakeRange(8, 16)];
-        NSLog(@"subPwd=%@",pwd);
-        NSString *parame = @"";
-        for (int i=0; i<self.parameters.count; i++)
-        {
-            //
-            id key = [[self.parameters allKeys]objectAtIndex:i];
-            id obj = [self.parameters objectForKey:key];
-            
-            NSString *key_obj_param = [[self stringFromObejct:key] stringByAppendingString:[self stringFromObejct:obj]];
-            
-            if (self.parameters.count == 1) {
-                parame = [[[parame stringByAppendingString:key_obj_param] stringByAppendingString:@"|"] stringByAppendingString:pwd];
-            }else if (self.parameters.count >1) {
-                
-                if (i == self.parameters.count-1) {
-                    if (pwd) {
-                        parame = [[[parame stringByAppendingString:key_obj_param] stringByAppendingString:@"|"] stringByAppendingString:pwd];
-                    }
-                }
-                else {
-                    
-                    parame = [parame stringByAppendingString:[key_obj_param stringByAppendingString:@"|"]];
-                    if (pwd) {
-                        [[parame stringByAppendingString:@"|"] stringByAppendingString:pwd];
-                    }
-                    
-                }
-            }
-        }
-        
-        return parame;
-    }
-    
+//    HJLoginModel *userModel = [HJUser sharedUser].loginModel;
+//    if (userModel) {
+//        
+//        NSLog(@"pwd=%@",userModel.pwd);
+//        NSString *pwd = [userModel.pwd substringWithRange:NSMakeRange(8, 16)];
+//        NSLog(@"subPwd=%@",pwd);
+//        NSString *parame = @"";
+//        for (int i=0; i<self.parameters.count; i++)
+//        {
+//            //
+//            id key = [[self.parameters allKeys]objectAtIndex:i];
+//            id obj = [self.parameters objectForKey:key];
+//            
+//            NSString *key_obj_param = [[self stringFromObejct:key] stringByAppendingString:[self stringFromObejct:obj]];
+//            
+//            if (self.parameters.count == 1) {
+//                parame = [[[parame stringByAppendingString:key_obj_param] stringByAppendingString:@"|"] stringByAppendingString:pwd];
+//            }else if (self.parameters.count >1) {
+//                
+//                if (i == self.parameters.count-1) {
+//                    if (pwd) {
+//                        parame = [[[parame stringByAppendingString:key_obj_param] stringByAppendingString:@"|"] stringByAppendingString:pwd];
+//                    }
+//                }
+//                else {
+//                    
+//                    parame = [parame stringByAppendingString:[key_obj_param stringByAppendingString:@"|"]];
+//                    if (pwd) {
+//                        [[parame stringByAppendingString:@"|"] stringByAppendingString:pwd];
+//                    }
+//                    
+//                }
+//            }
+//        }
+//        
+//        return parame;
+//    }
+//    
     return @"";
- 
+//
 }
 - (NSString *)stringFromObejct:(id)obj {
     
@@ -235,10 +235,10 @@
 #pragma mark - Request
 
 - (void)addUserIdAndToken {
-    HJLoginModel *userModel = [HJUser sharedUser].loginModel;
+    HJLoginModel *userModel = [HJUser sharedUser].pd;
     if (userModel) {
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:self.parameters];
-        dic[@"userId"] = userModel.userId;
+//        dic[@"userId"] = userModel.users_id;
         dic[@"token"] = userModel.token;
         self.parameters = dic;
     }
@@ -250,33 +250,33 @@
         
         [self addUserIdAndToken];
     }
-    
-    //添加sign字段
-    NSString *paramesStr = [self urlStringAppendingSign];
-    //NSLog(@"paramesStr=%@",paramesStr);
-    
-    NSArray *paramesArr = [paramesStr componentsSeparatedByString:@"|"];
-    NSMutableArray *paramesMArr = [NSMutableArray arrayWithArray:paramesArr];
-    [paramesMArr removeLastObject];
-    //排序
-    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
-    NSArray *descriptors = [NSArray arrayWithObject:descriptor];
-    NSArray *myDataArray = [NSArray arrayWithArray:paramesMArr];
-    NSArray *resultArray = [myDataArray sortedArrayUsingDescriptors:descriptors];
-    
-   // NSLog(@"resultArray=%@\n", resultArray);
-    
-    NSString *pwd = [paramesArr lastObject];
-    NSString *desRedyStr = [[resultArray componentsJoinedByString:@"|"] stringByAppendingFormat:@"|%@",pwd];
-    //
-   // NSLog(@"desRedyStr=%@\n", desRedyStr);
-    
-    NSString *des3Str = [DES3Util encrypt:desRedyStr];
-    //NSLog(@"des3Str=%@\n\n",des3Str);
-    NSString *signMd5Str = [MD5Encryption md5by32:des3Str];
-   // NSLog(@"signMd5Str=%@\n\n",signMd5Str);
-    //
-    [self.parameters setValue:signMd5Str forKey:@"sign"];
+//    
+//    //添加sign字段
+//    NSString *paramesStr = [self urlStringAppendingSign];
+//    //NSLog(@"paramesStr=%@",paramesStr);
+//    
+//    NSArray *paramesArr = [paramesStr componentsSeparatedByString:@"|"];
+//    NSMutableArray *paramesMArr = [NSMutableArray arrayWithArray:paramesArr];
+//    [paramesMArr removeLastObject];
+//    //排序
+//    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
+//    NSArray *descriptors = [NSArray arrayWithObject:descriptor];
+//    NSArray *myDataArray = [NSArray arrayWithArray:paramesMArr];
+//    NSArray *resultArray = [myDataArray sortedArrayUsingDescriptors:descriptors];
+//    
+//   // NSLog(@"resultArray=%@\n", resultArray);
+//    
+//    NSString *pwd = [paramesArr lastObject];
+//    NSString *desRedyStr = [[resultArray componentsJoinedByString:@"|"] stringByAppendingFormat:@"|%@",pwd];
+//    //
+//   // NSLog(@"desRedyStr=%@\n", desRedyStr);
+//    
+//    NSString *des3Str = [DES3Util encrypt:desRedyStr];
+//    //NSLog(@"des3Str=%@\n\n",des3Str);
+//    NSString *signMd5Str = [MD5Encryption md5by32:des3Str];
+//   // NSLog(@"signMd5Str=%@\n\n",signMd5Str);
+//    //
+//    [self.parameters setValue:signMd5Str forKey:@"sign"];
     // 添加 HUD
     if (containerView) {
         UIView *tmpContainerView = containerView;
@@ -324,6 +324,7 @@
 }
 
 - (void)dealWhileFailure:(NSError *)error {
+    
     // 请求完成后block
     APIFinishedBlock reqFinishedBlock = [self requestFinishedBlock];
     reqFinishedBlock(nil, error);
@@ -333,7 +334,7 @@
 
 - (void)requestSucces:(id)responseObject finishedBlock:(APIFinishedBlock)finishedBlock {
     
-//    BaseAPI *bAPIModel = [self dealWhileSuccess:responseObject];
+//    BaseAPI *bAPIModel = [self dealWhileSuccess:responseObject];
 //    if (!bAPIModel) {
 //        return;
 //    }
@@ -344,6 +345,9 @@
         
         // 成功获取数据后，去掉HUD
         [self.baseAPI hideHUDWhileFinish];
+        
+        APIFinishedBlock reqFinishedBlock = [self requestFinishedBlock];
+        reqFinishedBlock(responseObject, nil);
         
         finishedBlock(responseObject, nil);
 //        finishedBlock(bAPIModel, nil);
@@ -356,7 +360,7 @@
         return;
     }
     if (successBlock) {
-        successBlock(bAPIModel);
+        successBlock(responseObject);
     }
 }
 
@@ -385,7 +389,9 @@
 
 - (void)requestFailure:(NSError *)error finishedBlock:(APIFinishedBlock)finishedBlock {
     [self dealWhileFailure:error];
-    
+    if (finishedBlock) {
+        finishedBlock(nil, error);
+    }
 //    !finishedBlock ?: finishedBlock(nil, error);
 }
 
@@ -412,14 +418,14 @@
 #pragma mark - Post Request
 
 - (void)postRequestInView:(UIView *)containerView successJCBlock:(APISuccessJushCodeBlock)successJCBlock {
-//    [self readyForRequest:containerView];
+    [self readyForRequest:containerView];
     
-//#ifdef kNCLoaclResponse
-//    
-//    id responseObject = [self.bAPI localResponseJSON];
-//    [self requestSucces:responseObject successJCBlock:successJCBlock];
-//    
-//#else
+#ifdef kNCLoaclResponse
+    
+    id responseObject = [self.baseAPI localResponseJSON];
+    [self requestSucces:responseObject successJCBlock:successJCBlock];
+    
+#else
     
     // 开始请求
     [self.manager POST:self.subUrl parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -431,7 +437,7 @@
         [self requestFailure:error failurBlock:nil];
     }];
     
-//#endif
+#endif
 }
 
 - (void)postRequestInView:(UIView *)containerView successBlock:(APISuccessBlock)successBlock {
@@ -459,14 +465,14 @@
 }
 
 - (void)postRequestInView:(UIView *)containerView finishedBlock:(APIFinishedBlock)finishedBlock {
-//    [self readyForRequest:containerView];
+    [self readyForRequest:containerView];
     
-//#ifdef kNCLoaclResponse
-//    
-//    id responseObject = [self.bAPI localResponseJSON];
-//    [self requestSucces:responseObject finishedBlock:finishedBlock];
-//    
-//#else
+#ifdef kNCLoaclResponse
+    
+    id responseObject = [self.bAPI localResponseJSON];
+    [self requestSucces:responseObject finishedBlock:finishedBlock];
+    
+#else
     
     // 开始请求
     [self.manager POST:self.subUrl parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -476,9 +482,10 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         [self requestFailure:error finishedBlock:finishedBlock];
+        
     }];
     
-
+#endif
 }
 
 #pragma mark - Upload Request

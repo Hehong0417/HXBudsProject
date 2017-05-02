@@ -21,7 +21,7 @@
     
     self.editBtn.adjustsImageWhenHighlighted = NO;
     self.messageBtn.adjustsImageWhenHighlighted = NO;
-    
+    [self.ico lh_setCornerRadius:30 borderWidth:0 borderColor:nil];
 }
 + (instancetype)initMyHomeHeadViewWithXib{
     
@@ -114,6 +114,17 @@
     [self.messageBtn setTitleColor:APP_COMMON_COLOR forState:UIControlStateSelected];
     [self.messageBtn lh_setBackgroundColor:kWhiteColor forState:UIControlStateSelected];
     
-    
 }
+
+- (void)setPdModel:(HXPdModel *)pdModel {
+
+    _pdModel= pdModel;
+    
+    self.nickName.text = pdModel.nickname;
+    
+    [self.ico sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(pdModel.the_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    NSString *followtenum = pdModel.followtenum?pdModel.followtenum:@"0";
+    self.followtenum.text = [NSString stringWithFormat:@"%@粉丝",followtenum];
+}
+
 @end

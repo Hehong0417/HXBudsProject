@@ -15,6 +15,7 @@
 #import "AFNetworking.h"
 #import "CLPlayerView.h"
 #import <UShareUI/UShareUI.h>
+#import "HXSubscribeAddAPI.h"
 
 
 @interface HXCourseDetailAnotherVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>{
@@ -88,11 +89,23 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     UIButton *rightBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 50, 50) target:self action:@selector(shareAction) image:[UIImage imageNamed:@"share"]];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
 
+    
+    //加入学习
+    WEAK_SELF();
+    self.buyBottomView.addSubscribeBlock = ^{
+        
+        [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:weakSelf.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+            NSLog(@"%@",error);
+            weakSelf.buyBottomView.consultBtn.titleLabel.text = @"已加入";
+        }];
+        
+    };
+    
 }
 
 - (void)setupSegmentedControl {
     
-    NSArray *title_arr = @[@"介绍", @"目录", @"评价"];
+    NSArray *title_arr = @[@"简介", @"课时", @"评价"];
     
     // 创建底部滚动视图
     self.mainScrollView = [[UIScrollView alloc] init];
@@ -105,10 +118,10 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     _mainScrollView.bounces = NO;
     // 隐藏水平滚动条
     _mainScrollView.showsHorizontalScrollIndicator = NO;
+    _mainScrollView.showsVerticalScrollIndicator = NO;
     // 设置代理
     _mainScrollView.delegate = self;
     [self.view addSubview:_mainScrollView];
-    
     
     
     self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, headViewHeight, self.view.frame.size.width, WidthScaleSize_H(44)) delegate:self segmentedControlType:(SGSegmentedControlTypeStatic) titleArr:title_arr];
@@ -127,7 +140,7 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
         if (!weakSelf.URLString) {
             weakSelf.URLString = @"error";
         }
-        weakSelf.playerView.url = [NSURL URLWithString:weakSelf.URLString];
+        weakSelf.playerView.url = [NSURL URLWithString:@""];
         weakSelf.playerView.vc = weakSelf;
         [weakSelf.view addSubview:weakSelf.playerView];
         
@@ -149,17 +162,20 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
     // 添加所有子控制器
 - (void)setupChildViewController {
-    // 精选
     
+    // 精选
     HXCourseDetailOneVC *oneVC = [[HXCourseDetailOneVC alloc] init];
+    oneVC.curriculum_id = self.curriculum_id;
     [self addChildViewController:oneVC];
     
     // 电视剧
     HXCourseDetailTwoVC *twoVC = [[HXCourseDetailTwoVC alloc] init];
+    twoVC.curriculum_id = self.curriculum_id;
     [self addChildViewController:twoVC];
     
     // 电影
     HXCourseDetailThreeVC *threeVC = [[HXCourseDetailThreeVC alloc] init];
+    threeVC.curriculum_id = self.curriculum_id;
     [self addChildViewController:threeVC];
     
     

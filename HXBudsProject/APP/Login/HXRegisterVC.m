@@ -9,9 +9,18 @@
 #import "HXRegisterVC.h"
 #import "LHVerifyCodeButton.h"
 #import "HXCommitPassWordVC.h"
+#import "HXVerifyPhoneNumAPI.h"
+#import "HXGetVerifyCodeAPI.h"
 
-@interface HXRegisterVC ()
 
+@interface HXRegisterVC ()<UITextFieldDelegate>
+{
+    UITextField *phoneNumTextFiled;
+    UITextField *passWordTextFiled;
+    LHVerifyCodeButton *verifyCodeBtn;
+    NSString *verifyCode;
+
+}
 @end
 
 @implementation HXRegisterVC
@@ -19,8 +28,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
-    
     //导航栏背景图片
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     UIColor *leftColor = RGB(0, 215, 92);
@@ -67,7 +74,8 @@
     phoneNumBgView.alpha = 0.19;
     
     
-    UITextField *phoneNumTextFiled = [UITextField lh_textFieldWithFrame:CGRectZero placeholder:@"请输入手机号码" font:FONT(15) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
+    phoneNumTextFiled = [UITextField lh_textFieldWithFrame:CGRectZero placeholder:@"请输入手机号码" font:FONT(15) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
+    phoneNumTextFiled.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     phoneNumTextFiled.attributedPlaceholder = [[NSAttributedString alloc]initWithString:@"请输入手机号码" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     phoneNumTextFiled.textColor = kWhiteColor;
     phoneNumTextFiled.leftViewMode = UITextFieldViewModeAlways;
@@ -100,10 +108,11 @@
     passWordBgView.alpha = 0.19;
     
     
-    UITextField *passWordTextFiled = [UITextField lh_textFieldWithFrame:CGRectZero placeholder:nil font:FONT(15) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
+    passWordTextFiled = [UITextField lh_textFieldWithFrame:CGRectZero placeholder:nil font:FONT(15) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
     [bgView addSubview:passWordTextFiled];
     passWordTextFiled.textColor = kWhiteColor;
      passWordTextFiled.attributedPlaceholder = [[NSAttributedString alloc]initWithString:@"请输入验证码" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    passWordTextFiled.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     passWordTextFiled.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 22, WidthScaleSize_H(45))];
     passWordTextFiled.leftViewMode = UITextFieldViewModeAlways;
     
@@ -114,7 +123,7 @@
     [passWordTextFiled addSubview:codeBgView];
 
     codeBgView.alpha = 0.19;
-    LHVerifyCodeButton *verifyCodeBtn = [[LHVerifyCodeButton alloc]initWithFrame:codeBgView.frame];
+    verifyCodeBtn = [[LHVerifyCodeButton alloc]initWithFrame:codeBgView.frame];
     verifyCodeBtn.backgroundColor = kClearColor;
     [verifyCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     verifyCodeBtn.titleLabel.font = FONT(15);
@@ -147,14 +156,47 @@
     }];
     [registerBtn lh_setCornerRadius:WidthScaleSize_H(45)/2 borderWidth:1 borderColor:kWhiteColor];
     
-
+    phoneNumTextFiled.delegate = self;
 }
 - (void)registerAction:(UIButton *)btn{
 
-    HXCommitPassWordVC *vc = [HXCommitPassWordVC new];
-    [self.navigationController pushVC:vc];
+  NSString *validStr =  [self validAllMsg];
+    
+    if (!validStr) {
+        [self checkVerifyCode];
+    }else {
+        [SVProgressHUD showInfoWithStatus:validStr];
+        
+    }
+    
+}
+#pragma mark- 验证信息
+- (NSString *)validAllMsg{
+    
+    if (phoneNumTextFiled.text.length == 0) {
+        
+        return  @"手机号不能为空";
+        
+    }else if(passWordTextFiled.text.length == 0) {
+        
+        return  @"请填写验证码";
+        
+    }
+    
+    return nil;
+    
+}
+#pragma mark - textfieldDelegate限制手机号为11位
 
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (toBeString.length > 11 && range.length!=1){
+        textField.text = [toBeString substringToIndex:11];
+        return NO;
+    }
+    
+    return YES;
 }
 - (void)backAction:(UIButton *)btn {
     
@@ -163,8 +205,74 @@
 }
 
 - (void)getVerifyCodeAction:(LHVerifyCodeButton *)btn{
+    
+    if (phoneNumTextFiled.text.length == 0) {
+        
+        [SVProgressHUD showInfoWithStatus:@"请填写手机号"];
+    }else{
+    
+        BOOL isvalidPhone = [NSString valiMobile:phoneNumTextFiled.text];
+        if (!isvalidPhone) {
+            [SVProgressHUD showInfoWithStatus:@"请输入正确的手机号"];
+        }else {
+        
+            [self checkPhoneOnly];
 
-    [btn  startTimer:60];
+        }
+        
+    }
 
 }
+
+#pragma mark-手机号唯一性验证
+- (void)checkPhoneOnly
+{
+
+    [[[HXVerifyPhoneNumAPI verifyPhoneNumWithPhoneNum:phoneNumTextFiled.text] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
+        NSNumber *state = responseObject[@"pd"][@"state"];
+        if ([state isEqual:@0]) {
+            
+        [self sendverifyCodeRequest];
+
+        }else if ([state isEqual:@1]){
+        
+            [SVProgressHUD showInfoWithStatus:@"手机号已注册"];
+        }
+    }];
+        
+}
+#pragma mark-发送验证码请求
+
+- (void)sendverifyCodeRequest
+{
+    [[[HXGetVerifyCodeAPI getVerifyCodeWithPhoneNum:phoneNumTextFiled.text] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+       
+        [verifyCodeBtn startTimer:60];
+        
+        NSString *verifyCodeStr = responseObject[@"pd"][@"smscode"];
+        
+        verifyCode = verifyCodeStr;
+    
+    }];
+    
+}
+#pragma mark- 验证验证码
+
+- (void)checkVerifyCode{
+
+    if ([verifyCode isEqualToString:passWordTextFiled.text]) {
+        
+            HXCommitPassWordVC *vc = [HXCommitPassWordVC new];
+            vc.phoneNum = phoneNumTextFiled.text;
+            [self.navigationController pushVC:vc];
+
+    }else {
+    
+        [SVProgressHUD showErrorWithStatus:@"验证码错误"];
+    }
+
+}
+
+
 @end

@@ -8,8 +8,8 @@
 
 #import "BaseAPI.h"
 
-@interface HXHomeAPI : BaseAPI
+@interface HXTeacherListAPI : BaseAPI
 
-+(instancetype)getHomeInfoWithPage:(NSNumber *)page rows:(NSNumber *)rows;
++(instancetype)getTeacherListWithWithLimit:(NSNumber*)limit;
 
 @end

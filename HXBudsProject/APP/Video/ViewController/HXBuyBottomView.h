@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^addSubscribeBlock)();
+
 @interface HXBuyBottomView : UIView
 
 @property(nonatomic,strong) UIButton *consultBtn;
 @property(nonatomic,strong) UIButton *buyCourseBtn;
 @property(nonatomic,strong) UIViewController *vc;
+@property(nonatomic,copy) addSubscribeBlock addSubscribeBlock;
 
 @end

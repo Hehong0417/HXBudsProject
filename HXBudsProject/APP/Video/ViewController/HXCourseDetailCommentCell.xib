@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,9 +29,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开杂货铺的蜀黍" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5z-mb-ysb">
-                        <rect key="frame" x="80" y="10" width="132" height="20"/>
+                        <rect key="frame" x="80" y="10" width="120" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="132" id="OQ5-ul-2BA"/>
+                            <constraint firstAttribute="width" constant="120" id="OQ5-ul-2BA"/>
                             <constraint firstAttribute="height" constant="20" id="S9G-aB-db0"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -61,29 +61,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4O-uj-6UU">
                         <rect key="frame" x="250" y="7" width="122" height="24"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="evulate" translatesAutoresizingMaskIntoConstraints="NO" id="Trg-7f-VHh">
-                                <rect key="frame" x="-7" y="0.0" width="20" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="VFd-nc-nUr"/>
-                                </constraints>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip" translatesAutoresizingMaskIntoConstraints="NO" id="qfT-hX-QTU">
-                                <rect key="frame" x="59" y="0.0" width="24" height="24"/>
+                                <rect key="frame" x="82" y="0.0" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="9Gd-ed-ZQD"/>
                                 </constraints>
                             </imageView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMM-7q-XVt">
-                                <rect key="frame" x="13" y="0.0" width="39" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="39" id="B0t-Rn-aTi"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVT-YZ-Huq">
-                                <rect key="frame" x="83" y="0.0" width="38" height="24"/>
+                                <rect key="frame" x="106" y="0.0" width="15" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -91,19 +76,12 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="JVT-YZ-Huq" firstAttribute="top" secondItem="S4O-uj-6UU" secondAttribute="top" id="39S-Tb-nlq"/>
-                            <constraint firstItem="qMM-7q-XVt" firstAttribute="top" secondItem="S4O-uj-6UU" secondAttribute="top" id="92O-u1-zG9"/>
                             <constraint firstAttribute="bottom" secondItem="JVT-YZ-Huq" secondAttribute="bottom" id="FGB-PD-tck"/>
                             <constraint firstAttribute="width" constant="122" id="MbQ-YJ-4Li"/>
-                            <constraint firstAttribute="bottom" secondItem="Trg-7f-VHh" secondAttribute="bottom" id="O5q-yT-DP2"/>
                             <constraint firstItem="JVT-YZ-Huq" firstAttribute="leading" secondItem="qfT-hX-QTU" secondAttribute="trailing" id="OkU-EP-SKt"/>
-                            <constraint firstItem="qfT-hX-QTU" firstAttribute="leading" secondItem="qMM-7q-XVt" secondAttribute="trailing" constant="7" id="XGL-fw-CH9"/>
-                            <constraint firstItem="qMM-7q-XVt" firstAttribute="leading" secondItem="Trg-7f-VHh" secondAttribute="trailing" id="ac4-gc-OFb"/>
                             <constraint firstAttribute="trailing" secondItem="JVT-YZ-Huq" secondAttribute="trailing" constant="1" id="brl-bn-Wme"/>
-                            <constraint firstItem="Trg-7f-VHh" firstAttribute="leading" secondItem="S4O-uj-6UU" secondAttribute="leading" constant="-7" id="d6o-ov-zdC"/>
-                            <constraint firstAttribute="bottom" secondItem="qMM-7q-XVt" secondAttribute="bottom" id="iS3-qz-5MW"/>
                             <constraint firstAttribute="bottom" secondItem="qfT-hX-QTU" secondAttribute="bottom" id="k4m-wZ-dfh"/>
                             <constraint firstItem="qfT-hX-QTU" firstAttribute="top" secondItem="S4O-uj-6UU" secondAttribute="top" id="sra-3S-yYf"/>
-                            <constraint firstItem="Trg-7f-VHh" firstAttribute="top" secondItem="S4O-uj-6UU" secondAttribute="top" id="tBf-0c-rtF"/>
                             <constraint firstAttribute="height" constant="24" id="vwa-Hy-PSg"/>
                         </constraints>
                     </view>
@@ -122,13 +100,16 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="comment" destination="JVT-YZ-Huq" id="vya-fW-pqR"/>
                 <outlet property="commentIco_ImagV" destination="pZO-Sp-227" id="gek-LM-Mx0"/>
+                <outlet property="ctime" destination="Uke-AG-edm" id="Qdb-WU-iXk"/>
+                <outlet property="curriReView_Title" destination="O5z-mb-ysb" id="1lh-pc-8bh"/>
+                <outlet property="reViewContent" destination="JXX-oH-heZ" id="LGZ-Xb-8p3"/>
             </connections>
             <point key="canvasLocation" x="26.5" y="52"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="evulate" width="16" height="14"/>
         <image name="testIcon" width="72" height="72"/>
         <image name="tip" width="18" height="16"/>
     </resources>

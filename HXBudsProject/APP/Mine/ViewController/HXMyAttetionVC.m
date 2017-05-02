@@ -23,8 +23,17 @@
     [super viewDidLoad];
     
     self.title = @"我关注的";
+    switch (self.attentionType) {
+        case myAttention:
+             self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
+            break;
+        case homeInfoAttention:
+            self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-268) style:UITableViewStyleGrouped];
+        default:
+            break;
+    }
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-268) style:UITableViewStyleGrouped];
+   
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
@@ -75,6 +84,7 @@
     
     HXMyLikeVC *vc = [HXMyLikeVC new];
     vc.titleStr = @"他的网页";
+    vc.dynamicType = teacherDynamicType;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

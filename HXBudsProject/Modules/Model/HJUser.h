@@ -7,26 +7,23 @@
 //
 
 #import "BaseModel.h"
+
 @interface HJLoginModel : BaseModel
-@property (nonatomic, strong) NSNumber *isFirstLogin;
-@property (nonatomic, strong) NSNumber *userId;
-@property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) NSString *pwd;
+
+@property(nonatomic,copy) NSString *state;
+@property(nonatomic,copy) NSString *token;
+@property(nonatomic,copy) NSString *users_id;
+
 @end
 
 @interface HJUser : BaseModel {
     
-    HJLoginModel *_userModel;
+//    HJLoginModel *_userModel;
 }
 
 singleton_h(User)
 
-@property (nonatomic, strong) HJLoginModel *loginModel;
+@property (nonatomic, strong) HJLoginModel *pd;
 
-@property (nonatomic, assign) BOOL isRememberPwd;
-
-@property (nonatomic, copy) NSString *phone;
-
-@property (nonatomic, assign) BOOL isLogin;
 
 @end

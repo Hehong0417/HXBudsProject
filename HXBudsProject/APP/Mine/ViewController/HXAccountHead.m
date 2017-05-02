@@ -7,7 +7,7 @@
 //
 
 #import "HXAccountHead.h"
-
+#import "HXBalanceRechargeVC.h"
 
 @implementation HXAccountHead
 
@@ -23,7 +23,6 @@
         [self.balanceRechargeBgView addSubview:self.balanceRechargeLabel];
 
         [self makeContriant];
-        
     }
 
     return self;

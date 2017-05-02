@@ -13,6 +13,10 @@
 #import "HXCollectVC.h"
 #import "HXMyAttetionVC.h"
 #import "HXMyVideoVC.h"
+#import "HXTeacherDetailAPI.h"
+#import "HXTeacherDetailModel.h"
+
+
 
 @interface HXMyLikeVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
 {
@@ -23,10 +27,24 @@
 @property(nonatomic,strong)SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
 @property(nonatomic,assign) BOOL isMyHomeInfo;
+@property (nonatomic, strong) HXTeacherDetailModel *teacherDetailModel;
+@property (nonatomic, strong) HXHomeInfoArticleModel *homeInfoArticleModel;
+
+@property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
+@property (nonatomic, strong) NSArray *title_arr;
+
 
 @end
 
 @implementation HXMyLikeVC
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
+ 
+    //老师详情
+    [self getTeacherDetailData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,19 +52,29 @@
     self.title = self.titleStr;
     self.view.backgroundColor = kWhiteColor;
     
-    if ([self.titleStr isEqualToString:@"我的主页"]) {
-        
-        self.isMyHomeInfo = YES;
-    }else {
-        
-        self.isMyHomeInfo = NO;
+    switch (self.dynamicType) {
+        case teacherDynamicType:{
+            self.title_arr  = @[@"文章", @"视频"];
+            self.isMyHomeInfo = NO;
+        }
+            break;
+        case himDynamicType:{
+            self.title_arr  = @[@"文章", @"收藏",@"关注"];
+            self.isMyHomeInfo = NO;
+        }
+            break;
+        case mineDynamicType:{
+            self.title_arr  = @[@"文章", @"收藏",@"关注"];
+            self.isMyHomeInfo = YES;
+        }
+            break;
+        default:
+            break;
     }
-    
     mineHeadView = [HXMyHomeHeadView initMyHomeHeadViewWithXib];
     mineHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 224);
     mineHeadView.isMyHomeInfo = self.isMyHomeInfo;
     mineHeadView.nav = self.navigationController;
-    
     
     [self.view addSubview:mineHeadView];
     
@@ -58,16 +86,26 @@
     
     
 }
+- (void)getTeacherDetailData {
+
+    [[[HXTeacherDetailAPI getTeacherDetailWithTeacherId:self.theteacher_id users_id:self.users_id]netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+       
+        HXTeacherDetailModel *api = [HXTeacherDetailModel new];
+        self.teacherDetailModel = [api.class mj_objectWithKeyValues:responseObject];
+
+        mineHeadView.pdModel = self.teacherDetailModel.pd;
+
+    }];
+
+}
 
 - (void)setupSegmentedControl {
     
     
-    NSArray *title_arr = @[@"文章", @"收藏", @"视频",@"关注"];
-    
     // 创建底部滚动视图
     self.mainScrollView = [[UIScrollView alloc] init];
     _mainScrollView.frame = CGRectMake(0, 204, self.view.frame.size.width, self.view.frame.size.height- 165);
-    _mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width * title_arr.count, 0);
+    _mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width * self.title_arr.count, 0);
     _mainScrollView.backgroundColor = [UIColor whiteColor];
     // 开启分页
     _mainScrollView.pagingEnabled = YES;
@@ -80,7 +118,7 @@
     [self.view addSubview:_mainScrollView];
     
     
-    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 160, self.view.frame.size.width, 44) delegate:self segmentedControlType:(SGSegmentedControlTypeStatic) titleArr:title_arr];
+    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 160, self.view.frame.size.width, 44) delegate:self segmentedControlType:(SGSegmentedControlTypeStatic) titleArr:self.title_arr];
     self.SG.titleColorStateNormal = kBlackColor;
     self.SG.titleColorStateSelected = APP_COMMON_COLOR;
     self.SG.indicatorColor = kRedColor;
@@ -99,21 +137,40 @@
 }
 // 添加所有子控制器
 - (void)setupChildViewController {
-    
+
     HXMyArticleVC *vc1 = [HXMyArticleVC new];
-    vc1.articleType = homeInfoArticle;
-    [self addChildViewController:vc1];
     
     HXCollectVC *vc2 = [HXCollectVC new];
-    [self addChildViewController:vc2];
     
     HXMyVideoVC *vc3 = [HXMyVideoVC new];
     
-    [self addChildViewController:vc3];
-    
     HXMyAttetionVC *vc4 = [HXMyAttetionVC new];
-    [self addChildViewController:vc4];
     
+    switch (self.dynamicType) {
+        case teacherDynamicType:{
+            vc1.articleType = teacherDynamicArticle;
+            vc3.videoType = teacherVideo;
+            [self addChildViewController:vc1];
+            [self addChildViewController:vc3];
+        }
+            break;
+        case himDynamicType:{
+            vc1.articleType = himDynamicArticle;
+            [self addChildViewController:vc1];
+            [self addChildViewController:vc2];
+            [self addChildViewController:vc4];
+        }
+            break;
+        case mineDynamicType:{
+            vc1.articleType = mineDynamicArticle;
+            [self addChildViewController:vc1];
+            [self addChildViewController:vc2];
+            [self addChildViewController:vc4];
+        }
+            break;
+        default:
+            break;
+    }
     
 }
 

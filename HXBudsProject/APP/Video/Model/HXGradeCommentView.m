@@ -9,7 +9,12 @@
 #import "HXGradeCommentView.h"
 #import "HCSStarRatingView.h"
 
-@interface HXGradeCommentView ()<UITextViewDelegate>
+
+@interface HXGradeCommentView ()<UITextViewDelegate>{
+    
+    IQTextView *commentTextView;
+    CGFloat value;
+}
 
 @end
 
@@ -32,7 +37,7 @@
     [commentBgView addSubview:recommend];
     
     //评论框
-    IQTextView *commentTextView = [[IQTextView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(recommend.frame), SCREEN_WIDTH - 160, WidthScaleSize_H(85))];
+    commentTextView = [[IQTextView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(recommend.frame), SCREEN_WIDTH - 160, WidthScaleSize_H(85))];
     commentTextView.delegate = self;
     
     commentTextView.font = FONT(12);
@@ -54,9 +59,14 @@
 - (void)didChangeValue:(HCSStarRatingView *)sender {
     
     NSLog(@"Changed rating to %.1f", sender.value);
+    value = sender.value;
 }
 - (void)commitAction {
-
+    //评论
+    if(self.addReviewBlock){
+    
+        self.addReviewBlock(commentTextView.text, [NSNumber numberWithFloat:value]);
+    }
     [self hideWithCompletion:nil];
 }
 

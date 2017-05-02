@@ -10,6 +10,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 
+
 @interface HXBuyBottomView ()<WXApiDelegate>
 
 @end
@@ -21,7 +22,7 @@
     
     if (self == [super initWithFrame:frame]) {
         //        self.frame.size.width*0.28
-        self.consultBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, self.frame.size.width/2, self.frame.size.height)  target:self action:@selector(consultAction:) title:@"收藏" titleColor: kWhiteColor font:FONT(18) backgroundColor:APP_COMMON_COLOR];
+        self.consultBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, self.frame.size.width/2, self.frame.size.height)  target:self action:@selector(consultAction:) title:@"加入学习" titleColor: kWhiteColor font:FONT(18) backgroundColor:APP_COMMON_COLOR];
         
         [self addSubview:self.consultBtn];
         //     self.frame.size.width*0.72
@@ -37,7 +38,9 @@
 }
 - (void)consultAction:(UIButton *)btn{
     
-    
+    if (self.addSubscribeBlock) {
+        self.addSubscribeBlock();
+    }
     
     
 }
@@ -48,7 +51,8 @@
     //-----支付宝支付------
     NSString *appScheme = @"alipay_mengya";
     
-    // NOTE: 将签名成功字符串格式化为订单字符串,请严格按照该格式
+    // NOTE: 将签名成功字符串格式化为订单字符串,
+    //请严格按照该格式这一步应在商户服务端完成，商户服务端直接将组装和签名后的请求串orderString传给客户端，客户端直接传给SDK发起请求
     NSString *orderString = @"";
     
     // NOTE: 调用支付结果开始支付
@@ -60,7 +64,7 @@
     }];
     
    //----微信支付-----
-   
+   //商户服务器生成支付订单，先调用【统一下单API】生成预付单，获取到prepay_id后将参数再次签名传输给APP发起支付
     PayReq * req = [[PayReq alloc] init];
     req.partnerId           = @"服务器给的partnerId";
     req.prepayId            = @"服务器给的prepayId";
@@ -94,7 +98,7 @@
                                                            delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                                   otherButtonTitles:@"确定", nil];
-        alertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+        alertView.alertViewStyle = UIAlertViewStyleDefault;
         [alertView show];
 
 //    }

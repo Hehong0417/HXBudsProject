@@ -9,7 +9,8 @@
 #import "HXMyVideoVC.h"
 #import "HXSujectVideoListCell.h"
 #import "HXCourseDetailAnotherVC.h"
-
+#import "HXSubjectVideoAPI.h"
+#import "HXSubjectVideoListModel.h"
 @interface HXMyVideoVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
@@ -21,15 +22,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //视频
+    [self getVideoData];
+    
     self.title = @"我的视频";
     switch (self.videoType) {
-        case myVideo:{
+        case mineVideo:{
             self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT) style:UITableViewStyleGrouped];
         }
             break;
-        default:{
-            self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-268) style:UITableViewStyleGrouped];
+        case teacherVideo:{
+          self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-268) style:UITableViewStyleGrouped];
         }
+            break;
+        default:
             break;
     }
     
@@ -37,7 +43,19 @@
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = kWhiteColor;
+    self.tableView.showsVerticalScrollIndicator = NO;
 
+}
+- (void)getVideoData{
+    
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@5 theteacherId:nil] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        
+        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+        
+        self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+        [self.tableView reloadData];
+    }];
+    
 }
 #pragma mark - Table view data source
 
@@ -48,7 +66,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return self.SubjectVideoListModel.varList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -75,6 +93,8 @@
         cell = [HXSujectVideoListCell initSubjectVideoListCellWithXib];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
+    cell.model = model;
     
     return cell;
     
@@ -82,6 +102,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     HXCourseDetailAnotherVC  *vc = [HXCourseDetailAnotherVC new];
+    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
+    vc.curriculum_id = model.curriculum_id;
     [self.navigationController pushVC:vc];
     
     

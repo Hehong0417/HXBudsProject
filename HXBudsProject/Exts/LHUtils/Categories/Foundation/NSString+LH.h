@@ -282,8 +282,7 @@ typedef enum {
  *
  *  @return 是 → YES，否 → NO。
  */
-- (BOOL)lh_isValidateMobile;
-
++ (BOOL)valiMobile:(NSString *)mobile;
 /**
  *  固定电话号码验证
  *

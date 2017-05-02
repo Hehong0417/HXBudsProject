@@ -14,9 +14,14 @@
 #import "HXVideoSectionHead.h"
 #import "HXSubjectVideoVC.h"
 #import "HXMyLikeVC.h"
-#import "HXHomeAPI.h"
+#import "HXTeacherListAPI.h"
 #import "HXAdvertisementAPI.h"
 #import "HXAdvListModel.h"
+#import "HXteacherList.h"
+#import "HXTeacherListModel.h"
+#import "HXSubjectVideoAPI.h"
+#import "HXSubjectVideoListModel.h"
+#import "HXFollowAPI.h"
 
 @interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 
@@ -28,6 +33,12 @@
 @property (nonatomic, strong) HXVarListModel *varListModel;
 @property (nonatomic, strong) NSMutableArray *varListArr;
 
+@property (nonatomic, strong) HXTeacherListModel *teacherListModel;
+@property (nonatomic, strong) HXteacherVarListModel *teacherVarListModel;
+@property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
+
+
+
 @end
 
 @implementation HXHomeCVC
@@ -36,33 +47,32 @@
     [super viewWillAppear:animated];
     
     [self getList_online];
-    [self getHomeInfoData];
-
+    [self getTeacherList];
+    [self getSubjectVideoList];
 }
-- (void)getHomeInfoData{
+- (void)getTeacherList{
 
-//    [[[HXHomeAPI getHomeInfoWithPage:@(_page) rows:@10] netWorkClient]postRequestInView:self.view successBlock:^(id responseObject) {
-//        
-//         HXHomeAPI *api = responseObject;
-//        
-//    } ];
+    [[[HXTeacherListAPI getTeacherListWithWithLimit:@2] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        
+        HXTeacherListModel *api = [HXTeacherListModel new];
+        
+        self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
+        
+        [self.collectionView reloadData];
 
+    }];
 }
 - (void)getList_online {
     
-    [[[HXAdvertisementAPI getAdvertisement] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+    [[[HXAdvertisementAPI getAdvertisement] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         
         HXAdvListModel *adv = [HXAdvListModel new];
         
         self.advertiseModel = [adv.class mj_objectWithKeyValues:responseObject];
-        
-        
-        NSLog(@"responseObject:%@",responseObject);
-        NSLog(@"advertiseModel:%@",self.advertiseModel.varList);
-        
+        [self.varListArr removeAllObjects];
         for (HXVarListModel *model in self.advertiseModel.varList) {
             
-            [self.varListArr addObject:kAPIImageFromUrl(model.picture)];
+         [self.varListArr addObject:kAPIImageFromUrl(model.picture)];
             
         }
         [self.collectionView reloadData];
@@ -70,7 +80,18 @@
     
    
 }
+- (void)getSubjectVideoList {
 
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@4 theteacherId:nil] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
+        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+        
+        self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+        
+        [self.collectionView reloadData];
+    }];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -122,15 +143,18 @@
     if (indexPath.section == 0) {
         
         HXTeacherCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXTeacherCollectionCell" forIndexPath:indexPath];
-        NSArray *imagArr = @[@"testIcon",@"teacher2"];
-        cell.imageName = imagArr[indexPath.row];
+        HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
+        cell.teacherModel = model;
+        cell.followSelectedBlock = ^(BOOL followed) {
+    
+            [self followRequest:indexPath.row followed:followed];
+        };
         return cell;
   
     }else {
     
         HXvideoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXvideoCollectionCell" forIndexPath:indexPath];
-        NSArray *imagNameArr = @[@"video_01",@"video_02",@"video_03",@"video_04"];
-        cell.videoImagV.image = [UIImage imageNamed:imagNameArr[indexPath.item]];
+        cell.model = self.SubjectVideoListModel.varList[indexPath.row];
         cell.nav = self.navigationController;
         return cell;
     }
@@ -145,10 +169,11 @@
     
     if (section == 0) {
         
-        return 2;
+        return self.teacherListModel.varList.count?self.teacherListModel.varList.count:2;
+        
     }else {
         
-    return 4;
+        return self.SubjectVideoListModel.varList.count?self.SubjectVideoListModel.varList.count:4;
     }
 }
 
@@ -188,7 +213,10 @@
     if (indexPath.section == 0) {
         
         HXMyLikeVC *vc = [HXMyLikeVC new];
+        HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
+        vc.theteacher_id = model.theteacher_id;
         vc.titleStr = @"他的主页";
+        vc.dynamicType = teacherDynamicType;
         [self.navigationController pushVC:vc];
     }else{
         
@@ -209,33 +237,44 @@
 
             sectionHead.headtitle = @"名师推荐";
             sectionHead.contentType = LeftImageRightTitle;
-            sectionHead.rightBtnTitle = @"换一换";
+            sectionHead.rightBtnTitle = @"更多 》";
             sectionHead.btnFontAttributes = [FontAttributes fontAttributesWithFontColor:RGB(186, 186, 186) fontsize:13];
-            sectionHead.imageName = @"change";
+//          sectionHead.imageName = @"change";
             sectionHead.labFont = 15;
             sectionHead.discribText = @"为你的梦想保驾护航的人";
-            [sectionHead.rightBtn setTapActionWithBlock:^{
-                NSLog(@"换一换");
-            }];
+            HXteacherList *vc = [HXteacherList new];
+            sectionHead.vc = vc;
+            sectionHead.nav = self.navigationController;
+          
             return sectionHead;
         }else if (indexPath.section == 1){
         
          HXVideoSectionHead *sectionHead = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead" forIndexPath:indexPath];
             sectionHead.headtitle = @"专题视频";
             sectionHead.contentType = LeftImageRightTitle;
-            sectionHead.rightBtnTitle = @"更多 》";
+            sectionHead.rightBtnTitle = @"";
             sectionHead.labFont = 15;
             sectionHead.discribText = @"为你找到志趣相投的人";
             sectionHead.btnFontAttributes = [FontAttributes fontAttributesWithFontColor:RGB(186, 186, 186) fontsize:13];
-            [sectionHead setTapActionWithBlock:^{
-                HXSubjectVideoVC *vc = [HXSubjectVideoVC new];
-                [self.navigationController pushVC:vc];
-            }];
+//            [sectionHead setTapActionWithBlock:^{
+//                HXSubjectVideoVC *vc = [HXSubjectVideoVC new];
+//                [self.navigationController pushVC:vc];
+//            }];
             return sectionHead;
             
         }
     }
     return nil;
+}
+- (void)followRequest:(NSInteger )row followed:(BOOL)followed{
+    
+    
+    HXteacherVarListModel *model = self.teacherListModel.varList[row];
+    
+    [[[HXFollowAPI followTeacherWiththeteacherId:model.theteacher_id state:followed?@"1":@"0"] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
+    }];
+
 }
 - (NSMutableArray *)varListArr {
     if (!_varListArr) {

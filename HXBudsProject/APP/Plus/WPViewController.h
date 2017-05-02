@@ -7,5 +7,6 @@
 @interface WPViewController : WPEditorViewController <WPEditorViewControllerDelegate,UIActionSheetDelegate>
 @property(nonatomic,retain)publishedArticleViewModel *viewModel;
 
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
 @end

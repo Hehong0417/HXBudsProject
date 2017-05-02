@@ -9,11 +9,13 @@
 #import "HXCourseDetailOneVC.h"
 #import "HXCourseDetailCourseTitleCell.h"
 #import "HXCourseDetailIntroduceCell.h"
-
+#import "HXCurriculumDetailAPI.h"
+#import "HXCurrilumDetailModel.h"
 
 @interface HXCourseDetailOneVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) HXCurrilumDetailModel *curriculumDetailModel;
 @end
 
 @implementation HXCourseDetailOneVC
@@ -22,8 +24,20 @@
     [super viewDidLoad];
     [self addTableView];
     // Do any additional setup after loading the view.
+    
+    [self getCurriculumDetailData];
+    
 }
+- (void)getCurriculumDetailData{
 
+    [[[HXCurriculumDetailAPI getCurriculumDetailWithWithCurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        HXCurrilumDetailModel *model = [HXCurrilumDetailModel new];
+        self.curriculumDetailModel = [model.class mj_objectWithKeyValues:responseObject];
+        [self.tableView reloadData];
+    }];
+
+
+}
 - (void)addTableView{
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)-WidthScaleSize_H(200)-WidthScaleSize_H(44)-64 - WidthScaleSize_H(49)) style:UITableViewStyleGrouped];
@@ -34,6 +48,7 @@
     _tableView.rowHeight = 44;
     _tableView.backgroundColor = kWhiteColor;
     [self.view addSubview:_tableView];
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -75,7 +90,9 @@
             cell = [HXCourseDetailCourseTitleCell initCourseDetailCourseTitleCellWithXib];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        
         cell.nav = self.navigationController;
+        cell.pdModel = self.curriculumDetailModel.pd;
         return cell;
         
     }else {
@@ -90,7 +107,7 @@
             cell.showAllBtn.hidden = NO;
             cell.titleLab.text = @"课程简介";
         }
-        
+        cell.pdModel = self.curriculumDetailModel.pd;
         return cell;
     
     }

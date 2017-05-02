@@ -25,6 +25,9 @@
     self.testArr = [NSMutableArray arrayWithObjects:@"2",@"3",@"4", nil];
     
     self.tableV.backgroundColor = KVCBackGroundColor;
+    
+    
+//    UIButton *exitBtn = [UIButton lh_buttonWithFrame:CGRectMake(60, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>) target:<#(id)#> action:<#(SEL)#> image:<#(UIImage *)#> title:<#(NSString *)#> titleColor:<#(UIColor *)#> font:<#(UIFont *)#>]
 }
 
 - (void)saveAction:(UIButton *)btn{

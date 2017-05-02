@@ -77,6 +77,7 @@
 }
 
 - (MBProgressHUD *)HUD {
+
     MBProgressHUD *hud = objc_getAssociatedObject(self, _cmd);
     
     return hud;
@@ -107,6 +108,7 @@
 }
 
 - (void)setHUD:(MBProgressHUD *)HUD {
+    
     objc_setAssociatedObject(self, @selector(HUD), HUD, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -127,7 +129,8 @@
 
 - (void)mbShowIndeterminate {
     self.HUD = [MBProgressHUD showHUDAddedTo:self.containerView animated:YES];
-    [self.HUD show:YES];
+    
+    [self.HUD showAnimated:YES];
 }
 
 - (void)mbShowText:(NSString *)text {
@@ -135,12 +138,12 @@
         [self hideHUDWhileFinish];
         return;
     }
-    
     self.HUD.mode = MBProgressHUDModeText;
-    self.HUD.detailsLabelText = text;
-    self.HUD.detailsLabelFont = [UIFont systemFontOfSize:15];
-    [self.HUD show:YES];
-    [self hideHUDWhileFinishAfterDelay:2];
+    self.HUD.detailsLabel.text = text;
+    self.HUD.detailsLabel.font = [UIFont systemFontOfSize:15];
+    [self.HUD showAnimated:YES];
+    
+    [self hideHUDWhileFinishAfterDelay:1];
 }
 #pragma mark - HUD
 
@@ -154,7 +157,8 @@
 }
 
 - (void)hideHUDWhileFinishAfterDelay:(NSTimeInterval)delay {
-    [self.HUD hide:YES afterDelay:delay];
+    
+    [self.HUD hideAnimated:YES afterDelay:delay];
     
 #ifdef kNCLoaclResponse
     NSLog(@"加载本地数据文件 -----  __%@__   -----", self.class);
@@ -174,11 +178,13 @@
 
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTokenExpire object:msg];
     // mb显示不了
-    //[self mbShowText:msg];
+    [self mbShowText:msg];
 }
 
 - (void)showMsgWhileRequestError:(NSString *)msg {
-    [self mbShowText:@"连接失败！"];
+    
+    [self mbShowText:msg];
+    
 }
 
 

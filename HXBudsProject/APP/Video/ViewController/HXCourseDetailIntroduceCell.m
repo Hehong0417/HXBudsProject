@@ -22,5 +22,9 @@
     return [[[NSBundle mainBundle]loadNibNamed:@"HXCourseDetailIntroduceCell" owner:nil options:nil]lastObject];
 
 }
+- (void)setPdModel:(HXCurrilumPdModel *)pdModel {
+    _pdModel = pdModel;
+    self.introduction.text = pdModel.introduction;
 
+}
 @end

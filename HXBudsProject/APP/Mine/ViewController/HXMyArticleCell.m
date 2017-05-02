@@ -21,7 +21,16 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (void)setModel:(HXInfoArticleListModel *)model {
 
+    _model = model;
+    self.contentLab.text = model.article_title;
+//    self.readLab.text = [NSString stringWithFormat:@"阅读·%@",];
+//    self.tapLab.text = [NSString stringWithFormat:@"赞赏·%@",];
+//    self.commentLab.text = [NSString stringWithFormat:@"评论·%@",];
+//    [self.rightIcon sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(<#url#>)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    
+}
 
 
 @end

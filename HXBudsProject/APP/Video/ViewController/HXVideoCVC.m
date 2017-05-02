@@ -11,11 +11,14 @@
 #import "HXVideoSectionHead.h"
 #import "HXCourseDetailAnotherVC.h"
 #import "HXSubjectVideoVC.h"
-
+#import "HXSubjectVideoAPI.h"
+#import "HXSubjectVideoListModel.h"
 
 @interface HXVideoCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 
 @property(nonatomic,strong) UICollectionView *collectionView;
+@property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
+
 @end
 
 @implementation HXVideoCVC
@@ -25,6 +28,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self getSubjectVideoList];
+
     
     self.title = @"视频";
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
@@ -39,6 +45,18 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.view addSubview:self.collectionView];
 }
 
+- (void)getSubjectVideoList {
+    
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@4 theteacherId:nil] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        
+        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+        
+        self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+        
+        [self.collectionView reloadData];
+    }];
+    
+}
 
 
 #pragma mark <UICollectionViewDataSource>
@@ -51,15 +69,15 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
-    return 4;
+    return self.SubjectVideoListModel.varList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     HXvideoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXvideoCollectionCell" forIndexPath:indexPath];
-     NSArray *imagNameArr = @[@"video_01",@"video_02",@"video_03",@"video_04"];
-    cell.videoImagV.image = [UIImage imageNamed:imagNameArr[indexPath.row]];
+    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
     cell.nav = self.navigationController;
+    cell.model = model;
     return cell;
 }
 
@@ -131,9 +149,17 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)rightBtnActionWithSection:(NSInteger)section {
     
-        HXSubjectVideoVC *vc = [HXSubjectVideoVC new];
-        
-        [self.navigationController pushVC:vc];
+    
+    HXSubjectVideoVC *vc = [HXSubjectVideoVC new];
+    if (section == 0) {
+        vc.videoTitle = @"艺术教程";
+ 
+    }else {
+    
+        vc.videoTitle = @"专题视频";
+
+    }
+    [self.navigationController pushVC:vc];
     
 }
 

@@ -13,4 +13,7 @@
 
 @property (nonatomic, retain)NSString * URLString;
 
+@property (nonatomic, retain)NSString * curriculum_id;
+
+
 @end

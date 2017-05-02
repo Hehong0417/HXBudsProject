@@ -9,6 +9,8 @@
 #import "HXMyArticleVC.h"
 #import "HXMyArticleCell.h"
 #import "HXArticleDetailVC.h"
+#import "HXHomeInfoArtcleAPI.h"
+#import "HXHomeInfoArticleModel.h"
 
 @interface HXMyArticleVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -19,17 +21,33 @@
 
 @implementation HXMyArticleVC
 
+- (void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    //文章
+    [self getArticleData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.title = @"我的文章";
+    
     switch (self.articleType) {
-        case myArticle:
+        case mineArticle:
             self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT) style:UITableViewStyleGrouped];
             break;
-            
-        default:
+        case mineDynamicArticle:
+           self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT - 268) style:UITableViewStyleGrouped];
+            break;
+        case teacherDynamicArticle:
             self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT - 268) style:UITableViewStyleGrouped];
+            break;
+        case himDynamicArticle:
+          self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT - 268) style:UITableViewStyleGrouped];
+            break;
+        default:
+            
             break;
     }
     
@@ -37,7 +55,20 @@
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = kWhiteColor;
+    self.tableView.showsVerticalScrollIndicator = NO;
+
+    NSLog(@"infoArticleListModel---%@",self.infoArticleListModel);
+}
+- (void)getArticleData{
     
+    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:self.theteacher_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        NSLog(@"responseObject--%@",responseObject);
+        HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
+        
+        self.infoArticleListModel = [api.class mj_objectWithKeyValues:responseObject];
+        
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - Table view data source
@@ -49,7 +80,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 6;
+    return self.infoArticleListModel.varList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -77,6 +108,8 @@
         cell = [HXMyArticleCell initMyArticleCellWithXib];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    HXInfoArticleListModel *InfoArticleModel = self.infoArticleListModel.varList[indexPath.row];
+    cell.model = InfoArticleModel;
     
     return cell;
     

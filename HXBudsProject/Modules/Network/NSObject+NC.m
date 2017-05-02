@@ -18,7 +18,7 @@
 - (void)nc_setImageWithUrlString:(NSString *)urlString {
 #ifndef kNCLoaclResponse
     
-   // [self sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(urlString)]];
+    [self sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(urlString)]];
     
 #else
     

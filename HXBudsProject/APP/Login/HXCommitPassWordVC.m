@@ -8,15 +8,22 @@
 
 #import "HXCommitPassWordVC.h"
 #import "HJTabBarController.h"
-@interface HXCommitPassWordVC ()
+#import "HXRegisterAPI.h"
+#import "HXLoginAPI.h"
+#import "HJUser.h"
 
+@interface HXCommitPassWordVC ()
+{
+    UITextField *phoneNumTextFiled;
+    UITextField *passWordTextFiled;
+}
+@property(nonatomic,strong) HJUser *user;
 @end
 
 @implementation HXCommitPassWordVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     //导航栏背景图片
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
@@ -63,7 +70,7 @@
     phoneNumBgView.alpha = 0.19;
     
     
-    UITextField *phoneNumTextFiled = [UITextField lh_textFieldWithFrame:CGRectZero placeholder:nil font:FONT(15) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
+    phoneNumTextFiled = [UITextField lh_textFieldWithFrame:CGRectZero placeholder:nil font:FONT(15) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
     phoneNumTextFiled.attributedPlaceholder = [[NSAttributedString alloc]initWithString:@"请设置6位数以上的密码" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     phoneNumTextFiled.leftViewMode = UITextFieldViewModeAlways;
     UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 40, WidthScaleSize_H(45)) target:self action:nil image:[UIImage imageNamed:@"phoneNum"]];
@@ -97,7 +104,7 @@
     passWordBgView.alpha = 0.19;
     
     
-    UITextField *passWordTextFiled = [UITextField lh_textFieldWithFrame:CGRectZero placeholder:nil font:FONT(15) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
+    passWordTextFiled = [UITextField lh_textFieldWithFrame:CGRectZero placeholder:nil font:FONT(15) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
     [bgView addSubview:passWordTextFiled];
      passWordTextFiled.attributedPlaceholder = [[NSAttributedString alloc]initWithString:@"确认密码" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     passWordTextFiled.textColor = kWhiteColor;
@@ -130,19 +137,65 @@
     [registerBtn lh_setCornerRadius:WidthScaleSize_H(45)/2 borderWidth:1 borderColor:kWhiteColor];
     
     
-    
-    
 }
 - (void)registerAction:(UIButton *)btn{
     
-    [self.navigationController popToRootVC];
-
-    
+    //判断密码是否相同
+  NSString *validMsg = [self validAllMsg];
+    if (!validMsg) {
+        //注册
+        [self registerRequest];
+    }else {
+        
+    [SVProgressHUD showInfoWithStatus:validMsg];
+        
+    }
 }
 - (void)backAction:(UIButton *)btn {
     
     [self.navigationController popVC];
     
 }
+- (NSString *)validAllMsg{
 
+    if (phoneNumTextFiled.text.length == 0) {
+        
+        return  @"设置密码不能为空！";
+        
+    }else if(passWordTextFiled.text.length == 0) {
+        
+        return  @"请再次输入密码！";
+        
+    }else if(![passWordTextFiled.text isEqualToString:phoneNumTextFiled.text]){
+        return  @"两次密码输入不一致";
+    }
+    
+   return nil;
+
+}
+- (void)registerRequest{
+    
+    NSString *md5PwdStr = [passWordTextFiled.text md5String];
+    
+     [[[HXRegisterAPI registerWithPhoneNum:self.phoneNum password:md5PwdStr] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+     
+         [self loginRequest];
+
+     }];
+
+}
+- (void)loginRequest{
+    
+    NSString *md5PwdStr = [passWordTextFiled.text md5String];
+
+   [[[HXLoginAPI loginWithPhoneNum:self.phoneNum password:md5PwdStr] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+       
+       //保存登录模型
+       self.user = [[HJUser sharedUser].class mj_objectWithKeyValues:responseObject];
+       [self.user write];
+       [self.navigationController popToRootVC];
+       
+   }];
+
+}
 @end

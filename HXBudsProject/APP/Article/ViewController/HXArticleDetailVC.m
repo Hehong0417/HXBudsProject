@@ -9,8 +9,7 @@
 #import "HXArticleDetailVC.h"
 #import <WebKit/WebKit.h>
 #import "LWActiveIncator.h"
-
-
+#import "publishedArticleViewModel.h"
 
 @interface HXArticleDetailVC ()<WKUIDelegate,WKNavigationDelegate>
 
@@ -28,12 +27,16 @@
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc]init];
     WKWebView *wkWebView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) configuration:config];
     wkWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://daily.zhihu.com/story/8819853"]];
-    [wkWebView loadRequest:request];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://daily.zhihu.com/story/8819853"]];
+    
+    NSString *htmlStr = self.articleModel.article_content;
+    
+    [wkWebView loadHTMLString:htmlStr baseURL:nil];
+
+//  [wkWebView loadRequest:request];
     wkWebView.navigationDelegate = self;
     wkWebView.UIDelegate = self;
     [self.view addSubview:wkWebView];
-    
     
 
 }

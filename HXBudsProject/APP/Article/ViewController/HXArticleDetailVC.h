@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "HXHomeInfoArticleModel.h"
+
 @interface HXArticleDetailVC : UIViewController
+
+@property(nonatomic,strong)HXInfoArticleListModel *articleModel;
+
 
 @end

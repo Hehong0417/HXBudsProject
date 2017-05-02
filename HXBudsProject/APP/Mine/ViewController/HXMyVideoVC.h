@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HXSubjectVideoListModel.h"
 
 typedef NS_ENUM(NSUInteger, VideoType) {
-    myVideo,
-    homeInfoVideo,
+    mineVideo,//我收藏的视频
+    teacherVideo,//老师动态的视频
 };
 
 @interface HXMyVideoVC : UIViewController
 
 @property(nonatomic,assign) VideoType videoType;
+
+@property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
 
 @end

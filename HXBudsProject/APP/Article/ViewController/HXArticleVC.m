@@ -11,8 +11,8 @@
 #import "HXArticleCellOne.h"
 #import "HXArticleDetailVC.h"
 #import "UIView+WHC_AutoLayout.h"
-
-
+#import "HXHomeInfoArtcleAPI.h"
+#import "HXHomeInfoArticleModel.h"
 
 @interface HXArticleVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -21,10 +21,19 @@
 @property(nonatomic,strong)NSMutableArray *subjectArr;
 
 @property(nonatomic,assign)BOOL isViewMore;
+@property(nonatomic,strong)HXHomeInfoArticleModel *articleModel;
+
 
 @end
 
 @implementation HXArticleVC
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
+    [self getArticleListData];
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,6 +47,17 @@
     [self.subjectArr addObjectsFromArray:arr];
     
     
+}
+- (void)getArticleListData {
+
+    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
+        
+        self.articleModel = [api.class mj_objectWithKeyValues:responseObject];
+        [self.tabView reloadData];
+        
+    }];
+
 }
 #pragma mark --- tableView delegate
 
@@ -66,7 +86,7 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.articleType = homeArticle;
-    cell.contentLab.text = @"如果您觉得本文非常有用，请随意打赏！鼓励鼓励!如果您觉得本文非常有用，请随意打赏！鼓励鼓励!如果您觉得本文非常有用，请随意打赏！鼓励鼓励!";
+    cell.model = self.articleModel.varList[indexPath.row];
     cell.nav = self.navigationController;
     return cell;
     }
@@ -82,7 +102,7 @@
     if (section == 0) {
         return 1;
     }else{
-        return 3;
+        return self.articleModel.varList.count;
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -170,6 +190,7 @@
     if (indexPath.section == 1) {
         
         HXArticleDetailVC *vc = [HXArticleDetailVC new];
+        vc.articleModel = self.articleModel.varList[indexPath.row];
         [self.navigationController pushVC:vc];
         
     }

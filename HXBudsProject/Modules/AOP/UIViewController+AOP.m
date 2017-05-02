@@ -87,7 +87,6 @@
             [backButton setTapActionWithBlock:^{
                   [weakController.navigationController popViewControllerAnimated:YES];
             }];
-            
             controller.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
         }
         if ([NSStringFromClass([controller class]) hasPrefix:@"HX"] && ([controller isKindOfClass:NSClassFromString(@"HXHomeCVC")]||[controller isKindOfClass:NSClassFromString(@"HXArticleVC")]||[controller isKindOfClass:NSClassFromString(@"HXPersonCenterVC")]||[controller isKindOfClass:NSClassFromString(@"HXVideoCVC")])) {

@@ -12,6 +12,7 @@
 #import "imageSelectController.h"
 #import "LNNotificationsUI.h"
 #import "HXChooseSujectVC.h"
+#import "HXuploadImageAPI.h"
 
 @interface WPViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, WPImageMetaViewControllerDelegate,PYSearchViewControllerDelegate>
 {
@@ -140,15 +141,15 @@
     [self.view endEditing:YES];
 
     
-    if(_viewModel.content.length>0){
-        
-//        _alartViewController = [[AlartViewController alloc] initTitle:NSLocalizedString(@"sureToSaveDraft", @"是否保留草稿?") positiveButton:NSLocalizedString(@"sure", @"确认") negativeButton:NSLocalizedString(@"cancel", @"取消") showCloseButton:NO];
-//        _alartViewController.expendAbleAlartViewDelegate = self;
-//        _alartViewController.view.tag = 1;
-//        [_alartViewController showView:^(BOOL finished){}];
-        return;
-        
-    }
+//    if(_viewModel.content.length>0){
+//        
+////        _alartViewController = [[AlartViewController alloc] initTitle:NSLocalizedString(@"sureToSaveDraft", @"是否保留草稿?") positiveButton:NSLocalizedString(@"sure", @"确认") negativeButton:NSLocalizedString(@"cancel", @"取消") showCloseButton:NO];
+////        _alartViewController.expendAbleAlartViewDelegate = self;
+////        _alartViewController.view.tag = 1;
+////        [_alartViewController showView:^(BOOL finished){}];
+//        return;
+//        
+//    }
     
     [self dismissViewControllerAnimated:YES completion:^(){
     
@@ -206,7 +207,8 @@
         _viewModel.cover_image_url = [self.editorView getCoverImage];
         NSArray *allImage = [self.editorView getAllImage];
         
-        NSLog(@"内容:%@",_viewModel.content);
+        NSLog(@"allImage:%@",allImage);
+        
         
     }
     
@@ -500,15 +502,21 @@
     options.version = PHImageRequestOptionsVersionCurrent;
     options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     NSString *imageID = [[NSUUID UUID] UUIDString];
-    NSString *path = [NSString stringWithFormat:@"%@/%@.jpg", NSTemporaryDirectory(), imageID];
+//    NSString *path = [NSString stringWithFormat:@"%@/%@.jpg", NSTemporaryDirectory(), imageID];
+    
     [[PHImageManager defaultManager] requestImageDataForAsset:asset
                                                       options:options
                                                 resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
-        [imageData writeToFile:path atomically:YES];
+//        [imageData writeToFile:path atomically:YES];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.editorView insertLocalImage:[[NSURL fileURLWithPath:path] absoluteString] uniqueId:imageID];
             
-            [self submitImage:imageData imageID:imageID];
+            [self submitImageMethod:imageData imageID:imageID completionHandle:^(NSString *pathStr) {
+                
+                [self.editorView insertLocalImage:[[NSURL URLWithString:pathStr] absoluteString] uniqueId:imageID];
+            }];
+//            [self submitImage:imageData imageID:imageID];
+//            [self.editorView insertLocalImage:[[NSURL fileURLWithPath:@""] absoluteString] uniqueId:imageID];
+            
         });
     }];
 
@@ -659,9 +667,25 @@
 
 -(void)submitImage:(NSData *)imageData imageID:(NSString *)imageID{
     
-    [self submitImageMethod:imageData imageID:imageID];
+//    [self submitImageMethod:imageData imageID:imageID];
 }
--(void)submitImageMethod:(NSData *)imageData imageID:(NSString *)imageID{
+- (AFHTTPRequestOperationManager *)manager {
+    if (!_manager) {
+        _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        //        _manager = [AFHTTPRequestOperationManager manager];
+        _manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:API_BASE_URL]];
+        _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/plain", NULL];
+        // 设置超时时间
+//        _manager.requestSerializer.timeoutInterval = kTimeoutInterval;
+        
+        [_manager.requestSerializer setValue:APP_key forHTTPHeaderField:@"APP_key"];
+        [_manager.requestSerializer setValue:[[APP_key stringByAppendingString:API_APP_BASE_URL] md5String]forHTTPHeaderField:@"APP_scode"];
+    }
+    
+    return _manager;
+}
+
+- (void)submitImageMethod:(NSData *)imageData imageID:(NSString *)imageID completionHandle:(void(^)(NSString *pathStr))completionHandle{
     
     NSData *data = [_viewModel.content dataUsingEncoding:NSNonLossyASCIIStringEncoding];
     NSString *goodValue = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -669,22 +693,34 @@
     NSLog(@"Text:%@",goodValue);
     
     
-    NSDictionary *params = @{@"publishDesc":goodValue,@"mod":@"1",@"act":@"57"};
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[BASEURL stringByAppendingString:@"api/main"] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        
-        
-        
-        [formData appendPartWithFileData:imageData name:[NSString stringWithFormat:@"pic%d",1] fileName:[NSString stringWithFormat:@"publish%d.jpg",1] mimeType:@"image/jpg"];
-        
-        
-    } error:nil];
+//    NSDictionary *params = @{@"publishDesc":goodValue,@"mod":@"1",@"act":@"57"};
+//    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:[API_BASE_URL stringByAppendingString:@"goaling/article/media_upload"] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        
+//        
+//        [formData appendPartWithFileData:imageData name:[NSString stringWithFormat:@"pic%d",1] fileName:[NSString stringWithFormat:@"publish%d.jpg",1] mimeType:@"image/jpg"];
+//        
+//        
+//    } error:nil];
+//    
+//
     
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    
-    NSProgress *progress;
-    
-    
-    NSURLSessionUploadTask *uploadTask;
+    [[[HXuploadImageAPI uploadImageWithphotoFile:imageData] netWorkClient] uploadFileInView:self.view successBlock:^(id responseObject) {
+        
+       NSString *pathStr = responseObject[@"model"][@"path"];
+        if (completionHandle) {
+            
+            completionHandle(pathStr);
+
+            
+        }
+        
+    }];
+//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//    
+//    NSProgress *progress;
+//    
+//    
+//    NSURLSessionUploadTask *uploadTask;
 //    uploadTask = [manager
 //                  uploadTaskWithStreamedRequest:request
 //                  progress:&progress
@@ -723,15 +759,15 @@
 //    
 //    [uploadTask resume];
     
-    [progress setUserInfoObject:imageID forKey:@"imageID"];
-    
-    
-    // 3. 监听NSProgress对象
-    [progress addObserver:self
-               forKeyPath:@"fractionCompleted"
-                  options:NSKeyValueObservingOptionNew context:nil];
-    
-    self.mediaAdded[imageID] = progress;
+//    [progress setUserInfoObject:imageID forKey:@"imageID"];
+//    
+//    
+//    // 3. 监听NSProgress对象
+//    [progress addObserver:self
+//               forKeyPath:@"fractionCompleted"
+//                  options:NSKeyValueObservingOptionNew context:nil];
+//    
+//    self.mediaAdded[imageID] = progress;
 }
 // 监听处理方法
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -851,14 +887,17 @@
 -(void)addImageFromCamera:(UIImage *)image{
     
     NSString *imageID = [[NSUUID UUID] UUIDString];
-    NSString *path = [NSString stringWithFormat:@"%@/%@.jpg", NSTemporaryDirectory(), imageID];
+//    NSString *path = [NSString stringWithFormat:@"%@/%@.jpg", NSTemporaryDirectory(), imageID];
     
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     
-    [imageData writeToFile:path atomically:YES];
+//    [imageData writeToFile:path atomically:YES];
     
-    [self submitImage:imageData imageID:imageID];
-    [self.editorView insertLocalImage:[[NSURL fileURLWithPath:path] absoluteString] uniqueId:imageID];
+    [self submitImageMethod:imageData imageID:imageID completionHandle:^(NSString *pathStr) {
+        
+       [self.editorView insertLocalImage:[[NSURL URLWithString:pathStr] absoluteString] uniqueId:imageID];
+    }];
+   
     
 }
 -(void)autoSaveArticle:(id)args{

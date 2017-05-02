@@ -10,10 +10,15 @@
 #import "HXCourseDetailCommentCell.h"
 #import "HXGradeCommentCell.h"
 #import "HXGradeCommentView.h"
+#import "HXcurriculumreviewAPI.h"
+#import "HXcurriculumreviewModel.h"
+#import "HXReViewAddAPI.h"
+
 
 @interface HXCourseDetailThreeVC ()<UITableViewDelegate, UITableViewDataSource,HXGradeCommentCellDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) HXcurriculumreviewModel *reviewModel;
 
 @end
 
@@ -24,9 +29,19 @@
 
     //评价
     [self addTableView];
-
+    
+    [self getcurriculumreviewData];
+}
+- (void)getcurriculumreviewData{
+    
+    [[[HXcurriculumreviewAPI getcurriculumReviewWithCurriculum_id:self.curriculum_id limit:@4] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        HXcurriculumreviewModel *api = [HXcurriculumreviewModel new];
+//        self.reviewModel = [api.class mj_objectWithKeyValues:responseObject];
+//        [self.tableView reloadData];
+    }];
     
 }
+
 - (void)addTableView{
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - WidthScaleSize_H(200) - WidthScaleSize_H(44)- 64- WidthScaleSize_H(49)) style:UITableViewStyleGrouped];
@@ -109,6 +124,15 @@
 
   //弹框
     HXGradeCommentView *commentView = [[HXGradeCommentView alloc]init];
+    commentView.addReviewBlock = ^(NSString *content, NSNumber *starNum){
+      
+     [[[HXReViewAddAPI addReViewWithcurriculum_id:self.curriculum_id review_content:content star:starNum] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+         
+         [self.tableView reloadData];
+         
+     }];
+        
+    };
     [commentView showAnimated:YES];
 
 

@@ -8,6 +8,10 @@
 
 #import "LHAlertView.h"
 
+typedef void(^addReviewBlock)(NSString *content,NSNumber *starNum);
+
 @interface HXGradeCommentView : LHAlertView
+
+@property(nonatomic,copy) addReviewBlock addReviewBlock;
 
 @end

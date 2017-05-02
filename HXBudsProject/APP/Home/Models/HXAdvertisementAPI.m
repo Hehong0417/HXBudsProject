@@ -15,7 +15,7 @@
     HXAdvertisementAPI *api = [self new];
     
     api.subUrl = API_GET_LIST_anon;
-    
+    api.parametersAddToken = NO;
     return api;
 
 }

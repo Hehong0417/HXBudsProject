@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -29,8 +28,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="琵琶/国家一级演员" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oG-eA-zy1">
-                        <rect key="frame" x="110" y="48" width="166" height="17"/>
+                        <rect key="frame" x="110" y="48" width="124" height="17"/>
                         <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="124" id="Lnk-EK-vnz"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="dtG-VJ-Zmi"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -68,7 +68,6 @@
                 <constraint firstItem="9dr-fY-FvQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="22" id="Osg-7o-F76"/>
                 <constraint firstItem="9dr-fY-FvQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="14" id="Yz1-e6-Shk"/>
                 <constraint firstItem="4oG-eA-zy1" firstAttribute="leading" secondItem="ChY-Ck-Jxn" secondAttribute="leading" id="awH-6o-VXZ"/>
-                <constraint firstItem="c8s-nD-nRS" firstAttribute="leading" secondItem="4oG-eA-zy1" secondAttribute="trailing" constant="8" id="jam-aM-HHY"/>
                 <constraint firstItem="ChY-Ck-Jxn" firstAttribute="leading" secondItem="9dr-fY-FvQ" secondAttribute="trailing" constant="14" id="nWQ-SR-9aR"/>
                 <constraint firstAttribute="trailing" secondItem="c8s-nD-nRS" secondAttribute="trailing" constant="16" id="uuL-hc-3wG"/>
             </constraints>
@@ -78,6 +77,7 @@
                 <outlet property="introduceLab" destination="4oG-eA-zy1" id="PGa-io-gsu"/>
                 <outlet property="teacherNameLab" destination="ChY-Ck-Jxn" id="eaH-Mv-oa8"/>
             </connections>
+            <point key="canvasLocation" x="24.5" y="52"/>
         </collectionViewCell>
     </objects>
     <resources>

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -101,7 +100,11 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="editBtn" destination="Mxy-sM-jF8" id="G3J-Tk-iXK"/>
+                <outlet property="followtenum" destination="6bq-ya-vHu" id="7yH-j5-UVK"/>
+                <outlet property="ico" destination="3bi-ad-f3c" id="MTH-n9-21G"/>
+                <outlet property="introduce" destination="cPm-eM-BQW" id="g6h-5Z-uvU"/>
                 <outlet property="messageBtn" destination="8MN-1f-Y1G" id="VVz-Pe-7yq"/>
+                <outlet property="nickName" destination="iU2-uC-6qo" id="Eun-ED-oya"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>

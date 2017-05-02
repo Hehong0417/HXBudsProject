@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HXHomeInfoArticleModel.h"
+
 typedef NS_ENUM(NSUInteger, ArticleType) {
     homeArticle,
     homeInfoArticle,
@@ -27,6 +29,7 @@ typedef NS_ENUM(NSUInteger, ArticleType) {
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLab;
 @property (weak, nonatomic) IBOutlet UIView *downLineView;
 
+@property (strong, nonatomic) HXInfoArticleListModel *model;
 
 @property(nonatomic,strong) UINavigationController *nav;
 + (instancetype)initArticleCellTwoWithXib;

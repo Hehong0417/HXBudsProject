@@ -14,13 +14,15 @@
 #import "HXMyLikeVC.h"
 #import "HXMineLoginHeadView.h"
 #import "HXMyArticleVC.h"
-#import "HXMyAttetionVC.h"
+#import "HXMyAttentionSGVC.h"
 #import "HXFriendDynamicStateVC.h"
 #import "HXAdviceFaceBackVC.h"
 #import "HXBrowserRecordVC.h"
 #import "HXMessageVC.h"
 #import "HXMyVideoVC.h"
 #import <UShareUI/UShareUI.h>
+#import "HXIsLoginAPI.h"
+#import "HJUser.h"
 
 
 @interface HXPersonCenterVC ()<HXMineLearnCellDelegate>
@@ -34,6 +36,13 @@
     
     [super viewWillAppear:animated];
     
+    [self isLoginCompleteHandle:^(BOOL isLogin) {
+        
+        if (isLogin) {
+            
+        }
+        
+    }];
 }
 
 
@@ -42,22 +51,55 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    [self isLoginCompleteHandle:^(BOOL isLogin) {
+        UIView *headView;
+        if (isLogin) {
+           headView = [self isLoginState];
+        }else{
+        
+            headView = [self isNoLoginState];
+        }
+        self.tableV.tableHeaderView = headView;
+
+    }];
+    
+   
+    //
+    
+
+    
+}
+- (UIView *)isNoLoginState{
+
     HXMineHeadView *mineHeadView = [HXMineHeadView initmineHeadViewWithXib];
     mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
     mineHeadView.nav = self.navigationController;
-    //
-//        HXMineLoginHeadView *mineHeadView = [HXMineLoginHeadView initMineLoginHeadViewWithXib];
-//        mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
-//        mineHeadView.nav = self.navigationController;
-//    
-//        [mineHeadView setTapActionWithBlock:^{
-//    
-//            HXMyLikeVC *vc = [HXMyLikeVC new];
-//            vc.titleStr = @"我的主页";
-//            [self.navigationController pushVC:vc];
-//    
-//        }];
-    self.tableV.tableHeaderView = mineHeadView;
+    return mineHeadView;
+}
+- (UIView *)isLoginState{
+
+        HXMineLoginHeadView *mineHeadView = [HXMineLoginHeadView initMineLoginHeadViewWithXib];
+        mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
+        mineHeadView.nav = self.navigationController;
+
+        [mineHeadView setTapActionWithBlock:^{
+
+            HXMyLikeVC *vc = [HXMyLikeVC new];
+            vc.titleStr = @"我的主页";
+            vc.dynamicType = mineDynamicType;
+            [self.navigationController pushVC:vc];
+    
+        }];
+    return mineHeadView;
+}
+- (void)isLoginCompleteHandle:(void (^)(BOOL isLogin))CompleteHandle{
+
+    HJLoginModel *loginModel = [HJUser sharedUser].pd;
+    [[[HXIsLoginAPI isLoginWithToken:loginModel.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
+        BOOL isLogin = responseObject[@"pd"][@"islogin"];
+        CompleteHandle(isLogin);
+    }];
     
 }
 - (NSArray *)groupTitles {
@@ -114,7 +156,7 @@
     NSLog(@"left");
     //我的文章
     HXMyArticleVC *vc = [HXMyArticleVC new];
-    vc.articleType = myArticle;
+    vc.articleType = mineArticle;
     [self.navigationController pushVC:vc];
     
 }
@@ -123,6 +165,7 @@
     NSLog(@"right");
     //我的视频
     HXMyVideoVC *vc = [HXMyVideoVC new];
+    vc.videoType = mineVideo;
 
     [self.navigationController pushVC:vc];
 }
@@ -158,7 +201,7 @@
         [self.navigationController pushVC:vc];
         
     }else if (row == 2){
-        HXMyAttetionVC *vc = [HXMyAttetionVC new];
+        HXMyAttentionSGVC *vc = [HXMyAttentionSGVC new];
         [self.navigationController pushVC:vc];
         
     }else if (row == 3){

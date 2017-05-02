@@ -12,6 +12,10 @@
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *commentIco_ImagV;
+@property (weak, nonatomic) IBOutlet UILabel *curriReView_Title;
+@property (weak, nonatomic) IBOutlet UILabel *ctime;
+@property (weak, nonatomic) IBOutlet UILabel *reViewContent;
+@property (weak, nonatomic) IBOutlet UILabel *comment;
 
 + (instancetype)initCourseDetailCommentCellWithXib;
 

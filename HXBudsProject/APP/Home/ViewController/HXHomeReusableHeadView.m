@@ -9,7 +9,7 @@
 #import "HXHomeReusableHeadView.h"
 #import "HXSubjectVideoVC.h"
 #import "JKCustomAlertView.h"
-
+#import "HXteacherList.h"
 
 @interface HXHomeReusableHeadView ()<SDCycleScrollViewDelegate>
 
@@ -36,6 +36,12 @@
     
     [self addSubview:self.cycleSrollView];
     
+
+}
+- (void)layoutSubviews{
+
+
+    
     UIView *categoryView = [UIView lh_viewWithFrame:CGRectMake(0, CGRectGetMaxY(_cycleSrollView.frame), SCREEN_WIDTH, 40) backColor:kWhiteColor];
     //分类图片
     UIImageView *categoryImageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 2.5, 10, 35)];
@@ -56,13 +62,17 @@
     
     XYQButton *changeBtn = [XYQButton ButtonWithFrame:CGRectMake(SCREEN_WIDTH - WidthScaleSize_W(80), 2, WidthScaleSize_W(80), 40) imgaeName:self.imageName titleName:self.rightBtnTitle contentType:self.contentType buttonFontAttributes:self.btnFontAttributes tapAction:^(XYQButton *button) {
         
-        
+        [self.nav pushVC:self.vc];
+
     }];
-    changeBtn.enabled = NO;
+//    changeBtn.enabled = NO;
+    self.rightBtn = changeBtn;
     [categoryView addSubview:changeBtn];
     [self addSubview:categoryView];
 
+
 }
+
 - (NSArray *)getImageURLGroup {
 
              NSArray *imageURLGroup = @[

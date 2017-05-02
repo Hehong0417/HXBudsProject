@@ -10,4 +10,8 @@
 
 @interface HXSubjectVideoVC : UIViewController
 
+@property(nonatomic,strong) NSString *currilum_id;
+@property(nonatomic,strong) NSString *videoTitle;
+
+
 @end

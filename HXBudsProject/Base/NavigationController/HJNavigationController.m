@@ -64,7 +64,7 @@
 
 @end
 
-@interface HJNavigationController ()
+@interface HJNavigationController ()<UIGestureRecognizerDelegate>
 @end
 
 
@@ -162,6 +162,12 @@
     
 //    [self.view addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)]];
     
+    WEAK_SELF();
+    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        
+        self.interactivePopGestureRecognizer.delegate = weakSelf;
+    }
+    
 }
 
 - (void)showRightMenu
@@ -188,7 +194,7 @@
         //        vcBtnItem.leftBarButtonItem = [UIBarButtonItem BarButtonItemWithImageName:@"back_bt_7" highImageName:@"back_bt_7" title:[[self.childViewControllers lastObject] title] target:self action:@selector(back)];
     
     }
-    
+   
     [super pushViewController:viewController animated:YES];
 }
 - (void)back

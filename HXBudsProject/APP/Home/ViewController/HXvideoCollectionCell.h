@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HXSubjectVideoListModel.h"
 
 @interface HXvideoCollectionCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *videoImagV;
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *videoTitleLab;
 @property (weak, nonatomic) IBOutlet UILabel *viewsLab;
 @property (weak, nonatomic) IBOutlet UILabel *commentLab;
+@property(nonatomic,strong) HXSubjectVideoModel *model;
 
 
 @end

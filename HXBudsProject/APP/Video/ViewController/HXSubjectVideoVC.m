@@ -9,11 +9,14 @@
 #import "HXSubjectVideoVC.h"
 #import "HXSujectVideoListCell.h"
 #import "HXCourseDetailAnotherVC.h"
-
+#import "HXSubjectVideoAPI.h"
+#import "HXSubjectVideoListModel.h"
 
 @interface HXSubjectVideoVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
+
+@property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
 
 @end
 
@@ -22,13 +25,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-   self.title = @"专题视频";
+    [self getSubjectVideoList];
+
+    self.title = self.videoTitle?self.videoTitle:@"专题视频";
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
 
 }
+- (void)getSubjectVideoList {
+    
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@4 theteacherId:nil] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
+        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+        
+        self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+        
+        [self.tableView reloadData];
+    }];
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -38,7 +56,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 7;
+    return self.SubjectVideoListModel.varList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -66,6 +84,8 @@
         cell = [HXSujectVideoListCell initSubjectVideoListCellWithXib];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
+    cell.model = model;
     
     return cell;
     
@@ -73,6 +93,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
+    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
+    vc.curriculum_id = model.curriculum_id;
     [self.navigationController pushVC:vc];
     
 }

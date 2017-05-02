@@ -26,6 +26,9 @@
 @property(nonatomic,strong)UILabel *headTitleLab;
 @property(nonatomic,strong)XYQButton *rightBtn;
 @property(nonatomic,strong)NSArray *imageURLStringsGroup;
+@property(nonatomic,strong)UIViewController *vc;
+@property(nonatomic,strong)UINavigationController *nav;
+
 
 
 @end
