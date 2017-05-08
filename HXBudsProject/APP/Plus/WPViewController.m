@@ -191,7 +191,6 @@
     }
     
     
-    
     if(_viewModel.content.length==0){
         
  
@@ -207,7 +206,7 @@
         _viewModel.cover_image_url = [self.editorView getCoverImage];
         NSArray *allImage = [self.editorView getAllImage];
         
-        NSLog(@"allImage:%@",allImage);
+        NSLog(@"content:%@",_viewModel.content);
         
         
     }
@@ -229,8 +228,6 @@
     [self.editorView saveSelection];
     [super prepareForSegue:segue sender:sender];
 }
-
-
 
 #pragma mark - WPEditorViewControllerDelegate
 
@@ -502,22 +499,18 @@
     options.version = PHImageRequestOptionsVersionCurrent;
     options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     NSString *imageID = [[NSUUID UUID] UUIDString];
-//    NSString *path = [NSString stringWithFormat:@"%@/%@.jpg", NSTemporaryDirectory(), imageID];
+    NSString *path = [NSString stringWithFormat:@"%@/%@.jpg", NSTemporaryDirectory(), imageID];
     
     [[PHImageManager defaultManager] requestImageDataForAsset:asset
                                                       options:options
                                                 resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
-//        [imageData writeToFile:path atomically:YES];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [self submitImageMethod:imageData imageID:imageID completionHandle:^(NSString *pathStr) {
-                
-                [self.editorView insertLocalImage:[[NSURL URLWithString:pathStr] absoluteString] uniqueId:imageID];
-            }];
-//            [self submitImage:imageData imageID:imageID];
-//            [self.editorView insertLocalImage:[[NSURL fileURLWithPath:@""] absoluteString] uniqueId:imageID];
-            
-        });
+        [imageData writeToFile:path atomically:YES];
+
+        [self.editorView insertLocalImage:[[NSURL fileURLWithPath:path] absoluteString] uniqueId:imageID];
+        [self submitImageMethod:imageData imageID:imageID completionHandle:^(NSString *pathStr) {
+                                                        
+        }];
+
     }];
 
 //    NSProgress *progress = [[NSProgress alloc] initWithParent:nil userInfo:@{ @"imageID": imageID,
@@ -701,19 +694,14 @@
 //        
 //        
 //    } error:nil];
-//    
+//
 //
     
-    [[[HXuploadImageAPI uploadImageWithphotoFile:imageData] netWorkClient] uploadFileInView:self.view successBlock:^(id responseObject) {
+    [[[HXuploadImageAPI uploadImageWithphotoFile:imageData] netWorkClient] uploadFileInView:nil successBlock:^(id responseObject) {
         
        NSString *pathStr = responseObject[@"model"][@"path"];
-        if (completionHandle) {
-            
-            completionHandle(pathStr);
-
-            
-        }
-        
+        [self.editorView replaceLocalImageWithRemoteImage:pathStr uniqueId:imageID];
+//        completionHandle(pathStr);
     }];
 //    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 //    
@@ -866,11 +854,12 @@
         if (!assetURL) {
             
             UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
+            
+            
             [self addImageFromCamera:image];
         }
         
         else{
-            
             
             [self addAssetToContent:assetURL];
         }
@@ -887,15 +876,16 @@
 -(void)addImageFromCamera:(UIImage *)image{
     
     NSString *imageID = [[NSUUID UUID] UUIDString];
-//    NSString *path = [NSString stringWithFormat:@"%@/%@.jpg", NSTemporaryDirectory(), imageID];
+    NSString *path = [NSString stringWithFormat:@"%@/%@.jpg", NSTemporaryDirectory(), imageID];
     
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     
-//    [imageData writeToFile:path atomically:YES];
+    [imageData writeToFile:path atomically:YES];
     
+    [self.editorView insertLocalImage:[[NSURL URLWithString:path] absoluteString] uniqueId:imageID];
+
     [self submitImageMethod:imageData imageID:imageID completionHandle:^(NSString *pathStr) {
         
-       [self.editorView insertLocalImage:[[NSURL URLWithString:pathStr] absoluteString] uniqueId:imageID];
     }];
    
     

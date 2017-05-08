@@ -74,12 +74,14 @@
         
         HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
         vc.curriculum_id = model.curriculum_id;
+        vc.playImageStr = model.curr_picture;
         [self.nav pushVC:vc];
     }];
     [self.videoTitleLab setTapActionWithBlock:^{
         
         HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
         vc.curriculum_id = model.curriculum_id;
+        vc.playImageStr = model.curr_picture;
         [self.nav pushVC:vc];
         
     }];

@@ -57,18 +57,18 @@
     [self.collectCountLab whc_Width:72];
     [self.collectCountLab whc_RightSpace:10];
     
-    [self.rightIconImgV whc_Height:67];
-    [self.rightIconImgV whc_Width:67];
-    [self.rightIconImgV whc_TopSpace:10 toView:self.collectCountLab];
-    [self.rightIconImgV whc_RightSpace:10];
-    
     [self.contentLab whc_TopSpace:10 toView:self.teacherIconImagV];
     [self.contentLab whc_LeftSpace:15];
-    [self.contentLab whc_RightSpaceEqualView:self.rightIconImgV offset:67+10];
+    [self.contentLab whc_RightSpace:87];
     [self.contentLab whc_AutoHeight];
     
+    [self.rightIconImgV whc_Height:67];
+    [self.rightIconImgV whc_Width:67];
+    [self.rightIconImgV whc_TopSpace:0 toView:self.collectCountLab];
+    [self.rightIconImgV whc_LeftSpace:10 toView:self.contentLab];
+    
     [self.subjectLab whc_AutoWidth];
-    [self.contentLab whc_LeftSpace:15];
+    [self.subjectLab whc_LeftSpace:15];
     [self.subjectLab whc_Height:22];
     [self.subjectLab whc_TopSpace:10 toView:self.contentLab];
     
@@ -87,8 +87,8 @@
     [self.admireCountLab whc_TopSpaceEqualView:self.subjectLab];
     [self.admireCountLab whc_HeightEqualView:self.subjectLab];
     
-    [self.downLineView whc_LeftSpace:10 ];
-    [self.downLineView whc_TopSpace:10 toView:self.admireCountLab];
+    [self.downLineView whc_LeftSpace:10];
+    [self.downLineView whc_TopSpace:20 toView:self.admireCountLab];
     [self.downLineView whc_RightSpace:10];
     [self.downLineView whc_Height:1];
     
@@ -136,16 +136,18 @@
     }
     self.timeLab.text = model.ctime;
     
-    [self.teacherIconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(@"")] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
-    [self.rightIconImgV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(@"")] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
-//    self.teacherNameLab.text = ;
+    [self.teacherIconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    [self.rightIconImgV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.article_cover)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    self.teacherNameLab.text = model.The_name;
     self.contentLab.text = model.article_title;
     NSString *read;
     read = model.reading?model.reading:@"0";
     self.viewsLab.text = [NSString stringWithFormat:@"阅读·%@",read];
-//      self.commentCountLab.text = [NSString stringWithFormat:@"评论·%@",];
-//    self.admireCountLab.text = [NSString stringWithFormat:@"赞赏·%@",];
-//      self.commentCountLab.text = [NSString stringWithFormat:@"收藏|%@",];
+    
+    self.commentCountLab.text = [NSString stringWithFormat:@"评论·%@",model.comment?model.comment:@"0"];
+    self.admireCountLab.text = [NSString stringWithFormat:@"赞赏·%@",model.areward?model.areward:@"0"];
+    
+//    self.commentCountLab.text = [NSString stringWithFormat:@"收藏|%@",];
     
     [self.teacherIconImagV setTapActionWithBlock:^{
         HXMyLikeVC *vc = [HXMyLikeVC new];

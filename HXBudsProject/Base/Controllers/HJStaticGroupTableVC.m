@@ -8,12 +8,14 @@
 
 #import "HJStaticGroupTableVC.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "HXuploadIconAPI.h"
+
 
 static const CGFloat kNormalTableSectionHeaderViewHeight = 30;
 static const CGFloat kNormalGroupSpacing = 10;
 static const CGFloat kNormalCellHeight = 44;
 
-@interface HJStaticGroupTableVC () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface HJStaticGroupTableVC () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 
 @property (nonatomic, copy) idBlock finshiSelectedPhoto;
 @end
@@ -166,7 +168,11 @@ static const CGFloat kNormalCellHeight = 44;
             if ([indicatorIndexPath isEqual:indexPath]) {
                 
                 UITextField *textFiled = [UITextField lh_textFieldWithFrame:CGRectMake(114, 0, SCREEN_WIDTH-44, WidthScaleSize_H(44)) placeholder:self.textFieldPlaceholders[indexPath.row - 1] font:FONT(14) textAlignment:NSTextAlignmentLeft backgroundColor:kWhiteColor];
-                textFiled.text = self.textFieldTitles[indexPath.row -1];
+                textFiled.delegate = self;
+                textFiled.tag = indexPath.row;
+                if (indexPath.row == 2) {
+                    textFiled.keyboardType = UIKeyboardTypeNumberPad;
+                }
                 self.cellTextField = textFiled;
                 [cell.contentView addSubview:textFiled];
             }
@@ -254,7 +260,11 @@ static const CGFloat kNormalCellHeight = 44;
         [self showPhotoSheetActionWithFinishSelectedBlock:^(UIImage *image) {
             self.cellHeadImageView.image = image;
             NSData *imgData = UIImageJPEGRepresentation(self.cellHeadImageView.image, 1.0);
-
+            //上传头像
+            [[[HXuploadIconAPI uploadImageWithphotoFile:imgData] netWorkClient] uploadFileInView:nil successBlock:^(id responseObject) {
+                
+            }];
+            //
             }];
     }
 }
@@ -420,6 +430,8 @@ static const CGFloat kNormalCellHeight = 44;
     
     return nil;
 }
+
+
 
 
 @end

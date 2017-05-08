@@ -15,5 +15,6 @@
 
 @property (nonatomic, retain)NSString * curriculum_id;
 
+@property(nonatomic,strong) NSString *playImageStr;
 
 @end

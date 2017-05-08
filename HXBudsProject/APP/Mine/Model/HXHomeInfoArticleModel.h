@@ -24,4 +24,11 @@
 @property(nonatomic,strong) NSString *comment;
 @property(nonatomic,strong) NSString *reading;
 @property(nonatomic,strong) NSString *users_id;
+@property(nonatomic,strong) NSString *The_headportrait;
+@property(nonatomic,strong) NSString *article_cover;
+@property(nonatomic,strong) NSString *appreciate;
+@property(nonatomic,strong) NSString *The_name;
+@property(nonatomic,strong) NSString *areward;
+
+
 @end

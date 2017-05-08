@@ -86,6 +86,9 @@ typedef NS_ENUM(NSInteger, PYSearchResultShowMode) { // 搜索结果显示方式
 @property (nonatomic, strong) NSMutableArray<UIColor *> *colorPol;
 /** 热门搜索 */
 @property (nonatomic, copy) NSArray<NSString *> *hotSearches;
+/** 热门搜索Id */
+@property (nonatomic, copy) NSArray<NSString *> *hotSearches_ids;
+
 /** 所有的热门标签 */
 @property (nonatomic, copy) NSArray<UILabel *> *hotSearchTags;
 /** 热门标签头部 */
@@ -135,7 +138,7 @@ typedef NS_ENUM(NSInteger, PYSearchResultShowMode) { // 搜索结果显示方式
  * placeholder : searchBar占位文字
  *
  */
-+ (HXSearchViewController *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches searchBarPlaceholder:(NSString *)placeholder;
++ (HXSearchViewController *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches hotSearches_ids:(NSArray<NSString *> *)hotSearches_ids searchBarPlaceholder:(NSString *)placeholder;
 
 /**
  * 快速创建PYSearchViewController对象
@@ -146,6 +149,6 @@ typedef NS_ENUM(NSInteger, PYSearchResultShowMode) { // 搜索结果显示方式
  * 注意 : delegate(代理)的优先级大于block(即实现了代理方法则block失效)
  *
  */
-+ (HXSearchViewController *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches searchBarPlaceholder:(NSString *)placeholder didSearchBlock:(PYDidSearchBlock)block;
++ (HXSearchViewController *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches hotSearches_ids:(NSArray<NSString *> *)hotSearches_ids searchBarPlaceholder:(NSString *)placeholder didSearchBlock:(PYDidSearchBlock)block;
 
 @end

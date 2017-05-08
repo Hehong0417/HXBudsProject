@@ -8,8 +8,21 @@
 
 #import "HXPersonInfoVC.h"
 #import "HXCommonPickView.h"
+#import "HXgetUserInfoAPI.h"
+#import "HXModifyUserInfoAPI.h"
+
+
 @interface HXPersonInfoVC ()
 @property(nonatomic,strong)NSMutableArray *testArr;
+@property(nonatomic,strong)NSString *nickName;
+@property(nonatomic,strong)NSString *phone;
+@property(nonatomic,strong)NSString *name;
+@property(nonatomic,strong)NSString *hobby;
+@property(nonatomic,strong)IQTextView *introduce;
+@property(nonatomic,strong)NSString *sex;
+@property(nonatomic,strong)NSString *age;
+@property(nonatomic,strong)UILabel *sexLabel;
+@property(nonatomic,strong)UILabel *ageLabel;
 
 @end
 
@@ -19,23 +32,74 @@
     [super viewDidLoad];
     
    self.title = @"个人信息";
-    UIButton *saveBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 80, 80) target:self action:@selector(saveAction:) title:@"保存" titleColor:APP_COMMON_COLOR font:FONT(16) backgroundColor:kClearColor];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:saveBtn];
-
-    self.testArr = [NSMutableArray arrayWithObjects:@"2",@"3",@"4", nil];
+    UIButton *saveBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 60, 80) target:self action:@selector(saveAction:) title:@"保存" titleColor:APP_COMMON_COLOR font:FONT(16) backgroundColor:kClearColor];
+    UIBarButtonItem *rightBarItem =  [[UIBarButtonItem alloc]initWithCustomView:saveBtn];
+    rightBarItem.width = -10;
+    self.navigationItem.rightBarButtonItem = rightBarItem;
+    saveBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     
     self.tableV.backgroundColor = KVCBackGroundColor;
     
     
-//    UIButton *exitBtn = [UIButton lh_buttonWithFrame:CGRectMake(60, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>) target:<#(id)#> action:<#(SEL)#> image:<#(UIImage *)#> title:<#(NSString *)#> titleColor:<#(UIColor *)#> font:<#(UIFont *)#>]
+    [self getMyInfoData];
 }
+- (void)getMyInfoData{
+    
+    [[[HXgetUserInfoAPI getUserInfo] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
 
+    }];
+    
+}
+- (NSMutableArray *)testArr{
+    if (!_testArr) {
+        _testArr = [NSMutableArray array];
+    }
+    return _testArr;
+}
 - (void)saveAction:(UIButton *)btn{
- 
-    [self.navigationController popVC];
 
+    [self.view endEditing:YES];
+    
+    self.hobby = self.introduce.text;
+    
+   NSString *validMsg = [self validMsg];
+    if (validMsg) {
+        [SVProgressHUD showInfoWithStatus:validMsg];
+    }else{
+        
+    [[[HXModifyUserInfoAPI ModifyUserInfoWithNickname:self.nickName username:self.name phone:self.phone sex:self.sex age:self.age hobby:self.hobby] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        [SVProgressHUD showSuccessWithStatus:@"保存成功"];
+        [self.navigationController popVC];
+
+    }];
+    
+    }
 
 }
+- (NSString *)validMsg{
+
+    if (!self.nickName) {
+        return @"请输入昵称";
+    }else if(!self.name){
+    
+        return @"请输入姓名";
+    }else if(!self.phone){
+     
+        return @"请输入手机号";
+    }else if(!self.hobby){
+        return @"请输入个人描述";
+    }else if(!self.sex){
+        return @"请选择性别";
+    }else if(!self.age){
+        return @"请选择年龄";
+    }else{
+        return nil;
+    }
+
+}
+
+
 - (NSArray *)groupTitles {
     
     return @[@[@"头像",@"昵称",@"手机",@"姓名",@"性别",@"年龄"],@[@""]];
@@ -44,11 +108,6 @@
 - (NSArray *)groupIcons {
     
     return @[@[@" ",@" ",@" ",@" ",@" ",@" "],@[@""]];
-    
-}
-- (NSArray *)textFieldTitles{
-    
-    return self.testArr;
     
 }
 
@@ -76,15 +135,23 @@
     
     if (indexPath.section == 0) {
         UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        if (indexPath.row == 4) {
+            self.sexLabel = [[UILabel alloc]initWithFrame:CGRectMake(114, 0, SCREEN_WIDTH-44, WidthScaleSize_H(44))];
+            [cell.contentView addSubview:self.sexLabel];
+        }else if(indexPath.row == 5){
+            self.ageLabel = [[UILabel alloc]initWithFrame:CGRectMake(114, 0, SCREEN_WIDTH-44, WidthScaleSize_H(44))];
+            [cell.contentView addSubview:self.ageLabel];
         
+        }
         return cell;
+
     }else{
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        IQTextView *introduce = [[IQTextView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, WidthScaleSize_H(100))];
-        introduce.font = FONT(14);
-        introduce.placeholder = @"个人概述";
+        self.introduce = [[IQTextView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, WidthScaleSize_H(100))];
+        self.introduce.font = FONT(14);
+        self.introduce.placeholder = @"个人概述";
         
-        [cell addSubview:introduce];
+        [cell addSubview:self.introduce];
         return cell;
     }
     
@@ -133,8 +200,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-
-    
     if (indexPath.row == 4) {
         //性别
         HXCommonPickView *pickView = [[HXCommonPickView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -142,9 +207,12 @@
         [pickView showPickViewAnimation:YES];
         
         pickView.completeBlock = ^(NSString *selectedItem){
-        
-        
-        
+            self.sexLabel.text = selectedItem;
+            if ([selectedItem isEqualToString:@"男"]) {
+                self.sex = @"1";
+            }else if([selectedItem isEqualToString:@"女"]){
+                self.sex = @"2";
+            }
         };
         
     }else if(indexPath.row == 5){
@@ -154,9 +222,8 @@
         [pickView showPickViewAnimation:YES];
         
         pickView.completeBlock = ^(NSString *selectedItem){
-            
-            
-            
+            self.ageLabel.text = selectedItem;
+            self.age = selectedItem;
         };
     }else{
     
@@ -164,5 +231,26 @@
     }
 
 }
+#pragma mark - textFiledDelegate
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    if (textField.tag == 1) {
+        self.nickName = textField.text;
+        
+    }
+    if (textField.tag == 2) {
+        self.phone = textField.text;
+    }
+    if (textField.tag == 3) {
+        self.name = textField.text;
+    }
+    
+    
+}
 @end

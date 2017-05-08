@@ -9,5 +9,5 @@
 #import "BaseAPI.h"
 
 @interface HXSubjectVideoAPI : BaseAPI
-+(instancetype)getSubjectVideoWithLimit:(NSNumber *)limit theteacherId:(NSString *)theteacher_id;
++(instancetype)getSubjectVideoWithLimit:(NSNumber *)limit theteacherId:(NSString *)theteacher_id curriculum­­_status:(NSString *)curriculum­­_status isLogin:(BOOL)isLogin;
 @end

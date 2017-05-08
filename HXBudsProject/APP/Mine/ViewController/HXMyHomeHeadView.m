@@ -125,6 +125,7 @@
     [self.ico sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(pdModel.the_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
     NSString *followtenum = pdModel.followtenum?pdModel.followtenum:@"0";
     self.followtenum.text = [NSString stringWithFormat:@"%@粉丝",followtenum];
+    self.introduce.text = pdModel.hobby;
 }
 
 @end

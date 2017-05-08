@@ -149,13 +149,16 @@
     switch (self.dynamicType) {
         case teacherDynamicType:{
             vc1.articleType = teacherDynamicArticle;
+            vc1.theteacher_id = self.theteacher_id;
             vc3.videoType = teacherVideo;
+            
             [self addChildViewController:vc1];
             [self addChildViewController:vc3];
         }
             break;
         case himDynamicType:{
             vc1.articleType = himDynamicArticle;
+            vc4.attentionType = dynamicType;
             [self addChildViewController:vc1];
             [self addChildViewController:vc2];
             [self addChildViewController:vc4];
@@ -163,6 +166,7 @@
             break;
         case mineDynamicType:{
             vc1.articleType = mineDynamicArticle;
+            vc4.attentionType = dynamicType;
             [self addChildViewController:vc1];
             [self addChildViewController:vc2];
             [self addChildViewController:vc4];

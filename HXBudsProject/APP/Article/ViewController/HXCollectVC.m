@@ -99,7 +99,6 @@
     if (indexPath.section == 0) {
         
         HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
-        
         [self.navigationController pushVC:vc];
         
     }else{

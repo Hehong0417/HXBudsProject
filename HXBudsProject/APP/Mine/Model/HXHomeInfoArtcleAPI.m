@@ -9,6 +9,7 @@
 #import "HXHomeInfoArtcleAPI.h"
 
 @implementation HXHomeInfoArtcleAPI
+
 + (instancetype)getHomeInfoArticleWithTheteacherId:(NSString *)theteacher_id{
 
     HXHomeInfoArtcleAPI *api = [HXHomeInfoArtcleAPI new];
@@ -16,8 +17,9 @@
     if (theteacher_id) {
         [api.parameters setObject:theteacher_id forKey:@"theteacher_id"];
     }
-    
+    api.parametersAddToken = NO;
     return api;
 
 }
+
 @end

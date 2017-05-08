@@ -46,6 +46,10 @@
     
     [super viewDidLoad];
     
+    
+  
+
+    
     //1.添加所有的自控制器
     [self addAllChildVcs];
     
@@ -53,10 +57,10 @@
     self.delegate = self;
     self.tabBar.tintColor=APP_COMMON_COLOR;
     
-    HXTabBar *tabBar = [[HXTabBar alloc] init];
-    tabBar.customDelegate = self;
-    /** KVC */
-    [self setValue:tabBar forKey:@"tabBar"];
+//    HXTabBar *tabBar = [[HXTabBar alloc] init];
+//    tabBar.customDelegate = self;
+//    /** KVC */
+//    [self setValue:tabBar forKey:@"tabBar"];
     
 }
 
@@ -132,6 +136,7 @@
     //    UIImage *navImage = [UIImage imageWithColor:RGB(46, 40, 42)];
     //    [appearance1 setBackgroundImage:navImage];
     //
+    
 }
 
 #pragma mark - Setter&Getter

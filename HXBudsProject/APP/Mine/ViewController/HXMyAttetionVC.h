@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 typedef NS_ENUM(NSUInteger, AttentionType) {
-    myAttention,
-    homeInfoAttention,
+    dynamicType,//动态类型
+    mineType,//我的类型
 };
+
+
 @interface HXMyAttetionVC : UIViewController
 
 @property(nonatomic,assign) AttentionType attentionType;

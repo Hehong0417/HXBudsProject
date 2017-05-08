@@ -13,12 +13,16 @@
 #import "HXcurriculumreviewAPI.h"
 #import "HXcurriculumreviewModel.h"
 #import "HXReViewAddAPI.h"
+#import "HXSpotFabulousAPI.h"
+#import "HXLoginVC.h"
+#import "HXIsLoginAPI.h"
 
 
 @interface HXCourseDetailThreeVC ()<UITableViewDelegate, UITableViewDataSource,HXGradeCommentCellDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) HXcurriculumreviewModel *reviewModel;
+@property(nonatomic,assign)BOOL isLogin;
 
 @end
 
@@ -30,14 +34,27 @@
     //评价
     [self addTableView];
     
+    //判断是否已登录
+    HJUser *user = [HJUser sharedUser];
+    [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        
+        NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
+        if ([isLoginStr isEqualToString:@"no"]) {
+            self.isLogin = NO;
+        }else {
+            self.isLogin = YES;
+        }
+    }];
+    
+    
     [self getcurriculumreviewData];
 }
 - (void)getcurriculumreviewData{
     
     [[[HXcurriculumreviewAPI getcurriculumReviewWithCurriculum_id:self.curriculum_id limit:@4] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         HXcurriculumreviewModel *api = [HXcurriculumreviewModel new];
-//        self.reviewModel = [api.class mj_objectWithKeyValues:responseObject];
-//        [self.tableView reloadData];
+        self.reviewModel = [api.class mj_objectWithKeyValues:responseObject];
+        [self.tableView reloadData];
     }];
     
 }
@@ -60,7 +77,7 @@
         return 1;
     }else{
         
-        return 3;
+        return self.reviewModel.varList.count;
     }
     
 }
@@ -102,7 +119,29 @@
             cell = [HXCourseDetailCommentCell initCourseDetailCommentCellWithXib];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        HXcurriculumreviewVarListModel *model = self.reviewModel.varList[indexPath.row];
+        cell.model = model;
+        cell.tip.userInteractionEnabled = YES;
         
+        //点赞
+        [cell.tip setTapActionWithBlock:^{
+            if (self.isLogin) {
+                [[[HXSpotFabulousAPI addSpotFabulousWithcurriculumreview_id:model.curriculumreview_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+                    NSString *status = responseObject[@"pd"][@"status"];
+                    if ([status isEqualToString:@"no"]) {
+                        [self getcurriculumreviewData];
+
+                        }else {
+                    }
+                  
+                }];
+                
+            }else{
+                [self.navigationController pushVC:[HXLoginVC new]];
+            
+            }
+            
+        }];
         return cell;
         
     }
@@ -128,8 +167,8 @@
       
      [[[HXReViewAddAPI addReViewWithcurriculum_id:self.curriculum_id review_content:content star:starNum] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
          
-         [self.tableView reloadData];
-         
+         [self getcurriculumreviewData];
+
      }];
         
     };

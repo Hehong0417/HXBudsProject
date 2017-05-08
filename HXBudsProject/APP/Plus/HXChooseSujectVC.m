@@ -11,7 +11,7 @@
 #import "PYSearchConst.h"
 #import "PYSearchSuggestionViewController.h"
 #import "HXSearchSubjectVC.h"
-
+#import "HXTeachingTypeListAPI.h"
 
 #define HotSearchText @"推荐话题"
 #define Search_PlaceHolder @"搜索话题"
@@ -92,6 +92,7 @@
     return searchVC;
 }
 
+
 #pragma mark - 懒加载
 - (UITableView *)baseSearchTableView
 {
@@ -111,7 +112,7 @@
     if (!_searchResultController) {
         _searchResultController = [[HXSearchSubjectVC alloc] init];
 //        _searchResultController.view.frame = CGRectMake(0, 64, self.view.py_width, self.view.py_height);
-        _searchResultController.searchResults = @[@"Java", @"Python", @"Objective-C", @"Swift", @"C", @"C++", @"PHP", @"C#", @"Perl"];
+//        _searchResultController.searchResults = @[@"Java", @"Python", @"Objective-C", @"Swift", @"C", @"C++", @"PHP", @"C#", @"Perl"];
         _searchResultController.view.hidden = NO;
         [self.view addSubview:_searchResultController.view];
         [self addChildViewController:_searchResultController];
@@ -229,6 +230,7 @@
     return self.navigationItem.rightBarButtonItem;
 }
 
+
 /** 视图完全显示 */
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -260,6 +262,8 @@
 /** 初始化 */
 - (void)setup
 {
+
+    
     // 设置背景颜色为白色
     self.view.backgroundColor = [UIColor whiteColor];
     self.baseSearchTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -897,9 +901,9 @@
     [self.view bringSubviewToFront:self.searchResultController.view];
     
 //    // 如果代理实现了代理方法则调用代理方法
-//    if ([self.delegate respondsToSelector:@selector(searchViewController:searchTextDidChange:searchText:)]) {
-//        [self.delegate searchViewController:self searchTextDidChange:searchBar searchText:searchText];
-//    }
+    if ([self.delegate respondsToSelector:@selector(searchViewController:searchTextDidChange:searchText:)]) {
+        [self.delegate searchViewController:self searchTextDidChange:searchBar searchText:searchText];
+    }
 }
 
 - (void)closeDidClick:(UIButton *)sender

@@ -9,7 +9,6 @@
 #import "HJNavigationController.h"
 #import "AppDelegate.h"
 
-
 @implementation UINavigationController (Extension)
 
 
@@ -160,6 +159,9 @@
     
     [super viewDidLoad];
     
+    
+   
+
 //    [self.view addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)]];
     
     WEAK_SELF();

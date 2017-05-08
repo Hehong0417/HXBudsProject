@@ -19,10 +19,8 @@
     if (limit) {
         [api.parameters setObject:limit forKey:@"limit"];
     }
+    api.parametersAddToken = NO;
     return api;
-
-
-
 
 }
 @end

@@ -24,7 +24,7 @@
     adviceTextView.placeholder = @"意见";
     
     
-    UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, CGRectGetMaxY(adviceTextView.frame)+10, SCREEN_WIDTH ,30 ) target:self action:@selector(adviceFacebackAction) title:@"意见反馈" titleColor:kGrayColor font:FONT(14) backgroundColor:kWhiteColor];
+    UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, CGRectGetMaxY(adviceTextView.frame)+10, SCREEN_WIDTH ,30 ) target:self action:@selector(adviceFacebackAction) title:@"提交反馈" titleColor:kGrayColor font:FONT(14) backgroundColor:kWhiteColor];
     
     [self.view addSubview:btn];
     

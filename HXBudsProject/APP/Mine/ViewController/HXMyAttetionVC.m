@@ -9,11 +9,14 @@
 #import "HXMyAttetionVC.h"
 #import "HXMyAttentionCell.h"
 #import "HXMyLikeVC.h"
+#import "HXMyattetionTeacherAPI.h"
+#import "HXTeacherListModel.h"
+
 
 @interface HXMyAttetionVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
-
+@property (nonatomic, strong) HXTeacherListModel *teacherListModel;
 
 @end
 
@@ -22,24 +25,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+     [self getMyattetionTeacherData];
+    
     self.title = @"我关注的";
     switch (self.attentionType) {
-        case myAttention:
+        case mineType:
              self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
             break;
-        case homeInfoAttention:
+        case dynamicType:
             self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-268) style:UITableViewStyleGrouped];
         default:
             break;
     }
     
-   
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = kWhiteColor;
-
+    
+   
 }
+- (void)getMyattetionTeacherData {
+
+    [[[HXMyattetionTeacherAPI getMyattetionTeacher] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        HXTeacherListModel *api = [HXTeacherListModel new];
+        self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
+        [self.tableView reloadData];
+        
+    }];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -49,7 +64,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 5;
+    return self.teacherListModel.varList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -76,7 +91,7 @@
         cell = [HXMyAttentionCell initMyAttentionCellWithXib];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
+    cell.model = self.teacherListModel.varList[indexPath.row];
     return cell;
     
 }

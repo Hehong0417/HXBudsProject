@@ -238,7 +238,7 @@
     HJLoginModel *userModel = [HJUser sharedUser].pd;
     if (userModel) {
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:self.parameters];
-//        dic[@"userId"] = userModel.users_id;
+        dic[@"users_id"] = userModel.users_id;
         dic[@"token"] = userModel.token;
         self.parameters = dic;
     }

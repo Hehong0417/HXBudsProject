@@ -12,6 +12,7 @@
 
 @property(nonatomic,strong) NSString *currilum_id;
 @property(nonatomic,strong) NSString *videoTitle;
+@property(nonatomic,strong) NSString *curriculum­­_status;
 
 
 @end

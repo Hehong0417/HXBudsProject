@@ -22,9 +22,19 @@
 #import "HXSubjectVideoAPI.h"
 #import "HXSubjectVideoListModel.h"
 #import "HXFollowAPI.h"
+#import "HXIsLoginAPI.h"
+#import "HXTeachingTypeListAPI.h"
+#import "HXLoginVC.h"
+#import "HXMessageVC.h"
+#import "HXSearchViewController.h"
+#import "HXSearchVC.h"
+#import "HXTeachingTypeListModel.h"
 
-@interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
-
+@interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,PYSearchViewControllerDelegate>
+{
+BOOL isLogin;
+  
+}
 @property (nonatomic,strong)UICollectionView *collectionView;
 
 @property (nonatomic, assign) NSInteger page;
@@ -36,8 +46,9 @@
 @property (nonatomic, strong) HXTeacherListModel *teacherListModel;
 @property (nonatomic, strong) HXteacherVarListModel *teacherVarListModel;
 @property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
+@property (nonatomic, strong) HXTeachingTypeListModel *teachingTypeListModel;
 
-
+@property (nonatomic, strong) NSMutableArray *followList;
 
 @end
 
@@ -49,18 +60,43 @@
     [self getList_online];
     [self getTeacherList];
     [self getSubjectVideoList];
+    [self getTeachingTypeList];
+}
+- (void)getTeachingTypeList{
+
+    [[[HXTeachingTypeListAPI getTeachingTypeList] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
+        HXTeachingTypeListModel *api = [HXTeachingTypeListModel new];
+        self.teachingTypeListModel = [api.class mj_objectWithKeyValues:responseObject];
+    }];
+
 }
 - (void)getTeacherList{
 
-    [[[HXTeacherListAPI getTeacherListWithWithLimit:@2] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
-        HXTeacherListModel *api = [HXTeacherListModel new];
-        
-        self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
-        
-        [self.collectionView reloadData];
+    //判断是否登录
+    HJUser *user = [HJUser sharedUser];
+    [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+       
+        NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
+        if ([isLoginStr isEqualToString:@"no"]) {
+            isLogin = NO;
+        }else {
+            isLogin = YES;
+        }
 
+        [[[HXTeacherListAPI getTeacherListWithWithLimit:@2 isLogin:isLogin] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+            
+            HXTeacherListModel *api = [HXTeacherListModel new];
+            
+            self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
+            
+            [self.collectionView reloadData];
+            
+        }];
+        
     }];
+    
+    
 }
 - (void)getList_online {
     
@@ -77,12 +113,12 @@
         }
         [self.collectionView reloadData];
     }];
-    
+
    
 }
 - (void)getSubjectVideoList {
 
-    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@4 theteacherId:nil] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@4 theteacherId:nil curriculum­­_status:@"curriculum-status-ztsp" isLogin:NO] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         
         HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
         
@@ -112,6 +148,7 @@
     
     [self addHeaderRefresh];
     [self addFooterRefresh];
+    [self addSearchBtn];
 
 }
 - (void)addHeaderRefresh{
@@ -146,8 +183,12 @@
         HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
         cell.teacherModel = model;
         cell.followSelectedBlock = ^(BOOL followed) {
-    
-            [self followRequest:indexPath.row followed:followed];
+            if (isLogin) {
+                [self followRequest:indexPath.row followed:followed];
+            }else {
+            
+                [self.navigationController pushVC:[HXLoginVC new]];
+            }
         };
         return cell;
   
@@ -268,11 +309,10 @@
 }
 - (void)followRequest:(NSInteger )row followed:(BOOL)followed{
     
-    
     HXteacherVarListModel *model = self.teacherListModel.varList[row];
     
     [[[HXFollowAPI followTeacherWiththeteacherId:model.theteacher_id state:followed?@"1":@"0"] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        
+    
     }];
 
 }
@@ -283,4 +323,84 @@
 
     return _varListArr;
 }
+- (void)addSearchBtn{
+
+    XYQButton *searchBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, 44, 60) imgaeName:@"search" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
+        
+        [self addSearchVC];
+    }];
+    
+    UIImage *image = [UIImage imageNamed:@"search"];
+    [searchBtn setImage:image forState:UIControlStateNormal];
+    CGFloat imageWidth = image.size.width;
+    CGFloat imageHeight = image.size.height;
+    [searchBtn setTitleRectForContentRect:CGRectZero imageRectForContentRect:CGRectMake(-5, (searchBtn.lh_height-imageHeight)/2.0, imageWidth, imageHeight)];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:searchBtn];
+    
+    XYQButton *messageBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, 44, 60) imgaeName:@"message" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
+        
+        [self.navigationController pushVC:[HXMessageVC new]];
+        
+    }];
+    UIImage *image2 = [UIImage imageNamed:@"message"];
+    [messageBtn setImage:image2 forState:UIControlStateNormal];
+    CGFloat imageWidth2 = image2.size.width;
+    CGFloat imageHeight2 = image2.size.height;
+    [messageBtn setTitleRectForContentRect:CGRectZero imageRectForContentRect:CGRectMake(10, (messageBtn.lh_height-imageHeight)/2.0+5, imageWidth2, imageHeight2)];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:messageBtn];
+}
+- (void)addSearchVC{
+
+    //*************搜 索************//
+    // 1.创建热门搜索
+    NSMutableArray *hotSeaches = [NSMutableArray array];
+    NSMutableArray *hotSeaches_Ids = [NSMutableArray array];
+
+    for (HXTeachingTypeVarListModel *model in self.teachingTypeListModel.varList) {
+    
+    [hotSeaches addObject:model.type_name];
+    [hotSeaches_Ids addObject:model.teachingtype_id];
+    }
+    
+    // 2. 创建控制器
+    HXSearchViewController *searchViewController = [HXSearchViewController searchViewControllerWithHotSearches:hotSeaches hotSearches_ids:hotSeaches_Ids searchBarPlaceholder:@"搜索" didSearchBlock:^(HXSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
+        // 开始搜索执行以下代码
+        // 如：跳转到指定控制器
+        //                    [searchViewController.navigationController pushViewController:[[HXSearchVC alloc] init] animated:YES];
+        
+    }];
+    //3.设置风格
+    searchViewController.hotSearchStyle = PYHotSearchStyleDefault; // 热门搜索风格根据选择
+    searchViewController.searchHistoryStyle = PYSearchHistoryStyleDefault;
+    // 4. 设置代理
+    searchViewController.delegate = self;
+    searchViewController.searchSuggestions = @[@[@"视频1",@"视频2"],@[@"文章1",@"文章2"]];
+    
+    [self.navigationController pushVC:searchViewController];
+    
+    //****************************//
+
+}
+#pragma mark - PYSearchViewControllerDelegate
+- (void)searchViewController:(HXSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
+{
+    
+    if (searchText.length) { // 与搜索条件再搜索
+        // 根据条件发送查询（这里模拟搜索）
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 搜素完毕
+            // 显示建议搜索结果
+            NSMutableArray *searchSuggestionsM = [NSMutableArray array];
+            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
+                NSString *searchSuggestion = [NSString stringWithFormat:@"搜索建议 %d", i];
+                [searchSuggestionsM addObject:searchSuggestion];
+            }
+            // 返回
+            searchViewController.searchSuggestions = searchSuggestionsM;
+        });
+    }
+}
+
+
 @end

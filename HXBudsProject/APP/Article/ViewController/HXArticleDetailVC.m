@@ -13,7 +13,6 @@
 
 @interface HXArticleDetailVC ()<WKUIDelegate,WKNavigationDelegate>
 
-
 @end
 
 @implementation HXArticleDetailVC
@@ -27,13 +26,13 @@
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc]init];
     WKWebView *wkWebView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) configuration:config];
     wkWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
-//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://daily.zhihu.com/story/8819853"]];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"file:///Users/n/Downloads/Mengya/index.html"]];
     
     NSString *htmlStr = self.articleModel.article_content;
     
     [wkWebView loadHTMLString:htmlStr baseURL:nil];
 
-//  [wkWebView loadRequest:request];
+//   [wkWebView loadRequest:request];
     wkWebView.navigationDelegate = self;
     wkWebView.UIDelegate = self;
     [self.view addSubview:wkWebView];

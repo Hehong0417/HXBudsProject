@@ -8,11 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, DynamicType) {
-    teacherDynamicType,//名师
-    himDynamicType,//用户
-    mineDynamicType,//我
-};
+
 
 @interface HXMyLikeVC : UIViewController
 

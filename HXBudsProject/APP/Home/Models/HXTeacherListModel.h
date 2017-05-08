@@ -20,5 +20,6 @@
 @property(nonatomic,copy) NSString *the_name;
 @property(nonatomic,copy) NSString *hobby;
 @property(nonatomic,copy) NSString *the_headportrait;
+@property(nonatomic,copy) NSString *followState;
 
 @end

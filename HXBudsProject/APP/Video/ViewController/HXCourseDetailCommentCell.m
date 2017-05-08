@@ -14,8 +14,7 @@
     [super awakeFromNib];
     // Initialization code
     
-    [self.commentIco_ImagV lh_setCornerRadius:25 borderWidth:0 borderColor:nil];
-    
+    [self.commentIco_ImagV lh_setRoundImageViewWithBorderWidth:0 borderColor:nil];
 }
 
 + (instancetype)initCourseDetailCommentCellWithXib{
@@ -23,5 +22,22 @@
     return [[[NSBundle mainBundle] loadNibNamed:@"HXCourseDetailCommentCell" owner:nil options:nil] lastObject];
 
 }
+- (void)setModel:(HXcurriculumreviewVarListModel *)model {
 
+    _model = model;
+
+    NSString *urlStr;
+    
+    if ([model.headportrait containsString:@"http"]) {
+        urlStr = model.headportrait;
+    }else{
+        urlStr = kAPIImageFromUrl(model.headportrait);
+    }
+    
+    [self.commentIco_ImagV sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    self.comment.text = model.fabulous;
+    self.reViewContent.text = model.review_content;
+    self.ctime.text = model.ctime;
+    self.curriReView_Title.text = model.nickname;
+}
 @end

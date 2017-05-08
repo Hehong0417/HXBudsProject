@@ -14,7 +14,6 @@
 
     HXArticleDetailAPI *api = [HXArticleDetailAPI new];
     api.subUrl = API_GET_TEACHER_DDETAIL;
-    
     if (article_id) {
         [api.parameters setObject:article_id forKey:@"article_id"];
     }

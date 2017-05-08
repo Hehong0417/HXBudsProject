@@ -122,6 +122,16 @@ static const CGFloat kNormalButtonMargin = 30;
 //支付成功
 #define kNotificationPaySuccess @"kNotificationPaySuccess"
 
+
+typedef NS_ENUM(NSUInteger, DynamicType) {
+    teacherDynamicType,//名师
+    himDynamicType,//用户
+    mineDynamicType,//我
+};
+
+
+
+
 //Block
 //
 typedef void(^voidBlock)();

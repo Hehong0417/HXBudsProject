@@ -16,18 +16,24 @@
 #import "CLPlayerView.h"
 #import <UShareUI/UShareUI.h>
 #import "HXSubscribeAddAPI.h"
-
-
+#import "HXIsSubscribAddAPI.h"
+#import "HXIsLoginAPI.h"
+#import "HXLoginVC.h"
 @interface HXCourseDetailAnotherVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>{
     
-
+    
+    
 }
+@property(nonatomic,assign)BOOL isLogin;
+@property(nonatomic,assign)BOOL IsAddSubscrib;
+
 @property(nonatomic,strong)SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
 @property(nonatomic,strong) UIView *headView;
 @property(nonatomic,strong) HXBuyBottomView *buyBottomView;
 @property(nonatomic,strong) UIImageView *playImgV;
 @property(nonatomic,strong) CLPlayerView *playerView;
+@property(nonatomic,strong) UIImageView *videoDetailBgImageV;
 
 @end
 
@@ -63,11 +69,23 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 }
 
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+   //判断是否已登录
+    HJUser *user = [HJUser sharedUser];
+    [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        
+        NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
+        if ([isLoginStr isEqualToString:@"no"]) {
+            self.isLogin = NO;
+        }else {
+            self.isLogin = YES;
+            //判断是否已加入学习
+            [self isSubcribeAdd];
+        }
+    }];
+    
+    
     self.navigationItem.titleView = [UILabel lh_labelWithFrame:CGRectMake(0, 0, 50, 44) text:@"课程详情" textColor:kBlackColor font:FONT(20) textAlignment:NSTextAlignmentCenter backgroundColor:kClearColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -84,25 +102,56 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     [self.view addSubview:self.buyBottomView];
     
     
-    
     //rightBarButton、分享按钮
     UIButton *rightBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 50, 50) target:self action:@selector(shareAction) image:[UIImage imageNamed:@"share"]];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
-
-    
+    [self.videoDetailBgImageV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(self.playImageStr)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
     //加入学习
     WEAK_SELF();
     self.buyBottomView.addSubscribeBlock = ^{
-        
-        [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:weakSelf.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-            NSLog(@"%@",error);
-            weakSelf.buyBottomView.consultBtn.titleLabel.text = @"已加入";
-        }];
-        
+        //未加入且已登录
+        if (!weakSelf.IsAddSubscrib&&weakSelf.isLogin) {
+            [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:weakSelf.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+                
+                weakSelf.buyBottomView.consultBtn.titleLabel.text = @"已加入";
+            }];
+        }
+        //未加入且未登录
+        if (!weakSelf.IsAddSubscrib&&!weakSelf.isLogin) {
+            
+            [weakSelf.navigationController pushVC:[HXLoginVC new]];
+        }
+        //已加入
+        if (weakSelf.IsAddSubscrib) {
+            
+           weakSelf.buyBottomView.consultBtn.enabled = NO;
+        }
     };
     
+    
 }
+//是否加入学习
+- (void)isSubcribeAdd{
 
+    [[[HXIsSubscribAddAPI IsSubscribWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+       
+        NSString *statestr = responseObject[@"pd"][@"state"];
+        NSInteger state = statestr.integerValue;
+        if (state > 0) {
+            //已加入
+            self.IsAddSubscrib = YES;
+            [self.buyBottomView.consultBtn setTitle:@"已加入" forState:UIControlStateNormal];
+            
+            self.buyBottomView.consultBtn.enabled = NO;
+
+        }else{
+           //未加入
+            self.IsAddSubscrib = NO;
+            self.buyBottomView.consultBtn.titleLabel.text = @"加入学习";
+
+        }
+    }];
+}
 - (void)setupSegmentedControl {
     
     NSArray *title_arr = @[@"简介", @"课时", @"评价"];
@@ -135,15 +184,20 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     [self.playImgV setTapActionWithBlock:^{
         //**********播放器**************//
         
-        weakSelf.playerView = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
-        
-        if (!weakSelf.URLString) {
-            weakSelf.URLString = @"error";
+        if (weakSelf.IsAddSubscrib) {
+            weakSelf.playerView = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
+            
+            if (!weakSelf.URLString) {
+                weakSelf.URLString = @"error";
+            }
+            weakSelf.playerView.url = [NSURL URLWithString:@""];
+            weakSelf.playerView.vc = weakSelf;
+            [weakSelf.view addSubview:weakSelf.playerView];
+        }else{
+            
+            [SVProgressHUD showInfoWithStatus:@"请先加入学习"];
+            
         }
-        weakSelf.playerView.url = [NSURL URLWithString:@""];
-        weakSelf.playerView.vc = weakSelf;
-        [weakSelf.view addSubview:weakSelf.playerView];
-        
         //***************************//
 
     }];
@@ -178,9 +232,7 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     threeVC.curriculum_id = self.curriculum_id;
     [self addChildViewController:threeVC];
     
-    
 }
-    
     
     // 显示控制器的view
 - (void)showVc:(NSInteger)index {
@@ -253,14 +305,13 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     if (!_headView) {
         _headView = [UIView lh_viewWithFrame:CGRectMake(0, 0 , SCREEN_WIDTH,headViewHeight) backColor:kWhiteColor];
         
-        UIImageView *imageV =  [UIImageView lh_imageViewWithFrame:CGRectMake(0, 0 , SCREEN_WIDTH,headViewHeight) image:[UIImage imageNamed:@"courseDetail"]];
+        self.videoDetailBgImageV =  [UIImageView lh_imageViewWithFrame:CGRectMake(0, 0 , SCREEN_WIDTH,headViewHeight) image:[UIImage imageNamed:@"courseDetail"]];
         self.playImgV = [UIImageView lh_imageViewWithFrame:CGRectMake(0, 0, 80, 80) image:[UIImage imageNamed:@"play"] userInteractionEnabled:YES];
-        self.playImgV.center = imageV.center;
+        self.playImgV.center = self.videoDetailBgImageV.center;
         self.playImgV.contentMode = UIViewContentModeCenter;
-        [_headView addSubview:imageV];
+        [_headView addSubview:self.videoDetailBgImageV];
         [_headView addSubview:self.playImgV];
     }
-    
     
     return _headView;
     

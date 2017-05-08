@@ -15,7 +15,13 @@
 @end
 @interface HXcurriculumreviewVarListModel : BaseModel
 @property(nonatomic,strong) NSString *review_content;
-@property(nonatomic,strong) NSString *Ctime;
+@property(nonatomic,strong) NSString *ctime;
 @property(nonatomic,strong) NSString *fabulous;
 @property(nonatomic,strong) NSString *star;
+@property(nonatomic,strong) NSString *headportrait;
+@property(nonatomic,strong) NSString *nickname;
+@property(nonatomic,strong) NSString *curriculumreview_id;
+
+
+
 @end

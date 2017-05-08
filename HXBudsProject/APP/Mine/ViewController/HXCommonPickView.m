@@ -55,8 +55,6 @@
         self.completeBlock(selectedItem);
     
     }
-    
-
 }
 - (void)setStyle:(HXCommonPickViewStyle)style {
 
@@ -76,6 +74,7 @@
                 datePick.datePickerMode = UIDatePickerModeDate;
                 datePick.locale = [NSLocale localeWithLocaleIdentifier:@"zh_Hans_CN"];
                 datePick.minimumDate = [NSDate dateWithTimeIntervalSince1970:0];
+                datePick.maximumDate = [NSDate date];
                 self.datePick = datePick;
                 NSLog(@"date:%@",datePick.date);
                 [self.contentView addSubview:datePick];

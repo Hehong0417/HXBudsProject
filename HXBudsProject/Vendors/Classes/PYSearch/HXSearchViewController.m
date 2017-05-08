@@ -72,17 +72,18 @@
     return self;
 }
 
-+ (HXSearchViewController *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches searchBarPlaceholder:(NSString *)placeholder
++ (HXSearchViewController *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches hotSearches_ids:(NSArray<NSString *> *)hotSearches_ids searchBarPlaceholder:(NSString *)placeholder
 {
     HXSearchViewController *searchVC = [[HXSearchViewController alloc] init];
     searchVC.hotSearches = hotSearches;
+    searchVC.hotSearches_ids = hotSearches_ids;
     searchVC.searchBar.placeholder = placeholder;
     return searchVC;
 }
 
-+ (HXSearchViewController *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches searchBarPlaceholder:(NSString *)placeholder didSearchBlock:(PYDidSearchBlock)block
++ (HXSearchViewController *)searchViewControllerWithHotSearches:(NSArray<NSString *> *)hotSearches hotSearches_ids:(NSArray<NSString *> *)hotSearches_ids searchBarPlaceholder:(NSString *)placeholder didSearchBlock:(PYDidSearchBlock)block
 {
-    HXSearchViewController *searchVC = [self searchViewControllerWithHotSearches:hotSearches searchBarPlaceholder:placeholder];
+    HXSearchViewController *searchVC = [self searchViewControllerWithHotSearches:hotSearches hotSearches_ids:hotSearches_ids  searchBarPlaceholder:placeholder];
   
     searchVC.didSearchBlock = [block copy];
     return searchVC;
@@ -110,7 +111,7 @@
     }
     return _searchResultController;
 }
-
+#pragma mark- seachBar输入内容后显示的TableView(PYSearchSuggestionViewController)
 - (PYSearchSuggestionViewController *)searchSuggestionVC
 {
     if (!_searchSuggestionVC) {
@@ -873,16 +874,16 @@
 {
     
     // 如果有搜索文本且显示搜索建议，则隐藏
-    self.baseSearchTableView.hidden = searchText.length;
+//    self.baseSearchTableView.hidden = searchText.length;
     // 根据输入文本显示建议搜索条件
     self.searchSuggestionVC.view.hidden = self.searchSuggestionHidden || !searchText.length;
     // 放在最上层
     [self.view bringSubviewToFront:self.searchSuggestionVC.view];
     
     // 如果代理实现了代理方法则调用代理方法
-    if ([self.delegate respondsToSelector:@selector(searchViewController:searchTextDidChange:searchText:)]) {
-        [self.delegate searchViewController:self searchTextDidChange:searchBar searchText:searchText];
-    }
+//    if ([self.delegate respondsToSelector:@selector(searchViewController:searchTextDidChange:searchText:)]) {
+//        [self.delegate searchViewController:self searchTextDidChange:searchBar searchText:searchText];
+//    }
 }
 
 - (void)closeDidClick:(UIButton *)sender

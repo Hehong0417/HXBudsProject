@@ -9,12 +9,15 @@
 #import "HXMyattentionFriendVC.h"
 #import "HXMyAttentionCell.h"
 #import "HXMyLikeVC.h"
+#import "HXMyAttentionFrendsAPI.h"
+#import "HXAttentionFriendModel.h"
 
 
 @interface HXMyattentionFriendVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
 
+@property(nonatomic,strong)HXAttentionFriendModel *attentionFriendModel;
 
 
 @end
@@ -32,6 +35,13 @@
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = kWhiteColor;
 
+    [[[HXMyAttentionFrendsAPI getMyAttentionFrends] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        HXAttentionFriendModel *api = [HXAttentionFriendModel new];
+        self.attentionFriendModel = [api.class mj_objectWithKeyValues:responseObject];
+        [self.tableView reloadData];
+        
+    }];
+    
 }
 #pragma mark - Table view data source
 
@@ -42,7 +52,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 5;
+    return self.attentionFriendModel.varList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -69,7 +79,7 @@
         cell = [HXMyAttentionCell initMyAttentionCellWithXib];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
+    cell.friendsModel = self.attentionFriendModel.varList[indexPath.row];
     return cell;
     
 }

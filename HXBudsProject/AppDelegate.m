@@ -13,11 +13,10 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 
-
 #define USHARE_DEMO_APPKEY  @"58cb57441061d270900022bd"
 //#define Wechat_AppKey  @"wx6bf938fef8cc9fd2"
-#define Wechat_AppKey  @"wxdc1e388c3822c80b"
-#define Wechat_appSecret  @"3baf1193c85774b3fd9d18447d76cab0"
+#define Wechat_AppKey  @"wx4a20e81b69eba007"
+#define Wechat_appSecret  @"d53779986a73ddd21367e2034efa5b66"
 
 #define QQ_AppKey  @"1105821097"
 
@@ -54,7 +53,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    
+
+
+    //*************//
     //配置 IQKeyboardManager
     [self IQKeyboardManagerConfig];
     
@@ -74,7 +75,8 @@
     [self.window makeKeyAndVisible];
     
     self.window.rootViewController= [[HJTabBarController alloc]init];
-    
+//    self.window.rootViewController= [[HXLoginVC alloc]init];
+
     return YES;
 }
 - (void)IQKeyboardManagerConfig{

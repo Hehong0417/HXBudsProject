@@ -48,7 +48,7 @@
 }
 - (void)getVideoData{
     
-    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@5 theteacherId:nil] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@5 theteacherId:nil curriculum­­_status:nil isLogin:YES] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
         
         HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
         
@@ -104,6 +104,7 @@
     HXCourseDetailAnotherVC  *vc = [HXCourseDetailAnotherVC new];
     HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
     vc.curriculum_id = model.curriculum_id;
+    vc.playImageStr = model.curr_picture;
     [self.navigationController pushVC:vc];
     
     

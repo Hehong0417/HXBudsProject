@@ -76,7 +76,7 @@
     UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 40, WidthScaleSize_H(45)) target:self action:nil image:[UIImage imageNamed:@"phoneNum"]];
     // btn.backgroundColor = kClearColor;
     phoneNumTextFiled.textColor = kWhiteColor;
-
+    phoneNumTextFiled.keyboardType = UIKeyboardTypeNumberPad;
     phoneNumTextFiled.leftView = btn;
     [bgView addSubview:phoneNumTextFiled];
     [phoneNumTextFiled mas_makeConstraints:^(MASConstraintMaker *make) {

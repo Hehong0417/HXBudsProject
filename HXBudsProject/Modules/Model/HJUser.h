@@ -7,6 +7,7 @@
 //
 
 #import "BaseModel.h"
+#import "LHMacro.h"
 
 @interface HJLoginModel : BaseModel
 
@@ -16,11 +17,11 @@
 
 @end
 
+
 @interface HJUser : BaseModel {
     
 //    HJLoginModel *_userModel;
 }
-
 singleton_h(User)
 
 @property (nonatomic, strong) HJLoginModel *pd;

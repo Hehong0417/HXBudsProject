@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HXTeacherDetailModel.h"
 
 @interface HXMineLoginHeadView : UIView
 
 @property(nonatomic,strong) UINavigationController *nav;
+@property(nonatomic,strong) HXPdModel *model;
+
+@property (weak, nonatomic) IBOutlet UILabel *nameLab;
+@property (weak, nonatomic) IBOutlet UIImageView *iconImagV;
+
 
 + (instancetype)initMineLoginHeadViewWithXib;
 

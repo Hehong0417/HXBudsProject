@@ -9,12 +9,10 @@
 
 //#ifdef DEBUG
 //// 本地
-#define API_HOST @"http://192.168.0.109:8080"
+#define API_HOST @"http://192.168.0.105:8080"
 // 本地图片
-#define API_IMAGE_HOST @"http://192.168.0.109:8080/html/goaling/images/upload/task"
+#define API_IMAGE_HOST @"http://192.168.0.105:8080/html/goaling/images/upload/task"
 //
-//#define API_IMAGE_HOST @"http://192.168.0.89:8080/"
-//#define API_IMAGE_HOST @"http://192.168.0.89:7080/"
 
 #define APP_key @"59334e721bcd31"
 #define APP_scode @"15ca7554e8cb486f3b8cbe1fa166c75b"// [NSString md5:[APP_key stringByAppendingString:@"trans"]]
@@ -34,6 +32,9 @@
 
 #define video_testUrl @"http://yycloudvod2109130935.bs2dl.yy.com/djhmZjcyZTExZDRiZmY1Yzg0NzhlM2Q5MWVjZjRhYzY1MTUzNDQxMjM1Mg"
 
+#import "HJUser.h"
+
+
 
 /**
  *  登录注册
@@ -47,6 +48,9 @@
 #define API_LOGIN API_SUB_URL(@"users/login")//*
 //1.3判断是否已登录
 #define API_IS_LOGIN API_SUB_URL(@"users/isLogin")
+//1.3微信登录
+#define API_WX_LOGIN API_SUB_URL(@"users/wxlogin")
+
 
 //1.获取验证码
 #define API_GET_VERIFY_CODE API_SUB_URL(@"users/sms")//*
@@ -92,15 +96,18 @@
  */
 //2.3 文章详情
 #define API_GET_ARTICLE_DETAIL  API_SUB_URL(@"article/detail_anon")
-
+//2.3 上传图片
 #define API_GET_UPLOAD_IMAGE  API_SUB_URL(@"article/media_upload")
+//2.4文章类型列表
+#define API_GET_ARTICLE_TYPE  API_SUB_URL(@"articletype/list_anon")
 
+//2.4收藏文章
+#define API_collectionarticle API_SUB_URL(@"collectionarticle/add")
 
 
 /**
  *  发布文章
  */
-
 
 
 /**
@@ -112,44 +119,57 @@
 //5.4 教程视频详情目录
 #define API_GET_VIDEO_LIST  API_SUB_URL(@"videos/list_anon")//*
 //5.5 教程视频评论列表
-#define API_GET_REVIEW_LIST  API_SUB_URL(@"curriculumreview/list_anon")
+#define API_GET_REVIEW_LIST  API_SUB_URL(@"curriculumreview/list_anon")//*
 //5.6 添加教程评论
 #define API_GET_REVIEW_ADD  API_SUB_URL(@"curriculumreview/add")//*
 //5.7 加入学习
-#define API_GET_SUBSCRIBE_ADD  API_SUB_URL(@"subscribe/add")
+#define API_GET_SUBSCRIBE_ADD  API_SUB_URL(@"subscribe/add")//*
+//5.7 是否加入学习
+#define API_collectioncurriculum_isAdd  API_SUB_URL(@"collectioncurriculum/isAdd")//*
 //5.8 评论点赞
 #define API_GET_SPOTFABULOUS  API_SUB_URL(@"curriculumreview/spotFabulous")
+
+
+//5.8 课程模糊查询
+//API_GET_CURRICULUM接口（curr_title，teachingtype_id）
+
+//5.8 课程类型
+#define API_GET_teachingtype API_SUB_URL(@"teachingtype/list_anon")
+
 
 /**
  *  我的
  */
 //6.1获取我的资料信息
-#define API_GET_USER_SIMPLE_INFO API_SUB_URL(@"userElse/getUserSimpleInfo.do")
-//6.2 修改头像
-#define API_UPDATE_ICO API_SUB_URL(@"userElse/updateIco.do")
-//6.3修改昵称
-#define API_UPDATE_USER_NAME API_SUB_URL(@"userElse/updateUserName.do")
-//6.4 获取积分明细列表
-#define API_GET_SCORE_LIST API_SUB_URL(@"userElse/getScoreList.do")
-//6.5 修改密码
-#define API_UPDATE_PWD API_SUB_URL(@"userElse/updatePwd.do")
-//6.6获取我的收藏列表
-#define API_GET_COLLECT_LIST API_SUB_URL(@"userElse/getCollectList.do")
-//6.25提交反馈意见
-#define API_SEND_SUGGEST API_SUB_URL(@"userElse/sendSuggest.do")
-//6.43 QQ或者微信绑定手机号
-#define API_BINDING  API_SUB_URL(@"userElse/binding.do")
-//6.44获取我的消息列表（新加）
-#define API_GET_MY_MESSAGE_LIST API_SUB_URL(@"userElse/getMyMessageList.do")
-//6.45删除我的消息（新加）
-#define API_DELETE_MYMESSAGE_BY_ID API_SUB_URL(@"userElse/deleteMyMessageById.do")
-//6.51免责声明
-#define API_GET_STATE_MENT  API_SUB_URL(@"userElse/getStatement.do")
-//6.54使用说明
-#define API_GET_INSTRUCTIONS  API_SUB_URL(@"userElse/instructions.do")
+#define API_GET_USER_INFO API_SUB_URL(@"userdetails/initEdit")
+//6.1修改我的资料信息
+#define API_GET_USER_SIMPLE_INFO API_SUB_URL(@"userdetails/edit")
+//6.1用户头像上传
+#define API_media_upload API_SUB_URL(@"userdetails/media_upload")
+//2.4交易记录
+#define API_GET_TRANSACTION  API_SUB_URL(@"consumption/ list_anon")
+//2.4关注的老师列表
+#define API_GET_followTheteacher  API_SUB_URL(@"myinformation/followTheteacher")
+//2.4关注的用户列表
+#define API_GET_followUsers  API_SUB_URL(@"myinformation/followUsers")
+//2.4浏览文章记录
+#define API_GET_browseArticle  API_SUB_URL(@"myinformation/browseArticle")
+//2.4浏览教程记录
+#define API_GET_browseCourse API_SUB_URL(@"myinformation/browseCourse")
+//2.4我的资产
+#define API_GET_myAsset API_SUB_URL(@"myinformation/myAsset")
+
+
+//2.4系统通知
+#define API_systemnotification API_SUB_URL(@"systemnotification/list_anon")
+//2.4意见反馈
+#define API_feedback API_SUB_URL(@"feedback/add")
+
+
+
+
 
 //七、支付
 //7.1支付订单
 #define API_GET_PAY_CHARGE  API_SUB_URL(@"alipay/getPayCharge.do")
-//7.2支付组团订单
-#define API_PAY_INDENT  API_SUB_URL(@"userElse/payIndent.do")
+

@@ -78,6 +78,7 @@
     phoneNumTextFiled.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     phoneNumTextFiled.attributedPlaceholder = [[NSAttributedString alloc]initWithString:@"请输入手机号码" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     phoneNumTextFiled.textColor = kWhiteColor;
+    phoneNumTextFiled.keyboardType = UIKeyboardTypeNumberPad;
     phoneNumTextFiled.leftViewMode = UITextFieldViewModeAlways;
     UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 40, WidthScaleSize_H(45)) target:self action:nil image:[UIImage imageNamed:@"phoneNum"]];
     // btn.backgroundColor = kClearColor;
@@ -112,7 +113,8 @@
     [bgView addSubview:passWordTextFiled];
     passWordTextFiled.textColor = kWhiteColor;
      passWordTextFiled.attributedPlaceholder = [[NSAttributedString alloc]initWithString:@"请输入验证码" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    passWordTextFiled.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    passWordTextFiled.keyboardType = UIKeyboardTypeNumberPad;
+
     passWordTextFiled.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 22, WidthScaleSize_H(45))];
     passWordTextFiled.leftViewMode = UITextFieldViewModeAlways;
     

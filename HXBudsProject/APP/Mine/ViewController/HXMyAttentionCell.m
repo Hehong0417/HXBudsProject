@@ -22,10 +22,21 @@
     // Initialization code
     
     [self.iconImagV lh_setRoundImageViewWithBorderWidth:0 borderColor:nil];
-    
-    
-    
 }
+- (void)setModel:(HXteacherVarListModel *)model {
 
+    _model = model;
+    
+    self.hobbyLab.text = model.hobby;
+    self.nameLab.text = model.the_name;
+    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.the_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+
+}
+- (void)setFriendsModel:(HXAttentionFriendVarlistModel *)friendsModel {
+    _friendsModel = friendsModel;
+    self.hobbyLab.text = friendsModel.hobby;
+    self.nameLab.text = friendsModel.nickname;
+    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(friendsModel.headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+}
 
 @end

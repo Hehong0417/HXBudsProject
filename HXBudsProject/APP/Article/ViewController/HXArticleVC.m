@@ -13,6 +13,8 @@
 #import "UIView+WHC_AutoLayout.h"
 #import "HXHomeInfoArtcleAPI.h"
 #import "HXHomeInfoArticleModel.h"
+#import "HXArticleTypeAPI.h"
+#import "HXArticleTypeModel.h"
 
 @interface HXArticleVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -22,6 +24,7 @@
 
 @property(nonatomic,assign)BOOL isViewMore;
 @property(nonatomic,strong)HXHomeInfoArticleModel *articleModel;
+@property(nonatomic,strong)HXArticleTypeModel *articleTypeModel;
 
 
 @end
@@ -32,6 +35,7 @@
 
     [super viewWillAppear:animated];
     [self getArticleListData];
+    [self getArticleTypeList];
 
 }
 
@@ -43,9 +47,10 @@
     self.tabView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tabView];
     self.tabView.showsVerticalScrollIndicator = NO;
-    NSArray *arr = @[@"#智商·情商#",@"#叶文有话要说#",@"#单田方#",@"#城市#",@"#美女#",@"#社交恐惧#",@"#家庭矛盾#",@"#社交恐惧#",@"#家庭矛盾#"];
-    [self.subjectArr addObjectsFromArray:arr];
     
+//    NSArray *arr = @[@"#智商·情商#",@"#叶文有话要说#",@"#单田方#",@"#城市#",@"#美女#",@"#社交恐惧#",@"#家庭矛盾#",@"#社交恐惧#",@"#家庭矛盾#"];
+//    [self.subjectArr addObjectsFromArray:arr];
+    [self.tabView registerClass:[HXArticleCellOne class] forCellReuseIdentifier:@"HXArticleCellOne"];
     
 }
 - (void)getArticleListData {
@@ -59,6 +64,20 @@
     }];
 
 }
+- (void)getArticleTypeList {
+
+     [[[HXArticleTypeAPI getArticleTypeList] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
+         HXArticleTypeModel *api = [HXArticleTypeModel new];
+         self.articleTypeModel = [api.class mj_objectWithKeyValues:responseObject];
+
+         [self.tabView reloadData];
+         
+     }];
+    
+
+}
+
 #pragma mark --- tableView delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -66,13 +85,9 @@
     if (indexPath.section == 0) {
         
         HXArticleCellOne *cell = [tableView dequeueReusableCellWithIdentifier:@"HXArticleCellOne"];
-        if(!cell){
-            
-            cell = [[HXArticleCellOne alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HXArticleCellOne"];
-            [cell setSubjectArr:self.subjectArr isViewMore:self.isViewMore cellHeight:90];
-            
-        }
-        
+
+        [cell setSubjectArr:self.articleTypeModel.varList isViewMore:self.isViewMore cellHeight:90];
+
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.vc = self.navigationController;
@@ -111,21 +126,22 @@
         
         return nil;
     }
-    UIView *footView  = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20) backColor:kWhiteColor];
+    UIView *footView  = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10) backColor:kWhiteColor];
     //按钮与线的间距10 与屏幕的间距为15
+//    UIView *leftLine = [UIView lh_viewWithFrame:CGRectMake(10, 8,SCREEN_WIDTH - 20 , 1) backColor:LineDeepColor];
     
-    UIView *leftLine = [UIView lh_viewWithFrame:CGRectMake(15, 8,(SCREEN_WIDTH - 100)/2 , 1) backColor:LineDeepColor];
-    
-    XYQButton *moreBtn = [XYQButton ButtonWithFrame:CGRectMake(15+leftLine.width+5, 5, 58, 10) imgaeName:@"down" titleName:@"查看更多" contentType:LeftImageRightTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:LineDeepColor fontsize:10] tapAction:^(XYQButton *button) {
-        
-        self.isViewMore = !self.isViewMore;
-        [self.tabView reloadSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-    }];
-    UIView *rightLine = [UIView lh_viewWithFrame:CGRectMake(SCREEN_WIDTH - 15 - leftLine.width, 8, leftLine.width, 1) backColor:LineDeepColor];
-    [footView addSubview:leftLine];
-    [footView addSubview:rightLine];
-    [footView addSubview:moreBtn];
+//    UIView *leftLine = [UIView lh_viewWithFrame:CGRectMake(15, 8,(SCREEN_WIDTH - 100)/2 , 1) backColor:LineDeepColor];
+//    
+//    XYQButton *moreBtn = [XYQButton ButtonWithFrame:CGRectMake(15+leftLine.width+5, 5, 58, 10) imgaeName:@"down" titleName:@"查看更多" contentType:LeftImageRightTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:LineDeepColor fontsize:10] tapAction:^(XYQButton *button) {
+//        
+//        self.isViewMore = !self.isViewMore;
+//        [self.tabView reloadSection:0 withRowAnimation:UITableViewRowAnimationAutomatic];
+//        
+//    }];
+//    UIView *rightLine = [UIView lh_viewWithFrame:CGRectMake(SCREEN_WIDTH - 15 - leftLine.width, 8, leftLine.width, 1) backColor:LineDeepColor];
+//    [footView addSubview:leftLine];
+//    [footView addSubview:rightLine];
+//    [footView addSubview:moreBtn];
     return footView;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -155,15 +171,16 @@
     
     if (indexPath.section == 0) {
         
-        if (self.isViewMore) {
+//        if (self.isViewMore) {
+//            
+//            return [self calculteCellHeightWithSubjectArr];
+//            
+//        }else {
+        
+            CGFloat height = [HXArticleCellOne whc_CellHeightForIndexPath:indexPath tableView:tableView];
+            return height;
             
-            return [self calculteCellHeightWithSubjectArr];
-            
-        }else {
-            
-            return 100;
-            
-        }
+//        }
     }else{
         
         CGFloat height = [HXArticleCellTwo whc_CellHeightForIndexPath:indexPath tableView:tableView];
@@ -179,7 +196,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
     if (section == 0) {
-        return 20;
+        return 10;
     }else{
         
         return 0.01;
