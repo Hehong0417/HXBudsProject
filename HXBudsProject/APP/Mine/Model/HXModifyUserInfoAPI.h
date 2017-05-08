@@ -10,6 +10,6 @@
 
 @interface HXModifyUserInfoAPI : BaseAPI
 
-+ (instancetype)ModifyUserInfoWithNickname:(NSString *)nickname username:(NSString *)username  phone:(NSString *)phone  sex:(NSString *)sex age:(NSString *)age hobby:(NSString *)hobby;
++ (instancetype)ModifyUserInfoWithNickname:(NSString *)nickname username:(NSString *)username  phone:(NSString *)phone  sex:(NSString *)sex age:(NSString *)age hobby:(NSString *)hobby headportrait:(NSString *)headportrait;
 
 @end

@@ -179,18 +179,18 @@ BOOL isLogin;
     
     if (indexPath.section == 0) {
         
-        HXTeacherCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXTeacherCollectionCell" forIndexPath:indexPath];
-        HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
-        cell.teacherModel = model;
-        cell.followSelectedBlock = ^(BOOL followed) {
-            if (isLogin) {
-                [self followRequest:indexPath.row followed:followed];
-            }else {
-            
-                [self.navigationController pushVC:[HXLoginVC new]];
-            }
-        };
-        return cell;
+//        HXTeacherCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXTeacherCollectionCell" forIndexPath:indexPath];
+//        HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
+//        cell.teacherModel = model;
+//        cell.followSelectedBlock = ^(BOOL followed) {
+//            if (isLogin) {
+//                [self followRequest:indexPath.row followed:followed];
+//            }else {
+//            
+//                [self.navigationController pushVC:[HXLoginVC new]];
+//            }
+//        };
+//        return cell;
   
     }else {
     

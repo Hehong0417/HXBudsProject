@@ -23,10 +23,5 @@
     [self.iconImagV setRoundImageViewWithBorderWidth:0];
 
 }
-- (void)setModel:(HXPdModel *)model {
 
-    _model = model;
-    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.the_headportrait)]placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
-    self.nameLab.text = model.nickname;
-}
 @end

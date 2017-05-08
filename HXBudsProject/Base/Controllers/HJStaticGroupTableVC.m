@@ -9,7 +9,7 @@
 #import "HJStaticGroupTableVC.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "HXuploadIconAPI.h"
-
+#import "HXUploadIconModel.h"
 
 static const CGFloat kNormalTableSectionHeaderViewHeight = 30;
 static const CGFloat kNormalGroupSpacing = 10;
@@ -261,9 +261,14 @@ static const CGFloat kNormalCellHeight = 44;
             self.cellHeadImageView.image = image;
             NSData *imgData = UIImageJPEGRepresentation(self.cellHeadImageView.image, 1.0);
             //上传头像
-            [[[HXuploadIconAPI uploadImageWithphotoFile:imgData] netWorkClient] uploadFileInView:nil successBlock:^(id responseObject) {
-                
-            }];
+//            [[[HXuploadIconAPI uploadImageWithphotoFile:imgData] netWorkClient] uploadFileInView:nil successBlock:^(id responseObject) {
+//                
+//                NSString *path =  responseObject[@"model"][@"path"];
+//                HXUploadIconModel *model = [HXUploadIconModel new];
+//                model.path = path;
+//                [model write];
+//                
+//            }];
             //
             }];
     }
@@ -336,7 +341,6 @@ static const CGFloat kNormalCellHeight = 44;
             // 照片的元数据参数
             image = [info objectForKey:UIImagePickerControllerOriginalImage];
         }
-        
         //关闭相册界面
         [picker dismissViewControllerAnimated:YES completion:^{
 

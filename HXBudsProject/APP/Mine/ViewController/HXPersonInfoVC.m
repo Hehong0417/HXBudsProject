@@ -10,6 +10,8 @@
 #import "HXCommonPickView.h"
 #import "HXgetUserInfoAPI.h"
 #import "HXModifyUserInfoAPI.h"
+#import "HXUploadIconModel.h"
+#import "HXUserInfoModel.h"
 
 
 @interface HXPersonInfoVC ()
@@ -23,6 +25,8 @@
 @property(nonatomic,strong)NSString *age;
 @property(nonatomic,strong)UILabel *sexLabel;
 @property(nonatomic,strong)UILabel *ageLabel;
+@property(nonatomic,strong)HXUploadIconModel *uploadIconModel;
+@property(nonatomic,strong)HXUserInfoModel *userModel;
 
 @end
 
@@ -34,7 +38,7 @@
    self.title = @"个人信息";
     UIButton *saveBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 60, 80) target:self action:@selector(saveAction:) title:@"保存" titleColor:APP_COMMON_COLOR font:FONT(16) backgroundColor:kClearColor];
     UIBarButtonItem *rightBarItem =  [[UIBarButtonItem alloc]initWithCustomView:saveBtn];
-    rightBarItem.width = -10;
+    rightBarItem.width = -50;
     self.navigationItem.rightBarButtonItem = rightBarItem;
     saveBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     
@@ -62,23 +66,24 @@
     [self.view endEditing:YES];
     
     self.hobby = self.introduce.text;
-    
+    self.uploadIconModel = [HXUploadIconModel read];
+
    NSString *validMsg = [self validMsg];
     if (validMsg) {
         [SVProgressHUD showInfoWithStatus:validMsg];
     }else{
-        
-    [[[HXModifyUserInfoAPI ModifyUserInfoWithNickname:self.nickName username:self.name phone:self.phone sex:self.sex age:self.age hobby:self.hobby] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        [SVProgressHUD showSuccessWithStatus:@"保存成功"];
-        [self.navigationController popVC];
-
-    }];
+//        
+//    [[[HXModifyUserInfoAPI ModifyUserInfoWithNickname:self.nickName username:self.name phone:self.phone sex:self.sex age:self.age hobby:self.hobby headportrait:self.uploadIconModel.path] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+//        [SVProgressHUD showSuccessWithStatus:@"保存成功"];
+//        [self.navigationController popVC];
+//
+//    }];
     
     }
 
 }
 - (NSString *)validMsg{
-
+    
     if (!self.nickName) {
         return @"请输入昵称";
     }else if(!self.name){
@@ -93,16 +98,17 @@
         return @"请选择性别";
     }else if(!self.age){
         return @"请选择年龄";
+    }else if(!self.uploadIconModel.path){
+        return @"请选择头像";
     }else{
         return nil;
     }
-
 }
 
 
 - (NSArray *)groupTitles {
     
-    return @[@[@"头像",@"昵称",@"手机",@"姓名",@"性别",@"年龄"],@[@""]];
+    return @[@[@"头像",@"昵称",@"手机",@"姓名",@"性别",@"出生日期"],@[@""]];
 }
 
 - (NSArray *)groupIcons {
@@ -216,7 +222,7 @@
         };
         
     }else if(indexPath.row == 5){
-        //年龄
+        //出生日期
         HXCommonPickView *pickView = [[HXCommonPickView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         pickView.style = HXCommonPickViewStyleDate;
         [pickView showPickViewAnimation:YES];

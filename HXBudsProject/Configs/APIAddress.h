@@ -9,9 +9,9 @@
 
 //#ifdef DEBUG
 //// 本地
-#define API_HOST @"http://192.168.0.105:8080"
+#define API_HOST @"http://192.168.0.120:8080"
 // 本地图片
-#define API_IMAGE_HOST @"http://192.168.0.105:8080/html/goaling/images/upload/task"
+#define API_IMAGE_HOST @"http://192.168.0.120:8080/html/goaling/images/upload/task"
 //
 
 #define APP_key @"59334e721bcd31"
@@ -88,8 +88,7 @@
 #define API_GET_TEACHER_DDETAIL API_SUB_URL(@"theteacher/detail_anon")//*
 
 //5.2 关注
-#define API_GET_FOLLOW_TEACHER API_SUB_URL(@"followteacher/add")
-
+#define API_GET_FOLLOW_TEACHER API_SUB_URL(@"followteacher/add")//*
 
 /**
  *  文章

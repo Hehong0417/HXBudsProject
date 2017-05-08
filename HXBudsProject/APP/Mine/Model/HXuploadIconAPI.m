@@ -13,10 +13,9 @@
     
     HXuploadIconAPI *api = [[HXuploadIconAPI alloc] init];
     if (photoFile) {
-        NetworkClientFile *file = [NetworkClientFile imageFileWithFileData:photoFile name:@"headportrait"];
+        NetworkClientFile *file = [NetworkClientFile imageFileWithFileData:photoFile name:@"ico"];
         api.uploadFile = @[file];
     }
-    
     api.subUrl = API_media_upload;
     
     return api;

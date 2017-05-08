@@ -10,10 +10,13 @@
 
 @implementation HXModifyUserInfoAPI
 
-+ (instancetype)ModifyUserInfoWithNickname:(NSString *)nickname username:(NSString *)username  phone:(NSString *)phone  sex:(NSString *)sex age:(NSString *)age hobby:(NSString *)hobby{
++ (instancetype)ModifyUserInfoWithNickname:(NSString *)nickname username:(NSString *)username  phone:(NSString *)phone  sex:(NSString *)sex age:(NSString *)age hobby:(NSString *)hobby headportrait:(NSString *)headportrait{
 
     HXModifyUserInfoAPI *api = [HXModifyUserInfoAPI new];
     api.subUrl = API_GET_USER_SIMPLE_INFO;
+    if (headportrait) {
+        [api.parameters setObject:headportrait forKey:@"headportrait"];
+    }
     if (nickname) {
         [api.parameters setObject:nickname forKey:@"nickname"];
     }

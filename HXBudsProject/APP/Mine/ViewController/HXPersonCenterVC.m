@@ -87,6 +87,8 @@
     
     [[[HXgetUserInfoAPI getUserInfo] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         
+        self.mineHeadView.nameLab.text = responseObject[@"pd"][@"username"];
+        [self.mineHeadView.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(responseObject[@"pd"][@"headportrait"])] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
         self.tableV.tableHeaderView = self.mineHeadView;
     }];
     
