@@ -48,8 +48,9 @@
 
     }else{
      
-        NSString *selectedItem = [NSString stringWithFormat:@"%ld",[NSDate getAgeFromBirthDay:self.datePick.date]];
-        
+//        NSString *selectedItem = [NSString stringWithFormat:@"%ld",[NSDate getAgeFromBirthDay:self.datePick.date]];
+        NSString *selectedItem = [self.datePick.date lh_string_yyyyMMdd];
+
         NSLog(@"selectedItem:%@",selectedItem);
         
         self.completeBlock(selectedItem);

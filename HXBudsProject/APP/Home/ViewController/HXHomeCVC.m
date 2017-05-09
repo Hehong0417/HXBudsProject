@@ -29,6 +29,8 @@
 #import "HXSearchViewController.h"
 #import "HXSearchVC.h"
 #import "HXTeachingTypeListModel.h"
+#import "HXChoicenessCell.h"
+#import "HXCurriculumTypeCell.h"
 
 @interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,PYSearchViewControllerDelegate>
 {
@@ -141,7 +143,11 @@ BOOL isLogin;
     self.collectionView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.collectionView];
     [self.collectionView registerNib:[UINib nibWithNibName:@"HXvideoCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXvideoCollectionCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"HXTeacherCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXTeacherCollectionCell"];
+    [self.collectionView registerClass:[HXCurriculumTypeCell class] forCellWithReuseIdentifier:@"HXCurriculumTypeCell"];
+//    [self.collectionView registerNib:[UINib nibWithNibName:@"HXTeacherCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXTeacherCollectionCell"];
+     [self.collectionView registerNib:[UINib nibWithNibName:@"HXChoicenessCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXChoicenessCell"];
+    
+    
     [self.collectionView registerClass:[HXHomeReusableHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXHomeReusableHeadView"];
     [self.collectionView registerClass:[HXVideoSectionHead class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead"];
     self.view.backgroundColor = kWhiteColor;
@@ -179,22 +185,19 @@ BOOL isLogin;
     
     if (indexPath.section == 0) {
         
-//        HXTeacherCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXTeacherCollectionCell" forIndexPath:indexPath];
-//        HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
-//        cell.teacherModel = model;
-//        cell.followSelectedBlock = ^(BOOL followed) {
-//            if (isLogin) {
-//                [self followRequest:indexPath.row followed:followed];
-//            }else {
-//            
-//                [self.navigationController pushVC:[HXLoginVC new]];
-//            }
-//        };
-//        return cell;
+        HXCurriculumTypeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXCurriculumTypeCell" forIndexPath:indexPath];
+        cell.nav = self.navigationController;
+        return cell;
+        
+    }else if (indexPath.section == 1) {
+        
+        HXvideoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXvideoCollectionCell" forIndexPath:indexPath];
+        cell.model = self.SubjectVideoListModel.varList[indexPath.row];
+        return cell;
   
     }else {
     
-        HXvideoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXvideoCollectionCell" forIndexPath:indexPath];
+        HXChoicenessCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXChoicenessCell" forIndexPath:indexPath];
         cell.model = self.SubjectVideoListModel.varList[indexPath.row];
         cell.nav = self.navigationController;
         return cell;
@@ -204,13 +207,15 @@ BOOL isLogin;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 
-    return 2;
+    return 3;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     if (section == 0) {
+        return 1;
+    }else if (section == 1) {
         
-        return self.teacherListModel.varList.count?self.teacherListModel.varList.count:2;
+        return self.SubjectVideoListModel.varList.count?self.SubjectVideoListModel.varList.count:4;
         
     }else {
         
@@ -222,11 +227,17 @@ BOOL isLogin;
     
     if (indexPath.section == 0) {
         
-        return CGSizeMake(SCREEN_WIDTH , 100);
+        return CGSizeMake(SCREEN_WIDTH - 20 , 180);
+        
+    }else if (indexPath.section == 1) {
+        
+        return CGSizeMake((SCREEN_WIDTH - 35)/2, 160);
+
+//        return CGSizeMake(SCREEN_WIDTH , 100);
         
     }else{
         
-    return CGSizeMake((SCREEN_WIDTH - 35)/2, 160);
+    return CGSizeMake(SCREEN_WIDTH - 20, 160);
         
     }
 }
@@ -240,18 +251,17 @@ BOOL isLogin;
     
     if (section == 0) {
         
-        return   CGSizeMake(SCREEN_WIDTH, WidthScaleSize_W(152)+40);
+        return   CGSizeMake(SCREEN_WIDTH, WidthScaleSize_W(152)+WidthScaleSize_H(85));
 
-    }else  if (section == 1) {
+    }else {
     
         return  CGSizeMake(SCREEN_WIDTH, 35);
-
     }
     return CGSizeMake(0, 0);
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 1) {
         
         HXMyLikeVC *vc = [HXMyLikeVC new];
         HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
@@ -275,46 +285,40 @@ BOOL isLogin;
             HXHomeReusableHeadView *sectionHead = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXHomeReusableHeadView" forIndexPath:indexPath];
             
             sectionHead.imageURLStringsGroup = self.varListArr;
-
-            sectionHead.headtitle = @"名师推荐";
-            sectionHead.contentType = LeftImageRightTitle;
-            sectionHead.rightBtnTitle = @"更多 》";
-            sectionHead.btnFontAttributes = [FontAttributes fontAttributesWithFontColor:RGB(186, 186, 186) fontsize:13];
-//          sectionHead.imageName = @"change";
-            sectionHead.labFont = 15;
-            sectionHead.discribText = @"为你的梦想保驾护航的人";
-            HXteacherList *vc = [HXteacherList new];
-            sectionHead.vc = vc;
             sectionHead.nav = self.navigationController;
-          
             return sectionHead;
-        }else if (indexPath.section == 1){
+        }else if(indexPath.section == 1){
+            
+            HXVideoSectionHead *sectionHead = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead" forIndexPath:indexPath];
+            sectionHead.headtitle = @"热门课程";
+            sectionHead.contentType = LeftImageRightTitle;
+            sectionHead.rightBtnTitle = @"更多》";
+            sectionHead.labFont = 15;
+            sectionHead.imageName = @"hot";
+            sectionHead.btnFontAttributes = [FontAttributes fontAttributesWithFontColor:RGB(186, 186, 186) fontsize:13];
+            //            [sectionHead setTapActionWithBlock:^{
+            //                HXSubjectVideoVC *vc = [HXSubjectVideoVC new];
+            //                [self.navigationController pushVC:vc];
+            //            }];
+            return sectionHead;
+        
+        }else{
         
          HXVideoSectionHead *sectionHead = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead" forIndexPath:indexPath];
-            sectionHead.headtitle = @"专题视频";
+            sectionHead.headtitle = @"精选好课";
             sectionHead.contentType = LeftImageRightTitle;
-            sectionHead.rightBtnTitle = @"";
+            sectionHead.rightBtnTitle = @"更多》";
             sectionHead.labFont = 15;
-            sectionHead.discribText = @"为你找到志趣相投的人";
+            sectionHead.imageName = @"jingxuan";
             sectionHead.btnFontAttributes = [FontAttributes fontAttributesWithFontColor:RGB(186, 186, 186) fontsize:13];
 //            [sectionHead setTapActionWithBlock:^{
 //                HXSubjectVideoVC *vc = [HXSubjectVideoVC new];
 //                [self.navigationController pushVC:vc];
 //            }];
             return sectionHead;
-            
         }
     }
     return nil;
-}
-- (void)followRequest:(NSInteger )row followed:(BOOL)followed{
-    
-    HXteacherVarListModel *model = self.teacherListModel.varList[row];
-    
-    [[[HXFollowAPI followTeacherWiththeteacherId:model.theteacher_id state:followed?@"1":@"0"] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-    
-    }];
-
 }
 - (NSMutableArray *)varListArr {
     if (!_varListArr) {
@@ -338,12 +342,12 @@ BOOL isLogin;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:searchBtn];
     
-    XYQButton *messageBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, 44, 60) imgaeName:@"message" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
+    XYQButton *messageBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, 44, 60) imgaeName:@"mail" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
         
         [self.navigationController pushVC:[HXMessageVC new]];
         
     }];
-    UIImage *image2 = [UIImage imageNamed:@"message"];
+    UIImage *image2 = [UIImage imageNamed:@"mail"];
     [messageBtn setImage:image2 forState:UIControlStateNormal];
     CGFloat imageWidth2 = image2.size.width;
     CGFloat imageHeight2 = image2.size.height;

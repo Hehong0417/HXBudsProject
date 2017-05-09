@@ -10,7 +10,6 @@
 #import "HXMineLearnCell.h"
 #import "HXMineHeadView.h"
 #import "HXMyAccountInfoVC.h"
-#import "HXCouponVC.h"
 #import "HXMyLikeVC.h"
 #import "HXMineLoginHeadView.h"
 #import "HXMyArticleVC.h"
@@ -25,11 +24,10 @@
 #import "HJUser.h"
 #import "HXgetUserInfoAPI.h"
 #import "HXLoginVC.h"
+#import "HXMineLearnCell.h"
+#import "HXMyProductVC.h"
 
-@interface HXPersonCenterVC ()<HXMineLearnCellDelegate>
-{
-  
-}
+@interface HXPersonCenterVC ()
 //@property (nonatomic, strong) HXTeacherDetailModel *teacherDetailModel;
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, strong) HXMineLoginHeadView *mineHeadView;
@@ -88,7 +86,9 @@
     [[[HXgetUserInfoAPI getUserInfo] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         
         self.mineHeadView.nameLab.text = responseObject[@"pd"][@"username"];
-        [self.mineHeadView.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(responseObject[@"pd"][@"headportrait"])] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+        NSString *icostr = responseObject[@"pd"][@"headportrait"];
+        NSLog(@"icostr:%@",kAPIImageFromUrl(icostr));
+        [self.mineHeadView.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(icostr)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
         self.tableV.tableHeaderView = self.mineHeadView;
     }];
     
@@ -133,82 +133,78 @@
 }
 - (NSArray *)groupTitles {
     
-    return @[@[@"我的资产",@"我的消息",@"我关注的",@"好友动态"],@[@"浏览记录",@"分享萌芽APP",@"意见反馈",@"给我们好评~~"],@[@"仅在WI-Fi下播放",@""]];
+    return @[@[@" "],@[@"我关注的",@"我收藏的",@"我发布的"],@[@"设置"]];
 }
 
 - (NSArray *)groupIcons {
     
-    return @[@[@"mine_0",@"mine_1",@"mine_2",@"mine_3"],@[@"mine_4",@"mine_5",@"mine_6",@"mine_7"],@[@"",@""]];
-    
+  return @[@[@" "],@[@"fo",@"collect",@"sent"],@[@"set"]];
 }
 
-- (NSArray *)rightViewSwitchIndexPaths {
-    
-    NSIndexPath *indexpath = [NSIndexPath indexPathForRow:0 inSection:3];
-    
-    return @[indexpath];
-}
+
 
 - (NSArray *)groupDetials {
     
-    return @[@[@"",@"",@"",@""],@[@"",@"",@"",@""],@[@"",@" "]];
+  return @[@[@" "],@[@" ",@" ",@" "],@[@" "]];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-        UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-        if (indexPath.section == 2 && indexPath.row == 1){
-            
-            UILabel *exit = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-            exit.text = @"退出当前账号";
-            exit.font = FONT(14);
-            exit.textAlignment = NSTextAlignmentCenter;
-            exit.textColor = kRedColor;
-            [cell.contentView addSubview:exit];
+    if (indexPath.section == 0) {
+       
+        HXMineLearnCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXMineLearnCell"];
+        if (!cell) {
+            cell = [HXMineLearnCell initMineCellWithXib];
         }
+        [cell.leftBtn addTarget:self action:@selector(myAccountAction) forControlEvents:UIControlEventTouchUpInside];
+        [cell.rightBtn addTarget:self action:@selector(myMessageAction) forControlEvents:UIControlEventTouchUpInside];
         return cell;
         
+    }else{
+    
+        UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell;
+    }
     return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (indexPath.section == 0) {
+        
+        return 85;
+    }
     return 44;
     
 }
+- (void)myAccountAction {
+    
+    if (self.isLogin) {
+        HXMyAccountInfoVC *vc = [HXMyAccountInfoVC new];
+        [self.navigationController pushVC:vc];
+        return;
+    }
+    
+}
+- (void)myMessageAction {
+    
+    if (self.isLogin) {
+        HXMessageVC *vc = [HXMessageVC new];
+        [self.navigationController pushVC:vc];
+        return;
+    }
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
-        
-//        if (<#condition#>) {
-//            <#statements#>
-//        }
-        [self didSelectRowAtSection0:indexPath.row];
-        
-    }else if (indexPath.section == 1){
+    if (indexPath.section == 1) {
         
         [self didSelectRowAtSection1:indexPath.row];
         
-    }else if (indexPath.section == 2 && indexPath.row == 1){
+    }else if (indexPath.section == 2){
         
-    //退出登录
-  
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"确定退出当前账号?" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            HJUser *user = [HJUser sharedUser];
-            user.pd.token = @"";
-            user.pd.users_id = @"";
-            [user write];
-            [self updatePersonCenter];
-        }];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-        }];
-        [alert addAction:sureAction];
-        [alert addAction:cancelAction];
-        [self presentViewController:alert animated:YES completion:nil];
-        
+
     }
-    
 }
 - (void)updatePersonCenter {
 
@@ -216,33 +212,29 @@
     
 }
 
-- (void)didSelectRowAtSection0:(NSInteger )row{
+- (void)didSelectRowAtSection1:(NSInteger )row{
     
     if (row == 0) {
         if (self.isLogin) {
-            HXMyAccountInfoVC *vc = [HXMyAccountInfoVC new];
+            HXMyAttentionSGVC *vc = [HXMyAttentionSGVC new];
             [self.navigationController pushVC:vc];
             return;
         }
     }else if (row == 1){
+
         if (self.isLogin) {
-            HXMessageVC *vc = [HXMessageVC new];
+        HXBroserRecordSGVC *vc = [HXBroserRecordSGVC new];
+        [self.navigationController pushVC:vc];
+            return;
+            }
+        
+    }else if (row == 2){
+        if (self.isLogin) {
+            HXMyProductVC *vc = [HXMyProductVC new];
             [self.navigationController pushVC:vc];
             return;
         }
         
-    }else if (row == 2){
-        if (self.isLogin) {
-        HXMyAttentionSGVC *vc = [HXMyAttentionSGVC new];
-        [self.navigationController pushVC:vc];
-            return;
-            }
-    }else if (row == 3){
-            if (self.isLogin) {
-        HXFriendDynamicStateVC *vc = [HXFriendDynamicStateVC new];
-        [self.navigationController pushVC:vc];
-            return;
-            }
     }
       [self pushLoginVC];
 }
@@ -251,74 +243,67 @@
     [self.navigationController pushVC:[HXLoginVC new]];
 
 }
-- (void)didSelectRowAtSection1:(NSInteger)row{
-    
-    if (row == 0) {
-        if (self.isLogin) {
-        HXBroserRecordSGVC *vc = [HXBroserRecordSGVC new];
-        [self.navigationController pushVC:vc];
-            return;
-            }
-    }else if (row == 1){
-        
-        //分享app
-        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-            
-            // 根据获取的platformType确定所选平台进行下一步操作
-            [self shareWebPageToPlatformType:platformType];
-            
-        }];
-        
-    }else if (row == 2){
-        if (self.isLogin) {
-        HXAdviceFaceBackVC *vc = [HXAdviceFaceBackVC new];
-        [self.navigationController pushVC:vc];
-        return;
-            }
-    }else if (row == 3){
-        
-        
-        return;
-    }
-    [self pushLoginVC];
-    
-}
 
-//分享网页链接
-- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
-{
-    
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    
-    //创建网页内容对象
-    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"萌芽-多艺盟" descr:@"艺术教育平台" thumImage:thumbURL];
-    //设置网页地址
-    shareObject.webpageUrl = @"http://mobile.umeng.com/social";
-    
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    
-    //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        
-        if (error) {
-            UMSocialLogInfo(@"************Share fail with error %@*********",error);
-        }else{
-            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
-                UMSocialShareResponse *resp = data;
-                //分享结果消息
-                UMSocialLogInfo(@"response message is %@",resp.message);
-                //第三方原始返回的数据
-                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-                
-            }else{
-                UMSocialLogInfo(@"response data is %@",data);
-            }
-        }
-        //        [self alertWithError:error];
-    }];
-}
+//    else if (row == 1){
+//        
+//        //分享app
+//        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+//            
+//            // 根据获取的platformType确定所选平台进行下一步操作
+//            [self shareWebPageToPlatformType:platformType];
+//            
+//        }];
+//        
+//    }else if (row == 2){
+//        if (self.isLogin) {
+//        HXAdviceFaceBackVC *vc = [HXAdviceFaceBackVC new];
+//        [self.navigationController pushVC:vc];
+//        return;
+//            }
+//    }else if (row == 3){
+//        
+//        
+//        return;
+//    }
+//    [self pushLoginVC];
 
+//
+
+////分享网页链接
+//- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+//{
+//    
+//    //创建分享消息对象
+//    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+//    
+//    //创建网页内容对象
+//    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
+//    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"萌芽-多艺盟" descr:@"艺术教育平台" thumImage:thumbURL];
+//    //设置网页地址
+//    shareObject.webpageUrl = @"http://mobile.umeng.com/social";
+//    
+//    //分享消息对象设置分享内容对象
+//    messageObject.shareObject = shareObject;
+//    
+//    //调用分享接口
+//    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+//        
+//        if (error) {
+//            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+//        }else{
+//            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+//                UMSocialShareResponse *resp = data;
+//                //分享结果消息
+//                UMSocialLogInfo(@"response message is %@",resp.message);
+//                //第三方原始返回的数据
+//                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+//                
+//            }else{
+//                UMSocialLogInfo(@"response data is %@",data);
+//            }
+//        }
+//        //        [self alertWithError:error];
+//    }];
+//}
+//
 @end

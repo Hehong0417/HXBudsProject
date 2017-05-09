@@ -1,44 +1,42 @@
 //
-//  HXMyQuestionVC.m
+//  HXOrganizationSGVC.m
 //  HXBudsProject
 //
-//  Created by n on 2017/3/3.
+//  Created by n on 2017/5/9.
 //  Copyright © 2017年 n. All rights reserved.
 //
 
-#import "HXMyQuestionVC.h"
+#import "HXFamousTeacherSGVC.h"
 #import "SGSegmentedControl.h"
+#import "HXOrganizationVC.h"
 
-@interface HXMyQuestionVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
-
+@interface HXFamousTeacherSGVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
 @property(nonatomic,strong)SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
-
+@property (nonatomic, strong) NSArray *title_arr;
 @end
 
-@implementation HXMyQuestionVC
+@implementation HXFamousTeacherSGVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = @"我的提问";
+    self.title = @"找名师";
 
-    
     // 1.添加所有子控制器
     [self setupChildViewController];
     
     [self setupSegmentedControl];
 
-    
 }
 - (void)setupSegmentedControl {
     
-    NSArray *title_arr = @[@"已解决", @"未解决"];
+    self.title_arr = @[@"推荐名师",@"附近名师",@"全部"];
     
     // 创建底部滚动视图
     self.mainScrollView = [[UIScrollView alloc] init];
-    _mainScrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    _mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width * title_arr.count, 0);
+    _mainScrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height- 44);
+    _mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width * self.title_arr.count, 0);
     _mainScrollView.backgroundColor = [UIColor whiteColor];
     // 开启分页
     _mainScrollView.pagingEnabled = YES;
@@ -50,13 +48,11 @@
     _mainScrollView.delegate = self;
     [self.view addSubview:_mainScrollView];
     
-    
-    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) delegate:self segmentedControlType:(SGSegmentedControlTypeStatic) titleArr:title_arr];
+    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) delegate:self segmentedControlType:(SGSegmentedControlTypeStatic) titleArr:self.title_arr];
     self.SG.titleColorStateNormal = kBlackColor;
     self.SG.titleColorStateSelected = APP_COMMON_COLOR;
-    self.SG.indicatorColor = kRedColor;
-    self.SG.showsBottomScrollIndicator = NO;
-
+//    self.SG.showsBottomScrollIndicator = YES;
+    self.SG.indicatorColor = APP_COMMON_COLOR;
     [self.view addSubview:_SG];
 }
 
@@ -69,14 +65,15 @@
     // 2.给对应位置添加对应子控制器
     [self showVc:index];
 }
-
 // 添加所有子控制器
 - (void)setupChildViewController {
     
-    // 已解决
- 
-    
-    
+    for (NSInteger i = 0; i<3; i++) {
+        
+        HXOrganizationVC *vc = [HXOrganizationVC new];
+        [self addChildViewController:vc];
+    }
+
     
 }
 

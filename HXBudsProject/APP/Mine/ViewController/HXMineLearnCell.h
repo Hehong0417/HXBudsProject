@@ -8,15 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol HXMineLearnCellDelegate <NSObject>
-
-- (void)LearnBtnActionWithIndex:(NSInteger)index;
-
-@end
 
 @interface HXMineLearnCell : UITableViewCell
 
-@property(nonatomic,copy) id<HXMineLearnCellDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;

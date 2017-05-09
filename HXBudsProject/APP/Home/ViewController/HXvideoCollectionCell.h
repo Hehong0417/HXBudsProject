@@ -10,6 +10,7 @@
 #import "HXSubjectVideoListModel.h"
 
 @interface HXvideoCollectionCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *videoImagV;
 @property(nonatomic,strong) UINavigationController *nav;
 @property (weak, nonatomic) IBOutlet UIImageView *videoIconImgV;

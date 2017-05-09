@@ -1,13 +1,13 @@
 //
-//  HXMyQuestionVC.h
+//  HXOrganizationSGVC.h
 //  HXBudsProject
 //
-//  Created by n on 2017/3/3.
+//  Created by n on 2017/5/9.
 //  Copyright © 2017年 n. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface HXMyQuestionVC : UIViewController
+@interface HXFamousTeacherSGVC : UIViewController
 
 @end

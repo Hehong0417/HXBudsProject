@@ -13,6 +13,8 @@
 #import "HXSubjectVideoVC.h"
 #import "HXSubjectVideoAPI.h"
 #import "HXSubjectVideoListModel.h"
+#import "HXChoicenessCell.h"
+
 
 @interface HXVideoCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 
@@ -23,8 +25,6 @@
 @end
 
 @implementation HXVideoCVC
-
-static NSString * const reuseIdentifier = @"Cell";
 
 
 - (void)viewDidLoad {
@@ -39,30 +39,30 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.collectionView reloadData];
         
     }];
-   //艺术教程
-    [self getSubjectVideoListWithCurriculum­­_status:@"curriculum-status-ysjc" completeHandle:^(id responseObject) {
-        
-        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
-        
-        self.ArtVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
-        
-        [self.collectionView reloadData];
-        
-    }];
-    
-    
+//   //艺术教程
+//    [self getSubjectVideoListWithCurriculum­­_status:@"curriculum-status-ysjc" completeHandle:^(id responseObject) {
+//        
+//        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+//        
+//        self.ArtVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+//        
+//        [self.collectionView reloadData];
+//        
+//    }];
+//    
     
     self.title = @"视频";
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:layout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49) collectionViewLayout:layout];
     
-    [self.collectionView registerNib:[UINib nibWithNibName:@"HXvideoCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXvideoCollectionCell"];
-    [self.collectionView registerClass:[HXVideoSectionHead class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"HXChoicenessCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXChoicenessCell"];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = kWhiteColor;
     self.collectionView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.collectionView];
+    self.view.backgroundColor = kWhiteColor;
+    
 }
 
 - (void)getSubjectVideoListWithCurriculum­­_status:(NSString *)curriculum_status completeHandle:(void(^)(id responseObject))completeHandle {
@@ -79,43 +79,29 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 
-    return 2;
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
-    if (section == 0) {
+
+    return self.SubjectVideoListModel.varList.count?self.SubjectVideoListModel.varList.count:4;
         
-        return self.ArtVideoListModel.varList.count;
-        
-    }else{
-    
-    return self.SubjectVideoListModel.varList.count;
-        
-    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        HXvideoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXvideoCollectionCell" forIndexPath:indexPath];
-        HXSubjectVideoModel *model = self.ArtVideoListModel.varList[indexPath.row];
-        cell.nav = self.navigationController;
-        cell.model = model;
-        return cell;
-    }else{
     
-    HXvideoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXvideoCollectionCell" forIndexPath:indexPath];
-    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
+    HXChoicenessCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXChoicenessCell" forIndexPath:indexPath];
+    cell.model = self.SubjectVideoListModel.varList[indexPath.row];
     cell.nav = self.navigationController;
-    cell.model = model;
     return cell;
-    }
+
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    return CGSizeMake((SCREEN_WIDTH - 20 - 15)/2, 160);
+    return CGSizeMake((SCREEN_WIDTH - 20), 160);
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     
@@ -126,53 +112,53 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
 
-  return   CGSizeMake(SCREEN_WIDTH, WidthScaleSize_H(35));
+  return   CGSizeMake(SCREEN_WIDTH, 0.01);
 
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-
-    if (kind  == UICollectionElementKindSectionHeader) {
-       
-        ContentType contentType;
-        NSString *imageName;
-        NSString *titleName;
-        NSString *headTitle;
-        
-        if (indexPath.section == 0) {
-            headTitle = @"  专题视频";
-            contentType = LeftImageRightTitle;
-            titleName = @"更多》";
-        }
-        
-        if (indexPath.section == 1) {
-            headTitle = @"  艺术教程";
-            contentType = LeftImageRightTitle;
-            imageName = @"";
-            titleName = @"更多》";
-            
-        }
-        HXVideoSectionHead *sectionHead = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead" forIndexPath:indexPath];
-        sectionHead.headtitle = headTitle;
-        sectionHead.discribText = @"为你的梦想保驾护航";
-        sectionHead.rightBtnTitle = titleName;
-        sectionHead.contentType = contentType;
-        sectionHead.imageName = imageName;
-        sectionHead.labFont = 14;
-        FontAttributes *attrbutes = [FontAttributes fontAttributesWithFontColor:FontLightGrayColor fontsize:14];
-        sectionHead.btnFontAttributes = attrbutes;
-        [sectionHead setTapActionWithBlock:^{
-            
-            [self rightBtnActionWithSection:indexPath.section];
-            
-        }];    
-        
-        return sectionHead;
-        
-    }
-    
-    return nil;
-}
+//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+//
+//    if (kind  == UICollectionElementKindSectionHeader) {
+//       
+//        ContentType contentType;
+//        NSString *imageName;
+//        NSString *titleName;
+//        NSString *headTitle;
+//        
+//        if (indexPath.section == 0) {
+//            headTitle = @"  专题视频";
+//            contentType = LeftImageRightTitle;
+//            titleName = @"更多》";
+//        }
+//        
+//        if (indexPath.section == 1) {
+//            headTitle = @"  艺术教程";
+//            contentType = LeftImageRightTitle;
+//            imageName = @"";
+//            titleName = @"更多》";
+//            
+//        }
+//        HXVideoSectionHead *sectionHead = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead" forIndexPath:indexPath];
+//        sectionHead.headtitle = headTitle;
+//        sectionHead.discribText = @"为你的梦想保驾护航";
+//        sectionHead.rightBtnTitle = titleName;
+//        sectionHead.contentType = contentType;
+//        sectionHead.imageName = imageName;
+//        sectionHead.labFont = 14;
+//        FontAttributes *attrbutes = [FontAttributes fontAttributesWithFontColor:FontLightGrayColor fontsize:14];
+//        sectionHead.btnFontAttributes = attrbutes;
+//        [sectionHead setTapActionWithBlock:^{
+//            
+//            [self rightBtnActionWithSection:indexPath.section];
+//            
+//        }];    
+//        
+//        return sectionHead;
+//        
+//    }
+//    
+//    return nil;
+//}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 

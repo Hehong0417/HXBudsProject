@@ -12,7 +12,7 @@
 
 + (instancetype)initOrganizationCellWithXib;
 
-@property (weak, nonatomic) IBOutlet UILabel *evulateLab;
+@property (weak, nonatomic) IBOutlet UIImageView *iconImagV;
 
 
 

@@ -19,9 +19,7 @@
 - (void)awakeFromNib {
 
     [super awakeFromNib];
-    [self.evulateLab lh_setCornerRadius:3 borderWidth:1 borderColor:[UIColor colorWithHexString:@"#F6A623"]];
-    
-    
+    [self.iconImagV lh_setRoundImageViewWithBorderWidth:0 borderColor:nil];
     
 }
 @end

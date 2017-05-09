@@ -37,7 +37,7 @@
 - (void)setupSegmentedControl {
     
     
-    NSArray *title_arr = @[@"名师",@"好友"];
+    NSArray *title_arr = @[@"名师",@"萌友"];
     
     // 创建底部滚动视图
     self.mainScrollView = [[UIScrollView alloc] init];

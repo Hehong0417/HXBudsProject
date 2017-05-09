@@ -260,16 +260,16 @@ static const CGFloat kNormalCellHeight = 44;
         [self showPhotoSheetActionWithFinishSelectedBlock:^(UIImage *image) {
             self.cellHeadImageView.image = image;
             NSData *imgData = UIImageJPEGRepresentation(self.cellHeadImageView.image, 1.0);
-            //上传头像
-//            [[[HXuploadIconAPI uploadImageWithphotoFile:imgData] netWorkClient] uploadFileInView:nil successBlock:^(id responseObject) {
-//                
-//                NSString *path =  responseObject[@"model"][@"path"];
-//                HXUploadIconModel *model = [HXUploadIconModel new];
-//                model.path = path;
-//                [model write];
-//                
-//            }];
-            //
+//   上传头像
+            [[[HXuploadIconAPI uploadImageWithphotoFile:imgData] netWorkClient] uploadFileInView:nil successBlock:^(id responseObject) {
+                
+                NSString *path =  responseObject[@"model"][@"path"];
+                HXUploadIconModel *model = [HXUploadIconModel new];
+                model.path = path;
+                [model write];
+                
+            }];
+            
             }];
     }
 }

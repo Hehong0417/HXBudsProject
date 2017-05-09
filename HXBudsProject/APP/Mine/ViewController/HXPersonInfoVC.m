@@ -36,12 +36,12 @@
     [super viewDidLoad];
     
    self.title = @"个人信息";
-    UIButton *saveBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 60, 80) target:self action:@selector(saveAction:) title:@"保存" titleColor:APP_COMMON_COLOR font:FONT(16) backgroundColor:kClearColor];
+
+    UIButton *saveBtn = [UIButton lh_buttonWithFrame:CGRectMake(50, 0, 60, 80) target:self action:@selector(saveAction:) title:@"保存" titleColor:APP_COMMON_COLOR font:FONT(16) backgroundColor:kClearColor];
     UIBarButtonItem *rightBarItem =  [[UIBarButtonItem alloc]initWithCustomView:saveBtn];
-    rightBarItem.width = -50;
     self.navigationItem.rightBarButtonItem = rightBarItem;
     saveBtn.titleLabel.textAlignment = NSTextAlignmentRight;
-    
+    [saveBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     self.tableV.backgroundColor = KVCBackGroundColor;
     
     

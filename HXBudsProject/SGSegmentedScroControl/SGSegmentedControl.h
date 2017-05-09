@@ -49,6 +49,8 @@ typedef enum : NSUInteger {
 
 /** 默认为滚动风格 */
 @property (nonatomic, assign) SGSegmentedControlType segmentedControlType;
+/** 标题文字大小 */
+@property (nonatomic, strong) UIFont *title_fondOfSize;
 
 /** 标题文字颜色(默认为黑色) */
 @property (nonatomic, strong) UIColor *titleColorStateNormal;

@@ -35,7 +35,7 @@
 - (void)setupSegmentedControl {
     
     
-    NSArray *title_arr = @[@"文章",@"视频"];
+    NSArray *title_arr = @[@"视频",@"文章"];
     
     // 创建底部滚动视图
     self.mainScrollView = [[UIScrollView alloc] init];
@@ -73,12 +73,11 @@
 // 添加所有子控制器
 - (void)setupChildViewController {
     
-    HXBrowserRecordArticleVC *vc = [HXBrowserRecordArticleVC new];
-    [self addChildViewController:vc];
-    
     HXBroserRecordVideoVC *vc1 = [HXBroserRecordVideoVC new];
     [self addChildViewController:vc1];
     
+    HXBrowserRecordArticleVC *vc = [HXBrowserRecordArticleVC new];
+    [self addChildViewController:vc];
 }
 
 // 显示控制器的view

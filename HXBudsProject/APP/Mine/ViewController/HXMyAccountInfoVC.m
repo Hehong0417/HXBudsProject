@@ -8,7 +8,6 @@
 
 #import "HXMyAccountInfoVC.h"
 #import "HXAccountHead.h"
-#import "HXCouponVC.h"
 #import "HXBalanceRechargeVC.h"
 #import "HXMyAssetAPI.h"
 

@@ -130,6 +130,14 @@ typedef NS_ENUM(NSUInteger, DynamicType) {
 };
 
 
+//主页类型
+typedef NS_ENUM(NSUInteger, DetailType) {
+    teacherDetailType,//名师主页
+    organizationType,//机构主页
+};
+
+
+
 
 
 //Block

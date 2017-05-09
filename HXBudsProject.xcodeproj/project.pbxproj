@@ -36,6 +36,11 @@
 		0D56EE0C1E8DE5C600CB8E1C /* UIColor+PYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D56EE051E8DE5C500CB8E1C /* UIColor+PYExtension.m */; };
 		0D56EE0D1E8DE5C600CB8E1C /* UIView+PYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D56EE071E8DE5C500CB8E1C /* UIView+PYExtension.m */; };
 		0D59D79C1E82741900C2C33C /* HXTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D59D79B1E82741900C2C33C /* HXTabBar.m */; };
+		0D618B381EC170FA00E2C157 /* HXInstrumentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D618B371EC170FA00E2C157 /* HXInstrumentVC.m */; };
+		0D618B3C1EC171C200E2C157 /* HXInstrumentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D618B3A1EC171C200E2C157 /* HXInstrumentCell.m */; };
+		0D618B3D1EC171C200E2C157 /* HXInstrumentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D618B3B1EC171C200E2C157 /* HXInstrumentCell.xib */; };
+		0D618B401EC1745000E2C157 /* HXInstrumentSectionHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D618B3F1EC1745000E2C157 /* HXInstrumentSectionHead.m */; };
+		0D618B421EC1745E00E2C157 /* HXInstrumentSectionHead.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D618B411EC1745E00E2C157 /* HXInstrumentSectionHead.xib */; };
 		0D65C3F61E4AB703009F07F1 /* HXRecommendTeacherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D65C3E81E4AB703009F07F1 /* HXRecommendTeacherCell.m */; };
 		0D65C3F71E4AB703009F07F1 /* HXRecommendTeacherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D65C3E91E4AB703009F07F1 /* HXRecommendTeacherCell.xib */; };
 		0D65C3F81E4AB703009F07F1 /* HXPersonCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D65C3EF1E4AB703009F07F1 /* HXPersonCenterVC.m */; };
@@ -43,7 +48,6 @@
 		0D6B4C6D1EBC8578005A451B /* HXModifyUserInfoAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6B4C6C1EBC8578005A451B /* HXModifyUserInfoAPI.m */; };
 		0D6CFFDF1E9898890093B5FF /* HXSearchSubjectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CFFDE1E9898890093B5FF /* HXSearchSubjectVC.m */; };
 		0D6D72081E68FDB800DFCC68 /* HXMyAccountInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6D72071E68FDB800DFCC68 /* HXMyAccountInfoVC.m */; };
-		0D6D72121E690E3300DFCC68 /* HXCouponVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6D72111E690E3300DFCC68 /* HXCouponVC.m */; };
 		0D6EDFF51E6D47F10093F6CC /* HXCommonPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6EDFF41E6D47F10093F6CC /* HXCommonPickView.m */; };
 		0D6F56451EAEFA7800B9190F /* HXSubjectVideoAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6F56441EAEFA7800B9190F /* HXSubjectVideoAPI.m */; };
 		0D6F56481EAF1BDE00B9190F /* HXSubjectVideoListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6F56471EAF1BDE00B9190F /* HXSubjectVideoListModel.m */; };
@@ -102,7 +106,6 @@
 		0D78A7971E5EC1B90032F135 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D78A7961E5EC1B90032F135 /* WebKit.framework */; };
 		0D7960DC1EA601A10005A60A /* HXAdvListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7960DB1EA601A10005A60A /* HXAdvListModel.m */; };
 		0D79B1A71EBCA4B80089CBE5 /* HXuploadIconAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D79B1A61EBCA4B80089CBE5 /* HXuploadIconAPI.m */; };
-		0D7B22201E67FD54000ABE4A /* HXMineLearnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D7B221F1E67FD54000ABE4A /* HXMineLearnCell.xib */; };
 		0D7B22231E68091E000ABE4A /* HXPersonInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7B22221E68091E000ABE4A /* HXPersonInfoVC.m */; };
 		0D7C465A1EADF3BE00DEA3E8 /* HXteacherList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C46591EADF3BE00DEA3E8 /* HXteacherList.m */; };
 		0D7C465D1EAE018300DEA3E8 /* HXMyAttentionSGVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C465C1EAE018300DEA3E8 /* HXMyAttentionSGVC.m */; };
@@ -176,7 +179,6 @@
 		0D9168201E9626EF002D8296 /* HXHomeReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D91681F1E9626EF002D8296 /* HXHomeReusableHeadView.m */; };
 		0D93F0751E693DB900CD9450 /* HXLearningProgressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D93F0741E693DB900CD9450 /* HXLearningProgressVC.m */; };
 		0D93F0781E69417300CD9450 /* HXMyLikeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D93F0771E69417300CD9450 /* HXMyLikeVC.m */; };
-		0D93F07B1E69461800CD9450 /* HXMyQuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D93F07A1E69461800CD9450 /* HXMyQuestionVC.m */; };
 		0D9990071EBC236800EB1F42 /* HXTeachingTypeListAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9990061EBC236800EB1F42 /* HXTeachingTypeListAPI.m */; };
 		0D9A1DFD1E84C853004457A8 /* HXAccountHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9A1DFC1E84C853004457A8 /* HXAccountHead.m */; };
 		0D9A1E011E84D346004457A8 /* HXBalanceRechargeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9A1DFF1E84D346004457A8 /* HXBalanceRechargeVC.m */; };
@@ -185,6 +187,21 @@
 		0D9BC2851EA4AC5900EC2315 /* UIView+WHC_AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC27F1EA4AC5900EC2315 /* UIView+WHC_AutoLayout.m */; };
 		0D9BC2861EA4AC5900EC2315 /* UIView+WHC_Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC2811EA4AC5900EC2315 /* UIView+WHC_Frame.m */; };
 		0D9BC2871EA4AC5900EC2315 /* WHC_StackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC2831EA4AC5900EC2315 /* WHC_StackView.m */; };
+		0DA098BD1EC19866004BB09A /* HXFamousTeacherSGVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA098BC1EC19866004BB09A /* HXFamousTeacherSGVC.m */; };
+		0DA098C01EC19ACE004BB09A /* HXFamousTeacherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA098BF1EC19ACE004BB09A /* HXFamousTeacherVC.m */; };
+		0DA098C31EC19E19004BB09A /* HXOrganizationDetailCurriculumVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA098C21EC19E19004BB09A /* HXOrganizationDetailCurriculumVC.m */; };
+		0DAE8AA71EC04C2B00CA0619 /* HXChoicenessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE8AA51EC04C2B00CA0619 /* HXChoicenessCell.m */; };
+		0DAE8AA81EC04C2B00CA0619 /* HXChoicenessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DAE8AA61EC04C2B00CA0619 /* HXChoicenessCell.xib */; };
+		0DAE8AAA1EC056A100CA0619 /* HXMineLearnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DAE8AA91EC056A100CA0619 /* HXMineLearnCell.xib */; };
+		0DAE8AAD1EC060C000CA0619 /* HXMyProductVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE8AAC1EC060C000CA0619 /* HXMyProductVC.m */; };
+		0DAE8AB01EC067D100CA0619 /* HXSetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE8AAF1EC067D100CA0619 /* HXSetVC.m */; };
+		0DAE8AB31EC068FD00CA0619 /* HXAccountSecutityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE8AB21EC068FD00CA0619 /* HXAccountSecutityVC.m */; };
+		0DAE8AB61EC0707500CA0619 /* HXCurriculumTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE8AB51EC0707500CA0619 /* HXCurriculumTypeCell.m */; };
+		0DAE8AB91EC0767D00CA0619 /* HXFindGroupSGVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE8AB81EC0767D00CA0619 /* HXFindGroupSGVC.m */; };
+		0DAE8ABC1EC07D6000CA0619 /* HXOrganizationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE8ABB1EC07D6000CA0619 /* HXOrganizationVC.m */; };
+		0DAE8AC21EC083E000CA0619 /* HXOrganizationDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE8AC11EC083E000CA0619 /* HXOrganizationDetailVC.m */; };
+		0DAE8AC51EC0850D00CA0619 /* HXOrganizationHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE8AC41EC0850D00CA0619 /* HXOrganizationHeadView.m */; };
+		0DAE8AC71EC0852E00CA0619 /* HXOrganizationHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DAE8AC61EC0852E00CA0619 /* HXOrganizationHeadView.xib */; };
 		0DAE95B31E8D03E800A8C0A2 /* HXSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE95B21E8D03E800A8C0A2 /* HXSearchVC.m */; };
 		0DAEA51F1EB03247009AF9D9 /* HXCurriculumDetailAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAEA51E1EB03247009AF9D9 /* HXCurriculumDetailAPI.m */; };
 		0DAEA5221EB032A0009AF9D9 /* HXVideoCatalogueAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAEA5211EB032A0009AF9D9 /* HXVideoCatalogueAPI.m */; };
@@ -363,6 +380,14 @@
 		0D56EE071E8DE5C500CB8E1C /* UIView+PYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PYExtension.m"; sourceTree = "<group>"; };
 		0D59D79A1E82741900C2C33C /* HXTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTabBar.h; sourceTree = "<group>"; };
 		0D59D79B1E82741900C2C33C /* HXTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTabBar.m; sourceTree = "<group>"; };
+		0D618B361EC170FA00E2C157 /* HXInstrumentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXInstrumentVC.h; sourceTree = "<group>"; };
+		0D618B371EC170FA00E2C157 /* HXInstrumentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXInstrumentVC.m; sourceTree = "<group>"; };
+		0D618B391EC171C200E2C157 /* HXInstrumentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXInstrumentCell.h; sourceTree = "<group>"; };
+		0D618B3A1EC171C200E2C157 /* HXInstrumentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXInstrumentCell.m; sourceTree = "<group>"; };
+		0D618B3B1EC171C200E2C157 /* HXInstrumentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXInstrumentCell.xib; sourceTree = "<group>"; };
+		0D618B3E1EC1745000E2C157 /* HXInstrumentSectionHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXInstrumentSectionHead.h; sourceTree = "<group>"; };
+		0D618B3F1EC1745000E2C157 /* HXInstrumentSectionHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXInstrumentSectionHead.m; sourceTree = "<group>"; };
+		0D618B411EC1745E00E2C157 /* HXInstrumentSectionHead.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXInstrumentSectionHead.xib; sourceTree = "<group>"; };
 		0D65C3E71E4AB703009F07F1 /* HXRecommendTeacherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXRecommendTeacherCell.h; sourceTree = "<group>"; };
 		0D65C3E81E4AB703009F07F1 /* HXRecommendTeacherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXRecommendTeacherCell.m; sourceTree = "<group>"; };
 		0D65C3E91E4AB703009F07F1 /* HXRecommendTeacherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXRecommendTeacherCell.xib; sourceTree = "<group>"; };
@@ -376,8 +401,6 @@
 		0D6CFFDE1E9898890093B5FF /* HXSearchSubjectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXSearchSubjectVC.m; sourceTree = "<group>"; };
 		0D6D72061E68FDB800DFCC68 /* HXMyAccountInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyAccountInfoVC.h; sourceTree = "<group>"; };
 		0D6D72071E68FDB800DFCC68 /* HXMyAccountInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyAccountInfoVC.m; sourceTree = "<group>"; };
-		0D6D72101E690E3300DFCC68 /* HXCouponVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCouponVC.h; sourceTree = "<group>"; };
-		0D6D72111E690E3300DFCC68 /* HXCouponVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCouponVC.m; sourceTree = "<group>"; };
 		0D6EDFF31E6D47F10093F6CC /* HXCommonPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCommonPickView.h; sourceTree = "<group>"; };
 		0D6EDFF41E6D47F10093F6CC /* HXCommonPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCommonPickView.m; sourceTree = "<group>"; };
 		0D6F56431EAEFA7800B9190F /* HXSubjectVideoAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSubjectVideoAPI.h; sourceTree = "<group>"; };
@@ -495,7 +518,6 @@
 		0D7AB0E91E63D55F007B2740 /* SMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMenuButton.m; sourceTree = "<group>"; };
 		0D7AB0EA1E63D55F007B2740 /* SPullDownMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPullDownMenuView.h; sourceTree = "<group>"; };
 		0D7AB0EB1E63D55F007B2740 /* SPullDownMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPullDownMenuView.m; sourceTree = "<group>"; };
-		0D7B221F1E67FD54000ABE4A /* HXMineLearnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXMineLearnCell.xib; sourceTree = "<group>"; };
 		0D7B22211E68091E000ABE4A /* HXPersonInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPersonInfoVC.h; sourceTree = "<group>"; };
 		0D7B22221E68091E000ABE4A /* HXPersonInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPersonInfoVC.m; sourceTree = "<group>"; };
 		0D7C46581EADF3BE00DEA3E8 /* HXteacherList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXteacherList.h; sourceTree = "<group>"; };
@@ -558,9 +580,9 @@
 		0D87BB071E9E1A0E00FC2678 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0D8854941E6E81AC00E4132B /* HXWebViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXWebViewCell.h; sourceTree = "<group>"; };
 		0D8854951E6E81AC00E4132B /* HXWebViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXWebViewCell.m; sourceTree = "<group>"; };
-		0D88549C1E6EAA1E00E4132B /* HXInformationCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXInformationCommentView.h; sourceTree = "<group>"; };
-		0D88549D1E6EAA1E00E4132B /* HXInformationCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXInformationCommentView.m; sourceTree = "<group>"; };
-		0D88549F1E6EAA3500E4132B /* HXInformationCommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXInformationCommentView.xib; sourceTree = "<group>"; };
+		0D88549C1E6EAA1E00E4132B /* HXInformationCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HXInformationCommentView.h; path = ../../Home/ViewController/HXInformationCommentView.h; sourceTree = "<group>"; };
+		0D88549D1E6EAA1E00E4132B /* HXInformationCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HXInformationCommentView.m; path = ../../Home/ViewController/HXInformationCommentView.m; sourceTree = "<group>"; };
+		0D88549F1E6EAA3500E4132B /* HXInformationCommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HXInformationCommentView.xib; path = ../../Home/ViewController/HXInformationCommentView.xib; sourceTree = "<group>"; };
 		0D8B008B1E890C11000BF2EA /* HXSearchVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSearchVideoCell.h; sourceTree = "<group>"; };
 		0D8B008C1E890C11000BF2EA /* HXSearchVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXSearchVideoCell.m; sourceTree = "<group>"; };
 		0D8B008D1E890C11000BF2EA /* HXSearchVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXSearchVideoCell.xib; sourceTree = "<group>"; };
@@ -620,8 +642,6 @@
 		0D93F0741E693DB900CD9450 /* HXLearningProgressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXLearningProgressVC.m; sourceTree = "<group>"; };
 		0D93F0761E69417300CD9450 /* HXMyLikeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyLikeVC.h; sourceTree = "<group>"; };
 		0D93F0771E69417300CD9450 /* HXMyLikeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyLikeVC.m; sourceTree = "<group>"; };
-		0D93F0791E69461800CD9450 /* HXMyQuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyQuestionVC.h; sourceTree = "<group>"; };
-		0D93F07A1E69461800CD9450 /* HXMyQuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyQuestionVC.m; sourceTree = "<group>"; };
 		0D9990051EBC236800EB1F42 /* HXTeachingTypeListAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HXTeachingTypeListAPI.h; path = ../../Video/Model/HXTeachingTypeListAPI.h; sourceTree = "<group>"; };
 		0D9990061EBC236800EB1F42 /* HXTeachingTypeListAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HXTeachingTypeListAPI.m; path = ../../Video/Model/HXTeachingTypeListAPI.m; sourceTree = "<group>"; };
 		0D9A1DFB1E84C853004457A8 /* HXAccountHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAccountHead.h; sourceTree = "<group>"; };
@@ -637,6 +657,33 @@
 		0D9BC2811EA4AC5900EC2315 /* UIView+WHC_Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WHC_Frame.m"; sourceTree = "<group>"; };
 		0D9BC2821EA4AC5900EC2315 /* WHC_StackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHC_StackView.h; sourceTree = "<group>"; };
 		0D9BC2831EA4AC5900EC2315 /* WHC_StackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHC_StackView.m; sourceTree = "<group>"; };
+		0DA098BB1EC19866004BB09A /* HXFamousTeacherSGVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXFamousTeacherSGVC.h; sourceTree = "<group>"; };
+		0DA098BC1EC19866004BB09A /* HXFamousTeacherSGVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXFamousTeacherSGVC.m; sourceTree = "<group>"; };
+		0DA098BE1EC19ACE004BB09A /* HXFamousTeacherVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXFamousTeacherVC.h; sourceTree = "<group>"; };
+		0DA098BF1EC19ACE004BB09A /* HXFamousTeacherVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXFamousTeacherVC.m; sourceTree = "<group>"; };
+		0DA098C11EC19E19004BB09A /* HXOrganizationDetailCurriculumVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXOrganizationDetailCurriculumVC.h; sourceTree = "<group>"; };
+		0DA098C21EC19E19004BB09A /* HXOrganizationDetailCurriculumVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXOrganizationDetailCurriculumVC.m; sourceTree = "<group>"; };
+		0DAE8AA41EC04C2B00CA0619 /* HXChoicenessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXChoicenessCell.h; sourceTree = "<group>"; };
+		0DAE8AA51EC04C2B00CA0619 /* HXChoicenessCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXChoicenessCell.m; sourceTree = "<group>"; };
+		0DAE8AA61EC04C2B00CA0619 /* HXChoicenessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXChoicenessCell.xib; sourceTree = "<group>"; };
+		0DAE8AA91EC056A100CA0619 /* HXMineLearnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXMineLearnCell.xib; sourceTree = "<group>"; };
+		0DAE8AAB1EC060C000CA0619 /* HXMyProductVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyProductVC.h; sourceTree = "<group>"; };
+		0DAE8AAC1EC060C000CA0619 /* HXMyProductVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyProductVC.m; sourceTree = "<group>"; };
+		0DAE8AAE1EC067D100CA0619 /* HXSetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSetVC.h; sourceTree = "<group>"; };
+		0DAE8AAF1EC067D100CA0619 /* HXSetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXSetVC.m; sourceTree = "<group>"; };
+		0DAE8AB11EC068FD00CA0619 /* HXAccountSecutityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAccountSecutityVC.h; sourceTree = "<group>"; };
+		0DAE8AB21EC068FD00CA0619 /* HXAccountSecutityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAccountSecutityVC.m; sourceTree = "<group>"; };
+		0DAE8AB41EC0707500CA0619 /* HXCurriculumTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCurriculumTypeCell.h; sourceTree = "<group>"; };
+		0DAE8AB51EC0707500CA0619 /* HXCurriculumTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCurriculumTypeCell.m; sourceTree = "<group>"; };
+		0DAE8AB71EC0767D00CA0619 /* HXFindGroupSGVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXFindGroupSGVC.h; sourceTree = "<group>"; };
+		0DAE8AB81EC0767D00CA0619 /* HXFindGroupSGVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXFindGroupSGVC.m; sourceTree = "<group>"; };
+		0DAE8ABA1EC07D6000CA0619 /* HXOrganizationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXOrganizationVC.h; sourceTree = "<group>"; };
+		0DAE8ABB1EC07D6000CA0619 /* HXOrganizationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXOrganizationVC.m; sourceTree = "<group>"; };
+		0DAE8AC01EC083E000CA0619 /* HXOrganizationDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXOrganizationDetailVC.h; sourceTree = "<group>"; };
+		0DAE8AC11EC083E000CA0619 /* HXOrganizationDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXOrganizationDetailVC.m; sourceTree = "<group>"; };
+		0DAE8AC31EC0850D00CA0619 /* HXOrganizationHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXOrganizationHeadView.h; sourceTree = "<group>"; };
+		0DAE8AC41EC0850D00CA0619 /* HXOrganizationHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXOrganizationHeadView.m; sourceTree = "<group>"; };
+		0DAE8AC61EC0852E00CA0619 /* HXOrganizationHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXOrganizationHeadView.xib; sourceTree = "<group>"; };
 		0DAE95B11E8D03E800A8C0A2 /* HXSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXSearchVC.h; sourceTree = "<group>"; };
 		0DAE95B21E8D03E800A8C0A2 /* HXSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXSearchVC.m; sourceTree = "<group>"; };
 		0DAEA51D1EB03247009AF9D9 /* HXCurriculumDetailAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCurriculumDetailAPI.h; sourceTree = "<group>"; };
@@ -978,13 +1025,42 @@
 			children = (
 				0D9168161E9620EA002D8296 /* HXHomeCVC.h */,
 				0D9168171E9620EA002D8296 /* HXHomeCVC.m */,
-				0D9168191E9623D0002D8296 /* HXTeacherCollectionCell.h */,
-				0D91681A1E9623D0002D8296 /* HXTeacherCollectionCell.m */,
-				0D91681B1E9623D0002D8296 /* HXTeacherCollectionCell.xib */,
+				0DAE8AB41EC0707500CA0619 /* HXCurriculumTypeCell.h */,
+				0DAE8AB51EC0707500CA0619 /* HXCurriculumTypeCell.m */,
+				0DAE8AA41EC04C2B00CA0619 /* HXChoicenessCell.h */,
+				0DAE8AA51EC04C2B00CA0619 /* HXChoicenessCell.m */,
+				0DAE8AA61EC04C2B00CA0619 /* HXChoicenessCell.xib */,
+				0DB3051D1E8226EC00DDBCD2 /* HXvideoCollectionCell.h */,
+				0DB3051E1E8226EC00DDBCD2 /* HXvideoCollectionCell.m */,
+				0DB3051F1E8226EC00DDBCD2 /* HXvideoCollectionCell.xib */,
 				0D91681E1E9626EF002D8296 /* HXHomeReusableHeadView.h */,
 				0D91681F1E9626EF002D8296 /* HXHomeReusableHeadView.m */,
-				0D7C46581EADF3BE00DEA3E8 /* HXteacherList.h */,
-				0D7C46591EADF3BE00DEA3E8 /* HXteacherList.m */,
+				0DAE8AB71EC0767D00CA0619 /* HXFindGroupSGVC.h */,
+				0DAE8AB81EC0767D00CA0619 /* HXFindGroupSGVC.m */,
+				0DAE8ABA1EC07D6000CA0619 /* HXOrganizationVC.h */,
+				0DAE8ABB1EC07D6000CA0619 /* HXOrganizationVC.m */,
+				0D3A01501E4C05840038D62C /* HXOrganizationCell.h */,
+				0D3A01511E4C05840038D62C /* HXOrganizationCell.m */,
+				0D3A01521E4C05840038D62C /* HXOrganizationCell.xib */,
+				0DAE8AC01EC083E000CA0619 /* HXOrganizationDetailVC.h */,
+				0DAE8AC11EC083E000CA0619 /* HXOrganizationDetailVC.m */,
+				0DAE8AC31EC0850D00CA0619 /* HXOrganizationHeadView.h */,
+				0DAE8AC41EC0850D00CA0619 /* HXOrganizationHeadView.m */,
+				0DAE8AC61EC0852E00CA0619 /* HXOrganizationHeadView.xib */,
+				0DA098C11EC19E19004BB09A /* HXOrganizationDetailCurriculumVC.h */,
+				0DA098C21EC19E19004BB09A /* HXOrganizationDetailCurriculumVC.m */,
+				0DA098BB1EC19866004BB09A /* HXFamousTeacherSGVC.h */,
+				0DA098BC1EC19866004BB09A /* HXFamousTeacherSGVC.m */,
+				0DA098BE1EC19ACE004BB09A /* HXFamousTeacherVC.h */,
+				0DA098BF1EC19ACE004BB09A /* HXFamousTeacherVC.m */,
+				0D618B361EC170FA00E2C157 /* HXInstrumentVC.h */,
+				0D618B371EC170FA00E2C157 /* HXInstrumentVC.m */,
+				0D618B391EC171C200E2C157 /* HXInstrumentCell.h */,
+				0D618B3A1EC171C200E2C157 /* HXInstrumentCell.m */,
+				0D618B3B1EC171C200E2C157 /* HXInstrumentCell.xib */,
+				0D618B3E1EC1745000E2C157 /* HXInstrumentSectionHead.h */,
+				0D618B3F1EC1745000E2C157 /* HXInstrumentSectionHead.m */,
+				0D618B411EC1745E00E2C157 /* HXInstrumentSectionHead.xib */,
 				0DAE95B11E8D03E800A8C0A2 /* HXSearchVC.h */,
 				0DAE95B21E8D03E800A8C0A2 /* HXSearchVC.m */,
 				0D8B008B1E890C11000BF2EA /* HXSearchVideoCell.h */,
@@ -993,28 +1069,24 @@
 				0D8B00901E890C30000BF2EA /* HXSearchArticleCell.h */,
 				0D8B00911E890C30000BF2EA /* HXSearchArticleCell.m */,
 				0D8B00921E890C30000BF2EA /* HXSearchArticleCell.xib */,
-				0DB3051D1E8226EC00DDBCD2 /* HXvideoCollectionCell.h */,
-				0DB3051E1E8226EC00DDBCD2 /* HXvideoCollectionCell.m */,
-				0DB3051F1E8226EC00DDBCD2 /* HXvideoCollectionCell.xib */,
-				0D6AF4251E5303530020D554 /* HXSectionHead.h */,
-				0D6AF4261E5303530020D554 /* HXSectionHead.m */,
-				0D65C3E71E4AB703009F07F1 /* HXRecommendTeacherCell.h */,
-				0D65C3E81E4AB703009F07F1 /* HXRecommendTeacherCell.m */,
-				0D65C3E91E4AB703009F07F1 /* HXRecommendTeacherCell.xib */,
-				0D3A01501E4C05840038D62C /* HXOrganizationCell.h */,
-				0D3A01511E4C05840038D62C /* HXOrganizationCell.m */,
-				0D3A01521E4C05840038D62C /* HXOrganizationCell.xib */,
-				0D88549C1E6EAA1E00E4132B /* HXInformationCommentView.h */,
-				0D88549D1E6EAA1E00E4132B /* HXInformationCommentView.m */,
 				0DBA4D551E5E892D00E549A5 /* HXPayInformationCell.h */,
-				0D88549F1E6EAA3500E4132B /* HXInformationCommentView.xib */,
 				0DBA4D561E5E892D00E549A5 /* HXPayInformationCell.m */,
 				0DBA4D571E5E892D00E549A5 /* HXPayInformationCell.xib */,
+				0D6AF4251E5303530020D554 /* HXSectionHead.h */,
+				0D6AF4261E5303530020D554 /* HXSectionHead.m */,
+				0D7C46581EADF3BE00DEA3E8 /* HXteacherList.h */,
+				0D7C46591EADF3BE00DEA3E8 /* HXteacherList.m */,
 				0DBA4D5A1E5E8CDE00E549A5 /* HXPayWaysCell.h */,
 				0DBA4D5B1E5E8CDE00E549A5 /* HXPayWaysCell.m */,
 				0DBA4D5C1E5E8CDE00E549A5 /* HXPayWaysCell.xib */,
 				0D8854941E6E81AC00E4132B /* HXWebViewCell.h */,
 				0D8854951E6E81AC00E4132B /* HXWebViewCell.m */,
+				0D9168191E9623D0002D8296 /* HXTeacherCollectionCell.h */,
+				0D91681A1E9623D0002D8296 /* HXTeacherCollectionCell.m */,
+				0D91681B1E9623D0002D8296 /* HXTeacherCollectionCell.xib */,
+				0D65C3E71E4AB703009F07F1 /* HXRecommendTeacherCell.h */,
+				0D65C3E81E4AB703009F07F1 /* HXRecommendTeacherCell.m */,
+				0D65C3E91E4AB703009F07F1 /* HXRecommendTeacherCell.xib */,
 				0D65C3EA1E4AB703009F07F1 /* ViewModel */,
 			);
 			path = ViewController;
@@ -1084,7 +1156,7 @@
 				0D65C3EF1E4AB703009F07F1 /* HXPersonCenterVC.m */,
 				0D710EDA1E4C3C6300DA30FD /* HXMineLearnCell.h */,
 				0D710EDB1E4C3C6300DA30FD /* HXMineLearnCell.m */,
-				0D7B221F1E67FD54000ABE4A /* HXMineLearnCell.xib */,
+				0DAE8AA91EC056A100CA0619 /* HXMineLearnCell.xib */,
 				0DCC4F5E1E67C72300B7294B /* HXMineHeadView.h */,
 				0DCC4F5F1E67C72300B7294B /* HXMineHeadView.m */,
 				0DCC4F611E67C73A00B7294B /* HXMineHeadView.xib */,
@@ -1135,18 +1207,20 @@
 				0D8CC8AD1E84FDB900982B39 /* HXFraiendDynamicStateCell.h */,
 				0D8CC8AE1E84FDB900982B39 /* HXFraiendDynamicStateCell.m */,
 				0D8CC8AF1E84FDB900982B39 /* HXFraiendDynamicStateCell.xib */,
+				0D93F0731E693DB900CD9450 /* HXLearningProgressVC.h */,
+				0D93F0741E693DB900CD9450 /* HXLearningProgressVC.m */,
+				0D71D9C91EBABB0400C088A1 /* HXBroserRecordSGVC.h */,
+				0D71D9CA1EBABB0400C088A1 /* HXBroserRecordSGVC.m */,
 				0D8CC8A01E84FA3D00982B39 /* HXBrowserRecordArticleVC.h */,
 				0D8CC8A11E84FA3D00982B39 /* HXBrowserRecordArticleVC.m */,
 				0D71D9C61EBAB6EE00C088A1 /* HXBroserRecordVideoVC.h */,
 				0D71D9C71EBAB6EE00C088A1 /* HXBroserRecordVideoVC.m */,
-				0D71D9C91EBABB0400C088A1 /* HXBroserRecordSGVC.h */,
-				0D71D9CA1EBABB0400C088A1 /* HXBroserRecordSGVC.m */,
-				0D6D72101E690E3300DFCC68 /* HXCouponVC.h */,
-				0D6D72111E690E3300DFCC68 /* HXCouponVC.m */,
-				0D93F0731E693DB900CD9450 /* HXLearningProgressVC.h */,
-				0D93F0741E693DB900CD9450 /* HXLearningProgressVC.m */,
-				0D93F0791E69461800CD9450 /* HXMyQuestionVC.h */,
-				0D93F07A1E69461800CD9450 /* HXMyQuestionVC.m */,
+				0DAE8AAB1EC060C000CA0619 /* HXMyProductVC.h */,
+				0DAE8AAC1EC060C000CA0619 /* HXMyProductVC.m */,
+				0DAE8AAE1EC067D100CA0619 /* HXSetVC.h */,
+				0DAE8AAF1EC067D100CA0619 /* HXSetVC.m */,
+				0DAE8AB11EC068FD00CA0619 /* HXAccountSecutityVC.h */,
+				0DAE8AB21EC068FD00CA0619 /* HXAccountSecutityVC.m */,
 				0D6EDFF31E6D47F10093F6CC /* HXCommonPickView.h */,
 				0D6EDFF41E6D47F10093F6CC /* HXCommonPickView.m */,
 			);
@@ -1200,6 +1274,9 @@
 				0D72867E1E83BDE600025AF0 /* HXSubjectListTVC.m */,
 				0D8CC8C51E851EAC00982B39 /* LWActiveIncator.h */,
 				0D8CC8C61E851EAC00982B39 /* LWActiveIncator.m */,
+				0D88549C1E6EAA1E00E4132B /* HXInformationCommentView.h */,
+				0D88549D1E6EAA1E00E4132B /* HXInformationCommentView.m */,
+				0D88549F1E6EAA3500E4132B /* HXInformationCommentView.xib */,
 				0D8CC8C71E851EAC00982B39 /* LWActiveIncatorAnimationView.h */,
 				0D8CC8C81E851EAC00982B39 /* LWActiveIncatorAnimationView.m */,
 			);
@@ -2153,12 +2230,13 @@
 				0D8C87BE1EB97B2200863FFF /* L_01.jpg in Resources */,
 				0DBA4D591E5E892D00E549A5 /* HXPayInformationCell.xib in Resources */,
 				0D65C3F71E4AB703009F07F1 /* HXRecommendTeacherCell.xib in Resources */,
+				0D618B421EC1745E00E2C157 /* HXInstrumentSectionHead.xib in Resources */,
 				0DEA8F091E486FC10052C459 /* LaunchScreen.storyboard in Resources */,
 				0D8CC88E1E84EA3300982B39 /* HXMessageCell.xib in Resources */,
+				0DAE8AA81EC04C2B00CA0619 /* HXChoicenessCell.xib in Resources */,
 				0D7286B21E83BDE600025AF0 /* HXArticleCellTwo.xib in Resources */,
 				0D8B00941E890C30000BF2EA /* HXSearchArticleCell.xib in Resources */,
 				0D9A1E021E84D346004457A8 /* HXBalanceRechargeVC.xib in Resources */,
-				0D7B22201E67FD54000ABE4A /* HXMineLearnCell.xib in Resources */,
 				0DD36B241E8E4A5A00F817CF /* Images.xcassets in Resources */,
 				0D3A01541E4C05840038D62C /* HXOrganizationCell.xib in Resources */,
 				0D27B0131E94D84A00E93EC0 /* Localizable.strings in Resources */,
@@ -2178,7 +2256,10 @@
 				0DB305211E8226EC00DDBCD2 /* HXvideoCollectionCell.xib in Resources */,
 				0D72866A1E83A76400025AF0 /* HXMineLoginHeadView.xib in Resources */,
 				0D8CC8A71E84FA8500982B39 /* HXMyArticleCell.xib in Resources */,
+				0D618B3D1EC171C200E2C157 /* HXInstrumentCell.xib in Resources */,
+				0DAE8AAA1EC056A100CA0619 /* HXMineLearnCell.xib in Resources */,
 				0D27B0121E94D84A00E93EC0 /* InfoPlist.strings in Resources */,
+				0DAE8AC71EC0852E00CA0619 /* HXOrganizationHeadView.xib in Resources */,
 				0D15870D1E9DC54700C2160C /* UI.xcassets in Resources */,
 				0D8C87C01EB97B2200863FFF /* L_03.jpg in Resources */,
 			);
@@ -2253,6 +2334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DAE8AC21EC083E000CA0619 /* HXOrganizationDetailVC.m in Sources */,
 				0DEA903A1E4877BC0052C459 /* BaseModel.m in Sources */,
 				0DD36B261E8E4A5A00F817CF /* LNNotificationCenter.m in Sources */,
 				0D7C465A1EADF3BE00DEA3E8 /* HXteacherList.m in Sources */,
@@ -2276,6 +2358,7 @@
 				0D7F94791E5BCD1900D21D27 /* SGImageButton.m in Sources */,
 				0D7286CA1E83BDE600025AF0 /* HXSubjectVideoVC.m in Sources */,
 				0D7960DC1EA601A10005A60A /* HXAdvListModel.m in Sources */,
+				0DAE8AB01EC067D100CA0619 /* HXSetVC.m in Sources */,
 				0D7286B31E83BDE600025AF0 /* HXArticleVC.m in Sources */,
 				0D6CFFDF1E9898890093B5FF /* HXSearchSubjectVC.m in Sources */,
 				0DF4902C1E779B7900C567B0 /* WMDragView.m in Sources */,
@@ -2286,6 +2369,7 @@
 				0D6AF4271E5303530020D554 /* HXSectionHead.m in Sources */,
 				0D8CC8941E84F8D200982B39 /* HXMyArticleVC.m in Sources */,
 				0D8CC89F1E84F9F800982B39 /* HXFriendDynamicStateVC.m in Sources */,
+				0DAE8AAD1EC060C000CA0619 /* HXMyProductVC.m in Sources */,
 				0DEA902F1E4877BC0052C459 /* UILabel+FormattedText.m in Sources */,
 				0D757FEB1EB1EB75001E37E8 /* HXReViewAddAPI.m in Sources */,
 				0D71A3DC1E499E4E008F819D /* HJLog.m in Sources */,
@@ -2295,6 +2379,7 @@
 				0DEA904D1E4877BC0052C459 /* WBPopMenuModel.m in Sources */,
 				0D8CC8B01E84FDB900982B39 /* HXFraiendDynamicStateCell.m in Sources */,
 				0D7C465D1EAE018300DEA3E8 /* HXMyAttentionSGVC.m in Sources */,
+				0DAE8AC51EC0850D00CA0619 /* HXOrganizationHeadView.m in Sources */,
 				0D7286BA1E83BDE600025AF0 /* SegmentPageBaseViewController.m in Sources */,
 				0D757FE21EB1D60D001E37E8 /* HXCurrilumDetailModel.m in Sources */,
 				0DEA90241E4877BB0052C459 /* UILabel+LH.m in Sources */,
@@ -2303,7 +2388,6 @@
 				0D7F947A1E5BCD1900D21D27 /* UIView+SGExtension.m in Sources */,
 				0D65C3F61E4AB703009F07F1 /* HXRecommendTeacherCell.m in Sources */,
 				0D71D9C81EBAB6EE00C088A1 /* HXBroserRecordVideoVC.m in Sources */,
-				0D6D72121E690E3300DFCC68 /* HXCouponVC.m in Sources */,
 				0DEA90181E4877BB0052C459 /* NSString+LH.m in Sources */,
 				0D757FEE1EB1F39E001E37E8 /* HXSubscribeAddAPI.m in Sources */,
 				0DF4902A1E779B7900C567B0 /* FastForwardView.m in Sources */,
@@ -2315,6 +2399,7 @@
 				0D7286701E83B23200025AF0 /* HXMyHomeHeadView.m in Sources */,
 				0D7286B51E83BDE600025AF0 /* HXCourseDetailOneVC.m in Sources */,
 				0DEA90321E4877BC0052C459 /* UIView+Effects.m in Sources */,
+				0DAE8ABC1EC07D6000CA0619 /* HXOrganizationVC.m in Sources */,
 				0D8CC8A61E84FA8500982B39 /* HXMyArticleCell.m in Sources */,
 				0D71A3DD1E499E4E008F819D /* HJLogFormatter.m in Sources */,
 				0DEA8F011E486FC10052C459 /* ViewController.m in Sources */,
@@ -2342,6 +2427,7 @@
 				0DAEA5221EB032A0009AF9D9 /* HXVideoCatalogueAPI.m in Sources */,
 				0D8CC89B1E84F97500982B39 /* HXAdviceFaceBackVC.m in Sources */,
 				0DEA90211E4877BB0052C459 /* UIColor+LH.m in Sources */,
+				0DAE8AB61EC0707500CA0619 /* HXCurriculumTypeCell.m in Sources */,
 				0D7286C01E83BDE600025AF0 /* HXCourseDetailCommentCell.m in Sources */,
 				0D8B008E1E890C11000BF2EA /* HXSearchVideoCell.m in Sources */,
 				0D7286CC1E83BDE600025AF0 /* HXVideoSectionHead.m in Sources */,
@@ -2354,12 +2440,14 @@
 				0DEA903B1E4877BC0052C459 /* HJUser.m in Sources */,
 				0DD36B2A1E8E4A5A00F817CF /* WPImageMetaViewController.m in Sources */,
 				0D8B00931E890C30000BF2EA /* HXSearchArticleCell.m in Sources */,
+				0DA098C01EC19ACE004BB09A /* HXFamousTeacherVC.m in Sources */,
 				0DEA900A1E4877BB0052C459 /* HJStaticGroupTableVC.m in Sources */,
 				0D8CC8A21E84FA3D00982B39 /* HXBrowserRecordArticleVC.m in Sources */,
 				0D8CC8CA1E851EAC00982B39 /* LWActiveIncatorAnimationView.m in Sources */,
 				0D56EE091E8DE5C600CB8E1C /* PYSearchConst.m in Sources */,
 				0D7286B41E83BDE600025AF0 /* HXSubjectListTVC.m in Sources */,
 				0D85B1741EB894F800087DA2 /* KSGuideManager.m in Sources */,
+				0DA098C31EC19E19004BB09A /* HXOrganizationDetailCurriculumVC.m in Sources */,
 				0D9BC2861EA4AC5900EC2315 /* UIView+WHC_Frame.m in Sources */,
 				0DEA90351E4877BC0052C459 /* UIViewController+Create.m in Sources */,
 				0D7D77831E52A5EB00CF8D47 /* PGIndexBannerSubiew.m in Sources */,
@@ -2380,6 +2468,7 @@
 				0D27AFED1E94D07800E93EC0 /* HCSStarRatingView.m in Sources */,
 				0D9BC2871EA4AC5900EC2315 /* WHC_StackView.m in Sources */,
 				0DEA90171E4877BB0052C459 /* NSNumber+LH.m in Sources */,
+				0DAE8AB31EC068FD00CA0619 /* HXAccountSecutityVC.m in Sources */,
 				0D9BC2841EA4AC5900EC2315 /* UITableViewCell+WHC_AutoHeightForCell.m in Sources */,
 				0D8CC88D1E84EA3300982B39 /* HXMessageCell.m in Sources */,
 				0D7286C61E83BDE600025AF0 /* HXGradeCommentCell.m in Sources */,
@@ -2392,6 +2481,7 @@
 				0DEA902E1E4877BC0052C459 /* UIImageView+RoundImageView.m in Sources */,
 				0DBA4D4E1E5E6DB400E549A5 /* HJTabBarController.m in Sources */,
 				0DEA903C1E4877BC0052C459 /* BaseAPI.m in Sources */,
+				0DA098BD1EC19866004BB09A /* HXFamousTeacherSGVC.m in Sources */,
 				0D6D72081E68FDB800DFCC68 /* HXMyAccountInfoVC.m in Sources */,
 				0D757FF11EB1F61A001E37E8 /* HXSpotFabulousAPI.m in Sources */,
 				0D7286B01E83BDE600025AF0 /* HXArticleCellOne.m in Sources */,
@@ -2407,6 +2497,7 @@
 				0DEA901B1E4877BB0052C459 /* CAShapeLayer+LH.m in Sources */,
 				0D7286CB1E83BDE600025AF0 /* HXVideoCVC.m in Sources */,
 				0DEA901D1E4877BB0052C459 /* CATransition+LH.m in Sources */,
+				0D618B381EC170FA00E2C157 /* HXInstrumentVC.m in Sources */,
 				0D7286C41E83BDE600025AF0 /* HXCourseDetailIntroduceCell.m in Sources */,
 				0D8CC8911E84EC6600982B39 /* HXCourseOneVC.m in Sources */,
 				0D6F56581EAF270600B9190F /* HXHomeInfoArticleModel.m in Sources */,
@@ -2430,6 +2521,7 @@
 				0D7286B81E83BDE600025AF0 /* MainTouchTableTableView.m in Sources */,
 				0DEA900B1E4877BB0052C459 /* Base64Util.m in Sources */,
 				0D35498B1E5D90C200CFFD4A /* HJNavigationController.m in Sources */,
+				0DAE8AA71EC04C2B00CA0619 /* HXChoicenessCell.m in Sources */,
 				0DFB6AFB1EA5C3210006C6CF /* HXAdvertisementAPI.m in Sources */,
 				0D8412801EBC49EF004DB88E /* HXCurriculumSearchAPI.m in Sources */,
 				0DAEA5281EB03376009AF9D9 /* HXVideoCatalogueModel.m in Sources */,
@@ -2437,8 +2529,8 @@
 				0D8CC8891E84E90F00982B39 /* HXMessageVC.m in Sources */,
 				0D6F56551EAF24FE00B9190F /* HXHomeInfoArtcleAPI.m in Sources */,
 				0D75B69F1EBB174B00CE15E2 /* HXIsSubscribAddAPI.m in Sources */,
-				0D93F07B1E69461800CD9450 /* HXMyQuestionVC.m in Sources */,
 				0D7286B11E83BDE600025AF0 /* HXArticleCellTwo.m in Sources */,
+				0D618B401EC1745000E2C157 /* HXInstrumentSectionHead.m in Sources */,
 				0DEA901C1E4877BB0052C459 /* CATextLayer+LH.m in Sources */,
 				0D71D9CB1EBABB0400C088A1 /* HXBroserRecordSGVC.m in Sources */,
 				0DD36B251E8E4A5A00F817CF /* LNNotification.m in Sources */,
@@ -2468,8 +2560,10 @@
 				0D7286B71E83BDE600025AF0 /* HXCourseDetailTwoVC.m in Sources */,
 				0D8854961E6E81AC00E4132B /* HXWebViewCell.m in Sources */,
 				0DEA90291E4877BC0052C459 /* UITextView+LH.m in Sources */,
+				0D618B3C1EC171C200E2C157 /* HXInstrumentCell.m in Sources */,
 				0DEA900E1E4877BB0052C459 /* MD5Encryption.m in Sources */,
 				0D7D77841E52A5EB00CF8D47 /* NewPagedFlowView.m in Sources */,
+				0DAE8AB91EC0767D00CA0619 /* HXFindGroupSGVC.m in Sources */,
 				0D80FB9B1EB9D6B200800B91 /* HXMyAttentionFrendsAPI.m in Sources */,
 				0D93F0751E693DB900CD9450 /* HXLearningProgressVC.m in Sources */,
 				0DD36B271E8E4A5A00F817CF /* LNNotificationView.m in Sources */,
@@ -2617,7 +2711,6 @@
 			baseConfigurationReference = 1FB8498F25228EFA651EF216 /* Pods-HXBudsProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CLANG_MODULES_AUTOLINK = YES;
 				DEVELOPMENT_TEAM = F972623DL2;
 				ENABLE_BITCODE = NO;
@@ -2651,7 +2744,6 @@
 			baseConfigurationReference = E222DBD4DFBEACFCA4FD2995 /* Pods-HXBudsProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CLANG_MODULES_AUTOLINK = YES;
 				DEVELOPMENT_TEAM = F972623DL2;
 				ENABLE_BITCODE = NO;

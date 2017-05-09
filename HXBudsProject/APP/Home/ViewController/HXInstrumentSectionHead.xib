@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HXInstrumentSectionHead">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共945门相关课程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EiI-AW-v91">
+                    <rect key="frame" x="15" y="0.0" width="183" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="183" id="UI0-5g-gLy"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.39607843139999999" green="0.39607843139999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="排序：人气" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJu-rO-EeL">
+                    <rect key="frame" x="248.5" y="0.0" width="71.5" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="71.5" id="oB0-lB-GbN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.39607843139999999" green="0.39607843139999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24w-kJ-xF5">
+                    <rect key="frame" x="322" y="0.0" width="53" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="53" id="LGM-iH-Gtt"/>
+                    </constraints>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="25" maxY="0.0"/>
+                    <state key="normal" title="^">
+                        <color key="titleColor" red="0.39607843139999999" green="0.39607843139999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="24w-kJ-xF5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2OK-cq-gGf"/>
+                <constraint firstAttribute="bottom" secondItem="EiI-AW-v91" secondAttribute="bottom" id="Btr-WP-hEM"/>
+                <constraint firstAttribute="bottom" secondItem="24w-kJ-xF5" secondAttribute="bottom" id="Gxn-fW-dPt"/>
+                <constraint firstAttribute="trailing" secondItem="24w-kJ-xF5" secondAttribute="trailing" id="JcW-86-ggR"/>
+                <constraint firstItem="24w-kJ-xF5" firstAttribute="leading" secondItem="uJu-rO-EeL" secondAttribute="trailing" constant="2" id="X4H-3M-TQh"/>
+                <constraint firstItem="EiI-AW-v91" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="aee-i2-Z8f"/>
+                <constraint firstItem="EiI-AW-v91" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="he5-cl-i4Q"/>
+                <constraint firstItem="uJu-rO-EeL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lQ3-4q-wUz"/>
+                <constraint firstAttribute="bottom" secondItem="uJu-rO-EeL" secondAttribute="bottom" id="mFm-ZE-okk"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="48.5" y="60"/>
+        </view>
+    </objects>
+</document>

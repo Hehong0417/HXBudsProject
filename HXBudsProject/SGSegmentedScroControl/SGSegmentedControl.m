@@ -49,7 +49,7 @@
 /** 按钮之间的间距(滚动时按钮之间的间距) */
 static CGFloat const btn_Margin = 15;
 /** 按钮字体的大小(字号) */
-static CGFloat const btn_fondOfSize = 14;
+static CGFloat const btn_fondOfSize = 18;
 /** 指示器的高度 */
 static CGFloat const indicatorViewHeight = 2;
 /** 点击按钮时, 指示器的动画移动时间 */
@@ -513,6 +513,17 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.4;
 
 
 #pragma mark - - - setter 方法设置属性
+
+- (void)setTitle_fondOfSize:(UIFont *)title_fondOfSize {
+
+    _title_fondOfSize = title_fondOfSize;
+    for (UIView *subViews in self.titleBtn_mArr) {
+        UIButton *button = (UIButton *)subViews;
+        button.titleLabel.font = title_fondOfSize;
+    }
+    
+}
+
 - (void)setTitleColorStateNormal:(UIColor *)titleColorStateNormal {
     _titleColorStateNormal = titleColorStateNormal;
     for (UIView *subViews in self.titleBtn_mArr) {
