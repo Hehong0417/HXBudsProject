@@ -17,8 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+     self.title = @"余额提现";
 
-
+}
+- (IBAction)commmieWithdrawAction:(UIButton *)sender {
+    
+    
+    
+    
 }
 
 

@@ -72,10 +72,11 @@
     
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = kWhiteColor;
     [self.window makeKeyAndVisible];
     
     self.window.rootViewController= [[HJTabBarController alloc]init];
-//    self.window.rootViewController= [[HXLoginVC alloc]init];
+//  self.window.rootViewController= [[HXLoginVC alloc]init];
 
     return YES;
 }

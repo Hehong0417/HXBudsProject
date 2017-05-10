@@ -53,7 +53,7 @@
     [self.timeLab whc_RightSpace:10 toView:self.collectCountLab];
     
     [self.collectCountLab whc_TopSpace:8];
-    [self.collectCountLab whc_HeightEqualView:self.teacherIconImagV];
+    [self.collectCountLab whc_Height:20];
     [self.collectCountLab whc_Width:72];
     [self.collectCountLab whc_RightSpace:10];
     
@@ -62,8 +62,8 @@
     [self.contentLab whc_RightSpace:87];
     [self.contentLab whc_AutoHeight];
     
-    [self.rightIconImgV whc_Height:67];
-    [self.rightIconImgV whc_Width:67];
+    [self.rightIconImgV whc_Height:60];
+    [self.rightIconImgV whc_Width:60];
     [self.rightIconImgV whc_TopSpace:0 toView:self.collectCountLab];
     [self.rightIconImgV whc_LeftSpace:10 toView:self.contentLab];
     

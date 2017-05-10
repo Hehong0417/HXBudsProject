@@ -10,8 +10,10 @@
 #import <WebKit/WebKit.h>
 #import "LWActiveIncator.h"
 #import "publishedArticleViewModel.h"
+#import "HXInformationCommentView.h"
 
-@interface HXArticleDetailVC ()<WKUIDelegate,WKNavigationDelegate>
+
+@interface HXArticleDetailVC ()<WKNavigationDelegate,WKUIDelegate>
 
 @end
 
@@ -26,46 +28,71 @@
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc]init];
     WKWebView *wkWebView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) configuration:config];
     wkWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
-//    [wkWebView evaluateJavaScript:@"" completionHandler:^(id _Nullable, NSError * _Nullable error) {
-//        
-//    }];
+    
+    
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:article_detail_url]];
 //    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.jianshu.com/p/f79589c21dc4"]];
 
-    
-//    NSString *htmlStr = self.articleModel.article_content;
-//    
-//    [wkWebView loadHTMLString:htmlStr baseURL:nil];
 
    [wkWebView loadRequest:request];
     wkWebView.navigationDelegate = self;
     wkWebView.UIDelegate = self;
     [self.view addSubview:wkWebView];
     
+    HXInformationCommentView *commentView = [HXInformationCommentView initInformationCommentViewWithXib];
+    commentView.frame = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
+    [self.view addSubview:commentView];
+    //********//
+//    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    webView.delegate = self;
+//    NSNumber *numer = [NSNumber numberWithString:self.articleModel.article_id];
+//    NSString *js = [NSString stringWithFormat:@"textnum(%@)",numer];
+//    NSLog(@"js---%@",js);
+//    [webView lh_evaluatingJavaScript:js];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:article_detail_url]];
+//    [webView loadRequest:request];
+//    [self.view addSubview:webView];
 
 }
+//- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+//    
+//    NSNumber *numer = [NSNumber numberWithString:self.articleModel.article_id];
+//    NSString *js = [NSString stringWithFormat:@"textnum(%@)",numer];
+//    NSLog(@"js---%@",js);
+//    [webView stringByEvaluatingJavaScriptFromString:js];
+//    
+//    return YES;
+//}
 //// 页面开始加载时调用
 //- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
 //    
 //    [LWActiveIncator showInView:self.view];
 //
 //}
+
 // 当内容开始返回时调用
-- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
-
-
-}
-// 页面加载完成之后调用
-//- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+//- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
 //
-//    [LWActiveIncator hideInViwe:self.view];
 //
 //}
-// 页面加载失败时调用
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
+ //页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
 
+//    [LWActiveIncator hideInViwe:self.view];
 
+    NSString *js = [NSString stringWithFormat:@"textnum(%@)",self.articleModel.article_id];
+    NSLog(@"js---%@",js);
+    [webView evaluateJavaScript:js completionHandler:^(id _Nullable, NSError * _Nullable error) {
+        NSLog(@"error::%@",error);
+    }];
 
 }
+//// 页面加载失败时调用
+//- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
+//
+//
+//
+//}
 
 @end

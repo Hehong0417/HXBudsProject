@@ -11,5 +11,6 @@
 @interface HXMessageCell : UITableViewCell
 
 + (instancetype)initMessageCellWithXib;
+@property (weak, nonatomic) IBOutlet UIImageView *ico;
 
 @end

@@ -9,9 +9,9 @@
 
 //#ifdef DEBUG
 //// 本地
-#define API_HOST @"http://192.168.0.112:8080"
+#define API_HOST @"http://192.168.0.128:8080"
 // 本地图片
-#define API_IMAGE_HOST @"http://192.168.0.112:8080/html/goaling/images/upload/task"
+#define API_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/upload/task"
 //1
 
 #define APP_key @"59334e721bcd31"
@@ -35,7 +35,7 @@
 #import "HJUser.h"
 
 //
-#define article_detail_url  @"192.168.0.102/my/menya/Mengya/"
+#define article_detail_url  @"http://192.168.0.102/my/menya/Mengya/"
 
 
 /**

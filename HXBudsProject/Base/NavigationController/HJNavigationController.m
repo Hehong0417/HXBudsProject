@@ -32,8 +32,6 @@
 
 
 
-
-
 - (void)pushViewControllerWithStoryBoardName:(NSString *)storyBoardName identifier:(NSString *)identifier {
     
     UIViewController *controller = [UIViewController createFromStoryboardName:storyBoardName WithIdentifier:identifier];
@@ -118,7 +116,7 @@
         textAttrs[NSShadowAttributeName] = [[NSShadow alloc] init];
 
     }
-    [appearance setShadowImage:[UIImage new]];
+//    [appearance setShadowImage:[UIImage new]];
 
     [appearance setTitleTextAttributes:textAttrs];
 }

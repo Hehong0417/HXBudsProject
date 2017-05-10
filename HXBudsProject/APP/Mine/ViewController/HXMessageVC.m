@@ -8,7 +8,7 @@
 
 #import "HXMessageVC.h"
 #import "SGSegmentedControl.h"
-#import "HXCourseOneVC.h"
+#import "HXMesssageOneVC.h"
 
 @interface HXMessageVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
 
@@ -72,7 +72,7 @@
     
     for (NSInteger i = 0; i<2; i++) {
         
-        HXCourseOneVC *vc = [HXCourseOneVC new];
+        HXMesssageOneVC *vc = [HXMesssageOneVC new];
         
         [self addChildViewController:vc];
         

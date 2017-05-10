@@ -27,7 +27,7 @@
     
      [self getMyattetionTeacherData];
     
-    self.title = @"我关注的";
+    self.title = @"名师";
     switch (self.attentionType) {
         case mineType:
              self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];

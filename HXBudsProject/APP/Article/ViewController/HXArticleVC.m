@@ -74,7 +74,6 @@
          [self.tabView reloadData];
          
      }];
-    
 
 }
 
@@ -117,7 +116,7 @@
     if (section == 0) {
         return 1;
     }else{
-        return self.articleModel.varList.count;
+        return self.articleModel.varList.count?self.articleModel.varList.count:2;
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

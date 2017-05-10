@@ -73,6 +73,7 @@ PODS:
     - UMengUShare/Social/ReducedWeChat
   - UMengUShare/UI (6.4.2):
     - UMengUShare/Core
+  - WebViewJavascriptBridge (5.2.0)
   - WordPress-Editor-iOS-Extension (0.1.5):
     - NSObject-SafeExpectations
     - UIAlertView+Blocks
@@ -112,6 +113,7 @@ DEPENDENCIES:
   - UMengUShare/Social/Sina
   - UMengUShare/Social/WeChat
   - UMengUShare/UI
+  - WebViewJavascriptBridge (~> 5.0)
   - WordPress-Editor-iOS-Extension
   - YYCategories (~> 0.9.0)
 
@@ -137,12 +139,13 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   UIAlertView+Blocks: a46c99c5144f6c5dbc7d62fd2a0678daceec89a3
   UMengUShare: 740664d1dd5cc2fb2cc3325d61e4b35539aa9c78
+  WebViewJavascriptBridge: a00b2d61252aec5207e3263d46fd0fd3cfaf7895
   WordPress-Editor-iOS-Extension: 7d9ab7af71ba2bdca4c0bd24c8fbe2c60c8fdf83
   WordPress-iOS-Shared: 7ac71b0de427b02df3d3b39bae178073b7a2a2e9
   WordPressCom-Analytics-iOS: ec36976259d733430ba0fc2f8a51765947d2c7ba
   WYPopoverController: a9db25ac2841a686acdc0f3a99bdb21545db32f4
   YYCategories: 3c7e012ac4573b1fc432f9a2eac15109857391d2
 
-PODFILE CHECKSUM: 6148f63b294652cc308001c21e4bc4b3cff25a5e
+PODFILE CHECKSUM: 8173e4b0d6553c365ec6ad972982403878653898
 
 COCOAPODS: 1.2.0

@@ -9,7 +9,7 @@
 #import "HXOrganizationVC.h"
 #import "HXOrganizationCell.h"
 #import "HXOrganizationDetailVC.h"
-
+#import "HXLoginVC.h"
 
 @interface HXOrganizationVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -61,9 +61,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 
-    HXOrganizationDetailVC *detailVC = [[HXOrganizationDetailVC alloc]init];
-    detailVC.detailType = organizationType;
-    [self.navigationController pushViewController:detailVC animated:NO];
+    HXOrganizationDetailVC *vc = [[HXOrganizationDetailVC alloc]init];
+    vc.detailType = organizationType;
+//    HXLoginVC *vc = [HXLoginVC new];
+    [self.navigationController pushVC:vc];
 
 
 }

@@ -19,7 +19,6 @@
 #import "HXTeacherDetailModel.h"
 #import "HXOrganizationHeadView.h"
 
-
 @interface HXOrganizationDetailVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
 @property(nonatomic,strong)SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
@@ -43,6 +42,7 @@
     self.organizationHeadView = [HXOrganizationHeadView initOrganizationHeadViewWithXib];
     self.organizationHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 300);
     self.view.backgroundColor = kWhiteColor;
+    self.organizationHeadView.nav = self.navigationController;
     [self.view addSubview:self.organizationHeadView];
     
     // 1.添加所有子控制器
@@ -67,7 +67,7 @@
     }
     // 创建底部滚动视图
     self.mainScrollView = [[UIScrollView alloc] init];
-    _mainScrollView.frame = CGRectMake(0, 300, self.view.frame.size.width, self.view.frame.size.height- 300);
+    _mainScrollView.frame = CGRectMake(0, 350, self.view.frame.size.width, self.view.frame.size.height- 300);
     _mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width * self.title_arr.count, 0);
     _mainScrollView.backgroundColor = [UIColor whiteColor];
     // 开启分页
@@ -102,13 +102,12 @@
 // 添加所有子控制器
 - (void)setupChildViewController {
     
-    HXMyArticleVC *vc1 = [HXMyArticleVC new];
-    
-    HXCollectVC *vc2 = [HXCollectVC new];
-    
-    [self addChildViewController:vc1];
-    [self addChildViewController:vc2];
-    [self addChildViewController:vc1];
+    for (NSInteger i = 0; i<3; i++) {
+        
+        HXCollectVC *vc2 = [HXCollectVC new];
+        
+        [self addChildViewController:vc2];
+    }
     
     switch (self.detailType) {
         case organizationType:{

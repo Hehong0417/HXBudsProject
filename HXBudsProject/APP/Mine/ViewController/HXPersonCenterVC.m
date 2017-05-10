@@ -17,8 +17,7 @@
 #import "HXFriendDynamicStateVC.h"
 #import "HXAdviceFaceBackVC.h"
 #import "HXBroserRecordSGVC.h"
-#import "HXMessageVC.h"
-#import "HXMyVideoVC.h"
+#import "HXMesssageOneVC.h"
 #import <UShareUI/UShareUI.h>
 #import "HXIsLoginAPI.h"
 #import "HJUser.h"
@@ -26,6 +25,8 @@
 #import "HXLoginVC.h"
 #import "HXMineLearnCell.h"
 #import "HXMyProductVC.h"
+#import "HXSetVC.h"
+
 
 @interface HXPersonCenterVC ()
 //@property (nonatomic, strong) HXTeacherDetailModel *teacherDetailModel;
@@ -87,7 +88,7 @@
         
         self.mineHeadView.nameLab.text = responseObject[@"pd"][@"username"];
         NSString *icostr = responseObject[@"pd"][@"headportrait"];
-        NSLog(@"icostr:%@",kAPIImageFromUrl(icostr));
+//        NSLog(@"icostr:%@",kAPIImageFromUrl(icostr));
         [self.mineHeadView.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(icostr)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
         self.tableV.tableHeaderView = self.mineHeadView;
     }];
@@ -113,7 +114,6 @@
             HJUser *user = [HJUser sharedUser];
             vc.users_id = user.pd.users_id;
             [weakSelf.navigationController pushVC:vc];
-    
         }];
 }
 - (void)isLoginCompleteHandle:(void (^)(BOOL isLogin))CompleteHandle{
@@ -126,6 +126,9 @@
             self.isLogin = NO;
         }else {
             self.isLogin = YES;
+        }
+        if (error) {
+            self.isLogin = NO;
         }
         CompleteHandle(self.isLogin);
     }];
@@ -178,20 +181,20 @@
 }
 - (void)myAccountAction {
     
-    if (self.isLogin) {
+//    if (self.isLogin) {
         HXMyAccountInfoVC *vc = [HXMyAccountInfoVC new];
         [self.navigationController pushVC:vc];
         return;
-    }
+//    }
     
 }
 - (void)myMessageAction {
     
-    if (self.isLogin) {
-        HXMessageVC *vc = [HXMessageVC new];
+//    if (self.isLogin) {
+        HXMesssageOneVC *vc = [HXMesssageOneVC new];
         [self.navigationController pushVC:vc];
         return;
-    }
+//    }
     
 }
 
@@ -203,7 +206,7 @@
         
     }else if (indexPath.section == 2){
         
-
+        [self.navigationController pushVC:[HXSetVC new]];
     }
 }
 - (void)updatePersonCenter {

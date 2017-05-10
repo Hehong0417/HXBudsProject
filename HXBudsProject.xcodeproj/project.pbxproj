@@ -29,6 +29,17 @@
 		0D3987221EB2DF5300AEDE68 /* HXGetVerifyCodeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3987211EB2DF5300AEDE68 /* HXGetVerifyCodeAPI.m */; };
 		0D3A01531E4C05840038D62C /* HXOrganizationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3A01511E4C05840038D62C /* HXOrganizationCell.m */; };
 		0D3A01541E4C05840038D62C /* HXOrganizationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D3A01521E4C05840038D62C /* HXOrganizationCell.xib */; };
+		0D4242A01EC2AC2B0040B7C7 /* HXIndividualWorksVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D42429F1EC2AC2B0040B7C7 /* HXIndividualWorksVC.m */; };
+		0D4242A71EC2ADF00040B7C7 /* HXOpusDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4242A51EC2ADF00040B7C7 /* HXOpusDetailVC.m */; };
+		0D4242AB1EC2AFBF0040B7C7 /* HXMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4242AA1EC2AFBF0040B7C7 /* HXMapVC.m */; };
+		0D4242AF1EC2B85C0040B7C7 /* HXopusDetailCellOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4242AD1EC2B85B0040B7C7 /* HXopusDetailCellOne.m */; };
+		0D4242B01EC2B85C0040B7C7 /* HXopusDetailCellOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4242AE1EC2B85C0040B7C7 /* HXopusDetailCellOne.xib */; };
+		0D4242B41EC2B9050040B7C7 /* HXopusDetailCellTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4242B21EC2B9050040B7C7 /* HXopusDetailCellTwo.m */; };
+		0D4242B51EC2B9050040B7C7 /* HXopusDetailCellTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4242B31EC2B9050040B7C7 /* HXopusDetailCellTwo.xib */; };
+		0D4242BC1EC2BF210040B7C7 /* HXAccountHead.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4242BB1EC2BF210040B7C7 /* HXAccountHead.xib */; };
+		0D4242BF1EC2C3310040B7C7 /* HXDealRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4242BE1EC2C3310040B7C7 /* HXDealRecordVC.m */; };
+		0D4242C31EC2C3DD0040B7C7 /* HXdealrecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4242C11EC2C3DD0040B7C7 /* HXdealrecordCell.m */; };
+		0D4242C41EC2C3DD0040B7C7 /* HXdealrecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4242C21EC2C3DD0040B7C7 /* HXdealrecordCell.xib */; };
 		0D56EE081E8DE5C500CB8E1C /* PYSearch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0D56EDFC1E8DE5C500CB8E1C /* PYSearch.bundle */; };
 		0D56EE091E8DE5C600CB8E1C /* PYSearchConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D56EDFF1E8DE5C500CB8E1C /* PYSearchConst.m */; };
 		0D56EE0A1E8DE5C600CB8E1C /* PYSearchSuggestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D56EE011E8DE5C500CB8E1C /* PYSearchSuggestionViewController.m */; };
@@ -106,6 +117,10 @@
 		0D78A7971E5EC1B90032F135 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D78A7961E5EC1B90032F135 /* WebKit.framework */; };
 		0D7960DC1EA601A10005A60A /* HXAdvListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7960DB1EA601A10005A60A /* HXAdvListModel.m */; };
 		0D79B1A71EBCA4B80089CBE5 /* HXuploadIconAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D79B1A61EBCA4B80089CBE5 /* HXuploadIconAPI.m */; };
+		0D79C2AD1EC2EA58004B7CC8 /* HXAccountReChargeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D79C2AC1EC2EA58004B7CC8 /* HXAccountReChargeVC.m */; };
+		0D79C2B11EC2EB51004B7CC8 /* HXAccountReChargeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D79C2AF1EC2EB51004B7CC8 /* HXAccountReChargeCell.m */; };
+		0D79C2B51EC2EC8D004B7CC8 /* HXTabControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D79C2B41EC2EC8D004B7CC8 /* HXTabControl.m */; };
+		0D79C2B81EC2F087004B7CC8 /* HXTabControlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D79C2B71EC2F087004B7CC8 /* HXTabControlCell.m */; };
 		0D7B22231E68091E000ABE4A /* HXPersonInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7B22221E68091E000ABE4A /* HXPersonInfoVC.m */; };
 		0D7C465A1EADF3BE00DEA3E8 /* HXteacherList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C46591EADF3BE00DEA3E8 /* HXteacherList.m */; };
 		0D7C465D1EAE018300DEA3E8 /* HXMyAttentionSGVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C465C1EAE018300DEA3E8 /* HXMyAttentionSGVC.m */; };
@@ -157,7 +172,7 @@
 		0D8CC8891E84E90F00982B39 /* HXMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC8881E84E90F00982B39 /* HXMessageVC.m */; };
 		0D8CC88D1E84EA3300982B39 /* HXMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC88B1E84EA3300982B39 /* HXMessageCell.m */; };
 		0D8CC88E1E84EA3300982B39 /* HXMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D8CC88C1E84EA3300982B39 /* HXMessageCell.xib */; };
-		0D8CC8911E84EC6600982B39 /* HXCourseOneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC8901E84EC6600982B39 /* HXCourseOneVC.m */; };
+		0D8CC8911E84EC6600982B39 /* HXMesssageOneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC8901E84EC6600982B39 /* HXMesssageOneVC.m */; };
 		0D8CC8941E84F8D200982B39 /* HXMyArticleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC8931E84F8D200982B39 /* HXMyArticleVC.m */; };
 		0D8CC8971E84F90300982B39 /* HXMyAttetionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC8961E84F90300982B39 /* HXMyAttetionVC.m */; };
 		0D8CC89B1E84F97500982B39 /* HXAdviceFaceBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CC8991E84F97500982B39 /* HXAdviceFaceBackVC.m */; };
@@ -177,7 +192,6 @@
 		0D91681C1E9623D0002D8296 /* HXTeacherCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D91681A1E9623D0002D8296 /* HXTeacherCollectionCell.m */; };
 		0D91681D1E9623D0002D8296 /* HXTeacherCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D91681B1E9623D0002D8296 /* HXTeacherCollectionCell.xib */; };
 		0D9168201E9626EF002D8296 /* HXHomeReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D91681F1E9626EF002D8296 /* HXHomeReusableHeadView.m */; };
-		0D93F0751E693DB900CD9450 /* HXLearningProgressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D93F0741E693DB900CD9450 /* HXLearningProgressVC.m */; };
 		0D93F0781E69417300CD9450 /* HXMyLikeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D93F0771E69417300CD9450 /* HXMyLikeVC.m */; };
 		0D9990071EBC236800EB1F42 /* HXTeachingTypeListAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9990061EBC236800EB1F42 /* HXTeachingTypeListAPI.m */; };
 		0D9A1DFD1E84C853004457A8 /* HXAccountHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9A1DFC1E84C853004457A8 /* HXAccountHead.m */; };
@@ -366,6 +380,24 @@
 		0D3A01501E4C05840038D62C /* HXOrganizationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXOrganizationCell.h; sourceTree = "<group>"; };
 		0D3A01511E4C05840038D62C /* HXOrganizationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXOrganizationCell.m; sourceTree = "<group>"; };
 		0D3A01521E4C05840038D62C /* HXOrganizationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXOrganizationCell.xib; sourceTree = "<group>"; };
+		0D42429E1EC2AC2B0040B7C7 /* HXIndividualWorksVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXIndividualWorksVC.h; sourceTree = "<group>"; };
+		0D42429F1EC2AC2B0040B7C7 /* HXIndividualWorksVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXIndividualWorksVC.m; sourceTree = "<group>"; };
+		0D4242A41EC2ADF00040B7C7 /* HXOpusDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXOpusDetailVC.h; sourceTree = "<group>"; };
+		0D4242A51EC2ADF00040B7C7 /* HXOpusDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXOpusDetailVC.m; sourceTree = "<group>"; };
+		0D4242A91EC2AFBF0040B7C7 /* HXMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMapVC.h; sourceTree = "<group>"; };
+		0D4242AA1EC2AFBF0040B7C7 /* HXMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMapVC.m; sourceTree = "<group>"; };
+		0D4242AC1EC2B85B0040B7C7 /* HXopusDetailCellOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXopusDetailCellOne.h; sourceTree = "<group>"; };
+		0D4242AD1EC2B85B0040B7C7 /* HXopusDetailCellOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXopusDetailCellOne.m; sourceTree = "<group>"; };
+		0D4242AE1EC2B85C0040B7C7 /* HXopusDetailCellOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXopusDetailCellOne.xib; sourceTree = "<group>"; };
+		0D4242B11EC2B9050040B7C7 /* HXopusDetailCellTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXopusDetailCellTwo.h; sourceTree = "<group>"; };
+		0D4242B21EC2B9050040B7C7 /* HXopusDetailCellTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXopusDetailCellTwo.m; sourceTree = "<group>"; };
+		0D4242B31EC2B9050040B7C7 /* HXopusDetailCellTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXopusDetailCellTwo.xib; sourceTree = "<group>"; };
+		0D4242BB1EC2BF210040B7C7 /* HXAccountHead.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXAccountHead.xib; sourceTree = "<group>"; };
+		0D4242BD1EC2C3310040B7C7 /* HXDealRecordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXDealRecordVC.h; sourceTree = "<group>"; };
+		0D4242BE1EC2C3310040B7C7 /* HXDealRecordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXDealRecordVC.m; sourceTree = "<group>"; };
+		0D4242C01EC2C3DD0040B7C7 /* HXdealrecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXdealrecordCell.h; sourceTree = "<group>"; };
+		0D4242C11EC2C3DD0040B7C7 /* HXdealrecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXdealrecordCell.m; sourceTree = "<group>"; };
+		0D4242C21EC2C3DD0040B7C7 /* HXdealrecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXdealrecordCell.xib; sourceTree = "<group>"; };
 		0D56EDFC1E8DE5C500CB8E1C /* PYSearch.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PYSearch.bundle; sourceTree = "<group>"; };
 		0D56EDFD1E8DE5C500CB8E1C /* PYSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYSearch.h; sourceTree = "<group>"; };
 		0D56EDFE1E8DE5C500CB8E1C /* PYSearchConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYSearchConst.h; sourceTree = "<group>"; };
@@ -514,6 +546,14 @@
 		0D7960DB1EA601A10005A60A /* HXAdvListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAdvListModel.m; sourceTree = "<group>"; };
 		0D79B1A51EBCA4B80089CBE5 /* HXuploadIconAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXuploadIconAPI.h; sourceTree = "<group>"; };
 		0D79B1A61EBCA4B80089CBE5 /* HXuploadIconAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXuploadIconAPI.m; sourceTree = "<group>"; };
+		0D79C2AB1EC2EA58004B7CC8 /* HXAccountReChargeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAccountReChargeVC.h; sourceTree = "<group>"; };
+		0D79C2AC1EC2EA58004B7CC8 /* HXAccountReChargeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAccountReChargeVC.m; sourceTree = "<group>"; };
+		0D79C2AE1EC2EB51004B7CC8 /* HXAccountReChargeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAccountReChargeCell.h; sourceTree = "<group>"; };
+		0D79C2AF1EC2EB51004B7CC8 /* HXAccountReChargeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAccountReChargeCell.m; sourceTree = "<group>"; };
+		0D79C2B31EC2EC8D004B7CC8 /* HXTabControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTabControl.h; sourceTree = "<group>"; };
+		0D79C2B41EC2EC8D004B7CC8 /* HXTabControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTabControl.m; sourceTree = "<group>"; };
+		0D79C2B61EC2F087004B7CC8 /* HXTabControlCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTabControlCell.h; sourceTree = "<group>"; };
+		0D79C2B71EC2F087004B7CC8 /* HXTabControlCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTabControlCell.m; sourceTree = "<group>"; };
 		0D7AB0E81E63D55F007B2740 /* SMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMenuButton.h; sourceTree = "<group>"; };
 		0D7AB0E91E63D55F007B2740 /* SMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMenuButton.m; sourceTree = "<group>"; };
 		0D7AB0EA1E63D55F007B2740 /* SPullDownMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPullDownMenuView.h; sourceTree = "<group>"; };
@@ -602,8 +642,8 @@
 		0D8CC88A1E84EA3300982B39 /* HXMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMessageCell.h; sourceTree = "<group>"; };
 		0D8CC88B1E84EA3300982B39 /* HXMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMessageCell.m; sourceTree = "<group>"; };
 		0D8CC88C1E84EA3300982B39 /* HXMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXMessageCell.xib; sourceTree = "<group>"; };
-		0D8CC88F1E84EC6600982B39 /* HXCourseOneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCourseOneVC.h; sourceTree = "<group>"; };
-		0D8CC8901E84EC6600982B39 /* HXCourseOneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCourseOneVC.m; sourceTree = "<group>"; };
+		0D8CC88F1E84EC6600982B39 /* HXMesssageOneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMesssageOneVC.h; sourceTree = "<group>"; };
+		0D8CC8901E84EC6600982B39 /* HXMesssageOneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMesssageOneVC.m; sourceTree = "<group>"; };
 		0D8CC8921E84F8D200982B39 /* HXMyArticleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyArticleVC.h; sourceTree = "<group>"; };
 		0D8CC8931E84F8D200982B39 /* HXMyArticleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyArticleVC.m; sourceTree = "<group>"; };
 		0D8CC8951E84F90300982B39 /* HXMyAttetionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyAttetionVC.h; sourceTree = "<group>"; };
@@ -638,8 +678,6 @@
 		0D91681B1E9623D0002D8296 /* HXTeacherCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXTeacherCollectionCell.xib; sourceTree = "<group>"; };
 		0D91681E1E9626EF002D8296 /* HXHomeReusableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXHomeReusableHeadView.h; sourceTree = "<group>"; };
 		0D91681F1E9626EF002D8296 /* HXHomeReusableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXHomeReusableHeadView.m; sourceTree = "<group>"; };
-		0D93F0731E693DB900CD9450 /* HXLearningProgressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXLearningProgressVC.h; sourceTree = "<group>"; };
-		0D93F0741E693DB900CD9450 /* HXLearningProgressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXLearningProgressVC.m; sourceTree = "<group>"; };
 		0D93F0761E69417300CD9450 /* HXMyLikeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyLikeVC.h; sourceTree = "<group>"; };
 		0D93F0771E69417300CD9450 /* HXMyLikeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyLikeVC.m; sourceTree = "<group>"; };
 		0D9990051EBC236800EB1F42 /* HXTeachingTypeListAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HXTeachingTypeListAPI.h; path = ../../Video/Model/HXTeachingTypeListAPI.h; sourceTree = "<group>"; };
@@ -1049,6 +1087,18 @@
 				0DAE8AC61EC0852E00CA0619 /* HXOrganizationHeadView.xib */,
 				0DA098C11EC19E19004BB09A /* HXOrganizationDetailCurriculumVC.h */,
 				0DA098C21EC19E19004BB09A /* HXOrganizationDetailCurriculumVC.m */,
+				0D42429E1EC2AC2B0040B7C7 /* HXIndividualWorksVC.h */,
+				0D42429F1EC2AC2B0040B7C7 /* HXIndividualWorksVC.m */,
+				0D4242A91EC2AFBF0040B7C7 /* HXMapVC.h */,
+				0D4242AA1EC2AFBF0040B7C7 /* HXMapVC.m */,
+				0D4242A41EC2ADF00040B7C7 /* HXOpusDetailVC.h */,
+				0D4242A51EC2ADF00040B7C7 /* HXOpusDetailVC.m */,
+				0D4242AC1EC2B85B0040B7C7 /* HXopusDetailCellOne.h */,
+				0D4242AD1EC2B85B0040B7C7 /* HXopusDetailCellOne.m */,
+				0D4242AE1EC2B85C0040B7C7 /* HXopusDetailCellOne.xib */,
+				0D4242B11EC2B9050040B7C7 /* HXopusDetailCellTwo.h */,
+				0D4242B21EC2B9050040B7C7 /* HXopusDetailCellTwo.m */,
+				0D4242B31EC2B9050040B7C7 /* HXopusDetailCellTwo.xib */,
 				0DA098BB1EC19866004BB09A /* HXFamousTeacherSGVC.h */,
 				0DA098BC1EC19866004BB09A /* HXFamousTeacherSGVC.m */,
 				0DA098BE1EC19ACE004BB09A /* HXFamousTeacherVC.h */,
@@ -1105,7 +1155,6 @@
 			children = (
 				0D65C3EC1E4AB703009F07F1 /* Model */,
 				0D65C3ED1E4AB703009F07F1 /* ViewController */,
-				0D65C3F01E4AB703009F07F1 /* ViewModel */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1174,47 +1223,26 @@
 				0D6D72071E68FDB800DFCC68 /* HXMyAccountInfoVC.m */,
 				0D9A1DFB1E84C853004457A8 /* HXAccountHead.h */,
 				0D9A1DFC1E84C853004457A8 /* HXAccountHead.m */,
+				0D4242BB1EC2BF210040B7C7 /* HXAccountHead.xib */,
 				0D9A1DFE1E84D346004457A8 /* HXBalanceRechargeVC.h */,
 				0D9A1DFF1E84D346004457A8 /* HXBalanceRechargeVC.m */,
 				0D9A1E001E84D346004457A8 /* HXBalanceRechargeVC.xib */,
+				0D79C2AB1EC2EA58004B7CC8 /* HXAccountReChargeVC.h */,
+				0D79C2AC1EC2EA58004B7CC8 /* HXAccountReChargeVC.m */,
+				0D79C2AE1EC2EB51004B7CC8 /* HXAccountReChargeCell.h */,
+				0D79C2AF1EC2EB51004B7CC8 /* HXAccountReChargeCell.m */,
+				0D4242BD1EC2C3310040B7C7 /* HXDealRecordVC.h */,
+				0D4242BE1EC2C3310040B7C7 /* HXDealRecordVC.m */,
+				0D4242C01EC2C3DD0040B7C7 /* HXdealrecordCell.h */,
+				0D4242C11EC2C3DD0040B7C7 /* HXdealrecordCell.m */,
+				0D4242C21EC2C3DD0040B7C7 /* HXdealrecordCell.xib */,
 				0D8CC8871E84E90F00982B39 /* HXMessageVC.h */,
 				0D8CC8881E84E90F00982B39 /* HXMessageVC.m */,
 				0D8CC88A1E84EA3300982B39 /* HXMessageCell.h */,
 				0D8CC88B1E84EA3300982B39 /* HXMessageCell.m */,
 				0D8CC88C1E84EA3300982B39 /* HXMessageCell.xib */,
-				0D8CC88F1E84EC6600982B39 /* HXCourseOneVC.h */,
-				0D8CC8901E84EC6600982B39 /* HXCourseOneVC.m */,
-				0D8CC8921E84F8D200982B39 /* HXMyArticleVC.h */,
-				0D8CC8931E84F8D200982B39 /* HXMyArticleVC.m */,
-				0D8CC8A31E84FA8500982B39 /* HXMyArticleCell.h */,
-				0D8CC8A41E84FA8500982B39 /* HXMyArticleCell.m */,
-				0D8CC8A51E84FA8500982B39 /* HXMyArticleCell.xib */,
-				0D8CC8B21E8503EF00982B39 /* HXMyVideoVC.h */,
-				0D8CC8B31E8503EF00982B39 /* HXMyVideoVC.m */,
-				0D7C465E1EAE05A300DEA3E8 /* HXMyattentionFriendVC.h */,
-				0D7C465F1EAE05A300DEA3E8 /* HXMyattentionFriendVC.m */,
-				0D8CC8951E84F90300982B39 /* HXMyAttetionVC.h */,
-				0D8CC8961E84F90300982B39 /* HXMyAttetionVC.m */,
-				0D7C465B1EAE018300DEA3E8 /* HXMyAttentionSGVC.h */,
-				0D7C465C1EAE018300DEA3E8 /* HXMyAttentionSGVC.m */,
-				0D8CC8A81E84FCD400982B39 /* HXMyAttentionCell.h */,
-				0D8CC8A91E84FCD400982B39 /* HXMyAttentionCell.m */,
-				0D8CC8AA1E84FCD400982B39 /* HXMyAttentionCell.xib */,
-				0D8CC8981E84F97500982B39 /* HXAdviceFaceBackVC.h */,
-				0D8CC8991E84F97500982B39 /* HXAdviceFaceBackVC.m */,
-				0D8CC89D1E84F9F800982B39 /* HXFriendDynamicStateVC.h */,
-				0D8CC89E1E84F9F800982B39 /* HXFriendDynamicStateVC.m */,
-				0D8CC8AD1E84FDB900982B39 /* HXFraiendDynamicStateCell.h */,
-				0D8CC8AE1E84FDB900982B39 /* HXFraiendDynamicStateCell.m */,
-				0D8CC8AF1E84FDB900982B39 /* HXFraiendDynamicStateCell.xib */,
-				0D93F0731E693DB900CD9450 /* HXLearningProgressVC.h */,
-				0D93F0741E693DB900CD9450 /* HXLearningProgressVC.m */,
-				0D71D9C91EBABB0400C088A1 /* HXBroserRecordSGVC.h */,
-				0D71D9CA1EBABB0400C088A1 /* HXBroserRecordSGVC.m */,
-				0D8CC8A01E84FA3D00982B39 /* HXBrowserRecordArticleVC.h */,
-				0D8CC8A11E84FA3D00982B39 /* HXBrowserRecordArticleVC.m */,
-				0D71D9C61EBAB6EE00C088A1 /* HXBroserRecordVideoVC.h */,
-				0D71D9C71EBAB6EE00C088A1 /* HXBroserRecordVideoVC.m */,
+				0D8CC88F1E84EC6600982B39 /* HXMesssageOneVC.h */,
+				0D8CC8901E84EC6600982B39 /* HXMesssageOneVC.m */,
 				0DAE8AAB1EC060C000CA0619 /* HXMyProductVC.h */,
 				0DAE8AAC1EC060C000CA0619 /* HXMyProductVC.m */,
 				0DAE8AAE1EC067D100CA0619 /* HXSetVC.h */,
@@ -1223,15 +1251,37 @@
 				0DAE8AB21EC068FD00CA0619 /* HXAccountSecutityVC.m */,
 				0D6EDFF31E6D47F10093F6CC /* HXCommonPickView.h */,
 				0D6EDFF41E6D47F10093F6CC /* HXCommonPickView.m */,
+				0D7C465B1EAE018300DEA3E8 /* HXMyAttentionSGVC.h */,
+				0D7C465C1EAE018300DEA3E8 /* HXMyAttentionSGVC.m */,
+				0D7C465E1EAE05A300DEA3E8 /* HXMyattentionFriendVC.h */,
+				0D7C465F1EAE05A300DEA3E8 /* HXMyattentionFriendVC.m */,
+				0D8CC8951E84F90300982B39 /* HXMyAttetionVC.h */,
+				0D8CC8961E84F90300982B39 /* HXMyAttetionVC.m */,
+				0D8CC8A81E84FCD400982B39 /* HXMyAttentionCell.h */,
+				0D8CC8A91E84FCD400982B39 /* HXMyAttentionCell.m */,
+				0D8CC8AA1E84FCD400982B39 /* HXMyAttentionCell.xib */,
+				0D8CC8B21E8503EF00982B39 /* HXMyVideoVC.h */,
+				0D8CC8B31E8503EF00982B39 /* HXMyVideoVC.m */,
+				0D8CC8921E84F8D200982B39 /* HXMyArticleVC.h */,
+				0D8CC8931E84F8D200982B39 /* HXMyArticleVC.m */,
+				0D8CC8A31E84FA8500982B39 /* HXMyArticleCell.h */,
+				0D8CC8A41E84FA8500982B39 /* HXMyArticleCell.m */,
+				0D8CC8A51E84FA8500982B39 /* HXMyArticleCell.xib */,
+				0D8CC8981E84F97500982B39 /* HXAdviceFaceBackVC.h */,
+				0D8CC8991E84F97500982B39 /* HXAdviceFaceBackVC.m */,
+				0D8CC89D1E84F9F800982B39 /* HXFriendDynamicStateVC.h */,
+				0D8CC89E1E84F9F800982B39 /* HXFriendDynamicStateVC.m */,
+				0D8CC8AD1E84FDB900982B39 /* HXFraiendDynamicStateCell.h */,
+				0D8CC8AE1E84FDB900982B39 /* HXFraiendDynamicStateCell.m */,
+				0D8CC8AF1E84FDB900982B39 /* HXFraiendDynamicStateCell.xib */,
+				0D71D9C91EBABB0400C088A1 /* HXBroserRecordSGVC.h */,
+				0D71D9CA1EBABB0400C088A1 /* HXBroserRecordSGVC.m */,
+				0D8CC8A01E84FA3D00982B39 /* HXBrowserRecordArticleVC.h */,
+				0D8CC8A11E84FA3D00982B39 /* HXBrowserRecordArticleVC.m */,
+				0D71D9C61EBAB6EE00C088A1 /* HXBroserRecordVideoVC.h */,
+				0D71D9C71EBAB6EE00C088A1 /* HXBroserRecordVideoVC.m */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		0D65C3F01E4AB703009F07F1 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		0D71A3D71E499E4E008F819D /* Log */ = {
@@ -1723,6 +1773,10 @@
 			children = (
 				0DEA8F631E4877BB0052C459 /* HJHomePageHeaderView.h */,
 				0DEA8F641E4877BB0052C459 /* HJHomePageHeaderView.m */,
+				0D79C2B31EC2EC8D004B7CC8 /* HXTabControl.h */,
+				0D79C2B41EC2EC8D004B7CC8 /* HXTabControl.m */,
+				0D79C2B61EC2F087004B7CC8 /* HXTabControlCell.h */,
+				0D79C2B71EC2F087004B7CC8 /* HXTabControlCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2224,6 +2278,7 @@
 				0D8CC8B11E84FDB900982B39 /* HXFraiendDynamicStateCell.xib in Resources */,
 				0D7286C11E83BDE600025AF0 /* HXCourseDetailCommentCell.xib in Resources */,
 				0D8CC8AC1E84FCD400982B39 /* HXMyAttentionCell.xib in Resources */,
+				0D4242B01EC2B85C0040B7C7 /* HXopusDetailCellOne.xib in Resources */,
 				0D91681D1E9623D0002D8296 /* HXTeacherCollectionCell.xib in Resources */,
 				0DCC4F621E67C73A00B7294B /* HXMineHeadView.xib in Resources */,
 				0D87BAF01E9E0AC300FC2678 /* AlipaySDK.bundle in Resources */,
@@ -2249,6 +2304,7 @@
 				0DF4902F1E779B8D00C567B0 /* CLPlayer.bundle in Resources */,
 				0D56EE081E8DE5C500CB8E1C /* PYSearch.bundle in Resources */,
 				0D8B008F1E890C11000BF2EA /* HXSearchVideoCell.xib in Resources */,
+				0D4242C41EC2C3DD0040B7C7 /* HXdealrecordCell.xib in Resources */,
 				0DF4902B1E779B7900C567B0 /* FastForwardView.xib in Resources */,
 				0D7286C51E83BDE600025AF0 /* HXCourseDetailIntroduceCell.xib in Resources */,
 				0D7286D11E83BE1B00025AF0 /* HXSujectVideoListCell.xib in Resources */,
@@ -2256,11 +2312,13 @@
 				0DB305211E8226EC00DDBCD2 /* HXvideoCollectionCell.xib in Resources */,
 				0D72866A1E83A76400025AF0 /* HXMineLoginHeadView.xib in Resources */,
 				0D8CC8A71E84FA8500982B39 /* HXMyArticleCell.xib in Resources */,
+				0D4242BC1EC2BF210040B7C7 /* HXAccountHead.xib in Resources */,
 				0D618B3D1EC171C200E2C157 /* HXInstrumentCell.xib in Resources */,
 				0DAE8AAA1EC056A100CA0619 /* HXMineLearnCell.xib in Resources */,
 				0D27B0121E94D84A00E93EC0 /* InfoPlist.strings in Resources */,
 				0DAE8AC71EC0852E00CA0619 /* HXOrganizationHeadView.xib in Resources */,
 				0D15870D1E9DC54700C2160C /* UI.xcassets in Resources */,
+				0D4242B51EC2B9050040B7C7 /* HXopusDetailCellTwo.xib in Resources */,
 				0D8C87C01EB97B2200863FFF /* L_03.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2386,6 +2444,8 @@
 				0DEA90251E4877BB0052C459 /* UIScrollView+LH.m in Sources */,
 				0D65C3F81E4AB703009F07F1 /* HXPersonCenterVC.m in Sources */,
 				0D7F947A1E5BCD1900D21D27 /* UIView+SGExtension.m in Sources */,
+				0D79C2B11EC2EB51004B7CC8 /* HXAccountReChargeCell.m in Sources */,
+				0D4242A71EC2ADF00040B7C7 /* HXOpusDetailVC.m in Sources */,
 				0D65C3F61E4AB703009F07F1 /* HXRecommendTeacherCell.m in Sources */,
 				0D71D9C81EBAB6EE00C088A1 /* HXBroserRecordVideoVC.m in Sources */,
 				0DEA90181E4877BB0052C459 /* NSString+LH.m in Sources */,
@@ -2414,11 +2474,13 @@
 				0DAEA52B1EB03490009AF9D9 /* HXFollowAPI.m in Sources */,
 				0D7286681E83A75300025AF0 /* HXMineLoginHeadView.m in Sources */,
 				0DEA904B1E4877BC0052C459 /* NHDataBaseManager.m in Sources */,
+				0D4242B41EC2B9050040B7C7 /* HXopusDetailCellTwo.m in Sources */,
 				0DEA90511E4877BC0052C459 /* WBTableViewDataSource.m in Sources */,
 				0DD36B281E8E4A5A00F817CF /* LNNotificationWindow.m in Sources */,
 				0DEA90201E4877BB0052C459 /* UIButton+LH.m in Sources */,
 				0D7286BF1E83BDE600025AF0 /* HXCourseDetailAnotherVC.m in Sources */,
 				0DAE95B31E8D03E800A8C0A2 /* HXSearchVC.m in Sources */,
+				0D79C2B51EC2EC8D004B7CC8 /* HXTabControl.m in Sources */,
 				0D80FB951EB9A7C600800B91 /* HXMyAssetAPI.m in Sources */,
 				0DC7A7831E95EAC100DF84F8 /* HXGradeCommentView.m in Sources */,
 				0D75B69C1EBAF7EE00CE15E2 /* HXAttentionFriendModel.m in Sources */,
@@ -2455,6 +2517,7 @@
 				0DF490211E7799E600C567B0 /* CLPlayerView.m in Sources */,
 				0D7286BC1E83BDE600025AF0 /* HXBuyBottomView.m in Sources */,
 				0D82D10E1E9F7B9B005B8A3E /* HXTeacherListAPI.m in Sources */,
+				0D4242A01EC2AC2B0040B7C7 /* HXIndividualWorksVC.m in Sources */,
 				0D56EE0B1E8DE5C600CB8E1C /* HXSearchViewController.m in Sources */,
 				0D7D4A7F1EB30F4B00D1DD21 /* HXLoginAPI.m in Sources */,
 				0DEA900C1E4877BB0052C459 /* DES3Util.m in Sources */,
@@ -2490,6 +2553,7 @@
 				0DEA90521E4877BC0052C459 /* WBTableViewDelegate.m in Sources */,
 				0D3987171EB2D6B900AEDE68 /* HXCommitPassWordVC.m in Sources */,
 				0D71D9D41EBABCD100C088A1 /* HXBroserRecordVideoAPI.m in Sources */,
+				0D4242AB1EC2AFBF0040B7C7 /* HXMapVC.m in Sources */,
 				0D6EDFF51E6D47F10093F6CC /* HXCommonPickView.m in Sources */,
 				0D7286BB1E83BDE600025AF0 /* XLVideoItem.m in Sources */,
 				0D710EDC1E4C3C6300DA30FD /* HXMineLearnCell.m in Sources */,
@@ -2499,7 +2563,7 @@
 				0DEA901D1E4877BB0052C459 /* CATransition+LH.m in Sources */,
 				0D618B381EC170FA00E2C157 /* HXInstrumentVC.m in Sources */,
 				0D7286C41E83BDE600025AF0 /* HXCourseDetailIntroduceCell.m in Sources */,
-				0D8CC8911E84EC6600982B39 /* HXCourseOneVC.m in Sources */,
+				0D8CC8911E84EC6600982B39 /* HXMesssageOneVC.m in Sources */,
 				0D6F56581EAF270600B9190F /* HXHomeInfoArticleModel.m in Sources */,
 				0D3987221EB2DF5300AEDE68 /* HXGetVerifyCodeAPI.m in Sources */,
 				0DEA90151E4877BB0052C459 /* NSDate+LH.m in Sources */,
@@ -2531,6 +2595,7 @@
 				0D75B69F1EBB174B00CE15E2 /* HXIsSubscribAddAPI.m in Sources */,
 				0D7286B11E83BDE600025AF0 /* HXArticleCellTwo.m in Sources */,
 				0D618B401EC1745000E2C157 /* HXInstrumentSectionHead.m in Sources */,
+				0D79C2B81EC2F087004B7CC8 /* HXTabControlCell.m in Sources */,
 				0DEA901C1E4877BB0052C459 /* CATextLayer+LH.m in Sources */,
 				0D71D9CB1EBABB0400C088A1 /* HXBroserRecordSGVC.m in Sources */,
 				0DD36B251E8E4A5A00F817CF /* LNNotification.m in Sources */,
@@ -2551,8 +2616,10 @@
 				0D7F26631EC0135100DCBCE9 /* HXUploadIconModel.m in Sources */,
 				0D9990071EBC236800EB1F42 /* HXTeachingTypeListAPI.m in Sources */,
 				0DBA4D5D1E5E8CDE00E549A5 /* HXPayWaysCell.m in Sources */,
+				0D4242BF1EC2C3310040B7C7 /* HXDealRecordVC.m in Sources */,
 				0DEA90161E4877BB0052C459 /* NSMutableArray+LH.m in Sources */,
 				0DEA8EFB1E486FC10052C459 /* main.m in Sources */,
+				0D4242C31EC2C3DD0040B7C7 /* HXdealrecordCell.m in Sources */,
 				0DEA90191E4877BB0052C459 /* NSTimer+LH.m in Sources */,
 				0D7286C21E83BDE600025AF0 /* HXCourseDetailCourseTitleCell.m in Sources */,
 				0DBA4D581E5E892D00E549A5 /* HXPayInformationCell.m in Sources */,
@@ -2560,13 +2627,14 @@
 				0D7286B71E83BDE600025AF0 /* HXCourseDetailTwoVC.m in Sources */,
 				0D8854961E6E81AC00E4132B /* HXWebViewCell.m in Sources */,
 				0DEA90291E4877BC0052C459 /* UITextView+LH.m in Sources */,
+				0D79C2AD1EC2EA58004B7CC8 /* HXAccountReChargeVC.m in Sources */,
 				0D618B3C1EC171C200E2C157 /* HXInstrumentCell.m in Sources */,
 				0DEA900E1E4877BB0052C459 /* MD5Encryption.m in Sources */,
 				0D7D77841E52A5EB00CF8D47 /* NewPagedFlowView.m in Sources */,
 				0DAE8AB91EC0767D00CA0619 /* HXFindGroupSGVC.m in Sources */,
 				0D80FB9B1EB9D6B200800B91 /* HXMyAttentionFrendsAPI.m in Sources */,
-				0D93F0751E693DB900CD9450 /* HXLearningProgressVC.m in Sources */,
 				0DD36B271E8E4A5A00F817CF /* LNNotificationView.m in Sources */,
+				0D4242AF1EC2B85C0040B7C7 /* HXopusDetailCellOne.m in Sources */,
 				0DD36B2B1E8E4A5A00F817CF /* WPViewController.m in Sources */,
 				0D8C87C41EB982FF00863FFF /* HXArticleTypeAPI.m in Sources */,
 				0D71D9D11EBABC6E00C088A1 /* HXBroserRecordArticleAPI.m in Sources */,
@@ -2710,6 +2778,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1FB8498F25228EFA651EF216 /* Pods-HXBudsProject.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_MODULES_AUTOLINK = YES;
 				DEVELOPMENT_TEAM = F972623DL2;
@@ -2733,6 +2802,8 @@
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/pay/wechatPay",
 				);
+				OTHER_CFLAGS = "$(inherited)";
+				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2743,6 +2814,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E222DBD4DFBEACFCA4FD2995 /* Pods-HXBudsProject.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_MODULES_AUTOLINK = YES;
 				DEVELOPMENT_TEAM = F972623DL2;
@@ -2766,6 +2838,8 @@
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/HXBudsProject/Vendors/pay/wechatPay",
 				);
+				OTHER_CFLAGS = "$(inherited)";
+				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";

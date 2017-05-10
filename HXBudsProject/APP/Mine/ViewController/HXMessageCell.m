@@ -14,7 +14,7 @@
     [super awakeFromNib];
     // Initialization code
     
-    
+    [self.ico lh_setRoundImageViewWithBorderWidth:0 borderColor:nil];
     
 }
 + (instancetype)initMessageCellWithXib{

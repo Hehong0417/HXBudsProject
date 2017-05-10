@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface HXBalanceRechargeVC : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *moneyTextfield;
+@property (weak, nonatomic) IBOutlet UIButton *allWithDrawBtn;
+@property (weak, nonatomic) IBOutlet UILabel *commitWithdrawBtn;
 
 @end

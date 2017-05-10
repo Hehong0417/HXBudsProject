@@ -7,7 +7,7 @@
 //
 
 #import "HXSetVC.h"
-
+#import "HXAccountSecutityVC.h"
 @interface HXSetVC ()
 
 @end
@@ -21,6 +21,9 @@
     UIView *footView = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80) backColor:kWhiteColor];
     
     UIButton *exitBtn = [UIButton lh_buttonWithFrame:CGRectMake(30, 10, SCREEN_WIDTH - 60, 35) target:self action:@selector(exitBtnAction) image:nil];
+    [exitBtn setTitleColor:kRedColor forState:UIControlStateNormal];
+    [exitBtn setTitle:@"退出登录" forState:UIControlStateNormal];
+    [exitBtn lh_setCornerRadius:3 borderWidth:1 borderColor:kRedColor];
     [footView addSubview:exitBtn];
     self.tableV.tableFooterView = footView;
     
@@ -41,9 +44,12 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-
-
-
+    if (indexPath.row == 0) {
+        
+        HXAccountSecutityVC *vc = [HXAccountSecutityVC new];
+        [self.navigationController pushVC:vc];
+        
+    }
 }
 - (void)exitBtnAction{
 

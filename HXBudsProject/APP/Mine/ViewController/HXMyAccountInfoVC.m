@@ -10,6 +10,8 @@
 #import "HXAccountHead.h"
 #import "HXBalanceRechargeVC.h"
 #import "HXMyAssetAPI.h"
+#import "HXDealRecordVC.h"
+#import "HXAccountReChargeVC.h"
 
 @interface HXMyAccountInfoVC ()
 {
@@ -21,7 +23,6 @@
 
 @implementation HXMyAccountInfoVC
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -29,42 +30,55 @@
   
     [self getMyAssetData];
     
-    headView = [[HXAccountHead alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 169)];
-    headView.backgroundColor = RGB(2, 192, 186);
+    headView = [HXAccountHead initWithAccountHeadWithXib];
+    headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 200);
     self.tableV.tableHeaderView = headView;
-    WEAK_SELF();
-   [headView.balanceRechargeBgView setTapActionWithBlock:^{
-       
-       HXBalanceRechargeVC *vc = [[HXBalanceRechargeVC alloc]initWithNibName:@"HXBalanceRechargeVC" bundle:nil];
-       [weakSelf.navigationController pushVC:vc];
-       
-   }];
+
+    UIButton *dealRecordBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0,80, 60) target:self action:@selector(dealRecordAction) backgroundImage:nil title:@"交易记录" titleColor:kDarkGrayColor font:FONT(16)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:dealRecordBtn];
+                
+                
 }
 - (void)getMyAssetData{
 
   [[[HXMyAssetAPI getMyAsset] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
      
-      headView.balanceLabel.text = responseObject[@"balance"];
+//      headView.balanceLabel.text = responseObject[@"balance"];
       
   }];
 
 }
 - (NSArray *)groupTitles {
     
-    return @[@[@"交易记录"]];
+    return @[@[@"余额提现（100元起提现）"],@[@"账户充值"]];
 }
 
 - (NSArray *)groupIcons {
     
-    return @[@[@"property_2"]];
+    return @[@[@""],@[@""]];
 }
 
 - (NSArray *)groupDetials {
     
-    return @[@[@" "]];
+    return @[@[@""],@[@""]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    if (indexPath.section == 0) {
+        
+        HXBalanceRechargeVC *vc = [[HXBalanceRechargeVC alloc]initWithNibName:@"HXBalanceRechargeVC" bundle:nil];
+        [self.navigationController pushVC:vc];
+        
+    }else {
+        HXAccountReChargeVC *vc = [HXAccountReChargeVC new];
+        [self.navigationController pushVC:vc];
+    
+    }
+}
+- (void)dealRecordAction {
+
+    HXDealRecordVC *vc = [HXDealRecordVC new];
+    [self.navigationController pushVC:vc];
 
 }
 @end

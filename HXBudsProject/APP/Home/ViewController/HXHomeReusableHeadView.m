@@ -37,7 +37,7 @@
     
     //找名师、找课程
     self.findView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.cycleSrollView.frame), SCREEN_WIDTH, WidthScaleSize_H(85))];
-    XYQButton  *findCurriLumBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH-1)/2,WidthScaleSize_H(85)) imgaeName:@"kecheng" titleName:@"找机构" contentType:TopImageBottomTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:RGB(101, 101, 101) fontsize:12] tapAction:^(XYQButton *button) {
+    XYQButton  *findCurriLumBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH-1)/2,WidthScaleSize_H(85)) imgaeName:@"jigou" titleName:@"找机构" contentType:TopImageBottomTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:RGB(101, 101, 101) fontsize:12] tapAction:^(XYQButton *button) {
         
         HXFindGroupSGVC *vc = [HXFindGroupSGVC new];
         [self.nav pushVC:vc];

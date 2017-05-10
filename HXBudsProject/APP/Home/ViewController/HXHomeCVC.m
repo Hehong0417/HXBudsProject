@@ -25,7 +25,7 @@
 #import "HXIsLoginAPI.h"
 #import "HXTeachingTypeListAPI.h"
 #import "HXLoginVC.h"
-#import "HXMessageVC.h"
+#import "HXMesssageOneVC.h"
 #import "HXSearchViewController.h"
 #import "HXSearchVC.h"
 #import "HXTeachingTypeListModel.h"
@@ -139,7 +139,7 @@ BOOL isLogin;
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 ) collectionViewLayout:flowout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.collectionView.backgroundColor = kWhiteColor;
+    self.collectionView.backgroundColor = KVCBackGroundColor;
     self.collectionView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.collectionView];
     [self.collectionView registerNib:[UINib nibWithNibName:@"HXvideoCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXvideoCollectionCell"];
@@ -259,6 +259,10 @@ BOOL isLogin;
     }
     return CGSizeMake(0, 0);
 }
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+
+    return  CGSizeMake(SCREEN_WIDTH, 10);
+}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 1) {
@@ -344,7 +348,7 @@ BOOL isLogin;
     
     XYQButton *messageBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, 44, 60) imgaeName:@"mail" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
         
-        [self.navigationController pushVC:[HXMessageVC new]];
+        [self.navigationController pushVC:[HXMesssageOneVC new]];
         
     }];
     UIImage *image2 = [UIImage imageNamed:@"mail"];

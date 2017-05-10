@@ -8,7 +8,7 @@
 
 #import "HXMyHomeHeadView.h"
 #import "HXPersonInfoVC.h"
-#import "HXMessageVC.h"
+#import "HXMesssageOneVC.h"
 
 
 @implementation HXMyHomeHeadView
@@ -48,7 +48,7 @@
     
     if (self.isMyHomeInfo) {
         
-        HXMessageVC *vc1 = [HXMessageVC new];
+        HXMesssageOneVC *vc1 = [HXMesssageOneVC new];
         [self.nav pushVC:vc1];
         
     }else{

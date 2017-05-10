@@ -6,22 +6,22 @@
 //  Copyright © 2017年 n. All rights reserved.
 //
 
-#import "HXCourseOneVC.h"
+#import "HXMesssageOneVC.h"
 #import "HXMessageCell.h"
 
-@interface HXCourseOneVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface HXMesssageOneVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tabView;
 
 
 @end
 
-@implementation HXCourseOneVC
+@implementation HXMesssageOneVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
+    self.title = @"我的消息";
     self.tabView = [UITableView lh_tableViewWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) tableViewStyle:UITableViewStyleGrouped delegate:self dataSourec:self];
     self.tabView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tabView];
@@ -33,7 +33,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-        HXMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXArticleCellOne"];
+        HXMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXMessageCell"];
         if(!cell){
             
             cell = [HXMessageCell initMessageCellWithXib];
@@ -43,26 +43,26 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (section == 0) {
-        return 1;
-    }else{
+//    if (section == 0) {
+//        return 1;
+//    }else{
         return 3;
-    }
+//    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 0) {
-        
-        return 100;
-    }else{
-        
-        return 135;
-    }
+//    
+//    if (indexPath.section == 0) {
+//        
+        return 80;
+//    }else{
+//        
+//        return 135;
+//    }
 }
 //- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
 //
@@ -77,7 +77,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return WidthScaleSize_H(40);
+    return 0.01;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
