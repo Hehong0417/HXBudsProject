@@ -14,4 +14,11 @@
 
 @property(nonatomic,assign) DetailType detailType;
 
+@property(nonatomic,strong) NSString *organization_Id;
+
+@property(nonatomic,strong) NSString *teacher_Id;
+
+@property(nonatomic,assign) BOOL isLogin;
+
+
 @end

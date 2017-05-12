@@ -21,7 +21,7 @@
         [api.parameters setObject:theteacher_id forKey:@"theteacher_id"];
     }
     if (curriculum­­_status) {
-        [api.parameters setObject:curriculum­­_status forKey:@"curriculum­­_status"];
+        [api.parameters setObject:curriculum­­_status forKey:@"recommend_status"];
     }
     if (isLogin) {
         api.parametersAddToken = YES;

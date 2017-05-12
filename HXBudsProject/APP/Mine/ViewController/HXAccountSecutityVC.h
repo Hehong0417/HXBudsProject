@@ -10,4 +10,5 @@
 
 @interface HXAccountSecutityVC : HJStaticGroupTableVC
 
+
 @end

@@ -29,6 +29,8 @@
 
 #import <CocoaLumberjack/CocoaLumberjack-umbrella.h>
 
+#import <AVKit/AVKit.h>
+
 
 // config
 #import "APIAddress.h"//
@@ -58,7 +60,6 @@
 #import "Encryption.h"
 
 
-#import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
 #endif /* Buds_pch */

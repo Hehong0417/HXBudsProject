@@ -31,6 +31,7 @@
 #import "HXTeachingTypeListModel.h"
 #import "HXChoicenessCell.h"
 #import "HXCurriculumTypeCell.h"
+#import "HXSectionFootView.h"
 
 @interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,PYSearchViewControllerDelegate>
 {
@@ -47,10 +48,11 @@ BOOL isLogin;
 
 @property (nonatomic, strong) HXTeacherListModel *teacherListModel;
 @property (nonatomic, strong) HXteacherVarListModel *teacherVarListModel;
-@property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
-@property (nonatomic, strong) HXTeachingTypeListModel *teachingTypeListModel;
+@property (nonatomic, strong) HXSubjectVideoListModel *RmVideoListModel;
+@property (nonatomic, strong) HXSubjectVideoListModel *JxVideoListModel;
 
-@property (nonatomic, strong) NSMutableArray *followList;
+@property (nonatomic, strong) HXTeachingTypeListModel *teachingTypeListModel;
+@property (nonatomic, strong) NSArray *followList;
 
 @end
 
@@ -58,12 +60,24 @@ BOOL isLogin;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     [self getList_online];
-    [self getTeacherList];
-    [self getSubjectVideoList];
-    [self getTeachingTypeList];
+    //热门课程
+    [self getHotVideoList];
+    //精选好课
+    [self getFeaturedVideoList];
+    
 }
+- (void)dispatchRequest {
+        
+        [self getList_online];
+        //热门课程
+        [self getHotVideoList];
+        //精选好课
+        [self getFeaturedVideoList];
+    
+}
+
 - (void)getTeachingTypeList{
 
     [[[HXTeachingTypeListAPI getTeachingTypeList] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
@@ -118,21 +132,38 @@ BOOL isLogin;
 
    
 }
-- (void)getSubjectVideoList {
-
-    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@4 theteacherId:nil curriculum­­_status:@"curriculum-status-ztsp" isLogin:NO] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+//热门课程
+- (void)getHotVideoList{
+    
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@4 theteacherId:nil curriculum­­_status:@"recommend-status-rm" isLogin:NO] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         
         HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
         
-        self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
-        
+        self.RmVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
         [self.collectionView reloadData];
+
+    }];
+    
+}
+//精选好课
+- (void)getFeaturedVideoList {
+
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@4 theteacherId:nil curriculum­­_status:@"recommend-status-jx" isLogin:NO] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
+        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+        
+        self.JxVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+        [self.collectionView reloadData];
+
     }];
 
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+//    [self dispatchRequest];
+    
     self.page = 1;
     
     UICollectionViewFlowLayout *flowout = [[UICollectionViewFlowLayout alloc]init];
@@ -146,12 +177,12 @@ BOOL isLogin;
     [self.collectionView registerClass:[HXCurriculumTypeCell class] forCellWithReuseIdentifier:@"HXCurriculumTypeCell"];
 //    [self.collectionView registerNib:[UINib nibWithNibName:@"HXTeacherCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXTeacherCollectionCell"];
      [self.collectionView registerNib:[UINib nibWithNibName:@"HXChoicenessCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXChoicenessCell"];
-    
-    
+
     [self.collectionView registerClass:[HXHomeReusableHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXHomeReusableHeadView"];
     [self.collectionView registerClass:[HXVideoSectionHead class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead"];
-    self.view.backgroundColor = kWhiteColor;
+    [self.collectionView registerClass:[HXSectionFootView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HXSectionFootView"];
     
+    self.view.backgroundColor = kWhiteColor;
     [self addHeaderRefresh];
     [self addFooterRefresh];
     [self addSearchBtn];
@@ -192,13 +223,14 @@ BOOL isLogin;
     }else if (indexPath.section == 1) {
         
         HXvideoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXvideoCollectionCell" forIndexPath:indexPath];
-        cell.model = self.SubjectVideoListModel.varList[indexPath.row];
+        cell.model = self.RmVideoListModel.varList[indexPath.row];
+        cell.nav = self.navigationController;
         return cell;
   
     }else {
     
         HXChoicenessCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXChoicenessCell" forIndexPath:indexPath];
-        cell.model = self.SubjectVideoListModel.varList[indexPath.row];
+        cell.model = self.JxVideoListModel.varList[indexPath.row];
         cell.nav = self.navigationController;
         return cell;
     }
@@ -215,11 +247,11 @@ BOOL isLogin;
         return 1;
     }else if (section == 1) {
         
-        return self.SubjectVideoListModel.varList.count?self.SubjectVideoListModel.varList.count:4;
+        return self.RmVideoListModel.varList.count;
         
     }else {
         
-        return self.SubjectVideoListModel.varList.count?self.SubjectVideoListModel.varList.count:4;
+        return self.JxVideoListModel.varList.count;
     }
 }
 
@@ -230,14 +262,14 @@ BOOL isLogin;
         return CGSizeMake(SCREEN_WIDTH - 20 , 180);
         
     }else if (indexPath.section == 1) {
-        
-        return CGSizeMake((SCREEN_WIDTH - 35)/2, 160);
+        //195+35
+        return CGSizeMake((SCREEN_WIDTH - 35)/2, 165);
 
 //        return CGSizeMake(SCREEN_WIDTH , 100);
         
     }else{
         
-    return CGSizeMake(SCREEN_WIDTH - 20, 160);
+    return CGSizeMake(SCREEN_WIDTH - 20, 230);
         
     }
 }
@@ -251,7 +283,7 @@ BOOL isLogin;
     
     if (section == 0) {
         
-        return   CGSizeMake(SCREEN_WIDTH, WidthScaleSize_W(152)+WidthScaleSize_H(85));
+        return   CGSizeMake(SCREEN_WIDTH, WidthScaleSize_W(152)+85);
 
     }else {
     
@@ -267,16 +299,18 @@ BOOL isLogin;
     
     if (indexPath.section == 1) {
         
-        HXMyLikeVC *vc = [HXMyLikeVC new];
-        HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
-        vc.theteacher_id = model.theteacher_id;
-        vc.titleStr = @"他的主页";
-        vc.dynamicType = teacherDynamicType;
-        [self.navigationController pushVC:vc];
+//      HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
+//      HXSubjectVideoModel *model = self.RmVideoListModel.varList[indexPath.row];
+//        vc.curriculum_id = model.curriculum_id;
+//        [self.navigationController pushVC:vc];
+       
+        
     }else{
         
-//        HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
-//        [self.navigationController pushVC:vc];
+        HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
+        HXSubjectVideoModel *model = self.JxVideoListModel.varList[indexPath.row];
+        vc.curriculum_id = model.curriculum_id;
+        [self.navigationController pushVC:vc];
     
     }
 }
@@ -321,6 +355,9 @@ BOOL isLogin;
 //            }];
             return sectionHead;
         }
+    }else if(kind  == UICollectionElementKindSectionFooter){
+        HXSectionFootView *foot = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HXSectionFootView" forIndexPath:indexPath];
+        return foot;
     }
     return nil;
 }
@@ -409,6 +446,5 @@ BOOL isLogin;
         });
     }
 }
-
 
 @end

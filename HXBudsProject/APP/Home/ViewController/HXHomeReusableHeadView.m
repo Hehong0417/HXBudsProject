@@ -15,47 +15,61 @@
 @interface HXHomeReusableHeadView ()<SDCycleScrollViewDelegate>
 
 @property (nonatomic, strong)  UIView *findView;
+@property (nonatomic, strong)  XYQButton  *findCurriLumBtn;
+@property (nonatomic, strong)  XYQButton  *findTeacherBtn;
 
 @end
 
 
 @implementation HXHomeReusableHeadView
 
+- (instancetype)initWithFrame:(CGRect)frame {
+
+    if (self = [super initWithFrame:frame]) {
+        self.cycleSrollView = [[SDCycleScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, WidthScaleSize_H(152))];
+        self.cycleSrollView.infiniteLoop = YES;
+        self.cycleSrollView.placeholderImage=[UIImage imageNamed:@"homepagebannerplaceholder"];
+        self.cycleSrollView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
+        self.cycleSrollView.autoScrollTimeInterval = 2.0; // 轮播时间间隔，默认1.0秒，可自定义
+        self.cycleSrollView.delegate = self;
+        
+        [self addSubview:self.cycleSrollView];
+        
+        //找名师、找课程
+        self.findView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.cycleSrollView.frame), SCREEN_WIDTH, 85)];
+        self.findCurriLumBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH-1)/2,75) imgaeName:@"jigou" titleName:@"找机构" contentType:TopImageBottomTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kDarkGrayColor fontsize:14] tapAction:^(XYQButton *button) {
+            
+            HXFindGroupSGVC *vc = [HXFindGroupSGVC new];
+            [self.nav pushVC:vc];
+            
+        }];
+        
+        self.findTeacherBtn = [XYQButton ButtonWithFrame:CGRectMake(CGRectGetMaxX(self.findCurriLumBtn.frame)+1,0, (SCREEN_WIDTH-1)/2,75) imgaeName:@"mingshi" titleName:@"找名师" contentType:TopImageBottomTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kDarkGrayColor fontsize:14] tapAction:^(XYQButton *button) {
+            
+            HXFamousTeacherSGVC *vc = [HXFamousTeacherSGVC new];
+            [self.nav pushVC:vc];
+        }];
+        //分隔线
+        UIView *verticleLine = [UIView lh_viewWithFrame:CGRectMake(CGRectGetMaxX(self.findCurriLumBtn.frame), 20, 1, 85 - 20 -20) backColor:RGB(227, 227, 227)];
+        //组间隔
+        UIView *view = [UIView lh_viewWithFrame:CGRectMake(0, 85-10, SCREEN_WIDTH, 10) backColor:KVCBackGroundColor];
+        
+        [self.findView addSubview:self.findCurriLumBtn];
+        [self.findView addSubview:self.findTeacherBtn];
+        [self.findView addSubview:verticleLine];
+        [self.findView addSubview:view];
+        [self addSubview:self.findView];
+        
+    }
+    return self;
+}
+
 - (void)setImageURLStringsGroup:(NSArray *)imageURLStringsGroup {
 
     _imageURLStringsGroup = imageURLStringsGroup;
-    self.cycleSrollView = [[SDCycleScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, WidthScaleSize_H(152))];
-    self.cycleSrollView.infiniteLoop = YES;
-    self.cycleSrollView.placeholderImage=[UIImage imageNamed:@"homepagebannerplaceholder"];
-    self.cycleSrollView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
-    self.cycleSrollView.autoScrollTimeInterval = 2.0; // 轮播时间间隔，默认1.0秒，可自定义
-    self.cycleSrollView.delegate = self;
-
+   
     self.cycleSrollView.imageURLStringsGroup = imageURLStringsGroup.count?imageURLStringsGroup:[self getImageURLGroup];
     
-    [self addSubview:self.cycleSrollView];
-    
-    //找名师、找课程
-    self.findView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.cycleSrollView.frame), SCREEN_WIDTH, WidthScaleSize_H(85))];
-    XYQButton  *findCurriLumBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH-1)/2,WidthScaleSize_H(85)) imgaeName:@"jigou" titleName:@"找机构" contentType:TopImageBottomTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:RGB(101, 101, 101) fontsize:12] tapAction:^(XYQButton *button) {
-        
-        HXFindGroupSGVC *vc = [HXFindGroupSGVC new];
-        [self.nav pushVC:vc];
-        
-    }];
-    XYQButton  *findTeacherBtn = [XYQButton ButtonWithFrame:CGRectMake(CGRectGetMaxX(findCurriLumBtn.frame)+1,0, (SCREEN_WIDTH-1)/2,WidthScaleSize_H(85)) imgaeName:@"mingshi" titleName:@"找名师" contentType:TopImageBottomTitle buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:RGB(101, 101, 101) fontsize:12] tapAction:^(XYQButton *button) {
-        
-        HXFamousTeacherSGVC *vc = [HXFamousTeacherSGVC new];
-        [self.nav pushVC:vc];
-    }];
-    //分隔线
-    UIView *downLine = [UIView lh_viewWithFrame:CGRectMake(CGRectGetMaxX(findCurriLumBtn.frame), WidthScaleSize_H(21), 1, WidthScaleSize_H(85)- WidthScaleSize_H(21)) backColor:RGB(227, 227, 227)];
-    
-    [self.findView addSubview:findCurriLumBtn];
-    [self.findView addSubview:findTeacherBtn];
-    [self.findView addSubview:downLine];
-    
-    [self addSubview:self.findView];
     
 }
 - (void)layoutSubviews{
@@ -136,9 +150,9 @@
 //}
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     
-    JKCustomAlertView *jkAlert = [[JKCustomAlertView alloc]initWithJKAlertType:JKAlertTypeOneTextField contentView:self];
-    [jkAlert show];
-    
+//    JKCustomAlertView *jkAlert = [[JKCustomAlertView alloc]initWithJKAlertType:JKAlertTypeOneTextField contentView:self];
+//    [jkAlert show];
+//    
 }
 
 

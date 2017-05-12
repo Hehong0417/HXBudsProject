@@ -43,7 +43,7 @@
 
   [[[HXMyAssetAPI getMyAsset] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
      
-//      headView.balanceLabel.text = responseObject[@"balance"];
+      headView.balanceLabel.text = [NSString stringWithFormat:@"￥%@.00",responseObject[@"balance"]] ;
       
   }];
 

@@ -13,6 +13,7 @@
 #import "HXLoginAPI.h"
 #import "HJUser.h"
 #import "HXWXLoginAPI.h"
+#import "HXFindPwdVC.h"
 
 @interface HXLoginVC ()<UITextFieldDelegate>
 {
@@ -117,6 +118,11 @@
     passWordTextFiled.secureTextEntry = YES;
     passWordTextFiled.leftViewMode = UITextFieldViewModeAlways;
     passWordTextFiled.leftView = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 40, WidthScaleSize_H(45)) target:self action:nil image:[UIImage imageNamed:@"passWord"]];
+    passWordTextFiled.rightViewMode = UITextFieldViewModeAlways;
+    UIButton *forgetPwdBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 80, WidthScaleSize_H(45)) target:self action:@selector(forgetPwd) image:nil];
+    [forgetPwdBtn setTitle:@"忘记密码?" forState:UIControlStateNormal];
+    passWordTextFiled.rightView = forgetPwdBtn;
+    
     [passWordTextFiled mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.mas_equalTo(15);
@@ -137,7 +143,7 @@
         
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
-        make.top.equalTo(passWordTextFiled.mas_bottom).with.offset(WidthScaleSize_H(22));
+        make.top.equalTo(passWordTextFiled.mas_bottom).with.offset(WidthScaleSize_H(25));
         make.height.mas_equalTo(WidthScaleSize_H(45));
         
     }];
@@ -183,7 +189,7 @@
     
     CGFloat btn_W = SCREEN_WIDTH/3;
     //qq
-    UIButton *qqBtn = [UIButton lh_buttonWithFrame:CGRectZero target:self action:@selector(qqLoginAction:) image:[UIImage imageNamed:@"QQ"]];
+    UIButton *qqBtn = [UIButton lh_buttonWithFrame:CGRectZero target:self action:@selector(qqLoginAction:) image:[UIImage imageNamed:@""]];
     [bgView addSubview:qqBtn];
     [qqBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -191,21 +197,23 @@
         make.left.mas_equalTo(0);
         make.height.width.mas_equalTo(btn_W);
     }];
+    qqBtn.enabled = NO;
     
-    //微博
-    UIButton *weiboBtn = [UIButton lh_buttonWithFrame:CGRectZero target:self action:@selector(weiboLoginAction:) image:[UIImage imageNamed:@"weibo"]];
-    [bgView addSubview:weiboBtn];
-    [weiboBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    //微信
+    UIButton *weChatBtn = [UIButton lh_buttonWithFrame:CGRectZero target:self action:@selector(weChatLoginAction:) image:[UIImage imageNamed:@"weChat"]];
+    [bgView addSubview:weChatBtn];
+    [weChatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(leftLine.mas_bottom).with.offset(WidthScaleSize_H(25));
         make.left.mas_equalTo(btn_W);
         make.height.width.mas_equalTo(btn_W);
         
     }];
     
-    //微信
-    UIButton *weChatBtn = [UIButton lh_buttonWithFrame:CGRectZero target:self action:@selector(weChatLoginAction:) image:[UIImage imageNamed:@"weChat"]];
-    [bgView addSubview:weChatBtn];
-    [weChatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    //微博
+    UIButton *weiboBtn = [UIButton lh_buttonWithFrame:CGRectZero target:self action:@selector(weiboLoginAction:) image:[UIImage imageNamed:@""]];
+    [bgView addSubview:weiboBtn];
+    weiboBtn.enabled = NO;
+    [weiboBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(leftLine.mas_bottom).with.offset(WidthScaleSize_H(25));
         make.left.mas_equalTo(2*btn_W);
         make.height.width.mas_equalTo(btn_W);
@@ -235,6 +243,10 @@
     }
     return nil;
 }
+- (void)forgetPwd {
+    
+    [self.navigationController pushVC:[HXFindPwdVC new]];
+}
 - (void)backAction:(UIButton *)btn {
     
     [self.navigationController popVC];
@@ -252,8 +264,6 @@
         [SVProgressHUD showInfoWithStatus:isVaildStr];
     }
     
-
-
 }
 //登录
 - (void)loginRequest{
@@ -274,12 +284,12 @@
 
 - (void)qqLoginAction:(UIButton *)btn{
      
-    [self getAuthWithUserInfoFromQQ];
+//    [self getAuthWithUserInfoFromQQ];
 
 }
 - (void)weiboLoginAction:(UIButton *)btn{
    
-    [self getAuthWithUserInfoFromSina];
+//    [self getAuthWithUserInfoFromSina];
 
 }
 - (void)weChatLoginAction:(UIButton *)btn{
@@ -320,7 +330,6 @@
             
         } else {
             UMSocialUserInfoResponse *resp = result;
-            
             // 授权信息
             NSLog(@"Sina uid: %@", resp.uid);
             NSLog(@"Sina accessToken: %@", resp.accessToken);
@@ -345,7 +354,6 @@
             
         } else {
             UMSocialUserInfoResponse *resp = result;
-            
             // 授权信息
             NSLog(@"Wechat uid: %@", resp.uid);
             NSLog(@"Wechat openid: %@", resp.openid);

@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"浏览记录";
+    self.title = @"我的收藏";
     
     // 1.添加所有子控制器
     [self setupChildViewController];

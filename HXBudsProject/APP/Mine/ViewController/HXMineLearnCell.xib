@@ -24,7 +24,7 @@
                             <constraint firstAttribute="width" constant="185" id="Jtp-bt-ZY4"/>
                             <constraint firstAttribute="height" constant="85" id="Qye-Hq-aEj"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <inset key="titleEdgeInsets" minX="-25" minY="41" maxX="0.0" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="60" minY="-22" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="我的资产" image="zichan">
@@ -39,7 +39,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <inset key="titleEdgeInsets" minX="-25" minY="41" maxX="0.0" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="60" minY="-22" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="我的视频" image="message">
+                        <state key="normal" title="我的消息" image="message">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                     </button>

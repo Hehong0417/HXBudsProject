@@ -190,7 +190,10 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
             if (!weakSelf.URLString) {
                 weakSelf.URLString = @"error";
             }
-            weakSelf.playerView.url = [NSURL URLWithString:@""];
+
+            weakSelf.playerView.url = [NSURL URLWithString: @"http://1253712797.vod2.myqcloud.com/e8f61ed3vodtransgzp1253712797/863fe8399031868222929787287/f0.f20.mp4"];
+//            weakSelf.playerView.url = [NSURL URLWithString:@"http://yycloudvod2109130935.bs2dl.yy.com/djhmZjcyZTExZDRiZmY1Yzg0NzhlM2Q5MWVjZjRhYzY1MTUzNDQxMjM1Mg"];
+            
             weakSelf.playerView.vc = weakSelf;
             [weakSelf.view addSubview:weakSelf.playerView];
         }else{
@@ -327,7 +330,12 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 
+    self.playerView = nil;
+
+}
 
 
 @end

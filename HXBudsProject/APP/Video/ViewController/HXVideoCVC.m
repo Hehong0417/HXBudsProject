@@ -30,12 +30,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //专题视频
-    [self getSubjectVideoListWithCurriculum­­_status:@"curriculum-status-ztsp" completeHandle:^(id responseObject) {
+    [self getSubjectVideoListWithCurriculum­­_status:nil completeHandle:^(id responseObject) {
         
         HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
         
         self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
-        
+        NSLog(@"count---%ld",self.SubjectVideoListModel.varList.count);
         [self.collectionView reloadData];
         
     }];
@@ -49,8 +49,7 @@
 //        [self.collectionView reloadData];
 //        
 //    }];
-//    
-    
+//
     self.title = @"视频";
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49) collectionViewLayout:layout];
@@ -67,7 +66,7 @@
 
 - (void)getSubjectVideoListWithCurriculum­­_status:(NSString *)curriculum_status completeHandle:(void(^)(id responseObject))completeHandle {
     
-    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@4 theteacherId:nil  curriculum­­_status:curriculum_status  isLogin:NO ] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@20 theteacherId:nil  curriculum­­_status:curriculum_status  isLogin:NO ] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
         
         completeHandle(responseObject);
         
@@ -86,7 +85,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
 
-    return self.SubjectVideoListModel.varList.count?self.SubjectVideoListModel.varList.count:4;
+    return self.SubjectVideoListModel.varList.count;
         
 }
 
@@ -101,7 +100,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    return CGSizeMake((SCREEN_WIDTH - 20), 160);
+    return CGSizeMake((SCREEN_WIDTH - 20), 230);
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     

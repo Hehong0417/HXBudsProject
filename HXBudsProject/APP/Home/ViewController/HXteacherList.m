@@ -12,7 +12,6 @@
 #import "HXTeacherListAPI.h"
 #import "HXIsLoginAPI.h"
 #import "HXFollowAPI.h"
-#import "HXIsLoginAPI.h"
 #import "HXLoginVC.h"
 
 @interface HXteacherList ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>

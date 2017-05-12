@@ -16,10 +16,12 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)setModel:(HXConsumptionVarListModel *)model {
 
-    // Configure the view for the selected state
+    _model = model;
+//    self.titleLab.text = ;
+    self.ctimeLab.text = model.ctime;
+    self.tran_money.text = model.tran_money;
 }
 
 @end

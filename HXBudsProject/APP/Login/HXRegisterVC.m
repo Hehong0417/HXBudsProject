@@ -12,7 +12,6 @@
 #import "HXVerifyPhoneNumAPI.h"
 #import "HXGetVerifyCodeAPI.h"
 
-
 @interface HXRegisterVC ()<UITextFieldDelegate>
 {
     UITextField *phoneNumTextFiled;
@@ -271,7 +270,7 @@
 
     }else {
     
-        [SVProgressHUD showErrorWithStatus:@"验证码错误"];
+        [SVProgressHUD showErrorWithStatus:@"验证码输入不正确"];
     }
 
 }

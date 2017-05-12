@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HXTeacherListModel.h"
 
 @interface HXOrganizationCell : UITableViewCell
 
@@ -14,6 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconImagV;
 
-
+@property (strong, nonatomic)  HXteacherVarListModel *teacherModel;
+@property (weak, nonatomic) IBOutlet UILabel *teacherNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *introduceLab;
 
 @end

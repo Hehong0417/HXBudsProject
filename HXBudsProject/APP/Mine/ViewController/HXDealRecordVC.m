@@ -8,11 +8,12 @@
 
 #import "HXDealRecordVC.h"
 #import "HXdealrecordCell.h"
-
-
+#import "HXConsumptionAPI.h"
+#import "HXConsumptionModel.h"
 @interface HXDealRecordVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)   UITableView *dealRecordTable;
+@property (nonatomic, strong)   HXConsumptionModel *consumptionModel;
 
 @end
 
@@ -29,8 +30,17 @@
     self.dealRecordTable.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.dealRecordTable];
     [self.dealRecordTable registerNib:[UINib nibWithNibName:@"HXdealrecordCell" bundle:nil] forCellReuseIdentifier:@"HXdealrecordCell"];
+    [self getData];
 }
+- (void)getData{
 
+  [[[HXConsumptionAPI getConsumptionData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+      HXConsumptionModel *api = [HXConsumptionModel new];
+      self.consumptionModel = [api.class mj_objectWithKeyValues:responseObject];
+      [self.dealRecordTable reloadData];
+  }];
+
+}
 #pragma mark --- tableView delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -43,7 +53,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return self.consumptionModel.varList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

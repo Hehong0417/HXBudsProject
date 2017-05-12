@@ -61,6 +61,11 @@
                     <constraint firstItem="f65-M3-cbw" firstAttribute="top" secondItem="xl2-SM-FWU" secondAttribute="bottom" constant="8" id="yPi-rh-USw"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="ctimeLab" destination="f65-M3-cbw" id="GMF-FD-V1N"/>
+                <outlet property="titleLab" destination="xl2-SM-FWU" id="pTe-90-pHQ"/>
+                <outlet property="tran_money" destination="ujy-NT-tAE" id="mLn-TA-1OO"/>
+            </connections>
             <point key="canvasLocation" x="25" y="51.5"/>
         </tableViewCell>
     </objects>

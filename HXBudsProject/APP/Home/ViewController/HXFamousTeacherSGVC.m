@@ -8,7 +8,7 @@
 
 #import "HXFamousTeacherSGVC.h"
 #import "SGSegmentedControl.h"
-#import "HXOrganizationVC.h"
+#import "HXFamousTeacherVC.h"
 
 @interface HXFamousTeacherSGVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
 @property(nonatomic,strong)SGSegmentedControl *SG;
@@ -70,7 +70,7 @@
     
     for (NSInteger i = 0; i<3; i++) {
         
-        HXOrganizationVC *vc = [HXOrganizationVC new];
+        HXFamousTeacherVC *vc = [HXFamousTeacherVC new];
         [self addChildViewController:vc];
     }
 

@@ -53,6 +53,9 @@
                 <constraint firstItem="J4F-y9-pxT" firstAttribute="top" secondItem="uD9-Hi-9YF" secondAttribute="bottom" id="u6r-e6-WDO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="balanceLabel" destination="J4F-y9-pxT" id="tg5-oB-Wuz"/>
+            </connections>
             <point key="canvasLocation" x="-0.5" y="-177"/>
         </view>
     </objects>

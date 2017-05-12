@@ -12,20 +12,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HXvideoCollectionCell">
-            <rect key="frame" x="0.0" y="0.0" width="165" height="160"/>
+            <rect key="frame" x="0.0" y="0.0" width="165" height="165"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="165" height="160"/>
+                <rect key="frame" x="0.0" y="0.0" width="165" height="165"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01" translatesAutoresizingMaskIntoConstraints="NO" id="U1q-rb-rDz">
-                        <rect key="frame" x="0.0" y="0.0" width="165" height="80"/>
+                        <rect key="frame" x="0.0" y="0.0" width="165" height="84"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="80" id="daQ-Zw-mDU"/>
+                            <constraint firstAttribute="height" constant="84" id="daQ-Zw-mDU"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图图老师教你学绘画" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkQ-XX-BbN">
-                        <rect key="frame" x="0.0" y="83" width="165" height="22"/>
+                        <rect key="frame" x="0.0" y="84" width="165" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="9GE-Ys-cWF"/>
                         </constraints>
@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="178人看过" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omX-bf-aRG">
-                        <rect key="frame" x="4" y="108" width="72" height="25"/>
+                        <rect key="frame" x="4" y="109" width="72" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="AXv-kU-sRA"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="72" id="a3Y-3D-YDl"/>
@@ -44,7 +44,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7人评论过" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0e-wM-w9E">
-                        <rect key="frame" x="78" y="108" width="79" height="25"/>
+                        <rect key="frame" x="78" y="109" width="79" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="79" id="Ceq-RX-ZdO"/>
                             <constraint firstAttribute="height" constant="25" id="jBf-Fk-qGL"/>
@@ -54,7 +54,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图图老师" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mE-1t-vb3">
-                        <rect key="frame" x="46" y="135" width="111" height="25"/>
+                        <rect key="frame" x="46" y="136" width="111" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="111" id="Q58-9N-CCw"/>
                             <constraint firstAttribute="height" constant="25" id="wmc-hc-b7q"/>
@@ -64,7 +64,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rl0-Va-ji4">
-                        <rect key="frame" x="5" y="135" width="25" height="25"/>
+                        <rect key="frame" x="5" y="136" width="25" height="25"/>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="BPT-8l-NYX"/>
@@ -83,7 +83,7 @@
                 <constraint firstItem="5mE-1t-vb3" firstAttribute="top" secondItem="U0e-wM-w9E" secondAttribute="bottom" constant="2" id="Sxc-3k-S9y"/>
                 <constraint firstItem="5mE-1t-vb3" firstAttribute="leading" secondItem="rl0-Va-ji4" secondAttribute="trailing" constant="16" id="Xym-fv-4aG"/>
                 <constraint firstItem="pkQ-XX-BbN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cYL-L5-DQu"/>
-                <constraint firstItem="pkQ-XX-BbN" firstAttribute="top" secondItem="U1q-rb-rDz" secondAttribute="bottom" constant="3" id="fvu-Jg-qsh"/>
+                <constraint firstItem="pkQ-XX-BbN" firstAttribute="top" secondItem="U1q-rb-rDz" secondAttribute="bottom" id="fvu-Jg-qsh"/>
                 <constraint firstAttribute="trailing" secondItem="5mE-1t-vb3" secondAttribute="trailing" constant="8" id="kUr-hc-9oW"/>
                 <constraint firstAttribute="trailing" secondItem="pkQ-XX-BbN" secondAttribute="trailing" id="prt-oq-Pv7"/>
                 <constraint firstItem="omX-bf-aRG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="qEq-SK-ihO"/>
@@ -98,7 +98,7 @@
                 <outlet property="videoTitleLab" destination="pkQ-XX-BbN" id="vaL-xX-ab4"/>
                 <outlet property="viewsLab" destination="omX-bf-aRG" id="KTW-sm-b78"/>
             </connections>
-            <point key="canvasLocation" x="25.5" y="52"/>
+            <point key="canvasLocation" x="25.5" y="51.5"/>
         </collectionViewCell>
     </objects>
     <resources>

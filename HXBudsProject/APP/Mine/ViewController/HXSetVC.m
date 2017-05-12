@@ -8,7 +8,10 @@
 
 #import "HXSetVC.h"
 #import "HXAccountSecutityVC.h"
+#import "HXIsLoginAPI.h"
+#import "HXLoginVC.h"
 @interface HXSetVC ()
+@property (nonatomic, assign) BOOL isLogin;
 
 @end
 
@@ -26,6 +29,21 @@
     [exitBtn lh_setCornerRadius:3 borderWidth:1 borderColor:kRedColor];
     [footView addSubview:exitBtn];
     self.tableV.tableFooterView = footView;
+    
+    HJLoginModel *loginModel = [HJUser sharedUser].pd;
+    [[[HXIsLoginAPI isLoginWithToken:loginModel.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
+        NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
+        if ([isLoginStr isEqualToString:@"no"]) {
+            self.isLogin = NO;
+        }else {
+            self.isLogin = YES;
+        }
+        if (error) {
+            self.isLogin = NO;
+        }
+    }];
+
     
 }
 - (NSArray *)groupTitles {
@@ -46,9 +64,14 @@
 
     if (indexPath.row == 0) {
         
-        HXAccountSecutityVC *vc = [HXAccountSecutityVC new];
-        [self.navigationController pushVC:vc];
+        if (self.isLogin) {
+            HXAccountSecutityVC *vc = [HXAccountSecutityVC new];
+            [self.navigationController pushVC:vc];
+        }else{
+            HXLoginVC *vc = [HXLoginVC new];
+            [self.navigationController pushVC:vc];
         
+        }
     }
 }
 - (void)exitBtnAction{

@@ -11,5 +11,6 @@
 @interface HXAccountHead : UIView
 
 + (instancetype)initWithAccountHeadWithXib;
+@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
 
 @end

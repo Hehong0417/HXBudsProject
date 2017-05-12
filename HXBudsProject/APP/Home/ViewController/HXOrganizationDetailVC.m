@@ -44,14 +44,68 @@
     self.view.backgroundColor = kWhiteColor;
     self.organizationHeadView.nav = self.navigationController;
     [self.view addSubview:self.organizationHeadView];
+    //关注
+    [self.organizationHeadView.attentionBtn addTarget:self action:@selector(attentionBtnAction:) forControlEvents:UIControlStateNormal];
+    
     
     // 1.添加所有子控制器
     [self setupChildViewController];
     
     [self setupSegmentedControl];
     
+    switch (self.detailType) {
+        case teacherDetailType:{
+          //名师详情
+            [self getTeacherDetailData];
+        }
+            break;
+        case organizationType:{
+            //机构详情
+            
+        }
+            break;
+        default:
+            break;
+    }
     
 }
+- (void)getTeacherDetailData {
+    
+    [[[HXTeacherDetailAPI getTeacherDetailWithTeacherId:self.teacher_Id users_id:nil]netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        
+        HXTeacherDetailModel *api = [HXTeacherDetailModel new];
+        self.teacherDetailModel = [api.class mj_objectWithKeyValues:responseObject];
+        
+        self.organizationHeadView.pdModel = self.teacherDetailModel.pd;
+        
+    }];
+    
+}
+- (void)attentionBtnAction:(UIButton *)button {
+
+    
+
+    if (self.isLogin) {
+        
+//        [self followRequestfollowed:followed];
+  
+    }else {
+    
+    
+    
+    }
+
+}
+//- (void)followRequest:(NSInteger )row followed:(BOOL)followed{
+//    
+//    
+//    HXteacherVarListModel *model = self.teacherListModel.varList[row];
+//    
+//    [[[HXFollowAPI followTeacherWiththeteacherId:model.theteacher_id state:followed?@"1":@"0"] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+//        
+//    }];
+//    
+//}
 
 - (void)setupSegmentedControl {
     

@@ -9,17 +9,33 @@
 #import "HXFamousTeacherVC.h"
 #import "HXOrganizationCell.h"
 #import "HXOrganizationDetailVC.h"
-@interface HXFamousTeacherVC ()<UITableViewDelegate,UITableViewDataSource>
+#import "HXTeacherListAPI.h"
+#import "HXIsLoginAPI.h"
+#import "HXTeacherListModel.h"
 
+
+@interface HXFamousTeacherVC ()<UITableViewDelegate,UITableViewDataSource>
+{
+    
+    BOOL isLogin;
+}
 @property (nonatomic, strong)   UITableView *teacherListTable;
+@property (nonatomic, strong) HXTeacherListModel *teacherListModel;
 
 @end
 
 @implementation HXFamousTeacherVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    [self getTeacherList];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"推荐机构";
+    self.title = @"推荐名师";
     
     //tableView
     self.teacherListTable = [[UITableView alloc]initWithFrame:CGRectMake(0,WidthScaleSize_H(44), SCREEN_WIDTH, SCREEN_HEIGHT- 64 - WidthScaleSize_H(44)) style:UITableViewStylePlain];
@@ -28,6 +44,34 @@
     self.teacherListTable.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.teacherListTable];
     
+}
+- (void)getTeacherList{
+    
+    //判断是否登录
+    HJUser *user = [HJUser sharedUser];
+    [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
+        if (error) {
+            isLogin = NO;
+        }
+        NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
+        if ([isLoginStr isEqualToString:@"no"]) {
+            isLogin = NO;
+        }else {
+            isLogin = YES;
+        }
+        
+        [[[HXTeacherListAPI getTeacherListWithWithLimit:@10 isLogin:isLogin] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+            
+            HXTeacherListModel *api = [HXTeacherListModel new];
+            
+            self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
+            
+            [self.teacherListTable reloadData];
+            
+        }];
+        
+    }];
 }
 
 #pragma mark --- tableView delegate
@@ -39,14 +83,16 @@
         cell = [HXOrganizationCell initOrganizationCellWithXib];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    cell.teacherModel = self.teacherListModel.varList[indexPath.row];
+
     return cell;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+  return self.teacherListModel.varList.count;
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -59,6 +105,9 @@
     
     
     HXOrganizationDetailVC *detailVC = [[HXOrganizationDetailVC alloc]init];
+    HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
+    detailVC.teacher_Id = model.theteacher_id;
+    detailVC.isLogin = isLogin;
     detailVC.detailType = teacherDetailType;
 
     [self.navigationController pushViewController:detailVC animated:YES];

@@ -26,9 +26,11 @@
 #import "HXMineLearnCell.h"
 #import "HXMyProductVC.h"
 #import "HXSetVC.h"
+#import "HXPersonInfoVC.h"
+#import "HXWXPayAPI.h"
+#import "WXApi.h"
 
-
-@interface HXPersonCenterVC ()
+@interface HXPersonCenterVC ()<WXApiDelegate>
 //@property (nonatomic, strong) HXTeacherDetailModel *teacherDetailModel;
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, strong) HXMineLoginHeadView *mineHeadView;
@@ -96,7 +98,6 @@
 }
 - (void)isNoLoginState{
 
-  
     self.tableV.tableHeaderView = self.NoLoginMineHeadView;
 
 }
@@ -107,12 +108,12 @@
 //      self.mineHeadView.model = self.teacherDetailModel.pd;
         WEAK_SELF();
         [self.mineHeadView setTapActionWithBlock:^{
-
-            HXMyLikeVC *vc = [HXMyLikeVC new];
-            vc.titleStr = @"我的主页";
-            vc.dynamicType = mineDynamicType;
-            HJUser *user = [HJUser sharedUser];
-            vc.users_id = user.pd.users_id;
+            HXPersonInfoVC *vc = [HXPersonInfoVC new];
+//            HXMyLikeVC *vc = [HXMyLikeVC new];
+//            vc.titleStr = @"我的主页";
+//            vc.dynamicType = mineDynamicType;
+//            HJUser *user = [HJUser sharedUser];
+//            vc.users_id = user.pd.users_id;
             [weakSelf.navigationController pushVC:vc];
         }];
 }
@@ -181,20 +182,20 @@
 }
 - (void)myAccountAction {
     
-//    if (self.isLogin) {
+    if (self.isLogin) {
         HXMyAccountInfoVC *vc = [HXMyAccountInfoVC new];
         [self.navigationController pushVC:vc];
         return;
-//    }
+    }
     
 }
 - (void)myMessageAction {
     
-//    if (self.isLogin) {
+    if (self.isLogin) {
         HXMesssageOneVC *vc = [HXMesssageOneVC new];
         [self.navigationController pushVC:vc];
         return;
-//    }
+    }
     
 }
 
@@ -206,8 +207,41 @@
         
     }else if (indexPath.section == 2){
         
+//        [[[HXWXPayAPI wxPayWithopcash:@"1" wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+//            
+//            [self payWithResponse:responseObject];
+//            
+//        }];
         [self.navigationController pushVC:[HXSetVC new]];
     }
+}
+- (void)payWithResponse:(NSDictionary *)response{
+
+    PayReq * req = [[PayReq alloc] init];
+    req.partnerId           = @"";
+    req.prepayId            = response[@"pd"][@"prepay_id"];
+    req.nonceStr            = response[@"pd"][@"nonceStr"];
+    NSString *timeStamp = response[@"pd"][@"timeStamp"];
+    req.timeStamp           = timeStamp.floatValue;
+    req.package             = response[@"pd"][@"package"];
+    req.sign                = response[@"pd"][@"finalsign"];
+    BOOL success =  [WXApi sendReq:req];
+    //日志输出
+    NSLog(@"partid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\n sign=%@",req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+        NSLog(@"success--%d",success);
+
+
+
+
+}
+//微信支付回调
+- (void)onResp:(BaseResp *)resp  {
+    
+    
+    
+    
+    
+    
 }
 - (void)updatePersonCenter {
 

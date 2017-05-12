@@ -35,7 +35,7 @@
 #import "HJUser.h"
 
 //
-#define article_detail_url  @"http://192.168.0.102/my/menya/Mengya/"
+#define article_detail_url  @"http://192.168.0.110/my/menya/Mengya/"
 
 
 /**
@@ -52,15 +52,14 @@
 #define API_IS_LOGIN API_SUB_URL(@"users/isLogin")
 //1.3微信登录
 #define API_WX_LOGIN API_SUB_URL(@"users/wxlogin")
-
-
 //1.获取验证码
 #define API_GET_VERIFY_CODE API_SUB_URL(@"users/sms")//*
+//1.2忘记密码
+#define API_GET_FORGET_PWD API_SUB_URL(@"users/forgetPwd")
+//1.2修改密码
+#define API_GET_EDIT_PWD API_SUB_URL(@"users/editPwd")
 
 
-
-//1.2找回密码（重置）
-#define API_GET_BACK_PWD API_SUB_URL(@"user/getBackPwd.do")
 
 
 //1.5QQ绑定手机号
@@ -148,7 +147,7 @@
 //6.1用户头像上传
 #define API_media_upload API_SUB_URL(@"userdetails/media_upload")
 //2.4交易记录
-#define API_GET_TRANSACTION  API_SUB_URL(@"consumption/ list_anon")
+#define API_GET_TRANSACTION  API_SUB_URL(@"consumption/list_anon")
 //2.4关注的老师列表
 #define API_GET_followTheteacher  API_SUB_URL(@"myinformation/followTheteacher")
 //2.4关注的用户列表
@@ -172,5 +171,5 @@
 
 //七、支付
 //7.1支付订单
-#define API_GET_PAY_CHARGE  API_SUB_URL(@"alipay/getPayCharge.do")
+#define API_GET_PAY_CHARGE  API_SUB_URL(@"app/wxtopay/wxtopay_anon")
 

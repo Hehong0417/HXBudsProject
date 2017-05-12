@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jx4-ng-1Nl">
@@ -69,6 +69,8 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="iconImagV" destination="jx4-ng-1Nl" id="k52-0z-DNR"/>
+                <outlet property="introduceLab" destination="O17-rN-jhh" id="BwI-ie-2cR"/>
+                <outlet property="teacherNameLab" destination="Bfd-tb-0Gb" id="TTa-1h-F6E"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="52"/>
         </tableViewCell>
