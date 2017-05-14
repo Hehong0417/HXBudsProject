@@ -18,6 +18,8 @@
 
     HXAccountHead *headView;
 }
+@property (strong, nonatomic)  NSString *balance;
+
 
 @end
 
@@ -43,8 +45,9 @@
 
   [[[HXMyAssetAPI getMyAsset] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
      
-      headView.balanceLabel.text = [NSString stringWithFormat:@"￥%@.00",responseObject[@"balance"]] ;
-      
+      headView.balanceLabel.text = [NSString stringWithFormat:@"￥%@",responseObject[@"pd"][@"balance"]];
+      self.balance = [NSString stringWithFormat:@"%@",responseObject[@"pd"][@"balance"]] ;
+      [self.tableView reloadData];
   }];
 
 }
@@ -67,6 +70,7 @@
     if (indexPath.section == 0) {
         
         HXBalanceRechargeVC *vc = [[HXBalanceRechargeVC alloc]initWithNibName:@"HXBalanceRechargeVC" bundle:nil];
+        vc.balance = self.balance;
         [self.navigationController pushVC:vc];
         
     }else {

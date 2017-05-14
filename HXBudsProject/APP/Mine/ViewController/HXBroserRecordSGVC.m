@@ -10,6 +10,8 @@
 #import "SGSegmentedControl.h"
 #import "HXBrowserRecordArticleVC.h"
 #import "HXBroserRecordVideoVC.h"
+#import "HXMyArticleAPI.h"
+
 
 @interface HXBroserRecordSGVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
 

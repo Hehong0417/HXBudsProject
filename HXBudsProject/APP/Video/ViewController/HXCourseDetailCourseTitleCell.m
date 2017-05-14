@@ -50,7 +50,7 @@
     for (UIView *view in self.starView.subviews) {
         if ([view isKindOfClass:[UIImageView class]]) {
             UIImageView *iconImgV = (UIImageView *)view;
-            [iconImgV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(pdModel.The_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+            [iconImgV sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(pdModel.The_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
         }
         if ([view isKindOfClass:[UILabel class]]) {
              UILabel *teacherNameLab = (UILabel *)view;

@@ -96,6 +96,8 @@
     HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
     vc.curriculum_id = model.curriculum_id;
     vc.playImageStr = model.curr_picture;
+    vc.curriculum_price = model.curriculum_price;
+    vc.charge_status_text = model.charge_status_text;
     [self.navigationController pushVC:vc];
     
 }

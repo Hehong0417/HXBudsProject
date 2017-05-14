@@ -10,4 +10,7 @@
 
 @interface HXInstrumentVC : UIViewController
 
+@property(nonatomic,copy) NSString *teachingtype_id;
+@property(nonatomic,copy) NSString *type_name;
+
 @end

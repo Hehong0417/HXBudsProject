@@ -68,13 +68,15 @@
     }
     self.viewsLab.text = [NSString stringWithFormat:@"%@人看过",read];
     self.commentLab.text = [NSString stringWithFormat:@"%@人评论过",comment];
-    [self.videoIconImgV  sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    [self.videoIconImgV  sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
     
     [self.videoImagV setTapActionWithBlock:^{
         
         HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
         vc.curriculum_id = model.curriculum_id;
         vc.playImageStr = model.curr_picture;
+        vc.curriculum_price = model.curriculum_price;
+        vc.charge_status_text = model.charge_status_text;
         [self.nav pushVC:vc];
     }];
     [self.videoTitleLab setTapActionWithBlock:^{
@@ -82,6 +84,8 @@
         HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
         vc.curriculum_id = model.curriculum_id;
         vc.playImageStr = model.curr_picture;
+        vc.curriculum_price = model.curriculum_price;
+        vc.charge_status_text = model.charge_status_text;
         [self.nav pushVC:vc];
         
     }];

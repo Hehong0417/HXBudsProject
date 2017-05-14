@@ -22,5 +22,11 @@
     return [[[NSBundle mainBundle]loadNibNamed:@"HXMessageCell" owner:self options:nil]lastObject];
 
 }
+- (void)setModel:(HXMyMessageVarlistModel *)model {
+
+    _model = model;
+
+
+}
 
 @end

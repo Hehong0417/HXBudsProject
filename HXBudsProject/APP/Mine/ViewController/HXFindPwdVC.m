@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"修改密码";
+    self.title = @"找回密码";
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -82,6 +82,7 @@
     cell.leftTextLabel.text = self.leftTitleArr[indexPath.row];
     if (indexPath.row == 0) {
         cell.textFiled.rightView = [UILabel lh_labelWithFrame:CGRectMake(0, 0, 80, 44) text:@"中国大陆+86" textColor:kBlackColor font:FONT(14) textAlignment:NSTextAlignmentCenter backgroundColor:kWhiteColor];
+        cell.textFiled.rightViewMode = UITextFieldViewModeAlways;
         cell.textFiled.secureTextEntry = NO;
         cell.textFiled.delegate = self;
 
@@ -93,6 +94,8 @@
         [self.verifyCodeBtn setTitleColor:kGrayColor forState:UIControlStateNormal];
         [self.verifyCodeBtn lh_setCornerRadius:5 borderWidth:1 borderColor:kGrayColor];
         cell.textFiled.rightView = self.verifyCodeBtn;
+        cell.textFiled.rightViewMode = UITextFieldViewModeAlways;
+        
         cell.textFiled.secureTextEntry = NO;
 
     }else{

@@ -7,12 +7,15 @@
 //
 
 #import "HXMyProductVC.h"
-#import "HXArticleCellTwo.h"
+#import "HXMyArticleCell.h"
 #import "HXArticleDetailVC.h"
+#import "HXMyArticleAPI.h"
+
 
 @interface HXMyProductVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong) HXHomeInfoArticleModel *infoArticleListModel;
 
 @end
 
@@ -30,7 +33,22 @@
     [self.view addSubview:self.tableView];
     
     
+    [self getMyproductData];
 }
+- (void)getMyproductData{
+
+    [[[HXMyArticleAPI getMyArticleData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        
+        HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
+        
+        self.infoArticleListModel = [api.class mj_objectWithKeyValues:responseObject];
+        
+        [self.tableView reloadData];
+    }];
+
+
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -40,7 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 2;
+    return self.infoArticleListModel.varList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -56,19 +74,21 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 135;
+    return 90;
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    HXArticleCellTwo *cell = [tableView dequeueReusableCellWithIdentifier:@"HXArticleCellTwo"];
+    HXMyArticleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXMyArticleCell"];
     if(!cell){
         
-        cell = [HXArticleCellTwo initArticleCellTwoWithXib];
+        cell = [HXMyArticleCell initMyArticleCellWithXib];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
+    HXInfoArticleListModel *InfoArticleModel = self.infoArticleListModel.varList[indexPath.row];
+    cell.model = InfoArticleModel;
+
     return cell;
     
 }

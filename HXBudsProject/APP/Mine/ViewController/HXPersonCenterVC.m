@@ -12,7 +12,6 @@
 #import "HXMyAccountInfoVC.h"
 #import "HXMyLikeVC.h"
 #import "HXMineLoginHeadView.h"
-#import "HXMyArticleVC.h"
 #import "HXMyAttentionSGVC.h"
 #import "HXFriendDynamicStateVC.h"
 #import "HXAdviceFaceBackVC.h"
@@ -27,10 +26,8 @@
 #import "HXMyProductVC.h"
 #import "HXSetVC.h"
 #import "HXPersonInfoVC.h"
-#import "HXWXPayAPI.h"
-#import "WXApi.h"
 
-@interface HXPersonCenterVC ()<WXApiDelegate>
+@interface HXPersonCenterVC ()
 //@property (nonatomic, strong) HXTeacherDetailModel *teacherDetailModel;
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, strong) HXMineLoginHeadView *mineHeadView;
@@ -91,7 +88,7 @@
         self.mineHeadView.nameLab.text = responseObject[@"pd"][@"username"];
         NSString *icostr = responseObject[@"pd"][@"headportrait"];
 //        NSLog(@"icostr:%@",kAPIImageFromUrl(icostr));
-        [self.mineHeadView.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(icostr)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+        [self.mineHeadView.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIUserImageFromUrl(icostr)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
         self.tableV.tableHeaderView = self.mineHeadView;
     }];
     
@@ -188,6 +185,8 @@
         return;
     }
     
+        [self pushLoginVC];
+    
 }
 - (void)myMessageAction {
     
@@ -196,7 +195,8 @@
         [self.navigationController pushVC:vc];
         return;
     }
-    
+    [self pushLoginVC];
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -207,42 +207,10 @@
         
     }else if (indexPath.section == 2){
         
-//        [[[HXWXPayAPI wxPayWithopcash:@"1" wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-//            
-//            [self payWithResponse:responseObject];
-//            
-//        }];
         [self.navigationController pushVC:[HXSetVC new]];
     }
 }
-- (void)payWithResponse:(NSDictionary *)response{
 
-    PayReq * req = [[PayReq alloc] init];
-    req.partnerId           = @"";
-    req.prepayId            = response[@"pd"][@"prepay_id"];
-    req.nonceStr            = response[@"pd"][@"nonceStr"];
-    NSString *timeStamp = response[@"pd"][@"timeStamp"];
-    req.timeStamp           = timeStamp.floatValue;
-    req.package             = response[@"pd"][@"package"];
-    req.sign                = response[@"pd"][@"finalsign"];
-    BOOL success =  [WXApi sendReq:req];
-    //日志输出
-    NSLog(@"partid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\n sign=%@",req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
-        NSLog(@"success--%d",success);
-
-
-
-
-}
-//微信支付回调
-- (void)onResp:(BaseResp *)resp  {
-    
-    
-    
-    
-    
-    
-}
 - (void)updatePersonCenter {
 
     [self viewDidLoad];

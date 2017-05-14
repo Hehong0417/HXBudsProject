@@ -29,6 +29,8 @@
 - (HXTabControl *)tabControl {
     if (!_tabControl) {
         _tabControl = [[HXTabControl alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160)];
+        _tabControl.titleStr = @"充值金额";
+        _tabControl.moneyArr = @[@"20",@"50",@"100",@"200",@"300",@"500"];
     }
     return _tabControl;
 }

@@ -45,12 +45,12 @@
     [self.teacherNameLab whc_HeightEqualView:self.teacherIconImagV];
     [self.teacherNameLab whc_LeftSpace:10 toView:self.teacherIconImagV];
     [self.teacherNameLab whc_TopSpace:8];
-    [self.teacherNameLab whc_Width:60];
+    [self.teacherNameLab whc_WidthAuto];
     
     [self.timeLab whc_TopSpace:8];
     [self.timeLab whc_HeightEqualView:self.teacherIconImagV];
     [self.timeLab whc_LeftSpace:15 toView:self.teacherNameLab];
-    [self.timeLab whc_RightSpace:10 toView:self.collectCountLab];
+    [self.timeLab whc_WidthAuto];
     
     [self.collectCountLab whc_TopSpace:8];
     [self.collectCountLab whc_Height:20];
@@ -103,7 +103,7 @@
     switch (self.articleType) {
         case homeArticle:{
             self.subjectLab.whc_WidthAuto();
-            self.collectCountLab.hidden = NO;
+            self.collectCountLab.hidden = YES;
             self.subjectLab.whc_LeftSpace(10);
         }
             break;
@@ -130,13 +130,13 @@
         self.subjectLab.whc_LeftSpace(0);
     }else{
         self.subjectLab.whc_WidthAuto();
-        self.collectCountLab.hidden = NO;
+        self.collectCountLab.hidden = YES;
         self.subjectLab.whc_LeftSpace(10);
     self.subjectLab.text = [NSString stringWithFormat:@"  #%@#  ",model.articletype_name];
     }
     self.timeLab.text = model.ctime;
     
-    [self.teacherIconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    [self.teacherIconImagV sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
     [self.rightIconImgV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.article_cover)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
     self.teacherNameLab.text = model.The_name;
     self.contentLab.text = model.article_title;

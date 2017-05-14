@@ -61,7 +61,7 @@
 }
 - (void)getArticleData{
     
-    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:self.theteacher_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:self.theteacher_id mechanism_id:nil] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         NSLog(@"responseObject--%@",responseObject);
         HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
         

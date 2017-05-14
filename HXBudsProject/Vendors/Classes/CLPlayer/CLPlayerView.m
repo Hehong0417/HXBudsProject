@@ -928,6 +928,7 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
     [_timer invalidate];
     _sliderTimer = nil;
     _timer       = nil;
+    
 }
 //销毁定时消失定时器
 - (void)destroyTimer{

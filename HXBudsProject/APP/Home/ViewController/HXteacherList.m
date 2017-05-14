@@ -13,6 +13,8 @@
 #import "HXIsLoginAPI.h"
 #import "HXFollowAPI.h"
 #import "HXLoginVC.h"
+#import "HXTeacherTeamAPI.h"
+#import "HXTeacherListModel.h"
 
 @interface HXteacherList ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 {
@@ -30,7 +32,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:animated];
-    [self getTeacherList];
+    [self getTeacherTeamList];
 
 }
 
@@ -48,6 +50,15 @@
     [self.view addSubview:self.collectionView];
     [self.collectionView registerNib:[UINib nibWithNibName:@"HXTeacherCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXTeacherCollectionCell"];
     self.view.backgroundColor = kWhiteColor;
+
+}
+
+- (void)getTeacherTeamList{
+  
+    [[[HXTeacherTeamAPI getTeacherTeamWithmechanism_id:self.mechanism_id] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        
+        
+    }];
 
 }
 
@@ -81,15 +92,15 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
         HXTeacherCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXTeacherCollectionCell" forIndexPath:indexPath];
-        cell.teacherModel = self.teacherListModel.varList[indexPath.row];
-      cell.followSelectedBlock = ^(BOOL followed) {
-        if (isLogin) {
-            [self followRequest:indexPath.row followed:followed];
-        }else {
-            
-            [self.navigationController pushVC:[HXLoginVC new]];
-        }
-    };
+//        cell.teacherModel = self.teacherListModel.varList[indexPath.row];
+//      cell.followSelectedBlock = ^(BOOL followed) {
+//        if (isLogin) {
+//            [self followRequest:indexPath.row followed:followed];
+//        }else {
+//            
+//            [self.navigationController pushVC:[HXLoginVC new]];
+//        }
+//    };
         return cell;
 }
 - (void)followRequest:(NSInteger )row followed:(BOOL)followed{
@@ -105,7 +116,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
         
-        return self.teacherListModel.varList.count;
+        return 4;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -123,12 +134,12 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     
-        HXMyLikeVC *vc = [HXMyLikeVC new];
-        HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
-        vc.theteacher_id = model.theteacher_id;;
-        vc.titleStr = @"他的主页";
-        vc.dynamicType = teacherDynamicType;
-        [self.navigationController pushVC:vc];
+//        HXMyLikeVC *vc = [HXMyLikeVC new];
+//        HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
+//        vc.theteacher_id = model.theteacher_id;;
+//        vc.titleStr = @"他的主页";
+//        vc.dynamicType = teacherDynamicType;
+//        [self.navigationController pushVC:vc];
     
 }
 

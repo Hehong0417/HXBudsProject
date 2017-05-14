@@ -58,6 +58,7 @@
     self.SG.titleColorStateNormal = kBlackColor;
     self.SG.titleColorStateSelected = APP_COMMON_COLOR;
 //    self.SG.showsBottomScrollIndicator = YES;
+    self.SG.backgroundColor = kWhiteColor;
     self.SG.indicatorColor = APP_COMMON_COLOR;
     [self.view addSubview:_SG];
 }

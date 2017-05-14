@@ -8,11 +8,13 @@
 
 #import "HXMesssageOneVC.h"
 #import "HXMessageCell.h"
+#import "HXMyMessageAPI.h"
+#import "HXMyMessageModel.h"
 
 @interface HXMesssageOneVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tabView;
-
+@property(nonatomic,strong)HXMyMessageModel *myMessageModel;
 
 @end
 
@@ -27,7 +29,18 @@
     [self.view addSubview:self.tabView];
     self.tabView.showsVerticalScrollIndicator = NO;
     self.tabView.backgroundColor = kWhiteColor;
+    [self getMyMessageData];
+    
+    
+}
+- (void)getMyMessageData {
 
+   [[[HXMyMessageAPI getMyMessage] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+       
+       HXMyMessageModel *api = [HXMyMessageModel new];
+       self.myMessageModel = [api.class mj_objectWithKeyValues:responseObject];
+       [self.tabView reloadData];
+   }];
 }
 #pragma mark --- tableView delegate
 
@@ -38,6 +51,8 @@
             
             cell = [HXMessageCell initMessageCellWithXib];
         }
+        cell.model = self.myMessageModel.varList[indexPath.row];
+    
         return cell;
     
 }
@@ -51,7 +66,7 @@
 //    if (section == 0) {
 //        return 1;
 //    }else{
-        return 3;
+        return self.myMessageModel.varList.count;
 //    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

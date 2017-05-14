@@ -121,6 +121,7 @@
     passWordTextFiled.rightViewMode = UITextFieldViewModeAlways;
     UIButton *forgetPwdBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 80, WidthScaleSize_H(45)) target:self action:@selector(forgetPwd) image:nil];
     [forgetPwdBtn setTitle:@"忘记密码?" forState:UIControlStateNormal];
+    forgetPwdBtn.titleLabel.font = FONT(14);
     passWordTextFiled.rightView = forgetPwdBtn;
     
     [passWordTextFiled mas_makeConstraints:^(MASConstraintMaker *make) {

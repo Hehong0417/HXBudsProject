@@ -10,9 +10,11 @@
 #import "HXSujectVideoListCell.h"
 #import "HXCourseDetailAnotherVC.h"
 #import "HXBroserRecordVideoAPI.h"
-
+#import "HXSubjectVideoAPI.h"
+#import "HXSubjectVideoListModel.h"
 
 @interface HXBroserRecordVideoVC ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
 
 @property(nonatomic,strong)UITableView *tableView;
 
@@ -37,11 +39,19 @@
 }
 - (void)getBroserRecordVideoData{
 
-   [[[HXBroserRecordVideoAPI getBroserRecordVideoData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-      
-       
-   }];
-
+//   [[[HXBroserRecordVideoAPI getBroserRecordVideoData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+//      
+//       
+//   }];
+    
+        [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@5 theteacherId:nil curriculum­­_status:nil isLogin:YES] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+            
+            HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+            
+            self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+            [self.tableView reloadData];
+        }];
+        
 }
 #pragma mark - Table view data source
 
@@ -52,7 +62,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return self.SubjectVideoListModel.varList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -80,9 +90,9 @@
         cell = [HXSujectVideoListCell initSubjectVideoListCellWithXib];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-//    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
-//    cell.model = model;
-    
+    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
+    cell.model = model;
+
     return cell;
 
 }
@@ -90,9 +100,11 @@
     
     
     HXCourseDetailAnotherVC  *vc = [HXCourseDetailAnotherVC new];
-//    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
-//    vc.curriculum_id = model.curriculum_id;
-//    vc.playImageStr = ;
+    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
+    vc.curriculum_id = model.curriculum_id;
+    vc.playImageStr = model.curr_picture;
+    vc.curriculum_price = model.curriculum_price;
+    vc.charge_status_text = model.charge_status_text;
     [self.navigationController pushVC:vc];
     
     

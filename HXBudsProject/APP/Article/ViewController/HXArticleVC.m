@@ -15,6 +15,8 @@
 #import "HXHomeInfoArticleModel.h"
 #import "HXArticleTypeAPI.h"
 #import "HXArticleTypeModel.h"
+#import "HXtestWebView.h"
+
 
 @interface HXArticleVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -43,7 +45,6 @@
     [super viewDidLoad];
     
     self.tabView = [UITableView lh_tableViewWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) tableViewStyle:UITableViewStyleGrouped delegate:self dataSourec:self];
-    self.tabView.backgroundColor = kWhiteColor;
     self.tabView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tabView];
     self.tabView.showsVerticalScrollIndicator = NO;
@@ -51,11 +52,12 @@
 //    NSArray *arr = @[@"#智商·情商#",@"#叶文有话要说#",@"#单田方#",@"#城市#",@"#美女#",@"#社交恐惧#",@"#家庭矛盾#",@"#社交恐惧#",@"#家庭矛盾#"];
 //    [self.subjectArr addObjectsFromArray:arr];
     [self.tabView registerClass:[HXArticleCellOne class] forCellReuseIdentifier:@"HXArticleCellOne"];
-    
+    self.tabView.backgroundColor = kWhiteColor;
+    self.view.backgroundColor = kWhiteColor;
 }
 - (void)getArticleListData {
 
-    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil mechanism_id:nil] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
         
         self.articleModel = [api.class mj_objectWithKeyValues:responseObject];
@@ -116,7 +118,7 @@
     if (section == 0) {
         return 1;
     }else{
-        return self.articleModel.varList.count?self.articleModel.varList.count:2;
+        return self.articleModel.varList.count;
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -208,6 +210,8 @@
         HXArticleDetailVC *vc = [HXArticleDetailVC new];
         vc.articleModel = self.articleModel.varList[indexPath.row];
         [self.navigationController pushVC:vc];
+//        HXtestWebView *vc = [HXtestWebView new];
+//        [self.navigationController pushVC:vc];
         
     }
     

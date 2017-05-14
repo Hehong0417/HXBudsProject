@@ -19,9 +19,9 @@
 - (void)setModel:(HXConsumptionVarListModel *)model {
 
     _model = model;
-//    self.titleLab.text = ;
+    self.titleLab.text = model.descs;
     self.ctimeLab.text = model.ctime;
-    self.tran_money.text = model.tran_money;
+    self.tran_money.text = model.con_money;
 }
 
 @end

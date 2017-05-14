@@ -46,7 +46,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     HXdealrecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXdealrecordCell"];
-    
+    cell.model = self.consumptionModel.varList[indexPath.row];
     return cell;
 }
 

@@ -20,10 +20,9 @@
 
     if (self = [super initWithFrame:frame]) {
         
-        UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 16, 100, 25)];
-        titleLab.text = @"充值金额";
-        [self addSubview:titleLab];
-        self.moneyArr = @[@"20",@"50",@"100",@"200",@"300",@"500"];
+        self.titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 16, 100, 25)];
+        [self addSubview:self.titleLab];
+//        self.moneyArr = @[@"20",@"50",@"100",@"200",@"300",@"500"];
         self.collectionView.frame = CGRectMake(0, 41, SCREEN_WIDTH, frame.size.height - 41);
         self.collectionView.delegate = self;
         self.collectionView.dataSource = self;
@@ -33,6 +32,18 @@
     }
 
     return self;
+}
+- (void)setTitleStr:(NSString *)titleStr {
+
+    _titleStr = titleStr;
+    
+    self.titleLab.text = titleStr;
+    
+}
+- (void)setMoneyArr:(NSArray *)moneyArr {
+
+    _moneyArr = moneyArr;
+    [self.collectionView reloadData];
 }
 - (UICollectionView *)collectionView {
 

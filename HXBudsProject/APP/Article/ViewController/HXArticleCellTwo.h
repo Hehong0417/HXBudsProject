@@ -34,4 +34,5 @@ typedef NS_ENUM(NSUInteger, ArticleType) {
 @property(nonatomic,strong) UINavigationController *nav;
 + (instancetype)initArticleCellTwoWithXib;
 
+
 @end

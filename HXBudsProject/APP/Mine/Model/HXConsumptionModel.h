@@ -15,8 +15,9 @@
 @end
 @interface HXConsumptionVarListModel : BaseModel
 @property(nonatomic,copy) NSString *users_id;
-@property(nonatomic,copy) NSString *tran_money;
+@property(nonatomic,copy) NSString *con_money;
 @property(nonatomic,copy) NSString *transaction_id;
 @property(nonatomic,copy) NSString *ctime;
+@property(nonatomic,copy) NSString *descs;
 
 @end

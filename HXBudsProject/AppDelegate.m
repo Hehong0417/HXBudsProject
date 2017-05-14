@@ -16,7 +16,7 @@
 #define USHARE_DEMO_APPKEY  @"58cb57441061d270900022bd"
 //#define Wechat_AppKey  @"wx6bf938fef8cc9fd2"
 #define Wechat_AppKey  @"wx4a20e81b69eba007"
-#define Wechat_appSecret  @"d53779986a73ddd21367e2034efa5b66"
+#define Wechat_appSecret  @"066849ab40a78ddeb49370b9dcc2a4b4"
 
 #define QQ_AppKey  @"1105821097"
 
@@ -85,7 +85,7 @@
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     [manager setEnable:YES];
     manager.shouldResignOnTouchOutside = YES;
-    manager.enableAutoToolbar =YES; // 控制是否显示键盘上的工具条
+    manager.enableAutoToolbar = NO; // 控制是否显示键盘上的工具条
     manager.keyboardDistanceFromTextField = 50;
     
 }
@@ -93,7 +93,6 @@
 
     //向微信注册wxd930ea5d5a258f4f
     [WXApi registerApp:Wechat_AppKey ];
-
 
 
 }
@@ -200,7 +199,8 @@
         }
         // ----------微信SDK---------
         
-        
+        //微信SDK
+        return [WXApi handleOpenURL:url delegate:self];
         
         //---------------------------
     }

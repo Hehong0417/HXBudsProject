@@ -9,5 +9,11 @@
 #import "HXMyArticleAPI.h"
 
 @implementation HXMyArticleAPI
++(instancetype)getMyArticleData{
+    HXMyArticleAPI *api = [HXMyArticleAPI new];
+    api.subUrl = API_GET_ARTICLE;
+    api.parametersAddToken = YES;
+    return api;
+}
 
 @end

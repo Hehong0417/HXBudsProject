@@ -18,6 +18,7 @@ pod 'DZNEmptyDataSet'
 pod 'FMDB'
 pod 'WordPress-Editor-iOS-Extension'
 pod 'WebViewJavascriptBridge', '~> 5.0'
+pod 'BaiduMapKit' #百度地图SDK
 
 pod 'JPush', '3.0.2'
 pod 'RongCloudIM/IMLib', '~> 2.8.3'

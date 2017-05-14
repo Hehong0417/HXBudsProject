@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "HXTeacherListModel.h"
+#import "HXOrganizationListModel.h"
+
+
 
 @interface HXOrganizationCell : UITableViewCell
 
@@ -18,5 +21,8 @@
 @property (strong, nonatomic)  HXteacherVarListModel *teacherModel;
 @property (weak, nonatomic) IBOutlet UILabel *teacherNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *introduceLab;
+
+
+@property (nonatomic, strong)   HXOrganizationVarListModel *organizationModel;
 
 @end

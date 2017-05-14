@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HXteacherList : UIViewController
+@property (nonatomic,strong)NSString *mechanism_id;
 
 @end

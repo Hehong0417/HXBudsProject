@@ -12,7 +12,10 @@
 #define API_HOST @"http://192.168.0.128:8080"
 // 本地图片
 #define API_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/upload/task"
-//1
+//老师头像图片
+#define API_Teacher_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/theteacher"
+//用户头像图片
+#define API_User_IMAGE_HOST @"http://192.168.0.128:8080"
 
 #define APP_key @"59334e721bcd31"
 #define APP_scode @"15ca7554e8cb486f3b8cbe1fa166c75b"// [NSString md5:[APP_key stringByAppendingString:@"trans"]]
@@ -29,8 +32,14 @@
 
 //图片
 #define kAPIImageFromUrl(url) [[NSString stringWithFormat:@"%@/%@", API_IMAGE_HOST, url]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+//老师头像
+#define kAPITeacherImageFromUrl(url) [[NSString stringWithFormat:@"%@/%@", API_Teacher_IMAGE_HOST, url]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+//用户头像
+#define kAPIUserImageFromUrl(url) [[NSString stringWithFormat:@"%@/%@", API_User_IMAGE_HOST, url]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 
-#define video_testUrl @"http://yycloudvod2109130935.bs2dl.yy.com/djhmZjcyZTExZDRiZmY1Yzg0NzhlM2Q5MWVjZjRhYzY1MTUzNDQxMjM1Mg"
+
+
+#define video_testUrl @"http://1253712797.vod2.myqcloud.com/e8f61ed3vodtransgzp1253712797/863fe8399031868222929787287/f0.f20.mp4"
 
 #import "HJUser.h"
 
@@ -91,6 +100,16 @@
 //5.2 关注
 #define API_GET_FOLLOW_TEACHER API_SUB_URL(@"followteacher/add")//*
 
+//机构列表
+#define API_mechanism_list API_SUB_URL(@"mechanism/list_anon")
+//机构详情
+#define API_mechanism_detail API_SUB_URL(@"mechanism/detail_anon")
+//师资团队
+#define API_teacherteam_list API_SUB_URL(@"teacherteam/list_anon")
+//关注机构
+#define API_followmechanism_add API_SUB_URL(@"followmechanism/add")
+
+
 /**
  *  文章
  */
@@ -103,6 +122,12 @@
 
 //2.4收藏文章
 #define API_collectionarticle API_SUB_URL(@"collectionarticle/add")
+
+//2.4.添加文章评论
+#define API_articlereview_add API_SUB_URL(@"articlereview/add")
+
+
+
 
 
 /**
@@ -137,6 +162,7 @@
 #define API_GET_teachingtype API_SUB_URL(@"teachingtype/list_anon")
 
 
+
 /**
  *  我的
  */
@@ -159,6 +185,10 @@
 //2.4我的资产
 #define API_GET_myAsset API_SUB_URL(@"myinformation/myAsset")
 
+//2.4申请提现
+#define API_GET_withdrawals API_SUB_URL(@"withdrawals/add")
+
+
 
 //2.4系统通知
 #define API_systemnotification API_SUB_URL(@"systemnotification/list_anon")
@@ -166,10 +196,11 @@
 #define API_feedback API_SUB_URL(@"feedback/add")
 
 
-
-
-
 //七、支付
-//7.1支付订单
+//2.4.赞赏
+#define API_appreciation_add API_SUB_URL(@"appreciation/add")
+//2.4.购买课程
+#define API_purchaseCourse_add API_SUB_URL(@"purchasecourse/add")
+//7.1微信支付
 #define API_GET_PAY_CHARGE  API_SUB_URL(@"app/wxtopay/wxtopay_anon")
 

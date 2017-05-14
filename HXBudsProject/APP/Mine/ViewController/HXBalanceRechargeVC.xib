@@ -12,8 +12,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HXBalanceRechargeVC">
             <connections>
                 <outlet property="allWithDrawBtn" destination="L8A-ly-Ctx" id="56F-7E-0Jg"/>
+                <outlet property="commitWithdrawBtn" destination="2ip-I2-cLR" id="Iri-ng-hoE"/>
+                <outlet property="disribLab" destination="vBp-zB-dqr" id="DDq-3C-AQ7"/>
                 <outlet property="moneyTextfield" destination="EUX-dw-Uys" id="4Nu-84-N45"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wechatAccountTextfield" destination="rP8-2v-zpT" id="TXg-zO-Bb9"/>
+                <outlet property="with_moneyTextFiled" destination="EUX-dw-Uys" id="ulu-RE-LHc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -28,9 +32,9 @@
                             <rect key="frame" x="0.0" y="51" width="375" height="160"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提现金额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYh-Mw-XyO">
-                                    <rect key="frame" x="18" y="19" width="139" height="23"/>
+                                    <rect key="frame" x="18" y="19" width="200" height="23"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="139" id="cXi-W2-FSV"/>
+                                        <constraint firstAttribute="width" constant="200" id="cXi-W2-FSV"/>
                                         <constraint firstAttribute="height" constant="23" id="xQr-v0-FhW"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -47,7 +51,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的资产共有￥190，提现收取5%的手续费" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBp-zB-dqr">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBp-zB-dqr">
                                     <rect key="frame" x="18" y="125" width="243" height="27"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="243" id="66m-cH-f37"/>
@@ -57,7 +61,7 @@
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EUX-dw-Uys">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EUX-dw-Uys">
                                     <rect key="frame" x="18" y="55" width="306" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="306" id="dXw-Ku-bvf"/>
@@ -87,6 +91,9 @@
                                     <state key="normal" title="全部提现">
                                         <color key="titleColor" red="0.0078431372550000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="allWithDrawAction:" destination="-1" eventType="touchUpInside" id="qcs-MV-2UK"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -116,23 +123,35 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提现到微信" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIK-c8-tcg">
-                                    <rect key="frame" x="18" y="17" width="139" height="23"/>
+                                    <rect key="frame" x="18" y="17" width="84" height="23"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="23" id="0pl-0n-wf5"/>
-                                        <constraint firstAttribute="width" constant="139" id="DgO-6W-WVH"/>
+                                        <constraint firstAttribute="width" constant="84" id="DgO-6W-WVH"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入你的微信号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rP8-2v-zpT">
+                                    <rect key="frame" x="110" y="17" width="180" height="23"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="180" id="PDZ-pR-nan"/>
+                                    </constraints>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="rP8-2v-zpT" firstAttribute="leading" secondItem="iIK-c8-tcg" secondAttribute="trailing" constant="8" id="7xf-Pn-zKW"/>
                                 <constraint firstItem="v0A-MB-9I5" firstAttribute="top" secondItem="Hem-mM-hFw" secondAttribute="top" constant="5" id="9TX-sh-jfz"/>
                                 <constraint firstAttribute="bottom" secondItem="v0A-MB-9I5" secondAttribute="bottom" constant="-6" id="Nho-nb-z2b"/>
                                 <constraint firstAttribute="height" constant="50" id="Tix-Dg-yCI"/>
+                                <constraint firstItem="rP8-2v-zpT" firstAttribute="bottom" secondItem="iIK-c8-tcg" secondAttribute="bottom" id="UBn-UW-aZb"/>
                                 <constraint firstItem="iIK-c8-tcg" firstAttribute="leading" secondItem="Hem-mM-hFw" secondAttribute="leading" constant="18" id="eKI-lK-zeF"/>
                                 <constraint firstAttribute="trailing" secondItem="v0A-MB-9I5" secondAttribute="trailing" id="ixO-St-nlj"/>
+                                <constraint firstItem="rP8-2v-zpT" firstAttribute="top" secondItem="iIK-c8-tcg" secondAttribute="top" id="mHi-XG-wse"/>
                                 <constraint firstItem="iIK-c8-tcg" firstAttribute="top" secondItem="Hem-mM-hFw" secondAttribute="top" constant="17" id="szg-Bo-Ncf"/>
                             </constraints>
                         </view>

@@ -25,6 +25,7 @@ static const CGFloat kNormalCellHeight = 44;
     
     self.view = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) backColor:kWhiteColor];
     self.tableV = [UITableView lh_tableViewWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT-49) tableViewStyle:UITableViewStyleGrouped delegate:self dataSourec:self];
+    self.tableV.backgroundColor = KVCBackGroundColor;
     [self.view addSubview:self.tableV];
 
 }

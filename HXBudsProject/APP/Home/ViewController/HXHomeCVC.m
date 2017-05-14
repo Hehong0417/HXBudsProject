@@ -67,6 +67,8 @@ BOOL isLogin;
     //精选好课
     [self getFeaturedVideoList];
     
+    //课程类型
+    [self getTeachingTypeList];
 }
 - (void)dispatchRequest {
         
@@ -84,6 +86,7 @@ BOOL isLogin;
         
         HXTeachingTypeListModel *api = [HXTeachingTypeListModel new];
         self.teachingTypeListModel = [api.class mj_objectWithKeyValues:responseObject];
+        
     }];
 
 }
@@ -170,7 +173,7 @@ BOOL isLogin;
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 ) collectionViewLayout:flowout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.collectionView.backgroundColor = KVCBackGroundColor;
+    self.collectionView.backgroundColor = kWhiteColor;
     self.collectionView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.collectionView];
     [self.collectionView registerNib:[UINib nibWithNibName:@"HXvideoCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXvideoCollectionCell"];
@@ -182,7 +185,7 @@ BOOL isLogin;
     [self.collectionView registerClass:[HXVideoSectionHead class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead"];
     [self.collectionView registerClass:[HXSectionFootView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HXSectionFootView"];
     
-    self.view.backgroundColor = kWhiteColor;
+    self.view.backgroundColor = KVCBackGroundColor;
     [self addHeaderRefresh];
     [self addFooterRefresh];
     [self addSearchBtn];
@@ -310,6 +313,9 @@ BOOL isLogin;
         HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
         HXSubjectVideoModel *model = self.JxVideoListModel.varList[indexPath.row];
         vc.curriculum_id = model.curriculum_id;
+        vc.playImageStr = model.curr_picture;
+        vc.curriculum_price = model.curriculum_price;
+        vc.charge_status_text = model.charge_status_text;
         [self.navigationController pushVC:vc];
     
     }

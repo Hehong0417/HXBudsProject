@@ -10,13 +10,13 @@
 #import "HXMyArticleCell.h"
 #import "HXArticleDetailVC.h"
 #import "HXBroserRecordArticleAPI.h"
-
+#import "HXMyArticleAPI.h"
 
 @interface HXBrowserRecordArticleVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
 
-
+@property(nonatomic,strong) HXHomeInfoArticleModel *infoArticleListModel;
 
 @end
 
@@ -41,11 +41,19 @@
 
 - (void)getBroserRcordArticleData{
 
-   [[[HXBroserRecordArticleAPI getBroserRecordArticleData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-      
+//   [[[HXBroserRecordArticleAPI getBroserRecordArticleData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+//      
+//       
+//   }];
+   [[[HXMyArticleAPI getMyArticleData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+       HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
+       
+       self.infoArticleListModel = [api.class mj_objectWithKeyValues:responseObject];
+       
+       [self.tableView reloadData];
        
    }];
-
+    
 }
 
 #pragma mark - Table view data source
@@ -57,7 +65,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return self.infoArticleListModel.varList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -85,7 +93,8 @@
         cell = [HXMyArticleCell initMyArticleCellWithXib];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
+    HXInfoArticleListModel *InfoArticleModel = self.infoArticleListModel.varList[indexPath.row];
+    cell.model = InfoArticleModel;
     return cell;
     
 }

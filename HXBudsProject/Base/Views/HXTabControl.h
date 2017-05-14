@@ -18,5 +18,10 @@ typedef void(^didselectTabControlItem)(NSString *money);
 
 @property(nonatomic,copy)didselectTabControlItem  selectTabControlBlock;
 
+@property(nonatomic,strong)NSString *titleStr;
+
+@property(nonatomic,strong)UILabel *titleLab;
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

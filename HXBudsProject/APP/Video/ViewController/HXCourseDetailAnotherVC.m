@@ -19,7 +19,11 @@
 #import "HXIsSubscribAddAPI.h"
 #import "HXIsLoginAPI.h"
 #import "HXLoginVC.h"
-@interface HXCourseDetailAnotherVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>{
+#import "HXpurchaseCourseAPI.h"
+#import "WXApi.h"
+#import "HXWXPayAPI.h"
+
+@interface HXCourseDetailAnotherVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate,WXApiDelegate>{
     
     
     
@@ -111,10 +115,18 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     self.buyBottomView.addSubscribeBlock = ^{
         //未加入且已登录
         if (!weakSelf.IsAddSubscrib&&weakSelf.isLogin) {
-            [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:weakSelf.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+            
+            //判断是否免费
+            if (![weakSelf.charge_status_text isEqualToString:@"免费"]) {
                 
-                weakSelf.buyBottomView.consultBtn.titleLabel.text = @"已加入";
-            }];
+                [self purchaseCourse:weakSelf.curriculum_price];
+            }else{
+            
+                [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:weakSelf.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+                    
+                    weakSelf.buyBottomView.consultBtn.titleLabel.text = @"已加入";
+                }];
+            }
         }
         //未加入且未登录
         if (!weakSelf.IsAddSubscrib&&!weakSelf.isLogin) {
@@ -130,6 +142,31 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
     
 }
+//购买课程
+- (void)purchaseCourse:(NSString *)curriculum_price{
+    //后台支付接口
+    [[[HXpurchaseCourseAPI purchaseCourseWithCurriculum_id:self.curriculum_id curriculum_price:@"0.01"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        
+        NSString *transaction = responseObject[@"pd"][@"transaction"];
+        if ([transaction isEqualToString:@"ok"]) {
+            //购买成功
+            [SVProgressHUD showInfoWithStatus:@"加入成功"];
+            
+        }else if ([transaction isEqualToString:@"no"]){
+            //余额不足，调用微信支付接口
+            [[[HXWXPayAPI wxPayWithopcash:@"0.01" wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+                
+                [self payWithResponse:responseObject];
+            }];
+        }else{
+            
+            [SVProgressHUD showInfoWithStatus:@"加入失败"];
+        }
+    }];
+
+
+}
+
 //是否加入学习
 - (void)isSubcribeAdd{
 
@@ -191,7 +228,7 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
                 weakSelf.URLString = @"error";
             }
 
-            weakSelf.playerView.url = [NSURL URLWithString: @"http://1253712797.vod2.myqcloud.com/e8f61ed3vodtransgzp1253712797/863fe8399031868222929787287/f0.f20.mp4"];
+            weakSelf.playerView.url = [NSURL URLWithString:video_testUrl];
 //            weakSelf.playerView.url = [NSURL URLWithString:@"http://yycloudvod2109130935.bs2dl.yy.com/djhmZjcyZTExZDRiZmY1Yzg0NzhlM2Q5MWVjZjRhYzY1MTUzNDQxMjM1Mg"];
             
             weakSelf.playerView.vc = weakSelf;
@@ -266,14 +303,40 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 //分享
 - (void)shareAction {
     
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-        // 根据获取的platformType确定所选平台进行下一步操作
-        
-        [self shareVedioToPlatformType:platformType];
-        
-    }];
+//    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+//        // 根据获取的platformType确定所选平台进行下一步操作
+//        
+//        [self shareVedioToPlatformType:platformType];
+//        
+//    }];
+//
     
 }
+
+- (void)payWithResponse:(NSDictionary *)response{
+    
+    PayReq * req = [[PayReq alloc] init];
+    req.partnerId           = response[@"pd"][@"partner"];
+    req.prepayId            = response[@"pd"][@"prepay_id"];
+    req.nonceStr            = response[@"pd"][@"nonceStr"];
+    NSString *timeStamp = response[@"pd"][@"timeStamp"];
+    req.timeStamp           = timeStamp.intValue;
+    req.package             = response[@"pd"][@"package"];
+    req.sign                = response[@"pd"][@"finalsign"];
+    BOOL success =  [WXApi sendReq:req];
+    //日志输出
+    NSLog(@"partid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\n sign=%@",req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+    NSLog(@"success--%d",success);
+    
+}
+//微信支付回调
+- (void)onResp:(BaseResp *)resp  {
+    
+    
+    
+    
+}
+
 //分享到不同平台
 - (void)shareVedioToPlatformType:(UMSocialPlatformType)platformType
 {
@@ -333,9 +396,14 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 
-    self.playerView = nil;
-
+    [self.playerView destroyPlayer];
+    
 }
 
+- (void)dealloc{
+
+    [self.playerView destroyPlayer];
+
+}
 
 @end

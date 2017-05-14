@@ -25,7 +25,7 @@
 - (void)setTeacherModel:(HXteacherVarListModel *)teacherModel {
 
     _teacherModel = teacherModel;
-    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(teacherModel.the_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(teacherModel.the_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
     
     self.teacherNameLab.text = teacherModel.the_name;
     self.introduceLab.text = teacherModel.hobby;
@@ -37,4 +37,23 @@
     self.introduceLab.backgroundColor = introBackgroud;
     self.teacherNameLab.backgroundColor = backgroud;
 }
+
+- (void)setOrganizationModel:(HXOrganizationVarListModel *)organizationModel {
+    _organizationModel = organizationModel;
+    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(organizationModel.mechanism_logo)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    
+    self.teacherNameLab.text = organizationModel.mechanism_name;
+    self.introduceLab.text = organizationModel.mechanism_desc;
+    UIColor *backgroud = organizationModel.mechanism_name ?kWhiteColor:KPlaceHoldColor;
+    if (!organizationModel.mechanism_name) {
+        self.introduceLab.height = 21;
+    }
+    UIColor *introBackgroud = organizationModel.mechanism_desc ?kWhiteColor:KPlaceHoldColor;
+    self.introduceLab.backgroundColor = introBackgroud;
+    self.teacherNameLab.backgroundColor = backgroud;
+
+
+
+}
+
 @end

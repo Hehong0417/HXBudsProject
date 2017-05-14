@@ -8,7 +8,10 @@
 
 #import "HXAccountReChargeVC.h"
 #import "HXAccountReChargeCell.h"
-@interface HXAccountReChargeVC ()<UITableViewDelegate,UITableViewDataSource>
+#import "HXWXPayAPI.h"
+#import "WXApi.h"
+
+@interface HXAccountReChargeVC ()<UITableViewDelegate,UITableViewDataSource,WXApiDelegate>
 
 @property (nonatomic, strong)   UITableView *accountReChargeTable;
 @property (nonatomic, strong)   NSString *money;
@@ -93,10 +96,42 @@
 
 - (void)reChargeAction {
 
+    if (!self.money) {
+        [SVProgressHUD showInfoWithStatus:@"请选择充值金额！"];
+        return;
+    }
     
+    [[[HXWXPayAPI wxPayWithopcash:@"0.01" wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+
+        [self payWithResponse:responseObject];
+
+    }];
     NSLog(@"self.money-%@",self.money);
 
 
 }
 
+- (void)payWithResponse:(NSDictionary *)response{
+    
+    PayReq * req = [[PayReq alloc] init];
+    req.partnerId           = response[@"pd"][@"partner"];
+    req.prepayId            = response[@"pd"][@"prepay_id"];
+    req.nonceStr            = response[@"pd"][@"nonceStr"];
+    NSString *timeStamp = response[@"pd"][@"timeStamp"];
+    req.timeStamp           = timeStamp.intValue;
+    req.package             = response[@"pd"][@"package"];
+    req.sign                = response[@"pd"][@"finalsign"];
+    BOOL success =  [WXApi sendReq:req];
+    //日志输出
+    NSLog(@"partid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\n sign=%@",req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+    NSLog(@"success--%d",success);
+    
+}
+//微信支付回调
+- (void)onResp:(BaseResp *)resp  {
+    
+    
+    
+    
+}
 @end

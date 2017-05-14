@@ -53,6 +53,13 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="curr_picture" destination="BwT-lR-ZgB" id="8sW-5f-3UT"/>
+                <outlet property="curr_title" destination="fUf-el-0M3" id="hgW-Re-fiA"/>
+                <outlet property="curriculum_price" destination="mZ3-e5-fGO" id="uZZ-1S-jcr"/>
+                <outlet property="read" destination="BqU-Nk-SvU" id="7dc-oX-jkC"/>
+                <outlet property="when_long" destination="sDc-Xd-kUr" id="tnR-Df-pi5"/>
+            </connections>
             <point key="canvasLocation" x="48.5" y="59"/>
         </tableViewCell>
     </objects>

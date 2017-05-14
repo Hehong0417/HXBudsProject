@@ -10,10 +10,13 @@
 #import "HXOrganizationCell.h"
 #import "HXOrganizationDetailVC.h"
 #import "HXLoginVC.h"
+#import "HXOrganizationListAPI.h"
+#import "HXOrganizationListModel.h"
 
 @interface HXOrganizationVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)   UITableView *organizationListTable;
+@property (nonatomic, strong)   HXOrganizationListModel *OrganizationListModel;
 
 @end
 
@@ -31,8 +34,20 @@
     self.organizationListTable.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.organizationListTable];
     
+    [self getOrganizationListData];
+    
 }
+- (void)getOrganizationListData{
+ 
+  [[[HXOrganizationListAPI getOrganizationListWithLimit:@"20"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+      
+      HXOrganizationListModel *api = [HXOrganizationListModel new];
+      self.OrganizationListModel = [api.class mj_objectWithKeyValues:responseObject];
+      [self.organizationListTable reloadData];
+      
+  }];
 
+}
 #pragma mark --- tableView delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -43,13 +58,15 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    HXOrganizationVarListModel *model = self.OrganizationListModel.varList[indexPath.row];
+    cell.organizationModel = model;
     return cell;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
-    return 4;
+    return self.OrganizationListModel.varList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -60,10 +77,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-
     HXOrganizationDetailVC *vc = [[HXOrganizationDetailVC alloc]init];
     vc.detailType = organizationType;
-//    HXLoginVC *vc = [HXLoginVC new];
+    HXOrganizationVarListModel *model = self.OrganizationListModel.varList[indexPath.row];
+    vc.organization_Id = model.mechanism_id;
     [self.navigationController pushVC:vc];
 
 

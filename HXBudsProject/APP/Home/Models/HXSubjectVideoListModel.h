@@ -23,7 +23,6 @@
 @property(nonatomic,copy) NSString *the_name;
 @property(nonatomic,copy) NSString *The_headportrait;
 @property(nonatomic,copy) NSString *when_long;
-
-
+@property(nonatomic,copy) NSString *charge_status_text;
 
 @end

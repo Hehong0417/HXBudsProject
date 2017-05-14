@@ -65,7 +65,15 @@
 //            
 //            but.hidden = NO;
 //        }
-        [but addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [but setTapActionWithBlock:^{
+            
+            HXSubjectListTVC *vc = [HXSubjectListTVC new];
+            vc.titleStr = model.articletype_name;
+            vc.articletype_id = model.articletype_id;
+            [self.vc pushVC:vc];
+
+            
+        }];
         [self.contentView addSubview:but];
         
         butX = CGRectGetMaxX(but.frame)+10;
@@ -75,11 +83,5 @@
     }
 
 }
-- (void)btnClick:(UIButton *)btn{
 
-    HXSubjectListTVC *vc = [HXSubjectListTVC new];
-    vc.titleStr = btn.titleLabel.text;
-    [self.vc pushVC:vc];
-
-}
 @end

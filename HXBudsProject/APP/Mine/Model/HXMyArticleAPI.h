@@ -10,6 +10,6 @@
 
 @interface HXMyArticleAPI : BaseAPI
 
-//+(instancetype)getMyArticle
++(instancetype)getMyArticleData;
 
 @end

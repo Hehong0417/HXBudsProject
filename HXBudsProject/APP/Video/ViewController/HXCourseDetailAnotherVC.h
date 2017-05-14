@@ -17,4 +17,8 @@
 
 @property(nonatomic,strong) NSString *playImageStr;
 
+@property(nonatomic,strong) NSString *curriculum_price;
+
+@property(nonatomic,strong) NSString *charge_status_text;
+
 @end

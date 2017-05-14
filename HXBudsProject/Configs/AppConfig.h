@@ -9,8 +9,8 @@
 //公用颜色
 #define JDCommonColor [UIColor colorWithRed:0.478 green:0.478 blue:0.478 alpha:1]
 #define APP_COMMON_COLOR RGB(72, 210, 213)
-//#define KVCBackGroundColor RGB(240, 245, 249)
-#define KVCBackGroundColor RGB(250,250, 250)
+#define KVCBackGroundColor RGB(245, 245, 245)
+//#define KVCBackGroundColor RGB(250,250, 250)
 
 #define KPlaceHoldColor RGB(204, 204, 204)
 

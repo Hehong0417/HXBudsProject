@@ -10,7 +10,10 @@
 
 @interface HXInformationCommentView : UIView
 
-+ (instancetype)initInformationCommentViewWithXib;
-
+@property (strong, nonatomic)  UIButton *backBtn;
+@property (strong, nonatomic)  UITextField *reViewTextField;
+@property (strong, nonatomic)  UIButton *collectionBtn;
+@property (strong, nonatomic)  UIButton *shareBtn;
+@property (strong, nonatomic)  UIButton *sendBtn;
 
 @end

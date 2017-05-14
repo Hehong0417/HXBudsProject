@@ -17,7 +17,6 @@
 
 
 @interface HXVideoCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
-
 @property(nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
 @property (nonatomic, strong) HXSubjectVideoListModel *ArtVideoListModel;
@@ -26,9 +25,9 @@
 
 @implementation HXVideoCVC
 
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     //专题视频
     [self getSubjectVideoListWithCurriculum­­_status:nil completeHandle:^(id responseObject) {
         
@@ -39,17 +38,12 @@
         [self.collectionView reloadData];
         
     }];
-//   //艺术教程
-//    [self getSubjectVideoListWithCurriculum­­_status:@"curriculum-status-ysjc" completeHandle:^(id responseObject) {
-//        
-//        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
-//        
-//        self.ArtVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
-//        
-//        [self.collectionView reloadData];
-//        
-//    }];
-//
+
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+   
     self.title = @"视频";
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49) collectionViewLayout:layout];
@@ -57,16 +51,16 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"HXChoicenessCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXChoicenessCell"];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.collectionView.backgroundColor = kWhiteColor;
     self.collectionView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.collectionView];
-    self.view.backgroundColor = kWhiteColor;
+    self.collectionView.backgroundColor = kWhiteColor;
+    self.view.backgroundColor = KVCBackGroundColor;
     
 }
 
 - (void)getSubjectVideoListWithCurriculum­­_status:(NSString *)curriculum_status completeHandle:(void(^)(id responseObject))completeHandle {
     
-    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@20 theteacherId:nil  curriculum­­_status:curriculum_status  isLogin:NO ] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@20 theteacherId:nil  curriculum­­_status:curriculum_status  isLogin:NO ] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         
         completeHandle(responseObject);
         
@@ -159,7 +153,14 @@
 //    return nil;
 //}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    
+    HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
+    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
+    vc.curriculum_id = model.curriculum_id;
+    vc.playImageStr = model.curr_picture;
+    vc.curriculum_price = model.curriculum_price;
+    vc.charge_status_text = model.charge_status_text;
+    [self.navigationController pushVC:vc];
 
 }
 #pragma mark --- sectionHead delegate
