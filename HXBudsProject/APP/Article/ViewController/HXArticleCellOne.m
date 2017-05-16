@@ -33,7 +33,6 @@
     float butY = 10;
     
     for(int i = 0; i < subjectArr.count; i++){
-        
         //宽度自适应
         HXArticleTypeVarlistModel *model = subjectArr[i];
         

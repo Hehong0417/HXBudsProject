@@ -9,12 +9,15 @@
 #import "HXOrganizationListAPI.h"
 
 @implementation HXOrganizationListAPI
-+ (instancetype)getOrganizationListWithLimit:(NSString*)limit{
++ (instancetype)getOrganizationListWithmechanism_id:(NSString *)mechanism_id Limit:(NSString*)limit{
 
     HXOrganizationListAPI *api = [HXOrganizationListAPI new];
     api.subUrl = API_mechanism_list;
     if (limit) {
         [api.parameters setObject:limit forKey:@"limit"];
+    }
+    if (mechanism_id) {
+        [api.parameters setObject:mechanism_id forKey:@"mechanism_id"];
     }
     api.parametersAddToken = NO;
     

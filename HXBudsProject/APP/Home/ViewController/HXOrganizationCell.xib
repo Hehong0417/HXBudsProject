@@ -36,16 +36,19 @@
                         <color key="textColor" red="0.0078431372550000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如果你无法简洁的表达你的如果你如果你无法简洁的表" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O17-rN-jhh">
-                        <rect key="frame" x="74.5" y="40" width="282.5" height="29"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如果你无法简洁的表达你的如果你如果你无法简洁的表" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O17-rN-jhh">
+                        <rect key="frame" x="75" y="40" width="274" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="Q9T-hL-5Cr"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;15m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHY-rN-0BY">
-                        <rect key="frame" x="274" y="14" width="83" height="21"/>
+                        <rect key="frame" x="274" y="14" width="75" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="83" id="QC9-wI-6ZO"/>
+                            <constraint firstAttribute="width" constant="75" id="QC9-wI-6ZO"/>
                             <constraint firstAttribute="height" constant="21" id="RzU-4I-NQz"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -56,9 +59,9 @@
                 <constraints>
                     <constraint firstItem="Bfd-tb-0Gb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="21b-rl-zfK"/>
                     <constraint firstItem="jx4-ng-1Nl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-1.5" id="4jE-0p-d3Q"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="eHY-rN-0BY" secondAttribute="trailing" constant="10" id="7Hj-e0-lCV"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="eHY-rN-0BY" secondAttribute="trailing" constant="18" id="7Hj-e0-lCV"/>
                     <constraint firstItem="Bfd-tb-0Gb" firstAttribute="leading" secondItem="jx4-ng-1Nl" secondAttribute="trailing" constant="16" id="CAH-iY-fPl"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="O17-rN-jhh" secondAttribute="trailing" constant="10" id="CkW-F4-Wg4"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="O17-rN-jhh" secondAttribute="trailing" constant="18" id="CkW-F4-Wg4"/>
                     <constraint firstItem="O17-rN-jhh" firstAttribute="leading" secondItem="Bfd-tb-0Gb" secondAttribute="leading" id="K2K-gB-V6k"/>
                     <constraint firstItem="O17-rN-jhh" firstAttribute="top" secondItem="eHY-rN-0BY" secondAttribute="bottom" constant="5" id="MyX-vX-ZXZ"/>
                     <constraint firstItem="eHY-rN-0BY" firstAttribute="top" secondItem="Bfd-tb-0Gb" secondAttribute="top" id="Osq-0h-I17"/>
@@ -72,7 +75,7 @@
                 <outlet property="introduceLab" destination="O17-rN-jhh" id="BwI-ie-2cR"/>
                 <outlet property="teacherNameLab" destination="Bfd-tb-0Gb" id="TTa-1h-F6E"/>
             </connections>
-            <point key="canvasLocation" x="24.5" y="52"/>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
         </tableViewCell>
     </objects>
 </document>

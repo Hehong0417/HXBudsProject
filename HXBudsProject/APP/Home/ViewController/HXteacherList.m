@@ -57,42 +57,18 @@
   
     [[[HXTeacherTeamAPI getTeacherTeamWithmechanism_id:self.mechanism_id] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
         
-        
+        HXTeacherListModel *api = [HXTeacherListModel new];
+        self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
+        [self.collectionView reloadData];
     }];
 
 }
 
-- (void)getTeacherList{
-    
-    //判断是否登录
-    HJUser *user = [HJUser sharedUser];
-    [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        
-        
-        NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
-        if ([isLoginStr isEqualToString:@"no"]) {
-            isLogin = NO;
-        }else {
-            isLogin = YES;
-        }
-        
-        [[[HXTeacherListAPI getTeacherListWithWithLimit:@10 isLogin:isLogin] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-            
-            HXTeacherListModel *api = [HXTeacherListModel new];
-            
-            self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
-            
-            [self.collectionView reloadData];
-            
-        }];
-        
-    }];
-}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
         HXTeacherCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXTeacherCollectionCell" forIndexPath:indexPath];
-//        cell.teacherModel = self.teacherListModel.varList[indexPath.row];
+        cell.teacherModel = self.teacherListModel.varList[indexPath.row];
 //      cell.followSelectedBlock = ^(BOOL followed) {
 //        if (isLogin) {
 //            [self followRequest:indexPath.row followed:followed];

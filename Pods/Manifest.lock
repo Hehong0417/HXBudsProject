@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Aspects (1.4.1)
+  - BaiduMapKit (3.3.1)
   - CocoaLumberjack (1.9.2):
     - CocoaLumberjack/Extensions (= 1.9.2)
   - CocoaLumberjack/Core (1.9.2)
@@ -41,9 +42,6 @@ PODS:
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
   - NSObject-SafeExpectations (0.0.2)
-  - RongCloudIM/IMKit (2.8.9):
-    - RongCloudIM/IMLib
-  - RongCloudIM/IMLib (2.8.9)
   - SDCycleScrollView (1.65):
     - SDWebImage (~> 3.7)
   - SDWebImage (3.8.2):
@@ -73,7 +71,6 @@ PODS:
     - UMengUShare/Social/ReducedWeChat
   - UMengUShare/UI (6.4.2):
     - UMengUShare/Core
-  - WebViewJavascriptBridge (5.2.0)
   - WordPress-Editor-iOS-Extension (0.1.5):
     - NSObject-SafeExpectations
     - UIAlertView+Blocks
@@ -92,6 +89,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - Aspects
+  - BaiduMapKit
   - CocoaLumberjack
   - DZNEmptyDataSet
   - FMDB
@@ -103,8 +101,6 @@ DEPENDENCIES:
   - MBProgressHUD
   - MJExtension
   - MJRefresh
-  - RongCloudIM/IMKit (~> 2.8.3)
-  - RongCloudIM/IMLib (~> 2.8.3)
   - SDCycleScrollView
   - SDWebImage
   - SVProgressHUD
@@ -113,13 +109,13 @@ DEPENDENCIES:
   - UMengUShare/Social/Sina
   - UMengUShare/Social/WeChat
   - UMengUShare/UI
-  - WebViewJavascriptBridge (~> 5.0)
   - WordPress-Editor-iOS-Extension
   - YYCategories (~> 0.9.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
+  BaiduMapKit: 9e8ff80bbcfb8f96b4a58b2844d728590dac90ca
   CocoaLumberjack: 628fca2e88ef06f7cf6817309aa405f325d9a6fa
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
@@ -133,19 +129,17 @@ SPEC CHECKSUMS:
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   NSObject-SafeExpectations: 7d7f48df90df4e11da7cfe86b64f45eff7a7f521
-  RongCloudIM: 3ba011d67e5794d66b9723c7160fe1c6fdb9899f
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   UIAlertView+Blocks: a46c99c5144f6c5dbc7d62fd2a0678daceec89a3
   UMengUShare: 740664d1dd5cc2fb2cc3325d61e4b35539aa9c78
-  WebViewJavascriptBridge: a00b2d61252aec5207e3263d46fd0fd3cfaf7895
   WordPress-Editor-iOS-Extension: 7d9ab7af71ba2bdca4c0bd24c8fbe2c60c8fdf83
   WordPress-iOS-Shared: 7ac71b0de427b02df3d3b39bae178073b7a2a2e9
   WordPressCom-Analytics-iOS: ec36976259d733430ba0fc2f8a51765947d2c7ba
   WYPopoverController: a9db25ac2841a686acdc0f3a99bdb21545db32f4
   YYCategories: 3c7e012ac4573b1fc432f9a2eac15109857391d2
 
-PODFILE CHECKSUM: 8173e4b0d6553c365ec6ad972982403878653898
+PODFILE CHECKSUM: 26e277577dc4e9202d5dca26b68442c3f6b43761
 
 COCOAPODS: 1.2.0

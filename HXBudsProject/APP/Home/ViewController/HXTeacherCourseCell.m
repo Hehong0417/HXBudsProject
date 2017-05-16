@@ -22,4 +22,5 @@
     self.comment.text = [NSString stringWithFormat:@"%@人评论过",model.comment?model.comment:@"0"];
     self.read.text = [NSString stringWithFormat:@"%@人看过",model.read?model.read:@"0"];
 }
+
 @end

@@ -11,3 +11,6 @@
 @implementation HXUserInfoModel
 
 @end
+@implementation HXUserInfoPdModel
+
+@end

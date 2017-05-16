@@ -851,7 +851,7 @@
             break;
         case PYSearchResultShowModeEmbed: // 内嵌
             // 添加搜索结果的视图
-           
+            
             [self.view addSubview:self.searchResultController.tableView];
             [self addChildViewController:self.searchResultController];
             break;
@@ -877,13 +877,14 @@
 //    self.baseSearchTableView.hidden = searchText.length;
     // 根据输入文本显示建议搜索条件
     self.searchSuggestionVC.view.hidden = self.searchSuggestionHidden || !searchText.length;
+
     // 放在最上层
     [self.view bringSubviewToFront:self.searchSuggestionVC.view];
     
     // 如果代理实现了代理方法则调用代理方法
-//    if ([self.delegate respondsToSelector:@selector(searchViewController:searchTextDidChange:searchText:)]) {
-//        [self.delegate searchViewController:self searchTextDidChange:searchBar searchText:searchText];
-//    }
+    if ([self.delegate respondsToSelector:@selector(searchViewController:searchTextDidChange:searchText:)]) {
+        [self.delegate searchViewController:self searchTextDidChange:searchBar searchText:searchText];
+    }
 }
 
 - (void)closeDidClick:(UIButton *)sender

@@ -14,7 +14,7 @@
 #import "HXChooseSujectVC.h"
 #import "HXuploadImageAPI.h"
 
-@interface WPViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, WPImageMetaViewControllerDelegate,PYSearchViewControllerDelegate>
+@interface WPViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, WPImageMetaViewControllerDelegate,SearchViewControllerDelegate>
 {
     CGFloat keyboardValue;
     

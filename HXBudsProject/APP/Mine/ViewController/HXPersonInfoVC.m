@@ -12,7 +12,7 @@
 #import "HXModifyUserInfoAPI.h"
 #import "HXUploadIconModel.h"
 #import "HXUserInfoModel.h"
-
+#import "HXeditInfoVC.h"
 
 @interface HXPersonInfoVC ()
 @property(nonatomic,strong)NSMutableArray *testArr;
@@ -27,6 +27,7 @@
 @property(nonatomic,strong)UILabel *ageLabel;
 @property(nonatomic,strong)HXUploadIconModel *uploadIconModel;
 @property(nonatomic,strong)HXUserInfoModel *userModel;
+@property(nonatomic,strong)NSMutableArray *infoArr;
 
 @end
 
@@ -50,8 +51,36 @@
 - (void)getMyInfoData{
     
     [[[HXgetUserInfoAPI getUserInfo] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        HXUserInfoModel *api = [HXUserInfoModel new];
+        self.userModel = [api.class mj_objectWithKeyValues:responseObject];
         
-
+        //昵称
+        HJSettingItem *selectItem1 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] ];
+        selectItem1.detailTitle = self.userModel.pd.nickname?self.userModel.pd.nickname:@"";
+        //手机
+        HJSettingItem *selectItem2 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] ];
+        selectItem2.detailTitle = self.userModel.pd.phone?self.userModel.pd.phone:@"";
+        //姓名
+        HJSettingItem *selectItem3 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] ];
+        selectItem3.detailTitle = self.userModel.pd.username?self.userModel.pd.username:@"";
+        //性别
+        HJSettingItem *selectItem4 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:4 inSection:0] ];
+        NSString *sex;
+                if ([self.userModel.pd.sex isEqualToString:@"2"]) {
+                    sex = @"女";
+                }else if ([self.userModel.pd.sex isEqualToString:@"1"]){
+                    sex = @"男";
+                }else{
+                   sex = @"";
+                }
+        selectItem4.detailTitle = sex?sex:@"";
+        //出生日期
+        HJSettingItem *selectItem5 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] ];
+        selectItem5.detailTitle = self.userModel.pd.age?self.userModel.pd.age:@"0";
+        //个人描述
+        HJSettingItem *selectItem6 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
+        selectItem6.detailTitle = self.userModel.pd.hobby?self.userModel.pd.hobby:@"0";
+        [self.tableV reloadData];
     }];
     
 }
@@ -65,21 +94,41 @@
 
     [self.view endEditing:YES];
     
-    self.hobby = self.introduce.text;
     self.uploadIconModel = [HXUploadIconModel read];
-
-   NSString *validMsg = [self validMsg];
-    if (validMsg) {
-        [SVProgressHUD showInfoWithStatus:validMsg];
-    }else{
-//        
-//    [[[HXModifyUserInfoAPI ModifyUserInfoWithNickname:self.nickName username:self.name phone:self.phone sex:self.sex age:self.age hobby:self.hobby headportrait:self.uploadIconModel.path] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-//        [SVProgressHUD showSuccessWithStatus:@"保存成功"];
-//        [self.navigationController popVC];
-//
-//    }];
     
-    }
+    //昵称
+    HJSettingItem *selectItem1 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] ];
+    NSString *nickName = selectItem1.detailTitle;
+    //手机
+    HJSettingItem *selectItem2 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] ];
+    NSString *phone = selectItem2.detailTitle;
+
+    //姓名
+    HJSettingItem *selectItem3 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] ];
+    NSString *userName = selectItem3.detailTitle;
+    //性别
+    HJSettingItem *selectItem4 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:4 inSection:0] ];
+    NSString *sex = [selectItem4.detailTitle isEqualToString:@"男"]?@"1":@"2";
+
+    //出生日期
+    HJSettingItem *selectItem5 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] ];
+    NSString *birthDay = selectItem5.detailTitle;
+    
+    //个人描述
+    HJSettingItem *selectItem6 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
+    NSString *desc = selectItem6.detailTitle;
+
+//   NSString *validMsg = [self validMsg];
+//    if (validMsg) {
+//        [SVProgressHUD showInfoWithStatus:validMsg];
+//    }else{
+//
+    [[[HXModifyUserInfoAPI ModifyUserInfoWithNickname:nickName username:userName phone:phone sex:sex age:birthDay hobby:desc headportrait:self.uploadIconModel.path] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        [SVProgressHUD showSuccessWithStatus:@"保存成功"];
+        [self.navigationController popVC];
+    }];
+    
+//    }
 
 }
 - (NSString *)validMsg{
@@ -108,29 +157,28 @@
 
 - (NSArray *)groupTitles {
     
-    return @[@[@"头像",@"昵称",@"手机",@"姓名",@"性别",@"出生日期"],@[@""]];
+    return @[@[@"头像",@"昵称",@"手机",@"姓名",@"性别",@"出生日期",@"个人描述"]];
 }
 
 - (NSArray *)groupIcons {
     
-    return @[@[@" ",@" ",@" ",@" ",@" ",@" "],@[@""]];
+    return @[@[@" ",@" ",@" ",@" ",@" ",@" ",@" "]];
     
 }
 
-
+- (NSArray *)indicatorIndexPaths {
+    NSMutableArray *indexpathArr = [NSMutableArray array];
+    for (NSInteger i = 1; i< 7; i++) {
+        NSIndexPath *indexpath = [NSIndexPath indexPathForRow:i inSection:0];
+        [indexpathArr addObject:indexpath];
+    }
+    return indexpathArr;
+}
 - (NSArray *)groupDetials {
     
-    return @[@[@" ",@" ",@" ",@" ",@" ",@" "],@[@""]];
+    return @[@[@" ",@"",@"",@"",@"",@"",@""]];
 }
-- (NSArray *)textFieldCellIndexPaths{
-    
-    NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:1 inSection:0];
-    NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:2 inSection:0];
-    NSIndexPath *indexPath3 = [NSIndexPath indexPathForRow:3 inSection:0];
-    
-    return @[indexPath1,indexPath2,indexPath3];
-    
-}
+
 - (NSIndexPath *)headImageCellIndexPath{
 
     NSIndexPath *indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -139,57 +187,22 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
-        UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-        if (indexPath.row == 4) {
-            self.sexLabel = [[UILabel alloc]initWithFrame:CGRectMake(114, 0, SCREEN_WIDTH-44, WidthScaleSize_H(44))];
-            [cell.contentView addSubview:self.sexLabel];
-        }else if(indexPath.row == 5){
-            self.ageLabel = [[UILabel alloc]initWithFrame:CGRectMake(114, 0, SCREEN_WIDTH-44, WidthScaleSize_H(44))];
-            [cell.contentView addSubview:self.ageLabel];
-        
-        }
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    if (indexPath.row == 0) {
+        [self.cellHeadImageView sd_setImageWithURL:[NSURL URLWithString:kAPIUserImageFromUrl(self.userModel.pd.headportrait)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
+    }
         return cell;
 
-    }else{
-        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        self.introduce = [[IQTextView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, WidthScaleSize_H(100))];
-        self.introduce.font = FONT(14);
-        self.introduce.placeholder = @"个人概述";
-        
-        [cell addSubview:self.introduce];
-        return cell;
-    }
-    
-    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0&&indexPath.row == 0) {
+    if (indexPath.row == 0) {
         
-        return 70;
-
-    }else if (indexPath.section == 1&&indexPath.row == 0){
-    
-        return 100;
+     return 70;
 
     }else{
         
         return  44;
-    }
-}
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    if (section == 1) {
-        UIView *head = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20) backColor:LineLightColor];
-        UILabel *Label = [UILabel lh_labelWithFrame:CGRectMake(15, 0, 100, 20) text:@"个人概述" textColor:FontLightGrayColor font:FONT(13) textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
-        [head addSubview:Label];
-        return head;
-
-    }else{
-   
-     return nil;
-        
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -197,28 +210,60 @@
     return 0.001;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 0.001;
-    }else{
-        return 20;
-    }
+   
+    return 0.001;
+   
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    HXeditInfoVC *vc = [HXeditInfoVC new];
 
-    if (indexPath.row == 4) {
+    if (indexPath.row == 0) {
+        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }else if (indexPath.row == 1){
+        vc.personIntroduce = NO;
+        vc.titleStr = @"昵称";
+        vc.itemBlock = ^(NSString *item) {
+            HJSettingItem *selectItem = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] ];
+            selectItem.detailTitle = item;
+            [self.tableV reloadData];
+        };
+        [self.navigationController pushVC:vc];
+        
+    }else if (indexPath.row == 2){
+        vc.personIntroduce = NO;
+        vc.itemBlock = ^(NSString *item) {
+            HJSettingItem *selectItem = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] ];
+            selectItem.detailTitle = item;
+            [self.tableV reloadData];
+        };
+        vc.titleStr = @"手机";
+        [self.navigationController pushVC:vc];
+    }else if (indexPath.row == 3){
+        vc.personIntroduce = NO;
+        vc.itemBlock = ^(NSString *item) {
+            HJSettingItem *selectItem = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] ];
+            selectItem.detailTitle = item;
+        [self.tableV reloadData];
+        };
+        vc.titleStr = @"姓名";
+        [self.navigationController pushVC:vc];
+    }else if (indexPath.row == 4) {
         //性别
         HXCommonPickView *pickView = [[HXCommonPickView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         pickView.style = HXCommonPickViewStyleSex;
         [pickView showPickViewAnimation:YES];
         
         pickView.completeBlock = ^(NSString *selectedItem){
-            self.sexLabel.text = selectedItem;
+            HJSettingItem *selectItem = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:4 inSection:0] ];
+            selectItem.detailTitle = selectedItem;
             if ([selectedItem isEqualToString:@"男"]) {
                 self.sex = @"1";
             }else if([selectedItem isEqualToString:@"女"]){
                 self.sex = @"2";
             }
+            [self.tableV reloadData];
         };
         
     }else if(indexPath.row == 5){
@@ -228,35 +273,21 @@
         [pickView showPickViewAnimation:YES];
         
         pickView.completeBlock = ^(NSString *selectedItem){
-            self.ageLabel.text = selectedItem;
-            self.age = selectedItem;
+            HJSettingItem *selectItem = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] ];
+            selectItem.detailTitle = selectedItem;
+            [self.tableV reloadData];
         };
     }else{
-    
-        [super  tableView:tableView didSelectRowAtIndexPath:indexPath];
+        vc.personIntroduce = YES;
+        vc.itemBlock = ^(NSString *item) {
+            HJSettingItem *selectItem = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:6 inSection:0] ];
+            selectItem.detailTitle = item;
+            [self.tableV reloadData];
+
+        };
+        vc.titleStr = @"个人描述";
+        [self.navigationController pushVC:vc];
     }
 
-}
-#pragma mark - textFiledDelegate
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
-
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-    if (textField.tag == 1) {
-        self.nickName = textField.text;
-        
-    }
-    if (textField.tag == 2) {
-        self.phone = textField.text;
-    }
-    if (textField.tag == 3) {
-        self.name = textField.text;
-    }
-    
-    
 }
 @end

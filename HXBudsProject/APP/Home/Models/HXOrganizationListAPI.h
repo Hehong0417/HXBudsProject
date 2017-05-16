@@ -9,5 +9,5 @@
 #import "BaseAPI.h"
 
 @interface HXOrganizationListAPI : BaseAPI
-+ (instancetype)getOrganizationListWithLimit:(NSString*)limit;
++ (instancetype)getOrganizationListWithmechanism_id:(NSString *)mechanism_id Limit:(NSString*)limit;
 @end

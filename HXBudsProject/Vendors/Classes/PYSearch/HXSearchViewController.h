@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger, PYSearchResultShowMode) { // 搜索结果显示方式
 
 @end
 
-@protocol PYSearchViewControllerDelegate <NSObject, UITableViewDelegate>
+@protocol SearchViewControllerDelegate <NSObject, UITableViewDelegate>
 
 @optional
 
@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, PYSearchResultShowMode) { // 搜索结果显示方式
 @property (nonatomic, copy) NSString *searchHistoriesCachePath;
 
 /** 代理 */
-@property (nonatomic, weak) id<PYSearchViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<SearchViewControllerDelegate> delegate;
 /** 数据源 */
 @property (nonatomic, weak) id<PYSearchViewControllerDataSource> dataSource;
 

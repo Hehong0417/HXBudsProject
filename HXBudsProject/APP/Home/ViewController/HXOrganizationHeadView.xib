@@ -12,7 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HXOrganizationHeadView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="feE-2i-oIG">
@@ -22,28 +22,32 @@
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NbD-K5-a8a">
-                    <rect key="frame" x="0.0" y="105" width="375" height="90"/>
+                    <rect key="frame" x="0.0" y="105" width="375" height="105"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ttc-nv-9qm">
-                            <rect key="frame" x="280" y="9" width="75" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ttc-nv-9qm">
+                            <rect key="frame" x="280" y="9" width="75" height="26"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="DQA-PH-fZ3"/>
+                                <constraint firstAttribute="height" constant="26" id="DQA-PH-fZ3"/>
                                 <constraint firstAttribute="width" constant="75" id="iP9-oM-Ftg"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="关注">
                                 <color key="titleColor" red="0.0078431372550000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="attentionAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="pHg-xq-RAh"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="Ttc-nv-9qm" firstAttribute="top" secondItem="NbD-K5-a8a" secondAttribute="top" constant="9" id="JV4-iS-ryG"/>
-                        <constraint firstAttribute="height" constant="90" id="LqI-mw-KLu"/>
+                        <constraint firstAttribute="height" constant="105" id="LqI-mw-KLu"/>
                         <constraint firstAttribute="trailing" secondItem="Ttc-nv-9qm" secondAttribute="trailing" constant="20" id="mXn-bJ-cxl"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AAr-ER-vf6">
-                    <rect key="frame" x="0.0" y="202" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="218" width="375" height="44"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add" translatesAutoresizingMaskIntoConstraints="NO" id="VO5-Ne-u8x">
                             <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
@@ -110,11 +114,11 @@
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="专注钢琴20年，培养武术优秀学生" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRC-il-rXN">
-                    <rect key="frame" x="112" y="143" width="172" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="专注钢琴20年，培养武术优秀学生专注钢琴20年专专注钢琴20年，培养武术优秀学生专注钢琴20年专注钢专注钢琴20年，培养武术优秀学生专注钢琴20年专注钢注钢专注钢琴20年，培养武术优秀学生专注钢琴20年专注钢" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRC-il-rXN">
+                    <rect key="frame" x="112" y="145" width="237" height="53"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="16" id="LDr-LI-nTf"/>
-                        <constraint firstAttribute="width" constant="172" id="nv6-B4-BVr"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="LDr-LI-nTf"/>
+                        <constraint firstAttribute="width" constant="237" id="nv6-B4-BVr"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -127,7 +131,7 @@
                 <constraint firstItem="AAr-ER-vf6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7Xp-4H-PPA"/>
                 <constraint firstItem="sCk-i2-e8i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8Lu-Db-wE0"/>
                 <constraint firstAttribute="trailing" secondItem="feE-2i-oIG" secondAttribute="trailing" id="93T-Fi-mAH"/>
-                <constraint firstItem="AAr-ER-vf6" firstAttribute="top" secondItem="NbD-K5-a8a" secondAttribute="bottom" constant="7" id="AiY-FU-gea"/>
+                <constraint firstItem="AAr-ER-vf6" firstAttribute="top" secondItem="NbD-K5-a8a" secondAttribute="bottom" constant="8" id="AiY-FU-gea"/>
                 <constraint firstItem="NbD-K5-a8a" firstAttribute="top" secondItem="feE-2i-oIG" secondAttribute="bottom" id="FXR-cw-aTd"/>
                 <constraint firstAttribute="trailing" secondItem="NbD-K5-a8a" secondAttribute="trailing" id="FaK-Pe-ouK"/>
                 <constraint firstItem="040-o3-sJY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Rhc-VO-IBo"/>
@@ -139,8 +143,9 @@
                 <constraint firstItem="feE-2i-oIG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fJN-ub-lbV"/>
                 <constraint firstItem="040-o3-sJY" firstAttribute="top" secondItem="sCk-i2-e8i" secondAttribute="bottom" constant="2" id="gzo-6z-Adn"/>
                 <constraint firstItem="PRC-il-rXN" firstAttribute="leading" secondItem="tNK-gl-uKR" secondAttribute="leading" id="moe-Hm-tkg"/>
-                <constraint firstItem="PRC-il-rXN" firstAttribute="top" secondItem="tNK-gl-uKR" secondAttribute="bottom" constant="6" id="qZI-zQ-1X5"/>
+                <constraint firstItem="PRC-il-rXN" firstAttribute="top" secondItem="tNK-gl-uKR" secondAttribute="bottom" constant="8" id="qZI-zQ-1X5"/>
                 <constraint firstItem="NbD-K5-a8a" firstAttribute="top" secondItem="feE-2i-oIG" secondAttribute="bottom" id="uIS-c7-9KI"/>
+                <constraint firstAttribute="trailing" secondItem="PRC-il-rXN" secondAttribute="trailing" constant="26" id="zWz-et-byS"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

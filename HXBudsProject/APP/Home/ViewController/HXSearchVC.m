@@ -34,7 +34,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -56,21 +56,21 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    if (indexPath.section == 0) {
-        
+//    if (indexPath.section == 0) {
+    
         return 90;
         
-    }else if(indexPath.section == 1){
-    
-        return 70;
-    }
-    return 0.01;
+//    }else if(indexPath.section == 1){
+//    
+//        return 70;
+//    }
+//    return 0.01;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
-        
+//    if (indexPath.section == 0) {
+    
         HXSearchVideoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXSearchVideoCell"];
         if(!cell){
             
@@ -79,39 +79,39 @@
         }
         
         return cell;
-    }else {
-        HXSearchArticleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXSearchArticleCell"];
-        if(!cell){
-            
-            cell = [HXSearchArticleCell initSearchArticleCellWithXib];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        
-        return cell;
-    }
-    return nil;
+//    }else {
+//        HXSearchArticleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXSearchArticleCell"];
+//        if(!cell){
+//            
+//            cell = [HXSearchArticleCell initSearchArticleCellWithXib];
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        }
+//        
+//        return cell;
+//    }
+//    return nil;
     
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 
-    if (section == 0) {
+//    if (section == 0) {
         return @"视频";
-    }else{
-       return @"文章";
-    }
+//    }else{
+//       return @"文章";
+//    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
-        
+//    if (indexPath.section == 0) {
+    
         HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
         
         [self.navigationController pushVC:vc];
         
-    }else {
-        HXArticleDetailVC *vc = [HXArticleDetailVC new];
-        [self.navigationController pushVC:vc];
-    }
+//    }else {
+//        HXArticleDetailVC *vc = [HXArticleDetailVC new];
+//        [self.navigationController pushVC:vc];
+//    }
     
 }
 

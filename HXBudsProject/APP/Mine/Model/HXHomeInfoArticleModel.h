@@ -29,6 +29,7 @@
 @property(nonatomic,strong) NSString *appreciate;
 @property(nonatomic,strong) NSString *The_name;
 @property(nonatomic,strong) NSString *areward;
-
+@property(nonatomic,strong) NSString *head;
+@property(nonatomic,strong) NSString *name;
 
 @end

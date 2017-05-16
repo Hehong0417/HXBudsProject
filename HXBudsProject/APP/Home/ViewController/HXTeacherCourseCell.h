@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HXSubjectVideoListModel.h"
+
 @interface HXTeacherCourseCell : UICollectionViewCell
 
 @property (strong, nonatomic)  HXSubjectVideoModel *model;

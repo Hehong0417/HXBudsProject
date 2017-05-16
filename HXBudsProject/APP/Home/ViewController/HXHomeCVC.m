@@ -33,9 +33,9 @@
 #import "HXCurriculumTypeCell.h"
 #import "HXSectionFootView.h"
 
-@interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,PYSearchViewControllerDelegate>
+@interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,SearchViewControllerDelegate>
 {
-BOOL isLogin;
+     BOOL isLogin;
   
 }
 @property (nonatomic,strong)UICollectionView *collectionView;
@@ -66,7 +66,7 @@ BOOL isLogin;
     [self getHotVideoList];
     //精选好课
     [self getFeaturedVideoList];
-    
+//    http://192.168.0.128:8080/goaling/curriculum/list_anon?limit=4&recommend_status=recommend-status-jx
     //课程类型
     [self getTeachingTypeList];
 }
@@ -391,8 +391,22 @@ BOOL isLogin;
     
     XYQButton *messageBtn = [XYQButton ButtonWithFrame:CGRectMake(0, 0, 44, 60) imgaeName:@"mail" titleName:@"" contentType:LeftTitleRightImage buttonFontAttributes:[FontAttributes fontAttributesWithFontColor:kWhiteColor fontsize:14] tapAction:^(XYQButton *button) {
         
-        [self.navigationController pushVC:[HXMesssageOneVC new]];
-        
+        //判断是否登录
+        HJUser *user = [HJUser sharedUser];
+        [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+            if (error) {
+                [self.navigationController pushVC:[HXLoginVC new]];
+            }
+            NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
+            if ([isLoginStr isEqualToString:@"no"]) {
+                isLogin = NO;
+                [self.navigationController pushVC:[HXLoginVC new]];
+            }else if([isLoginStr isEqualToString:@"yes"]){
+                isLogin = YES;
+                [self.navigationController pushVC:[HXMesssageOneVC new]];
+            }
+        }];
+
     }];
     UIImage *image2 = [UIImage imageNamed:@"mail"];
     [messageBtn setImage:image2 forState:UIControlStateNormal];
@@ -422,35 +436,35 @@ BOOL isLogin;
         //                    [searchViewController.navigationController pushViewController:[[HXSearchVC alloc] init] animated:YES];
         
     }];
-    //3.设置风格
+//3.设置风格
     searchViewController.hotSearchStyle = PYHotSearchStyleDefault; // 热门搜索风格根据选择
     searchViewController.searchHistoryStyle = PYSearchHistoryStyleDefault;
     // 4. 设置代理
     searchViewController.delegate = self;
-    searchViewController.searchSuggestions = @[@[@"视频1",@"视频2"],@[@"文章1",@"文章2"]];
+    searchViewController.searchSuggestions = @[@[@"视频1",@"视频2"],@[@"视频1",@"视频2"]];
     
     [self.navigationController pushVC:searchViewController];
     
     //****************************//
 
 }
-#pragma mark - PYSearchViewControllerDelegate
-- (void)searchViewController:(HXSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
-{
-    
-    if (searchText.length) { // 与搜索条件再搜索
-        // 根据条件发送查询（这里模拟搜索）
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 搜素完毕
-            // 显示建议搜索结果
-            NSMutableArray *searchSuggestionsM = [NSMutableArray array];
-            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
-                NSString *searchSuggestion = [NSString stringWithFormat:@"搜索建议 %d", i];
-                [searchSuggestionsM addObject:searchSuggestion];
-            }
-            // 返回
-            searchViewController.searchSuggestions = searchSuggestionsM;
-        });
-    }
-}
+#pragma mark - SearchViewControllerDelegate
+//- (void)searchViewController:(HXSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
+//{
+//    
+//    if (searchText.length) { // 与搜索条件再搜索
+//        // 根据条件发送查询（这里模拟搜索）
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 搜素完毕
+//            // 显示建议搜索结果
+//            NSMutableArray *searchSuggestionsM = [NSMutableArray array];
+//            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
+//                NSString *searchSuggestion = [NSString stringWithFormat:@"搜索建议 %d", i];
+//                [searchSuggestionsM addObject:searchSuggestion];
+//            }
+//            // 返回
+//            searchViewController.searchSuggestions = searchSuggestionsM;
+//        });
+//    }
+//}
 
 @end

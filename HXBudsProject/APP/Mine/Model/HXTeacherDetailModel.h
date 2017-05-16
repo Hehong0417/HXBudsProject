@@ -22,5 +22,7 @@
 @property(nonatomic,copy) NSString *followtenum;
 @property(nonatomic,copy) NSString *the_headportrait;
 @property(nonatomic,copy) NSString *hobby;
+@property(nonatomic,copy) NSString *followState;
+@property(nonatomic,copy) NSString *theteacher_id;
 
 @end

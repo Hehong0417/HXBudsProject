@@ -24,8 +24,14 @@
 @property(nonatomic,copy)NSString *imageName;
 @property(nonatomic,assign)NSInteger labFont;
 @property(nonatomic,strong) FontAttributes *btnFontAttributes;
-@property(nonatomic,strong)UILabel *headTitleLab;
 @property(nonatomic,strong)XYQButton *rightBtn;
+//分类图片
+@property(nonatomic,strong)UIImageView *categoryImageV;
+
+@property(nonatomic,strong)UILabel *headTitleLab;
+@property(nonatomic,strong)UILabel *discribLab;
+
+
 @property(nonatomic,weak) id<HXSectionHeadDalegate>delegate;
 
 @property(nonatomic,strong)UINavigationController *nav;

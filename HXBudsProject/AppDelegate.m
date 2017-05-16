@@ -22,6 +22,10 @@
 
 #define Weibo_appKey  @"3921700954"
 #define Weibo_appSecret  @"04b48b094faeb16683c32669824ebdad"
+#define baiduMap_Key  @"Ns6jXZ3k1SUKTk2Tdt15ADXHsy9Qwd88"
+#import "HWNEWfeatureViewController.h"
+
+
 
 //// 引入JPush功能所需头文件
 //#import "JPUSHService.h"
@@ -32,8 +36,11 @@
 //
 //#define JPush_APPKEY  @"58cb57441061d270900022bd"
 
-@interface AppDelegate ()<UIApplicationDelegate,WXApiDelegate>
 
+@interface AppDelegate ()<UIApplicationDelegate,WXApiDelegate>{
+  BMKMapManager* _mapManager;
+    
+}
 @end
 
 @implementation AppDelegate
@@ -53,7 +60,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-
+    
 
     //*************//
     //配置 IQKeyboardManager
@@ -66,26 +73,64 @@
     //支付方式配置
     [self payWayConfig];
     
+    //配置百度地图
+    [self baiduMapConfig];
     
-    
-    //    [self JpushConfigWithOptions:launchOptions];
+    // [self JpushConfigWithOptions:launchOptions];
     
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = kWhiteColor;
+    
+    [self guidancePageConfig];
+    
     [self.window makeKeyAndVisible];
     
-    self.window.rootViewController= [[HJTabBarController alloc]init];
+//    self.window.rootViewController= [[HJTabBarController alloc]init];
 //  self.window.rootViewController= [[HXLoginVC alloc]init];
 
     return YES;
+}
+- (void)guidancePageConfig {
+
+    //**************************************//
+    
+    NSString *key = @"CFBundleVersion";
+    //上一次使用的版本号
+    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    //当前版本号
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[key];
+    //版本号相同直接打开工程
+    if ([currentVersion isEqualToString:lastVersion]) {
+        
+        self.window.rootViewController = [[HJTabBarController alloc]init];
+        
+    }else{
+        
+        self.window.rootViewController = [[HWNEWfeatureViewController alloc]init];
+        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:key];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    //**************************************//
+
+}
+- (void)baiduMapConfig{
+
+    _mapManager = [[BMKMapManager alloc]init];
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [_mapManager start:baiduMap_Key  generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
+
 }
 - (void)IQKeyboardManagerConfig{
     
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     [manager setEnable:YES];
     manager.shouldResignOnTouchOutside = YES;
-    manager.enableAutoToolbar = NO; // 控制是否显示键盘上的工具条
+    manager.enableAutoToolbar = YES; // 控制是否显示键盘上的工具条
     manager.keyboardDistanceFromTextField = 50;
     
 }
@@ -93,7 +138,6 @@
 
     //向微信注册wxd930ea5d5a258f4f
     [WXApi registerApp:Wechat_AppKey ];
-
 
 }
 //- (void)JpushConfigWithOptions:(NSDictionary *)launchOptions{
@@ -210,6 +254,8 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    [BMKMapView willBackGround];//当应用即将后台时调用，停止一切调用opengl相关的操作
+
 }
 
 
@@ -226,6 +272,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [BMKMapView didForeGround];//当应用恢复前台状态时调用，回复地图的渲染和opengl相关的操作
+
 }
 
 

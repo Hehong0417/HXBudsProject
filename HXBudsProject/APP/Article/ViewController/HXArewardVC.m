@@ -171,7 +171,8 @@
                 [SVProgressHUD showSuccessWithStatus:@"打赏成功"];
                 [self.navigationController popVC];
             }else{
-                [SVProgressHUD showSuccessWithStatus:@"打赏失败"];
+                [SVProgressHUD setMinimumDismissTimeInterval:2];
+                [SVProgressHUD showErrorWithStatus:@"打赏失败"];
             
             }
             

@@ -11,6 +11,7 @@
 #import "HXTeacherCourseCell.h"
 #import "HXSubjectVideoAPI.h"
 #import "HXSubjectVideoListModel.h"
+#import "HXOrganizationCourseAPI.h"
 
 
 @interface HXTeacherGroupCourseVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
@@ -59,9 +60,13 @@
 }
 - (void)getOrganizationVideoData {
   
-
-
-
+  [[[HXOrganizationCourseAPI getOrganizationVideoWithmechanism_id:self.mechanism_id Limit:@20] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+      HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+      
+      self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+      [self.collectionView reloadData];
+  }];
+    
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -73,8 +78,7 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
-    
+
     return self.SubjectVideoListModel.varList.count;
     
 }
@@ -82,9 +86,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     HXTeacherCourseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXTeacherCourseCell" forIndexPath:indexPath];
+
     cell.model = self.SubjectVideoListModel.varList[indexPath.row];
+
     return cell;
-    
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{

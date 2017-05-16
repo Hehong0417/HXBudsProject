@@ -52,15 +52,15 @@
     if (!teacherModel.the_name) {
         self.introduceLab.height = 21;
     }
-    if ([teacherModel.followState isEqualToString:@"yes"]) {
-        
-        self.attentionBtn.selected = YES;
-        [self.attentionBtn lh_setCornerRadius:3 borderWidth:0 borderColor:nil];
-
-    }else{
-        self.attentionBtn.selected = NO;
-        [self.attentionBtn lh_setCornerRadius:3 borderWidth:1 borderColor:kLightGrayColor];
-    }
+//    if ([teacherModel.followState isEqualToString:@"yes"]) {
+//        
+//        self.attentionBtn.selected = YES;
+//        [self.attentionBtn lh_setCornerRadius:3 borderWidth:0 borderColor:nil];
+//
+//    }else{
+//        self.attentionBtn.selected = NO;
+//        [self.attentionBtn lh_setCornerRadius:3 borderWidth:1 borderColor:kLightGrayColor];
+//    }
     UIColor *introBackgroud = teacherModel.hobby ?kWhiteColor:KPlaceHoldColor;
     self.introduceLab.backgroundColor = introBackgroud;
     self.teacherNameLab.backgroundColor = backgroud;

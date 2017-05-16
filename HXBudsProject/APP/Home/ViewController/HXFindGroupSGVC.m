@@ -57,6 +57,7 @@
     self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) delegate:self segmentedControlType:(SGSegmentedControlTypeStatic) titleArr:title_arr];
     self.SG.titleColorStateNormal = kBlackColor;
     self.SG.titleColorStateSelected = APP_COMMON_COLOR;
+    self.SG.title_fondOfSize  = FONT(16);
 //    self.SG.showsBottomScrollIndicator = YES;
     self.SG.backgroundColor = kWhiteColor;
     self.SG.indicatorColor = APP_COMMON_COLOR;

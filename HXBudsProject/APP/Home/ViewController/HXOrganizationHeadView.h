@@ -10,6 +10,7 @@
 #import "HXTeacherDetailModel.h"
 #import "HXOrganizationDeetailModel.h"
 
+typedef void(^followSelectedBlock)(BOOL followed);
 
 @interface HXOrganizationHeadView : UIView
 @property (weak, nonatomic) IBOutlet UIButton *attentionBtn;
@@ -27,5 +28,7 @@
 @property(nonatomic,strong) HXPdModel *pdModel;
 
 @property(nonatomic,strong) HXOrganizationPdModel *model;
+
+@property (copy, nonatomic)  followSelectedBlock followSelectedBlock;
 
 @end

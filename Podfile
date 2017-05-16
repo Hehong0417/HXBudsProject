@@ -17,12 +17,12 @@ pod 'JSONModel', '~> 1.1.2'
 pod 'DZNEmptyDataSet'
 pod 'FMDB'
 pod 'WordPress-Editor-iOS-Extension'
-pod 'WebViewJavascriptBridge', '~> 5.0'
+#pod 'WebViewJavascriptBridge', '~> 5.0'
 pod 'BaiduMapKit' #百度地图SDK
 
 pod 'JPush', '3.0.2'
-pod 'RongCloudIM/IMLib', '~> 2.8.3'
-pod 'RongCloudIM/IMKit', '~> 2.8.3'
+#pod 'RongCloudIM/IMLib', '~> 2.8.3'
+#pod 'RongCloudIM/IMKit', '~> 2.8.3'
 
  # U-Share SDK UI模块（分享面板，建议添加）
 pod 'UMengUShare/UI'

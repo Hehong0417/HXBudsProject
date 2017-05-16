@@ -13,7 +13,8 @@
 // 本地图片
 #define API_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/upload/task"
 //老师头像图片
-#define API_Teacher_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/theteacher"
+#define API_Teacher_IMAGE_HOST @"http://192.168.0.128:8080"
+
 //用户头像图片
 #define API_User_IMAGE_HOST @"http://192.168.0.128:8080"
 
@@ -44,8 +45,7 @@
 #import "HJUser.h"
 
 //
-#define article_detail_url  @"http://192.168.0.110/my/menya/Mengya/"
-
+#define article_detail_url  @"http://192.168.0.106/my/menya/Mengya/index.html"
 
 /**
  *  登录注册
@@ -67,7 +67,6 @@
 #define API_GET_FORGET_PWD API_SUB_URL(@"users/forgetPwd")
 //1.2修改密码
 #define API_GET_EDIT_PWD API_SUB_URL(@"users/editPwd")
-
 
 
 
@@ -97,7 +96,7 @@
 //5.1 获取教师详情
 #define API_GET_TEACHER_DDETAIL API_SUB_URL(@"theteacher/detail_anon")//*
 
-//5.2 关注
+//5.2 关注老师
 #define API_GET_FOLLOW_TEACHER API_SUB_URL(@"followteacher/add")//*
 
 //机构列表

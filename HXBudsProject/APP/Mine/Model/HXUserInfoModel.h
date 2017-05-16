@@ -8,7 +8,14 @@
 
 #import "BaseModel.h"
 
+
+@class HXUserInfoPdModel;
 @interface HXUserInfoModel : BaseModel
+
+@property(nonatomic,strong) HXUserInfoPdModel *pd;
+
+@end
+@interface HXUserInfoPdModel : BaseModel
 
 @property(nonatomic,copy) NSString *nickname;
 @property(nonatomic,copy) NSString *phone;

@@ -68,7 +68,7 @@
     }
     self.viewsLab.text = [NSString stringWithFormat:@"%@人看过",read];
     self.commentLab.text = [NSString stringWithFormat:@"%@人评论过",comment];
-    [self.videoIconImgV  sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    [self.videoIconImgV  sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
     
     [self.videoImagV setTapActionWithBlock:^{
         

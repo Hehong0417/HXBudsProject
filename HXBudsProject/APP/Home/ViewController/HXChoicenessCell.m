@@ -42,7 +42,7 @@
     }
     self.read.text = [NSString stringWithFormat:@"%@人看过",read];
     self.comment.text = [NSString stringWithFormat:@"%@人评论过",comment];
-    [self.The_headportrait  sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    [self.The_headportrait  sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
     
     
     [self.curr_picture setTapActionWithBlock:^{

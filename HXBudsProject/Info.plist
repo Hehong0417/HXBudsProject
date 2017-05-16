@@ -28,44 +28,6 @@
 				<string>wx4a20e81b69eba007</string>
 			</array>
 		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>tencent1105821097</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>QQ41E97DA9</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>wb3921700954</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>2015121500982519</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array/>
-		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -115,6 +77,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>使用相机</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>允许在前台使用时获取GPS的描述</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>使用相册</string>
 	<key>UILaunchStoryboardName</key>

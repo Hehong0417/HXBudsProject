@@ -25,7 +25,7 @@
 - (void)setTeacherModel:(HXteacherVarListModel *)teacherModel {
 
     _teacherModel = teacherModel;
-    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(teacherModel.the_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(teacherModel.the_headportrait)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
     
     self.teacherNameLab.text = teacherModel.the_name;
     self.introduceLab.text = teacherModel.hobby;
@@ -40,7 +40,7 @@
 
 - (void)setOrganizationModel:(HXOrganizationVarListModel *)organizationModel {
     _organizationModel = organizationModel;
-    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(organizationModel.mechanism_logo)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(organizationModel.mechanism_logo)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
     
     self.teacherNameLab.text = organizationModel.mechanism_name;
     self.introduceLab.text = organizationModel.mechanism_desc;

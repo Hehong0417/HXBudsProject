@@ -26,12 +26,20 @@
 #import "HXMyProductVC.h"
 #import "HXSetVC.h"
 #import "HXPersonInfoVC.h"
+#import "HXMapVC.h"
 
-@interface HXPersonCenterVC ()
+
+@interface HXPersonCenterVC ()<BMKLocationServiceDelegate>
+{
+    BMKLocationService *_locService;
+
+}
 //@property (nonatomic, strong) HXTeacherDetailModel *teacherDetailModel;
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, strong) HXMineLoginHeadView *mineHeadView;
 @property (nonatomic, strong) HXMineHeadView *NoLoginMineHeadView;
+@property (nonatomic, strong) BMKUserLocation *userLocation;
+
 
 @end
 
@@ -80,15 +88,42 @@
         }
     }];
     
+    
+    
+    //地图定位
+    //初始化BMKLocationService
+    _locService = [[BMKLocationService alloc]init];
+    _locService.delegate = self;
+    //启动LocationService
+    [_locService startUserLocationService];
+    
 }
+#pragma mark - 实现相关delegate 处理位置信息更新
+
+//处理方向变更信息
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+{
+    NSLog(@"heading is %@",userLocation.heading);
+}
+//处理位置坐标更新
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    self.userLocation = userLocation;
+}
+
 - (void)getMyInfoData{
     
     [[[HXgetUserInfoAPI getUserInfo] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         
-        self.mineHeadView.nameLab.text = responseObject[@"pd"][@"username"];
+        self.mineHeadView.nameLab.text = responseObject[@"pd"][@"nickname"];
         NSString *icostr = responseObject[@"pd"][@"headportrait"];
 //        NSLog(@"icostr:%@",kAPIImageFromUrl(icostr));
-        [self.mineHeadView.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIUserImageFromUrl(icostr)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+        if ([icostr containsString:@"https://wx.qlogo.cn"]) {
+            [self.mineHeadView.iconImagV sd_setImageWithURL:[NSURL URLWithString:icostr] placeholderImage:[UIImage imageNamed:@"person_ico"]];
+        }else{
+        [self.mineHeadView.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIUserImageFromUrl(icostr)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
+        }
         self.tableV.tableHeaderView = self.mineHeadView;
     }];
     
@@ -207,7 +242,7 @@
         
     }else if (indexPath.section == 2){
         
-        [self.navigationController pushVC:[HXSetVC new]];
+      [self.navigationController pushVC:[HXSetVC new]];
     }
 }
 

@@ -34,7 +34,7 @@
         urlStr = kAPIImageFromUrl(model.headportrait);
     }
     
-    [self.commentIco_ImagV sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    [self.commentIco_ImagV sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"article_ico"]];
     self.comment.text = model.fabulous;
     self.reViewContent.text = model.review_content;
     self.ctime.text = model.ctime;

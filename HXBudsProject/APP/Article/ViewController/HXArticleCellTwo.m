@@ -136,9 +136,9 @@
     }
     self.timeLab.text = model.ctime;
     
-    [self.teacherIconImagV sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+    [self.teacherIconImagV sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.head)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
     [self.rightIconImgV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.article_cover)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
-    self.teacherNameLab.text = model.The_name;
+    self.teacherNameLab.text = model.name;
     self.contentLab.text = model.article_title;
     NSString *read;
     read = model.reading?model.reading:@"0";

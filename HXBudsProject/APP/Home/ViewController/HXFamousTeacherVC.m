@@ -14,10 +14,11 @@
 #import "HXTeacherListModel.h"
 
 
-@interface HXFamousTeacherVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface HXFamousTeacherVC ()<UITableViewDelegate,UITableViewDataSource,BMKLocationServiceDelegate>
 {
     
     BOOL isLogin;
+    BMKLocationService *_locService;
 }
 @property (nonatomic, strong)   UITableView *teacherListTable;
 @property (nonatomic, strong) HXTeacherListModel *teacherListModel;
@@ -44,6 +45,27 @@
     self.teacherListTable.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.teacherListTable];
     
+    
+    //地图定位
+    //初始化BMKLocationService
+    _locService = [[BMKLocationService alloc]init];
+    _locService.delegate = self;
+    //启动LocationService
+    [_locService startUserLocationService];
+    
+    
+}
+#pragma mark - 实现相关delegate 处理位置信息更新
+
+//处理方向变更信息
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+{
+    NSLog(@"heading is %@",userLocation.heading);
+}
+//处理位置坐标更新
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
 }
 - (void)getTeacherList{
     

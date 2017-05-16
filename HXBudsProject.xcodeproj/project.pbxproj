@@ -17,6 +17,9 @@
 		0D27AFED1E94D07800E93EC0 /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D27AFEC1E94D07800E93EC0 /* HCSStarRatingView.m */; };
 		0D27B0121E94D84A00E93EC0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0D27B0101E94D84A00E93EC0 /* InfoPlist.strings */; };
 		0D27B0131E94D84A00E93EC0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0D27B0111E94D84A00E93EC0 /* Localizable.strings */; };
+		0D29905C1ECADEC900729E94 /* HXFollowOrganizationAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D29905B1ECADEC900729E94 /* HXFollowOrganizationAPI.m */; };
+		0D29905F1ECAEF4100729E94 /* HXOrganizationCourseAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D29905E1ECAEF4100729E94 /* HXOrganizationCourseAPI.m */; };
+		0D2990621ECB078900729E94 /* HXInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2990611ECB078900729E94 /* HXInputView.m */; };
 		0D29C1DD1E67AF64003ACE39 /* WMPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0D29C1DC1E67AF64003ACE39 /* WMPlayer.bundle */; };
 		0D3544751EAEE47400DE5D0D /* HXTeacherListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3544741EAEE47400DE5D0D /* HXTeacherListModel.m */; };
 		0D3549871E5D907500CFFD4A /* AppDelegate+AOP.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3549841E5D907500CFFD4A /* AppDelegate+AOP.m */; };
@@ -30,6 +33,8 @@
 		0D3987221EB2DF5300AEDE68 /* HXGetVerifyCodeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3987211EB2DF5300AEDE68 /* HXGetVerifyCodeAPI.m */; };
 		0D3A01531E4C05840038D62C /* HXOrganizationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3A01511E4C05840038D62C /* HXOrganizationCell.m */; };
 		0D3A01541E4C05840038D62C /* HXOrganizationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D3A01521E4C05840038D62C /* HXOrganizationCell.xib */; };
+		0D3A74181EC99C220071D0D0 /* HXCurriSearchResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3A74171EC99C220071D0D0 /* HXCurriSearchResultVC.m */; };
+		0D3A741B1EC9A0A20071D0D0 /* HXCurriSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3A741A1EC9A0A20071D0D0 /* HXCurriSearchVC.m */; };
 		0D4242A01EC2AC2B0040B7C7 /* HXIndividualWorksVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D42429F1EC2AC2B0040B7C7 /* HXIndividualWorksVC.m */; };
 		0D4242A71EC2ADF00040B7C7 /* HXOpusDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4242A51EC2ADF00040B7C7 /* HXOpusDetailVC.m */; };
 		0D4242AB1EC2AFBF0040B7C7 /* HXMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4242AA1EC2AFBF0040B7C7 /* HXMapVC.m */; };
@@ -161,6 +166,8 @@
 		0D80FB981EB9B52D00800B91 /* HXWXLoginAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D80FB971EB9B52D00800B91 /* HXWXLoginAPI.m */; };
 		0D80FB9B1EB9D6B200800B91 /* HXMyAttentionFrendsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D80FB9A1EB9D6B200800B91 /* HXMyAttentionFrendsAPI.m */; };
 		0D80FB9E1EB9D6C900800B91 /* HXMyattetionTeacherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D80FB9D1EB9D6C900800B91 /* HXMyattetionTeacherAPI.m */; };
+		0D81EC001EC94C740092B5FE /* HWNEWfeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D81EBFF1EC94C740092B5FE /* HWNEWfeatureViewController.m */; };
+		0D81EC021EC96C170092B5FE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D81EC011EC96C170092B5FE /* MapKit.framework */; };
 		0D82D10E1E9F7B9B005B8A3E /* HXTeacherListAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D82D10D1E9F7B9B005B8A3E /* HXTeacherListAPI.m */; };
 		0D8412801EBC49EF004DB88E /* HXCurriculumSearchAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D84127F1EBC49EF004DB88E /* HXCurriculumSearchAPI.m */; };
 		0D8412831EBC5718004DB88E /* HXTeachingTypeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8412821EBC5718004DB88E /* HXTeachingTypeListModel.m */; };
@@ -220,6 +227,7 @@
 		0D91681C1E9623D0002D8296 /* HXTeacherCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D91681A1E9623D0002D8296 /* HXTeacherCollectionCell.m */; };
 		0D91681D1E9623D0002D8296 /* HXTeacherCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D91681B1E9623D0002D8296 /* HXTeacherCollectionCell.xib */; };
 		0D9168201E9626EF002D8296 /* HXHomeReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D91681F1E9626EF002D8296 /* HXHomeReusableHeadView.m */; };
+		0D931F921EC9ABC6006ADC78 /* HXeditInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D931F911EC9ABC6006ADC78 /* HXeditInfoVC.m */; };
 		0D93F0781E69417300CD9450 /* HXMyLikeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D93F0771E69417300CD9450 /* HXMyLikeVC.m */; };
 		0D9990071EBC236800EB1F42 /* HXTeachingTypeListAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9990061EBC236800EB1F42 /* HXTeachingTypeListAPI.m */; };
 		0D9A1DFD1E84C853004457A8 /* HXAccountHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9A1DFC1E84C853004457A8 /* HXAccountHead.m */; };
@@ -389,6 +397,12 @@
 		0D27AFEC1E94D07800E93EC0 /* HCSStarRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSStarRatingView.m; sourceTree = "<group>"; };
 		0D27B0101E94D84A00E93EC0 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		0D27B0111E94D84A00E93EC0 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		0D29905A1ECADEC900729E94 /* HXFollowOrganizationAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXFollowOrganizationAPI.h; sourceTree = "<group>"; };
+		0D29905B1ECADEC900729E94 /* HXFollowOrganizationAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXFollowOrganizationAPI.m; sourceTree = "<group>"; };
+		0D29905D1ECAEF4100729E94 /* HXOrganizationCourseAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXOrganizationCourseAPI.h; sourceTree = "<group>"; };
+		0D29905E1ECAEF4100729E94 /* HXOrganizationCourseAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXOrganizationCourseAPI.m; sourceTree = "<group>"; };
+		0D2990601ECB078900729E94 /* HXInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXInputView.h; sourceTree = "<group>"; };
+		0D2990611ECB078900729E94 /* HXInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXInputView.m; sourceTree = "<group>"; };
 		0D29C1DC1E67AF64003ACE39 /* WMPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WMPlayer.bundle; sourceTree = "<group>"; };
 		0D3544731EAEE47400DE5D0D /* HXTeacherListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTeacherListModel.h; sourceTree = "<group>"; };
 		0D3544741EAEE47400DE5D0D /* HXTeacherListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTeacherListModel.m; sourceTree = "<group>"; };
@@ -413,6 +427,10 @@
 		0D3A01501E4C05840038D62C /* HXOrganizationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXOrganizationCell.h; sourceTree = "<group>"; };
 		0D3A01511E4C05840038D62C /* HXOrganizationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXOrganizationCell.m; sourceTree = "<group>"; };
 		0D3A01521E4C05840038D62C /* HXOrganizationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXOrganizationCell.xib; sourceTree = "<group>"; };
+		0D3A74161EC99C220071D0D0 /* HXCurriSearchResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCurriSearchResultVC.h; sourceTree = "<group>"; };
+		0D3A74171EC99C220071D0D0 /* HXCurriSearchResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCurriSearchResultVC.m; sourceTree = "<group>"; };
+		0D3A74191EC9A0A20071D0D0 /* HXCurriSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCurriSearchVC.h; sourceTree = "<group>"; };
+		0D3A741A1EC9A0A20071D0D0 /* HXCurriSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCurriSearchVC.m; sourceTree = "<group>"; };
 		0D42429E1EC2AC2B0040B7C7 /* HXIndividualWorksVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXIndividualWorksVC.h; sourceTree = "<group>"; };
 		0D42429F1EC2AC2B0040B7C7 /* HXIndividualWorksVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXIndividualWorksVC.m; sourceTree = "<group>"; };
 		0D4242A41EC2ADF00040B7C7 /* HXOpusDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXOpusDetailVC.h; sourceTree = "<group>"; };
@@ -668,6 +686,9 @@
 		0D80FB9A1EB9D6B200800B91 /* HXMyAttentionFrendsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyAttentionFrendsAPI.m; sourceTree = "<group>"; };
 		0D80FB9C1EB9D6C900800B91 /* HXMyattetionTeacherAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyattetionTeacherAPI.h; sourceTree = "<group>"; };
 		0D80FB9D1EB9D6C900800B91 /* HXMyattetionTeacherAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyattetionTeacherAPI.m; sourceTree = "<group>"; };
+		0D81EBFE1EC94C740092B5FE /* HWNEWfeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWNEWfeatureViewController.h; sourceTree = "<group>"; };
+		0D81EBFF1EC94C740092B5FE /* HWNEWfeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWNEWfeatureViewController.m; sourceTree = "<group>"; };
+		0D81EC011EC96C170092B5FE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0D82D10C1E9F7B9B005B8A3E /* HXTeacherListAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTeacherListAPI.h; sourceTree = "<group>"; };
 		0D82D10D1E9F7B9B005B8A3E /* HXTeacherListAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTeacherListAPI.m; sourceTree = "<group>"; };
 		0D84127E1EBC49EF004DB88E /* HXCurriculumSearchAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCurriculumSearchAPI.h; sourceTree = "<group>"; };
@@ -765,6 +786,8 @@
 		0D91681B1E9623D0002D8296 /* HXTeacherCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXTeacherCollectionCell.xib; sourceTree = "<group>"; };
 		0D91681E1E9626EF002D8296 /* HXHomeReusableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXHomeReusableHeadView.h; sourceTree = "<group>"; };
 		0D91681F1E9626EF002D8296 /* HXHomeReusableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXHomeReusableHeadView.m; sourceTree = "<group>"; };
+		0D931F901EC9ABC6006ADC78 /* HXeditInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXeditInfoVC.h; sourceTree = "<group>"; };
+		0D931F911EC9ABC6006ADC78 /* HXeditInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXeditInfoVC.m; sourceTree = "<group>"; };
 		0D93F0761E69417300CD9450 /* HXMyLikeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyLikeVC.h; sourceTree = "<group>"; };
 		0D93F0771E69417300CD9450 /* HXMyLikeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyLikeVC.m; sourceTree = "<group>"; };
 		0D9990051EBC236800EB1F42 /* HXTeachingTypeListAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HXTeachingTypeListAPI.h; path = ../../Video/Model/HXTeachingTypeListAPI.h; sourceTree = "<group>"; };
@@ -1035,6 +1058,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D81EC021EC96C170092B5FE /* MapKit.framework in Frameworks */,
 				0DFC33411EC337D200066145 /* AVKit.framework in Frameworks */,
 				0D87BB081E9E1A0E00FC2678 /* Security.framework in Frameworks */,
 				0D87BAFD1E9E0BB300FC2678 /* libc++.tbd in Frameworks */,
@@ -1156,6 +1180,10 @@
 			children = (
 				0D9168161E9620EA002D8296 /* HXHomeCVC.h */,
 				0D9168171E9620EA002D8296 /* HXHomeCVC.m */,
+				0D3A74191EC9A0A20071D0D0 /* HXCurriSearchVC.h */,
+				0D3A741A1EC9A0A20071D0D0 /* HXCurriSearchVC.m */,
+				0D3A74161EC99C220071D0D0 /* HXCurriSearchResultVC.h */,
+				0D3A74171EC99C220071D0D0 /* HXCurriSearchResultVC.m */,
 				0DAE8AB41EC0707500CA0619 /* HXCurriculumTypeCell.h */,
 				0DAE8AB51EC0707500CA0619 /* HXCurriculumTypeCell.m */,
 				0DAE8AA41EC04C2B00CA0619 /* HXChoicenessCell.h */,
@@ -1337,6 +1365,8 @@
 				0D7286711E83B24F00025AF0 /* HXMyHomeHeadView.xib */,
 				0D7B22211E68091E000ABE4A /* HXPersonInfoVC.h */,
 				0D7B22221E68091E000ABE4A /* HXPersonInfoVC.m */,
+				0D931F901EC9ABC6006ADC78 /* HXeditInfoVC.h */,
+				0D931F911EC9ABC6006ADC78 /* HXeditInfoVC.m */,
 				0D6D72061E68FDB800DFCC68 /* HXMyAccountInfoVC.h */,
 				0D6D72071E68FDB800DFCC68 /* HXMyAccountInfoVC.m */,
 				0D9A1DFB1E84C853004457A8 /* HXAccountHead.h */,
@@ -1444,6 +1474,8 @@
 				0D72867A1E83BDE600025AF0 /* HXArticleCellTwo.xib */,
 				0D8CC8B51E850DF300982B39 /* HXArticleDetailVC.h */,
 				0D8CC8B61E850DF300982B39 /* HXArticleDetailVC.m */,
+				0D2990601ECB078900729E94 /* HXInputView.h */,
+				0D2990611ECB078900729E94 /* HXInputView.m */,
 				0D764BB21EC5B88C001C41C6 /* HXArewardVC.h */,
 				0D764BB31EC5B88C001C41C6 /* HXArewardVC.m */,
 				0D764BB51EC5BC28001C41C6 /* HXArewardCell.h */,
@@ -1617,6 +1649,8 @@
 				0D6F56471EAF1BDE00B9190F /* HXSubjectVideoListModel.m */,
 				0DAEA5291EB03490009AF9D9 /* HXFollowAPI.h */,
 				0DAEA52A1EB03490009AF9D9 /* HXFollowAPI.m */,
+				0D29905A1ECADEC900729E94 /* HXFollowOrganizationAPI.h */,
+				0D29905B1ECADEC900729E94 /* HXFollowOrganizationAPI.m */,
 				0D9990051EBC236800EB1F42 /* HXTeachingTypeListAPI.h */,
 				0D9990061EBC236800EB1F42 /* HXTeachingTypeListAPI.m */,
 				0D8412811EBC5718004DB88E /* HXTeachingTypeListModel.h */,
@@ -1631,6 +1665,8 @@
 				0D8E3CA31EC8298500C127EC /* HXOrganizationDetailAPI.m */,
 				0D8E3CAB1EC82E1000C127EC /* HXOrganizationDeetailModel.h */,
 				0D8E3CAC1EC82E1000C127EC /* HXOrganizationDeetailModel.m */,
+				0D29905D1ECAEF4100729E94 /* HXOrganizationCourseAPI.h */,
+				0D29905E1ECAEF4100729E94 /* HXOrganizationCourseAPI.m */,
 				0D8E3CA51EC82A3F00C127EC /* HXTeacherTeamAPI.h */,
 				0D8E3CA61EC82A3F00C127EC /* HXTeacherTeamAPI.m */,
 			);
@@ -1791,6 +1827,8 @@
 			children = (
 				0DEA8EFC1E486FC10052C459 /* AppDelegate.h */,
 				0DEA8EFD1E486FC10052C459 /* AppDelegate.m */,
+				0D81EBFE1EC94C740092B5FE /* HWNEWfeatureViewController.h */,
+				0D81EBFF1EC94C740092B5FE /* HWNEWfeatureViewController.m */,
 				0DEA8EFA1E486FC10052C459 /* main.m */,
 				0DEA8EFF1E486FC10052C459 /* ViewController.h */,
 				0DEA8F001E486FC10052C459 /* ViewController.m */,
@@ -2268,6 +2306,7 @@
 		57C56E307684BBA6F087C06A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0D81EC011EC96C170092B5FE /* MapKit.framework */,
 				0DFC33401EC337D200066145 /* AVKit.framework */,
 				0D87BB071E9E1A0E00FC2678 /* Security.framework */,
 				0D87BB051E9E19ED00FC2678 /* libsqlite3.0.tbd */,
@@ -2603,6 +2642,7 @@
 				0D79C2B11EC2EB51004B7CC8 /* HXAccountReChargeCell.m in Sources */,
 				0D4242A71EC2ADF00040B7C7 /* HXOpusDetailVC.m in Sources */,
 				0DFC333F1EC331A300066145 /* HXPlayerVC.m in Sources */,
+				0D2990621ECB078900729E94 /* HXInputView.m in Sources */,
 				0D7A6D891EC6DF3100EE80CD /* MYSegmentView.m in Sources */,
 				0D65C3F61E4AB703009F07F1 /* HXRecommendTeacherCell.m in Sources */,
 				0D71D9C81EBAB6EE00C088A1 /* HXBroserRecordVideoVC.m in Sources */,
@@ -2633,6 +2673,7 @@
 				0D7A6D9E1EC70AF900EE80CD /* HXTeacherCourseCell.m in Sources */,
 				0D56EE0C1E8DE5C600CB8E1C /* UIColor+PYExtension.m in Sources */,
 				0D8C87C71EB987B600863FFF /* HXArticleTypeModel.m in Sources */,
+				0D3A741B1EC9A0A20071D0D0 /* HXCurriSearchVC.m in Sources */,
 				0DAEA52B1EB03490009AF9D9 /* HXFollowAPI.m in Sources */,
 				0D7286681E83A75300025AF0 /* HXMineLoginHeadView.m in Sources */,
 				0DEA904B1E4877BC0052C459 /* NHDataBaseManager.m in Sources */,
@@ -2679,6 +2720,7 @@
 				0D7D77831E52A5EB00CF8D47 /* PGIndexBannerSubiew.m in Sources */,
 				0D8412831EBC5718004DB88E /* HXTeachingTypeListModel.m in Sources */,
 				0DF490211E7799E600C567B0 /* CLPlayerView.m in Sources */,
+				0D29905F1ECAEF4100729E94 /* HXOrganizationCourseAPI.m in Sources */,
 				0D6CA06E1EC433A8007F131A /* HXWXPayAPI.m in Sources */,
 				0D7286BC1E83BDE600025AF0 /* HXBuyBottomView.m in Sources */,
 				0D82D10E1E9F7B9B005B8A3E /* HXTeacherListAPI.m in Sources */,
@@ -2700,6 +2742,7 @@
 				0D9BC2871EA4AC5900EC2315 /* WHC_StackView.m in Sources */,
 				0DEA90171E4877BB0052C459 /* NSNumber+LH.m in Sources */,
 				0DAE8AB31EC068FD00CA0619 /* HXAccountSecutityVC.m in Sources */,
+				0D3A74181EC99C220071D0D0 /* HXCurriSearchResultVC.m in Sources */,
 				0D9BC2841EA4AC5900EC2315 /* UITableViewCell+WHC_AutoHeightForCell.m in Sources */,
 				0D8CC88D1E84EA3300982B39 /* HXMessageCell.m in Sources */,
 				0D7286C61E83BDE600025AF0 /* HXGradeCommentCell.m in Sources */,
@@ -2756,6 +2799,7 @@
 				0DEA901F1E4877BB0052C459 /* UIAlertView+LH.m in Sources */,
 				0D6CA07D1EC454CD007F131A /* HXEditPwdVC.m in Sources */,
 				0DEA900B1E4877BB0052C459 /* Base64Util.m in Sources */,
+				0D931F921EC9ABC6006ADC78 /* HXeditInfoVC.m in Sources */,
 				0D35498B1E5D90C200CFFD4A /* HJNavigationController.m in Sources */,
 				0DAE8AA71EC04C2B00CA0619 /* HXChoicenessCell.m in Sources */,
 				0DFB6AFB1EA5C3210006C6CF /* HXAdvertisementAPI.m in Sources */,
@@ -2787,6 +2831,7 @@
 				0D93F0781E69417300CD9450 /* HXMyLikeVC.m in Sources */,
 				0D7F2EA91E9876C10050394E /* HXChooseSujectVC.m in Sources */,
 				0D7286D01E83BE1B00025AF0 /* HXSujectVideoListCell.m in Sources */,
+				0D81EC001EC94C740092B5FE /* HWNEWfeatureViewController.m in Sources */,
 				0D6F564C1EAF204300B9190F /* HXTeacherDetailAPI.m in Sources */,
 				0D7F26631EC0135100DCBCE9 /* HXUploadIconModel.m in Sources */,
 				0D9990071EBC236800EB1F42 /* HXTeachingTypeListAPI.m in Sources */,
@@ -2814,6 +2859,7 @@
 				0DD36B2B1E8E4A5A00F817CF /* WPViewController.m in Sources */,
 				0D8C87C41EB982FF00863FFF /* HXArticleTypeAPI.m in Sources */,
 				0D71D9D11EBABC6E00C088A1 /* HXBroserRecordArticleAPI.m in Sources */,
+				0D29905C1ECADEC900729E94 /* HXFollowOrganizationAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2957,6 +3003,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_MODULES_AUTOLINK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = F972623DL2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2968,7 +3016,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HXBudsProject/Buds.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = HXBudsProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2982,6 +3030,7 @@
 				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -2993,6 +3042,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_MODULES_AUTOLINK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = F972623DL2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3004,7 +3055,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HXBudsProject/Buds.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = HXBudsProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3018,6 +3069,7 @@
 				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

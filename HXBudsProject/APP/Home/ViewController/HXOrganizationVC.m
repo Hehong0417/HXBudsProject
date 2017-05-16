@@ -39,7 +39,7 @@
 }
 - (void)getOrganizationListData{
  
-  [[[HXOrganizationListAPI getOrganizationListWithLimit:@"20"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+  [[[HXOrganizationListAPI getOrganizationListWithmechanism_id:nil Limit:@"30"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
       
       HXOrganizationListModel *api = [HXOrganizationListModel new];
       self.OrganizationListModel = [api.class mj_objectWithKeyValues:responseObject];

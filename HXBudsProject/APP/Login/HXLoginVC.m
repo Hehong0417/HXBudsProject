@@ -298,61 +298,14 @@
     [self getAuthWithUserInfoFromWechat];
 
 }
-//QQ
-- (void)getAuthWithUserInfoFromQQ
-{
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_QQ currentViewController:nil completion:^(id result, NSError *error) {
-        if (error) {
-            
-        } else {
-            UMSocialUserInfoResponse *resp = result;
-            
-            // 授权信息
-            NSLog(@"QQ uid: %@", resp.uid);
-            NSLog(@"QQ openid: %@", resp.openid);
-            NSLog(@"QQ accessToken: %@", resp.accessToken);
-            NSLog(@"QQ expiration: %@", resp.expiration);
-            
-            // 用户信息
-            NSLog(@"QQ name: %@", resp.name);
-            NSLog(@"QQ iconurl: %@", resp.iconurl);
-            NSLog(@"QQ gender: %@", resp.gender);
-            
-            // 第三方平台SDK源数据
-            NSLog(@"QQ originalResponse: %@", resp.originalResponse);
-        }
-    }];
-}
-//新浪
-- (void)getAuthWithUserInfoFromSina
-{
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Sina currentViewController:nil completion:^(id result, NSError *error) {
-        if (error) {
-            
-        } else {
-            UMSocialUserInfoResponse *resp = result;
-            // 授权信息
-            NSLog(@"Sina uid: %@", resp.uid);
-            NSLog(@"Sina accessToken: %@", resp.accessToken);
-            NSLog(@"Sina refreshToken: %@", resp.refreshToken);
-            NSLog(@"Sina expiration: %@", resp.expiration);
-            
-            // 用户信息
-            NSLog(@"Sina name: %@", resp.name);
-            NSLog(@"Sina iconurl: %@", resp.iconurl);
-            NSLog(@"Sina gender: %@", resp.gender);
-            
-            // 第三方平台SDK源数据
-            NSLog(@"Sina originalResponse: %@", resp.originalResponse);
-        }
-    }];
-}
+
 //微信
 - (void)getAuthWithUserInfoFromWechat
 {
+    
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
         if (error) {
-            
+            NSLog(@"%@",error);
         } else {
             UMSocialUserInfoResponse *resp = result;
             // 授权信息
