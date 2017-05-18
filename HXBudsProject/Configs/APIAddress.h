@@ -45,7 +45,7 @@
 #import "HJUser.h"
 
 //
-#define article_detail_url  @"http://192.168.0.106/my/menya/Mengya/index.html"
+#define article_detail_url  @"http://192.168.0.108/my/menya/Mengya/index.html"
 
 /**
  *  登录注册
@@ -125,9 +125,7 @@
 //2.4.添加文章评论
 #define API_articlereview_add API_SUB_URL(@"articlereview/add")
 
-
-
-
+//http://192.168.0.128:8080/goaling/article/detail_anon?article_id=24
 
 /**
  *  发布文章
@@ -193,6 +191,12 @@
 #define API_systemnotification API_SUB_URL(@"systemnotification/list_anon")
 //2.4意见反馈
 #define API_feedback API_SUB_URL(@"feedback/add")
+
+//我收藏的文章
+#define API_My_collectionarticle API_SUB_URL(@"myinformation/collectionarticle")
+//我收藏的视频
+#define API_My_collectioncurriculum API_SUB_URL(@"myinformation/collectioncurriculum")
+
 
 
 //七、支付

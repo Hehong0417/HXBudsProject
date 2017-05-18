@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *introduceLab;
 
 
+@property (weak, nonatomic) IBOutlet UILabel *distanceLab;
 @property (nonatomic, strong)   HXOrganizationVarListModel *organizationModel;
 
 @end

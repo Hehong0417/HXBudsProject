@@ -66,6 +66,12 @@
                     <constraint firstItem="aFg-jN-nog" firstAttribute="top" secondItem="yfx-3S-rSO" secondAttribute="top" id="vK4-XM-3we"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="curri_picture" destination="CYk-CG-qGN" id="giA-yG-n0X"/>
+                <outlet property="curri_title" destination="jyM-7x-3iw" id="MYT-S1-Wka"/>
+                <outlet property="the_head" destination="yfx-3S-rSO" id="wtp-AR-6jq"/>
+                <outlet property="the_name" destination="aFg-jN-nog" id="wVW-V2-PnG"/>
+            </connections>
             <point key="canvasLocation" x="24.5" y="52"/>
         </tableViewCell>
     </objects>

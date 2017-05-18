@@ -9,7 +9,6 @@
 #import "HXteacherList.h"
 #import "HXTeacherCollectionCell.h"
 #import "HXMyLikeVC.h"
-#import "HXTeacherListAPI.h"
 #import "HXIsLoginAPI.h"
 #import "HXFollowAPI.h"
 #import "HXLoginVC.h"
@@ -79,20 +78,11 @@
 //    };
         return cell;
 }
-- (void)followRequest:(NSInteger )row followed:(BOOL)followed{
-    
-    
-    HXteacherVarListModel *model = self.teacherListModel.varList[row];
-    
-    [[[HXFollowAPI followTeacherWiththeteacherId:model.theteacher_id state:followed?@"1":@"0"] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        
-    }];
-    
-}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
         
-        return 4;
+        return self.teacherListModel.varList.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{

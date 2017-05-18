@@ -25,5 +25,6 @@
 @property(nonatomic,copy) NSString *mechanism_address;
 @property(nonatomic,copy) NSString *mechanism_Lng;//经度
 @property(nonatomic,copy) NSString *mechanism_Lat;//经度
+@property(nonatomic,copy) NSString *followState;
 
 @end

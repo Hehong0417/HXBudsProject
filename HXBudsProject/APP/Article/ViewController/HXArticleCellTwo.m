@@ -22,7 +22,6 @@
     [self.teacherIconImagV lh_setRoundImageViewWithBorderWidth:0 borderColor:nil];
     [self setLayout];
     
-    
     [self.subjectLab lh_setCornerRadius:5 borderWidth:1 borderColor:APP_COMMON_COLOR];
     self.subjectLab.userInteractionEnabled = YES;
     [self.subjectLab setTapActionWithBlock:^{

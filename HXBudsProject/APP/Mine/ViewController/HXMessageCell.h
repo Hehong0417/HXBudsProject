@@ -12,8 +12,11 @@
 @interface HXMessageCell : UITableViewCell
 
 + (instancetype)initMessageCellWithXib;
-@property (weak, nonatomic) IBOutlet UIImageView *ico;
+
 @property (strong, nonatomic)  HXMyMessageVarlistModel *model;
 
+@property (weak, nonatomic) IBOutlet UILabel *meassge_title;
+@property (weak, nonatomic) IBOutlet UILabel *content;
+@property (weak, nonatomic) IBOutlet UILabel *ctime;
 
 @end

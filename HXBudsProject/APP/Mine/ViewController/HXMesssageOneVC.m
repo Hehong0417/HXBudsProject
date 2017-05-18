@@ -63,32 +63,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-//    if (section == 0) {
-//        return 1;
-//    }else{
+
         return self.myMessageModel.varList.count;
-//    }
+
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    if (indexPath.section == 0) {
-//        
+    
         return 80;
-//    }else{
-//        
-//        return 135;
-//    }
+
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//
-//    return 0.01;
-//    
-//}
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//
-//    return 10;
-//
-//}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     

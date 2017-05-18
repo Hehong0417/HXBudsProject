@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HXFamousTeacherVC : UIViewController
+@property(nonatomic,assign) NSInteger typeNum;
 
 @end

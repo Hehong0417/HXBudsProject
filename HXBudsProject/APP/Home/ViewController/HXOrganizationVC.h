@@ -12,4 +12,8 @@
 
 @property(nonatomic,assign) BOOL isMyLike;
 
+@property(nonatomic,assign) NSInteger typeNum;
+
+@property (nonatomic, assign) BOOL isLogin;
+
 @end

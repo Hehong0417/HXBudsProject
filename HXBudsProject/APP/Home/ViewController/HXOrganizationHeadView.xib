@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="feE-2i-oIG">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg(teacher)" translatesAutoresizingMaskIntoConstraints="NO" id="feE-2i-oIG">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="105" id="uFT-TE-SuZ"/>
@@ -24,7 +24,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NbD-K5-a8a">
                     <rect key="frame" x="0.0" y="105" width="375" height="105"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ttc-nv-9qm">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ttc-nv-9qm">
                             <rect key="frame" x="280" y="9" width="75" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="26" id="DQA-PH-fZ3"/>
@@ -162,6 +162,7 @@
     <resources>
         <image name="add" width="11" height="15"/>
         <image name="back" width="12" height="22"/>
+        <image name="bg(teacher)" width="375" height="109"/>
         <image name="next" width="6" height="12"/>
     </resources>
 </document>

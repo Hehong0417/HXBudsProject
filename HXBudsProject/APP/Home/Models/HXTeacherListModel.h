@@ -21,5 +21,8 @@
 @property(nonatomic,copy) NSString *hobby;
 @property(nonatomic,copy) NSString *the_headportrait;
 @property(nonatomic,copy) NSString *followState;
+@property(nonatomic,copy) NSString *lng;//经度
+@property(nonatomic,copy) NSString *lat;//经度
+@property(nonatomic,copy) NSString *distance;//距离
 
 @end

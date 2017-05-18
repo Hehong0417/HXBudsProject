@@ -29,7 +29,7 @@
 }
 - (void)loadView {
 
-    self.view = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) backColor:kClearColor];
+    self.view = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) backColor:kWhiteColor];
     self.tabView = [UITableView lh_tableViewWithFrame:CGRectMake(0,-64, SCREEN_WIDTH, SCREEN_HEIGHT+64) tableViewStyle:UITableViewStyleGrouped delegate:self dataSourec:self];
     [self.view addSubview:self.tabView];
 }
@@ -59,56 +59,39 @@
     if ([self.dataSource respondsToSelector:@selector(numberOfSectionsInSearchSuggestionView:)]) {
         return [self.dataSource numberOfSectionsInSearchSuggestionView:tableView];
     }
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([self.dataSource respondsToSelector:@selector(searchSuggestionView:numberOfRowsInSection:)]) {
         return [self.dataSource searchSuggestionView:tableView numberOfRowsInSection:section];
     }
-    NSArray *arr = self.searchSuggestions[section];
-    return arr.count;
+    return self.searchSuggestions.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    if ([self.dataSource respondsToSelector:@selector(searchSuggestionView:cellForRowAtIndexPath:)]) {
-////        UITableViewCell *cell= [self.dataSource searchSuggestionView:tableView cellForRowAtIndexPath:indexPath];
-//        if (indexPath.section == 0) {
-//            
-//             HXSearchVideoCell *cell= (HXSearchVideoCell *)[self.dataSource searchSuggestionView:tableView cellForRowAtIndexPath:indexPath];
-//            
-//            return cell;
-//        }else {
-//               HXSearchArticleCell *cell= (HXSearchArticleCell*)[self.dataSource searchSuggestionView:tableView cellForRowAtIndexPath:indexPath];
-//            
-//            return cell;
-//        }
-//        return nil;
-//    }
+    if ([self.dataSource respondsToSelector:@selector(searchSuggestionView:cellForRowAtIndexPath:)]) {
+        HXSearchVideoCell *cell= [self.dataSource searchSuggestionView:tableView cellForRowAtIndexPath:indexPath];
+        if (cell)
+            return cell;
+    }
     
     //***********************//
-    if (indexPath.section == 0) {
-        
+    
         HXSearchVideoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXSearchVideoCell"];
         if(!cell){
             
             cell = [HXSearchVideoCell initSearchVideoCellWithXib];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+    if (self.searchSuggestions.count >0) {
         
-        return cell;
-    }else {
-        HXSearchArticleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXSearchArticleCell"];
-        if(!cell){
-            
-            cell = [HXSearchArticleCell initSearchArticleCellWithXib];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        
-        return cell;
+         cell.model = self.searchSuggestions[indexPath.row];
     }
-    return nil;
+    
+//        NSLog(@"searchSuggestions----%@",self.searchSuggestions);
+        return cell;
     //**************************//
     
     
@@ -139,44 +122,25 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
         if ([self.dataSource respondsToSelector:@selector(searchSuggestionView:heightForRowAtIndexPath:)]) {
             return [self.dataSource searchSuggestionView:tableView heightForRowAtIndexPath:indexPath];
         }
         return 90;
-        
-    }else{
-        if ([self.dataSource respondsToSelector:@selector(searchSuggestionView:heightForRowAtIndexPath:)]) {
-            return [self.dataSource searchSuggestionView:tableView heightForRowAtIndexPath:indexPath];
-        }
-
-        return 70;
-    }
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    if (section == 0) {
-        return @"视频";
-    }else {
-    
-       return @"文章";
-    }
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.didSelectCellBlock) self.didSelectCellBlock([tableView cellForRowAtIndexPath:indexPath]);
-
-    if (indexPath.section == 0) {
-        [self.navigationController pushVC:[HXCourseDetailAnotherVC new]];
+    HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
+    HXSubjectVideoModel *model = self.searchSuggestions[indexPath.row];
+    vc.curriculum_id = model.curriculum_id;
+    vc.playImageStr = model.curr_picture;
+    vc.curriculum_price = model.curriculum_price;
+    vc.charge_status_text = model.charge_status_text;
+    [self.navigationController pushVC:vc];
         
-    }else{
-    
-        [self.navigationController pushVC:[HXArticleDetailVC new]];
-    }
-    
 }
 
 @end

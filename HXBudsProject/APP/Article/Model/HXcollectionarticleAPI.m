@@ -10,13 +10,16 @@
 
 @implementation HXcollectionarticleAPI
 
-+ (instancetype)collectionarticleWitharticle_id:(NSString *)article_id{
++ (instancetype)collectionarticleWitharticle_id:(NSString *)article_id state:(NSString *)state{
 
     HXcollectionarticleAPI *api = [HXcollectionarticleAPI new];
     if (article_id) {
         [api.parameters setObject:article_id forKey:@"article_id"];
     }
-    api.subUrl = API_articlereview_add;
+    if (state) {
+        [api.parameters setObject:state forKey:@"state"];
+    }
+    api.subUrl = API_collectionarticle;
     api.parametersAddToken = YES;
     
     return api;

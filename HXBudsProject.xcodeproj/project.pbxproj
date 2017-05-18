@@ -262,6 +262,10 @@
 		0DB17DC61EC6CD5200F94E26 /* HXpurchaseCourseAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB17DC51EC6CD5200F94E26 /* HXpurchaseCourseAPI.m */; };
 		0DB305201E8226EC00DDBCD2 /* HXvideoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB3051E1E8226EC00DDBCD2 /* HXvideoCollectionCell.m */; };
 		0DB305211E8226EC00DDBCD2 /* HXvideoCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DB3051F1E8226EC00DDBCD2 /* HXvideoCollectionCell.xib */; };
+		0DB466191ECC4BDB00F6FFB9 /* HXMyCollectArticleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB466181ECC4BDB00F6FFB9 /* HXMyCollectArticleAPI.m */; };
+		0DB4661C1ECC4BFF00F6FFB9 /* HXMyCollectCurriAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB4661B1ECC4BFF00F6FFB9 /* HXMyCollectCurriAPI.m */; };
+		0DB4661F1ECC528C00F6FFB9 /* HXNearByOrganizationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB4661E1ECC528C00F6FFB9 /* HXNearByOrganizationVC.m */; };
+		0DB466221ECC544D00F6FFB9 /* HXNearByTeacherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB466211ECC544D00F6FFB9 /* HXNearByTeacherVC.m */; };
 		0DBA4D4E1E5E6DB400E549A5 /* HJTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBA4D4D1E5E6DB400E549A5 /* HJTabBarController.m */; };
 		0DBA4D581E5E892D00E549A5 /* HXPayInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBA4D561E5E892D00E549A5 /* HXPayInformationCell.m */; };
 		0DBA4D591E5E892D00E549A5 /* HXPayInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DBA4D571E5E892D00E549A5 /* HXPayInformationCell.xib */; };
@@ -851,6 +855,14 @@
 		0DB3051D1E8226EC00DDBCD2 /* HXvideoCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXvideoCollectionCell.h; sourceTree = "<group>"; };
 		0DB3051E1E8226EC00DDBCD2 /* HXvideoCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXvideoCollectionCell.m; sourceTree = "<group>"; };
 		0DB3051F1E8226EC00DDBCD2 /* HXvideoCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXvideoCollectionCell.xib; sourceTree = "<group>"; };
+		0DB466171ECC4BDB00F6FFB9 /* HXMyCollectArticleAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyCollectArticleAPI.h; sourceTree = "<group>"; };
+		0DB466181ECC4BDB00F6FFB9 /* HXMyCollectArticleAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyCollectArticleAPI.m; sourceTree = "<group>"; };
+		0DB4661A1ECC4BFF00F6FFB9 /* HXMyCollectCurriAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXMyCollectCurriAPI.h; sourceTree = "<group>"; };
+		0DB4661B1ECC4BFF00F6FFB9 /* HXMyCollectCurriAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXMyCollectCurriAPI.m; sourceTree = "<group>"; };
+		0DB4661D1ECC528C00F6FFB9 /* HXNearByOrganizationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXNearByOrganizationVC.h; sourceTree = "<group>"; };
+		0DB4661E1ECC528C00F6FFB9 /* HXNearByOrganizationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXNearByOrganizationVC.m; sourceTree = "<group>"; };
+		0DB466201ECC544D00F6FFB9 /* HXNearByTeacherVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXNearByTeacherVC.h; sourceTree = "<group>"; };
+		0DB466211ECC544D00F6FFB9 /* HXNearByTeacherVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXNearByTeacherVC.m; sourceTree = "<group>"; };
 		0DBA4D4C1E5E6DB400E549A5 /* HJTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJTabBarController.h; sourceTree = "<group>"; };
 		0DBA4D4D1E5E6DB400E549A5 /* HJTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJTabBarController.m; sourceTree = "<group>"; };
 		0DBA4D551E5E892D00E549A5 /* HXPayInformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPayInformationCell.h; sourceTree = "<group>"; };
@@ -1200,6 +1212,8 @@
 				0DAE8AB81EC0767D00CA0619 /* HXFindGroupSGVC.m */,
 				0DAE8ABA1EC07D6000CA0619 /* HXOrganizationVC.h */,
 				0DAE8ABB1EC07D6000CA0619 /* HXOrganizationVC.m */,
+				0DB4661D1ECC528C00F6FFB9 /* HXNearByOrganizationVC.h */,
+				0DB4661E1ECC528C00F6FFB9 /* HXNearByOrganizationVC.m */,
 				0D3A01501E4C05840038D62C /* HXOrganizationCell.h */,
 				0D3A01511E4C05840038D62C /* HXOrganizationCell.m */,
 				0D3A01521E4C05840038D62C /* HXOrganizationCell.xib */,
@@ -1236,6 +1250,8 @@
 				0DA098BC1EC19866004BB09A /* HXFamousTeacherSGVC.m */,
 				0DA098BE1EC19ACE004BB09A /* HXFamousTeacherVC.h */,
 				0DA098BF1EC19ACE004BB09A /* HXFamousTeacherVC.m */,
+				0DB466201ECC544D00F6FFB9 /* HXNearByTeacherVC.h */,
+				0DB466211ECC544D00F6FFB9 /* HXNearByTeacherVC.m */,
 				0D618B361EC170FA00E2C157 /* HXInstrumentVC.h */,
 				0D618B371EC170FA00E2C157 /* HXInstrumentVC.m */,
 				0D618B391EC171C200E2C157 /* HXInstrumentCell.h */,
@@ -1340,6 +1356,10 @@
 				0D7A6D911EC6E81A00EE80CD /* HXMyMessageAPI.m */,
 				0D7A6D931EC6ECA300EE80CD /* HXMyMessageModel.h */,
 				0D7A6D941EC6ECA300EE80CD /* HXMyMessageModel.m */,
+				0DB466171ECC4BDB00F6FFB9 /* HXMyCollectArticleAPI.h */,
+				0DB466181ECC4BDB00F6FFB9 /* HXMyCollectArticleAPI.m */,
+				0DB4661A1ECC4BFF00F6FFB9 /* HXMyCollectCurriAPI.h */,
+				0DB4661B1ECC4BFF00F6FFB9 /* HXMyCollectCurriAPI.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2416,7 +2436,7 @@
 				TargetAttributes = {
 					0DEA8EF51E486FC10052C459 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = F972623DL2;
+						DevelopmentTeam = KGWAJ8P3WV;
 						ProvisioningStyle = Automatic;
 					};
 					0DEA8F0E1E486FC10052C459 = {
@@ -2625,6 +2645,7 @@
 				0DEA902F1E4877BC0052C459 /* UILabel+FormattedText.m in Sources */,
 				0D764BB71EC5BC28001C41C6 /* HXArewardCell.m in Sources */,
 				0D757FEB1EB1EB75001E37E8 /* HXReViewAddAPI.m in Sources */,
+				0DB466191ECC4BDB00F6FFB9 /* HXMyCollectArticleAPI.m in Sources */,
 				0D71A3DC1E499E4E008F819D /* HJLog.m in Sources */,
 				0DEA902A1E4877BC0052C459 /* UIView+LH.m in Sources */,
 				0DB305201E8226EC00DDBCD2 /* HXvideoCollectionCell.m in Sources */,
@@ -2709,6 +2730,7 @@
 				0D8B00931E890C30000BF2EA /* HXSearchArticleCell.m in Sources */,
 				0DA098C01EC19ACE004BB09A /* HXFamousTeacherVC.m in Sources */,
 				0DEA900A1E4877BB0052C459 /* HJStaticGroupTableVC.m in Sources */,
+				0DB4661C1ECC4BFF00F6FFB9 /* HXMyCollectCurriAPI.m in Sources */,
 				0D8CC8A21E84FA3D00982B39 /* HXBrowserRecordArticleVC.m in Sources */,
 				0D8CC8CA1E851EAC00982B39 /* LWActiveIncatorAnimationView.m in Sources */,
 				0D56EE091E8DE5C600CB8E1C /* PYSearchConst.m in Sources */,
@@ -2719,6 +2741,7 @@
 				0DEA90351E4877BC0052C459 /* UIViewController+Create.m in Sources */,
 				0D7D77831E52A5EB00CF8D47 /* PGIndexBannerSubiew.m in Sources */,
 				0D8412831EBC5718004DB88E /* HXTeachingTypeListModel.m in Sources */,
+				0DB466221ECC544D00F6FFB9 /* HXNearByTeacherVC.m in Sources */,
 				0DF490211E7799E600C567B0 /* CLPlayerView.m in Sources */,
 				0D29905F1ECAEF4100729E94 /* HXOrganizationCourseAPI.m in Sources */,
 				0D6CA06E1EC433A8007F131A /* HXWXPayAPI.m in Sources */,
@@ -2775,6 +2798,7 @@
 				0D618B381EC170FA00E2C157 /* HXInstrumentVC.m in Sources */,
 				0D7286C41E83BDE600025AF0 /* HXCourseDetailIntroduceCell.m in Sources */,
 				0D8CC8911E84EC6600982B39 /* HXMesssageOneVC.m in Sources */,
+				0DB4661F1ECC528C00F6FFB9 /* HXNearByOrganizationVC.m in Sources */,
 				0D8E3CB01EC837C600C127EC /* HXTeacherGroupArticleVC.m in Sources */,
 				0D6F56581EAF270600B9190F /* HXHomeInfoArticleModel.m in Sources */,
 				0D3987221EB2DF5300AEDE68 /* HXGetVerifyCodeAPI.m in Sources */,
@@ -3005,7 +3029,7 @@
 				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = F972623DL2;
+				DEVELOPMENT_TEAM = KGWAJ8P3WV;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3028,7 +3052,7 @@
 				);
 				OTHER_CFLAGS = "$(inherited)";
 				PODS_ROOT = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya111;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -3044,7 +3068,7 @@
 				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = F972623DL2;
+				DEVELOPMENT_TEAM = KGWAJ8P3WV;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3067,7 +3091,7 @@
 				);
 				OTHER_CFLAGS = "$(inherited)";
 				PODS_ROOT = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya111;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "";

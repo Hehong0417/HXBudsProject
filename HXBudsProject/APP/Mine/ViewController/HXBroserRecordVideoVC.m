@@ -10,8 +10,8 @@
 #import "HXSujectVideoListCell.h"
 #import "HXCourseDetailAnotherVC.h"
 #import "HXBroserRecordVideoAPI.h"
-#import "HXSubjectVideoAPI.h"
 #import "HXSubjectVideoListModel.h"
+#import "HXMyCollectCurriAPI.h"
 
 @interface HXBroserRecordVideoVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
@@ -39,19 +39,13 @@
 }
 - (void)getBroserRecordVideoData{
 
-//   [[[HXBroserRecordVideoAPI getBroserRecordVideoData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-//      
-//       
-//   }];
-    
-        [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@5 theteacherId:nil curriculum­­_status:nil isLogin:YES] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-            
-            HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
-            
-            self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
-            [self.tableView reloadData];
-        }];
+    [[[HXMyCollectCurriAPI getMyCollectCurriculum] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
         
+        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+        
+        self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+        [self.tableView reloadData];
+    }];
 }
 #pragma mark - Table view data source
 

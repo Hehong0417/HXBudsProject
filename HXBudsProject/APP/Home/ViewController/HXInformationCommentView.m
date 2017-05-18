@@ -22,33 +22,28 @@
         self.reViewTextField.borderStyle = UITextBorderStyleRoundedRect;
         [self addSubview:self.reViewTextField];
         
-        //
+        //收藏按钮
         self.collectionBtn = [UIButton lh_buttonWithFrame:CGRectMake(frame.size.width-47*2, 0,47, 50) target:self action:@selector(collectionBtnAction:) image:[UIImage imageNamed:@"collect"]];
+        [self.collectionBtn setImage:[UIImage imageNamed:@"collect1"] forState:UIControlStateSelected];
         [self addSubview:self.collectionBtn];
         //
-        self.shareBtn = [UIButton lh_buttonWithFrame:CGRectMake(frame.size.width-47, 0,47, 50) target:self action:@selector(shareBtnAction) image:[UIImage imageNamed:@"share"]];
+        self.shareBtn = [UIButton lh_buttonWithFrame:CGRectMake(frame.size.width-47, 0,47, 50) target:self action:@selector(shareBtnAction) image:[UIImage imageNamed:@"share1"]];
         [self addSubview:self.shareBtn];
-        //
-        self.sendBtn = [UIButton lh_buttonWithFrame:CGRectMake(frame.size.width-70, CGRectGetMaxY(self.collectionBtn.frame)+5,60, 30) target:self action:@selector(sendAction) image:nil title:@"发送评论" titleColor:kWhiteColor font:FONT(12)];
-        [self addSubview:self.sendBtn];
     }
     return self;
 }
 - (void)collectionBtnAction:(UIButton *)btn{
-   
+    btn.selected = !btn.selected;
+    self.selectefinishBlock(btn.selected);
 
 }
 - (void)backAction{
-
-
+   
+    [self.nav popVC];
 }
 - (void)shareBtnAction{
 
 
 }
-- (void)sendAction {
 
-
-
-}
 @end

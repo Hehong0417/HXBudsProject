@@ -16,7 +16,7 @@
 
     if (self =[super initWithFrame:frame]) {
         //分类图片
-        self.categoryImageV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 0, 10, 40)];
+        self.categoryImageV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 0, 10, 35)];
         self.categoryImageV.contentMode = UIViewContentModeLeft;
         //categoryImageV.backgroundColor = kOrangeColor;
         [self addSubview:self.categoryImageV];
@@ -44,8 +44,8 @@
 }
 - (void)setHeadtitle:(NSString *)headtitle {
     _headtitle = headtitle;
-    CGSize nameSize = [self.headtitle lh_sizeWithFont:[UIFont systemFontOfSize:self.labFont] constrainedToSize:CGSizeMake(SCREEN_WIDTH, 30)];
-    self.headTitleLab.frame = CGRectMake(25, 4, nameSize.width+5, self.frame.size.height-9);
+    CGSize nameSize = [self.headtitle lh_sizeWithFont:[UIFont systemFontOfSize:self.labFont] constrainedToSize:CGSizeMake(SCREEN_WIDTH, 25)];
+    self.headTitleLab.frame = CGRectMake(25, 0, nameSize.width+5, 35);
     self.headTitleLab.text = _headtitle;
 }
 - (void)setDiscribText:(NSString *)discribText {
@@ -55,9 +55,9 @@
 }
 - (void)layoutSubviews {
 
-    XYQButton *changeBtn = [XYQButton ButtonWithFrame:CGRectMake(SCREEN_WIDTH - WidthScaleSize_W(80), 2, WidthScaleSize_W(80), self.frame.size.height-2) imgaeName:@"" titleName:self.rightBtnTitle contentType:self.contentType buttonFontAttributes:self.btnFontAttributes tapAction:^(XYQButton *button) {
+    XYQButton *changeBtn = [XYQButton ButtonWithFrame:CGRectMake(SCREEN_WIDTH - WidthScaleSize_W(80), 2, 60, self.frame.size.height-2) imgaeName:@"more" titleName:self.rightBtnTitle contentType:self.contentType buttonFontAttributes:self.btnFontAttributes tapAction:^(XYQButton *button) {
         
-        [self.nav pushVC:[HXSubjectVideoVC new]];
+//        [self.nav pushVC:[HXSubjectVideoVC new]];
         
     }];
     changeBtn.enabled = NO;

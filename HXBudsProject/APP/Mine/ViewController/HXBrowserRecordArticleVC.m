@@ -10,7 +10,7 @@
 #import "HXMyArticleCell.h"
 #import "HXArticleDetailVC.h"
 #import "HXBroserRecordArticleAPI.h"
-#import "HXMyArticleAPI.h"
+#import "HXMyCollectArticleAPI.h"
 
 @interface HXBrowserRecordArticleVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -41,19 +41,15 @@
 
 - (void)getBroserRcordArticleData{
 
-//   [[[HXBroserRecordArticleAPI getBroserRecordArticleData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-//      
-//       
-//   }];
-   [[[HXMyArticleAPI getMyArticleData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-       HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
-       
-       self.infoArticleListModel = [api.class mj_objectWithKeyValues:responseObject];
-       
-       [self.tableView reloadData];
-       
-   }];
-    
+ [[[HXMyCollectArticleAPI getMycollectionarticle] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+     HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
+     
+     self.infoArticleListModel = [api.class mj_objectWithKeyValues:responseObject];
+     
+     [self.tableView reloadData];
+
+ }];
+  
 }
 
 #pragma mark - Table view data source

@@ -17,7 +17,8 @@
 @property(nonatomic,copy) NSString *mechanism_name;
 @property(nonatomic,copy) NSString *mechanism_logo;
 @property(nonatomic,copy) NSString *mechanism_desc;
-@property(nonatomic,copy) NSString *mechanism_Lng;//经度
-@property(nonatomic,copy) NSString *mechanism_Lat;//经度
+@property(nonatomic,copy) NSString *mechanism_lng;//经度
+@property(nonatomic,copy) NSString *mechanism_lat;//经度
+@property(nonatomic,copy) NSString *distance;//距离
 
 @end

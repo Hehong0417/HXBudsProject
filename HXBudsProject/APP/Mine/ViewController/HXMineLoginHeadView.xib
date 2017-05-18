@@ -15,6 +15,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="5OU-St-vNC">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGl-Uu-nj5">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                     <subviews>
@@ -48,7 +51,6 @@
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="XWY-22-iY3" firstAttribute="leading" secondItem="IGl-Uu-nj5" secondAttribute="leading" constant="18" id="0cB-zK-UG1"/>
                         <constraint firstItem="baV-9u-x2g" firstAttribute="leading" secondItem="XWY-22-iY3" secondAttribute="trailing" constant="31" id="3Bz-Fl-9FW"/>
@@ -66,6 +68,10 @@
                 <constraint firstItem="IGl-Uu-nj5" firstAttribute="leading" secondItem="S8V-O0-gVb" secondAttribute="leading" id="Ql5-pD-py1"/>
                 <constraint firstAttribute="bottom" secondItem="IGl-Uu-nj5" secondAttribute="bottom" id="bq8-tX-5n2"/>
                 <constraint firstAttribute="trailing" secondItem="IGl-Uu-nj5" secondAttribute="trailing" id="cE4-KR-osw"/>
+                <constraint firstAttribute="bottom" secondItem="5OU-St-vNC" secondAttribute="bottom" id="mzh-om-YMQ"/>
+                <constraint firstItem="5OU-St-vNC" firstAttribute="leading" secondItem="S8V-O0-gVb" secondAttribute="leading" id="pCd-gn-QwH"/>
+                <constraint firstItem="5OU-St-vNC" firstAttribute="top" secondItem="S8V-O0-gVb" secondAttribute="top" id="tWJ-jJ-iHH"/>
+                <constraint firstAttribute="trailing" secondItem="5OU-St-vNC" secondAttribute="trailing" id="xGo-K8-nKS"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -76,6 +82,7 @@
         </view>
     </objects>
     <resources>
+        <image name="bg" width="375" height="150"/>
         <image name="right_arrow" width="8" height="16"/>
     </resources>
 </document>

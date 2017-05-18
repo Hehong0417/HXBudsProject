@@ -31,4 +31,6 @@ typedef void(^followSelectedBlock)(BOOL followed);
 
 @property (copy, nonatomic)  followSelectedBlock followSelectedBlock;
 
+@property(nonatomic,assign) BOOL  loginState;
+
 @end

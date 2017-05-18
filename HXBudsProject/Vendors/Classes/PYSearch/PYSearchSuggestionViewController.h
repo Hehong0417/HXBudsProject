@@ -15,7 +15,7 @@ typedef void(^PYSearchSuggestionDidSelectCellBlock)(UITableViewCell *selectedCel
 
 @required
 /** 返回用户自定义搜索建议Cell */
-- (UITableViewCell *)searchSuggestionView:(UITableView *)searchSuggestionView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (HXSearchVideoCell *)searchSuggestionView:(UITableView *)searchSuggestionView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 /** 返回用户自定义搜索建议cell的rows */
 - (NSInteger)searchSuggestionView:(UITableView *)searchSuggestionView numberOfRowsInSection:(NSInteger)section;
 @optional

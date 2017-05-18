@@ -14,7 +14,6 @@
 #import "HXVideoSectionHead.h"
 #import "HXSubjectVideoVC.h"
 #import "HXMyLikeVC.h"
-#import "HXTeacherListAPI.h"
 #import "HXAdvertisementAPI.h"
 #import "HXAdvListModel.h"
 #import "HXteacherList.h"
@@ -32,6 +31,8 @@
 #import "HXChoicenessCell.h"
 #import "HXCurriculumTypeCell.h"
 #import "HXSectionFootView.h"
+#import "HXCurriculumSearchAPI.h"
+#import "HXSubjectVideoListModel.h"
 
 @interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,SearchViewControllerDelegate>
 {
@@ -53,6 +54,9 @@
 
 @property (nonatomic, strong) HXTeachingTypeListModel *teachingTypeListModel;
 @property (nonatomic, strong) NSArray *followList;
+
+
+@property (nonatomic, strong) HXSubjectVideoListModel *searchVideoModel;
 
 @end
 
@@ -90,33 +94,7 @@
     }];
 
 }
-- (void)getTeacherList{
 
-    //判断是否登录
-    HJUser *user = [HJUser sharedUser];
-    [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-       
-        NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
-        if ([isLoginStr isEqualToString:@"no"]) {
-            isLogin = NO;
-        }else {
-            isLogin = YES;
-        }
-
-        [[[HXTeacherListAPI getTeacherListWithWithLimit:@2 isLogin:isLogin] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-            
-            HXTeacherListModel *api = [HXTeacherListModel new];
-            
-            self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
-            
-            [self.collectionView reloadData];
-            
-        }];
-        
-    }];
-    
-    
-}
 - (void)getList_online {
     
     [[[HXAdvertisementAPI getAdvertisement] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
@@ -335,30 +313,29 @@
             
             HXVideoSectionHead *sectionHead = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead" forIndexPath:indexPath];
             sectionHead.headtitle = @"热门课程";
-            sectionHead.contentType = LeftImageRightTitle;
-            sectionHead.rightBtnTitle = @"更多》";
+            sectionHead.contentType = LeftTitleRightImage;
+            sectionHead.rightBtnTitle = @"更多";
             sectionHead.labFont = 15;
             sectionHead.imageName = @"hot";
             sectionHead.btnFontAttributes = [FontAttributes fontAttributesWithFontColor:RGB(186, 186, 186) fontsize:13];
-            //            [sectionHead setTapActionWithBlock:^{
-            //                HXSubjectVideoVC *vc = [HXSubjectVideoVC new];
-            //                [self.navigationController pushVC:vc];
-            //            }];
+            [sectionHead setTapActionWithBlock:^{
+                HXSubjectVideoVC *vc = [HXSubjectVideoVC new];
+                [self.navigationController pushVC:vc];
+            }];
             return sectionHead;
         
         }else{
         
          HXVideoSectionHead *sectionHead = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HXVideoSectionHead" forIndexPath:indexPath];
             sectionHead.headtitle = @"精选好课";
-            sectionHead.contentType = LeftImageRightTitle;
-            sectionHead.rightBtnTitle = @"更多》";
+            sectionHead.contentType = LeftTitleRightImage;
+            sectionHead.rightBtnTitle = @"更多";
             sectionHead.labFont = 15;
             sectionHead.imageName = @"jingxuan";
             sectionHead.btnFontAttributes = [FontAttributes fontAttributesWithFontColor:RGB(186, 186, 186) fontsize:13];
-//            [sectionHead setTapActionWithBlock:^{
-//                HXSubjectVideoVC *vc = [HXSubjectVideoVC new];
-//                [self.navigationController pushVC:vc];
-//            }];
+            [sectionHead setTapActionWithBlock:^{
+                [self.navigationController pushVC:[HXLoginVC new]];
+            }];
             return sectionHead;
         }
     }else if(kind  == UICollectionElementKindSectionFooter){
@@ -416,6 +393,7 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:messageBtn];
 }
+//搜索
 - (void)addSearchVC{
 
     //*************搜 索************//
@@ -433,7 +411,8 @@
     HXSearchViewController *searchViewController = [HXSearchViewController searchViewControllerWithHotSearches:hotSeaches hotSearches_ids:hotSeaches_Ids searchBarPlaceholder:@"搜索" didSearchBlock:^(HXSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
         // 开始搜索执行以下代码
         // 如：跳转到指定控制器
-        //                    [searchViewController.navigationController pushViewController:[[HXSearchVC alloc] init] animated:YES];
+//        
+//        [searchViewController.navigationController pushViewController:[[HXSearchVC alloc] init] animated:YES];
         
     }];
 //3.设置风格
@@ -441,7 +420,7 @@
     searchViewController.searchHistoryStyle = PYSearchHistoryStyleDefault;
     // 4. 设置代理
     searchViewController.delegate = self;
-    searchViewController.searchSuggestions = @[@[@"视频1",@"视频2"],@[@"视频1",@"视频2"]];
+//    searchViewController.searchSuggestions = @[@"视频1",@"视频2"];
     
     [self.navigationController pushVC:searchViewController];
     
@@ -449,22 +428,20 @@
 
 }
 #pragma mark - SearchViewControllerDelegate
-//- (void)searchViewController:(HXSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
-//{
-//    
-//    if (searchText.length) { // 与搜索条件再搜索
-//        // 根据条件发送查询（这里模拟搜索）
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 搜素完毕
-//            // 显示建议搜索结果
-//            NSMutableArray *searchSuggestionsM = [NSMutableArray array];
-//            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
-//                NSString *searchSuggestion = [NSString stringWithFormat:@"搜索建议 %d", i];
-//                [searchSuggestionsM addObject:searchSuggestion];
-//            }
-//            // 返回
-//            searchViewController.searchSuggestions = searchSuggestionsM;
-//        });
-//    }
-//}
+- (void)searchViewController:(HXSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
+{
+    
+    if (searchText.length) { // 与搜索条件再搜索
+        
+        //标题模糊查询
+        [[[HXCurriculumSearchAPI getsearchCurriculumListWithCurr_title:searchText teachingtype_id:nil]netWorkClient]postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+            HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+            self.searchVideoModel = [api.class mj_objectWithKeyValues:responseObject];
+            searchViewController.searchSuggestions = self.searchVideoModel.varList;
+        }];
+        
+       }
+    
+}
 
 @end

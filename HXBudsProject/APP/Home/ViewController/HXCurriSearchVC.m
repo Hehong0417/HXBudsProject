@@ -9,10 +9,14 @@
 #import "HXCurriSearchVC.h"
 #import "HXTeachingTypeListModel.h"
 #import "HXTeachingTypeListAPI.h"
+#import "HXCurriculumSearchAPI.h"
+#import "HXSubjectVideoListModel.h"
 
 #define  Margin 10
 @interface HXCurriSearchVC ()<UISearchBarDelegate>
 @property (nonatomic, strong) HXTeachingTypeListModel *teachingTypeListModel;
+@property (nonatomic, strong) HXSubjectVideoListModel *searchVideoModel;
+
 
 @end
 
@@ -116,6 +120,14 @@
     
 //   根据输入文本显示建议搜索结果
     self.searchResultVC.view.hidden = self.searchSuggestionHidden || !searchText.length;
+    
+    //标题模糊查询
+    [[[HXCurriculumSearchAPI getsearchCurriculumListWithCurr_title:searchText teachingtype_id:nil]netWorkClient]postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+        self.searchVideoModel = [api.class mj_objectWithKeyValues:responseObject];
+        
+    }];
+    
     
     // 放在最上层
     [self.view bringSubviewToFront:self.searchResultVC.view];

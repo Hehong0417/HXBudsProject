@@ -9,7 +9,7 @@
 #import "HXOrganizationListAPI.h"
 
 @implementation HXOrganizationListAPI
-+ (instancetype)getOrganizationListWithmechanism_id:(NSString *)mechanism_id Limit:(NSString*)limit{
++ (instancetype)getOrganizationListWithmechanism_id:(NSString *)mechanism_id Limit:(NSString*)limit recommend:(NSString *)recommend{
 
     HXOrganizationListAPI *api = [HXOrganizationListAPI new];
     api.subUrl = API_mechanism_list;
@@ -18,6 +18,9 @@
     }
     if (mechanism_id) {
         [api.parameters setObject:mechanism_id forKey:@"mechanism_id"];
+    }
+    if (recommend) {
+        [api.parameters setObject:recommend forKey:@"recommend"];
     }
     api.parametersAddToken = NO;
     

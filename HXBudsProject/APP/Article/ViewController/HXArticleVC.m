@@ -36,13 +36,14 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:animated];
+    
     [self getArticleListData];
     [self getArticleTypeList];
-
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     
     self.tabView = [UITableView lh_tableViewWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) tableViewStyle:UITableViewStyleGrouped delegate:self dataSourec:self];
     self.tabView.separatorStyle = UITableViewCellSeparatorStyleNone;

@@ -18,10 +18,11 @@
 #define Wechat_AppKey  @"wx4a20e81b69eba007"
 #define Wechat_appSecret  @"066849ab40a78ddeb49370b9dcc2a4b4"
 
-#define QQ_AppKey  @"1105821097"
+#define QQ_AppKey  @"1106034083"
 
 #define Weibo_appKey  @"3921700954"
 #define Weibo_appSecret  @"04b48b094faeb16683c32669824ebdad"
+
 #define baiduMap_Key  @"Ns6jXZ3k1SUKTk2Tdt15ADXHsy9Qwd88"
 #import "HWNEWfeatureViewController.h"
 
@@ -64,7 +65,7 @@
 
     //*************//
     //配置 IQKeyboardManager
-    [self IQKeyboardManagerConfig];
+//    [self IQKeyboardManagerConfig];
     
     //配置友盟
     [self UMSocialConfig];
@@ -179,12 +180,12 @@
     /* 设置分享到QQ互联的appID
      * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
      */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:QQ_AppKey  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:QQ_AppKey  appSecret:nil redirectURL:article_detail_url];
     
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Qzone appKey:QQ_AppKey  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Qzone appKey:QQ_AppKey  appSecret:nil redirectURL:article_detail_url];
     
     /* 设置新浪的appKey和appSecret */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:Weibo_appKey  appSecret:Weibo_appSecret redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:Weibo_appKey  appSecret:Weibo_appSecret redirectURL:article_detail_url];
     
 }
 

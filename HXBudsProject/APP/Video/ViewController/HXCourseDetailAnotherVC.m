@@ -72,10 +72,10 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     return UIInterfaceOrientationPortrait;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-   //判断是否已登录
+    [super viewWillAppear:animated];
+    //判断是否已登录
     HJUser *user = [HJUser sharedUser];
     [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
         
@@ -88,6 +88,9 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
             [self isSubcribeAdd];
         }
     }];
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     
     self.navigationItem.titleView = [UILabel lh_labelWithFrame:CGRectMake(0, 0, 50, 44) text:@"课程详情" textColor:kBlackColor font:FONT(20) textAlignment:NSTextAlignmentCenter backgroundColor:kClearColor];
@@ -119,12 +122,14 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
             //判断是否免费
             if (![weakSelf.charge_status_text isEqualToString:@"免费"]) {
                 
-                [self purchaseCourse:weakSelf.curriculum_price];
+                [weakSelf purchaseCourse:weakSelf.curriculum_price];
             }else{
             
                 [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:weakSelf.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
                     
                     weakSelf.buyBottomView.consultBtn.titleLabel.text = @"已加入";
+                    weakSelf.IsAddSubscrib = YES;
+                    weakSelf.buyBottomView.consultBtn.enabled = NO;
                 }];
             }
         }
@@ -139,8 +144,6 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
            weakSelf.buyBottomView.consultBtn.enabled = NO;
         }
     };
-    
-    
 }
 //购买课程
 - (void)purchaseCourse:(NSString *)curriculum_price{
@@ -150,7 +153,11 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
         NSString *transaction = responseObject[@"pd"][@"transaction"];
         if ([transaction isEqualToString:@"ok"]) {
             //购买成功
-            [SVProgressHUD showInfoWithStatus:@"加入成功"];
+            [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+                
+                self.buyBottomView.consultBtn.titleLabel.text = @"已加入";
+                [SVProgressHUD showInfoWithStatus:@"加入成功"];
+            }];
             
         }else if ([transaction isEqualToString:@"no"]){
             //余额不足，调用微信支付接口
@@ -303,14 +310,12 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 //分享
 - (void)shareAction {
     
-//    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-//        // 根据获取的platformType确定所选平台进行下一步操作
-//        
-//        [self shareVedioToPlatformType:platformType];
-//        
-//    }];
-//
-    
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        // 根据获取的platformType确定所选平台进行下一步操作
+        
+        [self shareVedioToPlatformType:platformType];
+        
+    }];
 }
 
 - (void)payWithResponse:(NSDictionary *)response{
@@ -327,7 +332,15 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     //日志输出
     NSLog(@"partid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\n sign=%@",req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
     NSLog(@"success--%d",success);
-    
+    if (success) {
+        //加入学习
+        [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+            
+            self.buyBottomView.consultBtn.titleLabel.text = @"已加入";
+            self.IsAddSubscrib = YES;
+            [SVProgressHUD showInfoWithStatus:@"加入成功"];
+        }];
+    }
 }
 //微信支付回调
 - (void)onResp:(BaseResp *)resp  {
@@ -399,7 +412,11 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     [self.playerView destroyPlayer];
     
 }
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.playerView destroyPlayer];
 
+}
 - (void)dealloc{
 
     [self.playerView destroyPlayer];

@@ -38,7 +38,6 @@
 @property (nonatomic, strong) HXOrganizationHeadView *organizationHeadView;
 @property (nonatomic, strong) HXOrganizationDeetailModel *organizationDetailModel;
 
-
 @end
 
 @implementation HXOrganizationDetailVC
@@ -46,6 +45,9 @@
 - (void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
+    
+    //判断是否登录
+    [self isLoginState];
     
     switch (self.detailType) {
         case teacherDetailType:{
@@ -61,11 +63,6 @@
         default:
             break;
     }
-    
-}
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
     self.organizationHeadView = [HXOrganizationHeadView initOrganizationHeadViewWithXib];
     self.organizationHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 270);
     self.view.backgroundColor = kWhiteColor;
@@ -73,10 +70,10 @@
     [self.view addSubview:self.organizationHeadView];
     //关注
     WEAK_SELF();
-     self.organizationHeadView.followSelectedBlock = ^(BOOL followed) {
-         
-         [weakSelf followRequestfollowed:followed];
-     };
+    self.organizationHeadView.followSelectedBlock = ^(BOOL followed) {
+        
+        [weakSelf followRequestfollowed:followed];
+    };
     //地址
     [self.organizationHeadView.addressView setTapActionWithBlock:^{
         HXMapVC *mapVc = [HXMapVC new];
@@ -84,9 +81,9 @@
         [self.navigationController pushVC:[HXMapVC new]];
     }];
 
-    //判断是否登录
-    [self isLoginState];
-
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     // 1.添加所有子控制器
     [self setupChildViewController];
@@ -109,7 +106,6 @@
         }
     }];
     
-
 }
 //关注老师
 - (void)followRequestfollowed:(BOOL)followed{

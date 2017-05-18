@@ -11,12 +11,15 @@
 #import "HXMyAttetionVC.h"
 #import "HXMyattentionFriendVC.h"
 #import "HXOrganizationVC.h"
+#import "HXNearByOrganizationVC.h"
+#import "HXIsLoginAPI.h"
 
 
 @interface HXFindGroupSGVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
 
 @property(nonatomic,strong)SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
+@property (nonatomic, assign) BOOL isLogin;
 
 @end
 
@@ -31,7 +34,6 @@
     [self setupChildViewController];
     
     [self setupSegmentedControl];
-    
     
 }
 - (void)setupSegmentedControl {
@@ -64,7 +66,6 @@
     [self.view addSubview:_SG];
 }
 
-
 - (void)SGSegmentedControl:(SGSegmentedControl *)segmentedControl didSelectBtnAtIndex:(NSInteger)index {
     // 1 计算滚动的位置
     CGFloat offsetX = index * self.view.frame.size.width;
@@ -76,12 +77,19 @@
 // 添加所有子控制器
 - (void)setupChildViewController {
     
-    for (NSInteger i = 0; i<3; i++) {
-        
-        HXOrganizationVC *vc = [HXOrganizationVC new];
-        [self addChildViewController:vc];
-    }
+    //推荐机构
+    HXOrganizationVC *vc1 = [HXOrganizationVC new];
+    vc1.typeNum = 1;
+    [self addChildViewController:vc1];
     
+    //附近机构
+    HXNearByOrganizationVC *vc2 = [HXNearByOrganizationVC new];
+    [self addChildViewController:vc2];
+    //全部
+    HXOrganizationVC *vc3 = [HXOrganizationVC new];
+    vc3.typeNum = 2;
+    [self addChildViewController:vc3];
+ 
 }
 
 // 显示控制器的view

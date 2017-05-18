@@ -821,7 +821,6 @@
 /** 选中标签 */
 - (void)tagDidCLick:(UITapGestureRecognizer *)gr
 {
-//    
 //    UILabel *label = (UILabel *)gr.view;
 //    self.searchBar.text = label.text;
 //    [self searchBar:self.searchBar textDidChange:self.searchBar.text];

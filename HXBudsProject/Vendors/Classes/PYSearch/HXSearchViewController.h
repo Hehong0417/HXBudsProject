@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, PYSearchResultShowMode) { // 搜索结果显示方式
     PYSearchResultShowModeDefault = PYSearchResultShowModeCustom // 默认为用户自定义（自己处理）
 };
 
-@protocol PYSearchViewControllerDataSource <NSObject, UITableViewDataSource>
+@protocol SearchViewControllerDataSource <NSObject, UITableViewDataSource>
 /** 返回用户自定义搜索建议Cell */
 - (UITableViewCell *)searchSuggestionView:(UITableView *)SearchSuggestionView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 /** 返回用户自定义搜索建议cell的rows */
@@ -104,7 +104,7 @@ typedef NS_ENUM(NSInteger, PYSearchResultShowMode) { // 搜索结果显示方式
 /** 代理 */
 @property (nonatomic, weak) id<SearchViewControllerDelegate> delegate;
 /** 数据源 */
-@property (nonatomic, weak) id<PYSearchViewControllerDataSource> dataSource;
+@property (nonatomic, weak) id<SearchViewControllerDataSource> dataSource;
 
 /** 热门搜索风格 （默认为：PYHotSearchStyleDefault）*/
 @property (nonatomic, assign) PYHotSearchStyle hotSearchStyle;

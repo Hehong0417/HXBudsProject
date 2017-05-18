@@ -9,6 +9,8 @@
 #import "HXFamousTeacherSGVC.h"
 #import "SGSegmentedControl.h"
 #import "HXFamousTeacherVC.h"
+#import "HXNearByTeacherVC.h"
+
 
 @interface HXFamousTeacherSGVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
 @property(nonatomic,strong)SGSegmentedControl *SG;
@@ -69,12 +71,14 @@
 // 添加所有子控制器
 - (void)setupChildViewController {
     
-    for (NSInteger i = 0; i<3; i++) {
-        
-        HXFamousTeacherVC *vc = [HXFamousTeacherVC new];
-        [self addChildViewController:vc];
-    }
-
+        HXFamousTeacherVC *vc1 = [HXFamousTeacherVC new];
+        vc1.typeNum = 1;
+        [self addChildViewController:vc1];
+        HXNearByTeacherVC *vc2 = [HXNearByTeacherVC new];
+        [self addChildViewController:vc2];
+        HXFamousTeacherVC *vc3 = [HXFamousTeacherVC new];
+         vc3.typeNum = 2;
+        [self addChildViewController:vc3];
     
 }
 

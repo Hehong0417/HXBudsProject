@@ -23,10 +23,11 @@ static const CGFloat kNormalCellHeight = 44;
 
 - (void)loadView {
     
-    self.view = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) backColor:kWhiteColor];
-    self.tableV = [UITableView lh_tableViewWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT-49) tableViewStyle:UITableViewStyleGrouped delegate:self dataSourec:self];
-    self.tableV.backgroundColor = KVCBackGroundColor;
+    self.view = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) backColor:KVCBackGroundColor];
+    self.tableV = [UITableView lh_tableViewWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT-49) tableViewStyle:UITableViewStylePlain delegate:self dataSourec:self];
+    self.tableV.backgroundColor = kClearColor;
     [self.view addSubview:self.tableV];
+    self.tableV.tableFooterView = [UIView new];
 
 }
 -(void)viewDidLoad {
@@ -187,32 +188,37 @@ static const CGFloat kNormalCellHeight = 44;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    if (!self.tableSectionHeaderViewTitle) {
-        
-        if (section == 0 && self.firstGroupSpacing > 0) {
-            
-            
-            return self.firstGroupSpacing;
-        }
-        
-        return kNormalGroupSpacing;
-    }else {
-        
-       NSString *tableSectionTitle = [self.tableSectionHeaderViewTitle objectAtIndex:section];
-        
-        if (tableSectionTitle.length >0) {
-            
-            return kNormalTableSectionHeaderViewHeight;
-        }else {
-            
-            if (self.firstGroupSpacing>0 && section ==0) {
-                
-                return self.firstGroupSpacing;
-            }
-            
-            return kNormalGroupSpacing;
-        }
-    }
+//    if (!self.tableSectionHeaderViewTitle) {
+//        
+//        if (section == 0 && self.firstGroupSpacing > 0) {
+//            
+//            
+//            return self.firstGroupSpacing;
+//        }
+//        
+//        return kNormalGroupSpacing;
+//    }else {
+//        
+//       NSString *tableSectionTitle = [self.tableSectionHeaderViewTitle objectAtIndex:section];
+//        
+//        if (tableSectionTitle.length >0) {
+//            
+//            return kNormalTableSectionHeaderViewHeight;
+//        }else {
+//            
+//            if (self.firstGroupSpacing>0 && section ==0) {
+//                
+//                return self.firstGroupSpacing;
+//            }
+                if (section == 0) {
+                 return 0.01;
+                }else{
+                    return kNormalGroupSpacing;
+                }
+//        }
+//    }
+//    return 0.01;
+  
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -243,12 +249,12 @@ static const CGFloat kNormalCellHeight = 44;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-
-    return 0.01;
+  
+        return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     return kNormalCellHeight;
 }
 

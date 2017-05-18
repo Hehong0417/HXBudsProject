@@ -9,6 +9,6 @@
 #import "BaseAPI.h"
 
 @interface HXcollectionarticleAPI : BaseAPI
-+(instancetype)collectionarticleWitharticle_id:(NSString *)article_id;
++(instancetype)collectionarticleWitharticle_id:(NSString *)article_id state:(NSString *)state;
 
 @end

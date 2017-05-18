@@ -36,6 +36,16 @@
         UIColor *introBackgroud = teacherModel.hobby ?kWhiteColor:KPlaceHoldColor;
     self.introduceLab.backgroundColor = introBackgroud;
     self.teacherNameLab.backgroundColor = backgroud;
+    if (teacherModel.distance.floatValue >1000) {
+        
+        self.distanceLab.text = [NSString stringWithFormat:@"%.2fkm",teacherModel.distance.floatValue/1000];
+        
+    }else{
+        
+        self.distanceLab.text = [NSString stringWithFormat:@"%@m",teacherModel.distance];  ;
+        
+    }
+
 }
 
 - (void)setOrganizationModel:(HXOrganizationVarListModel *)organizationModel {
@@ -52,7 +62,15 @@
     self.introduceLab.backgroundColor = introBackgroud;
     self.teacherNameLab.backgroundColor = backgroud;
 
+    if (organizationModel.distance.floatValue >1000) {
+        
+        self.distanceLab.text = [NSString stringWithFormat:@"%.2fkm",organizationModel.distance.floatValue/1000];
 
+    }else{
+    
+        self.distanceLab.text = [NSString stringWithFormat:@"%@m",organizationModel.distance];  ;
+        
+    }
 
 }
 

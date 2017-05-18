@@ -13,5 +13,9 @@
 
 @end
 @interface HXMyMessageVarlistModel : BaseModel
-
+@property(nonatomic,strong) NSString *ctime;
+@property(nonatomic,strong) NSString *notification_title;
+@property(nonatomic,strong) NSString *systemnotification_id;
+@property(nonatomic,strong) NSString *content;
+@property(nonatomic,strong) NSString *watch_status;
 @end

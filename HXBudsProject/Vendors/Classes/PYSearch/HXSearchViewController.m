@@ -11,6 +11,8 @@
 #import "HXSearchVC.h"
 #import "HXSearchVideoCell.h"
 #import "HXSearchArticleCell.h"
+#import "HXCurriculumSearchAPI.h"
+#import "HXSubjectVideoListModel.h"
 
 #define PYRectangleTagMaxCol 3 // 矩阵标签时，最多列数
 #define PYTextColor PYColor(113, 113, 113)  // 文本字体颜色
@@ -51,6 +53,9 @@
 @property (nonatomic, strong) UITableView *baseSearchTableView;
 /** 记录是否点击搜索建议 */
 @property (nonatomic, assign) BOOL didClickSuggestionCell;
+
+
+@property (nonatomic, strong) HXSubjectVideoListModel *searchVideoModel;
 
 @end
 
@@ -370,6 +375,7 @@
         rectangleTagLabel.py_height = rectangleTagH;
         rectangleTagLabel.textAlignment = NSTextAlignmentCenter;
         [rectangleTagLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tagDidCLick:)]];
+        rectangleTagLabel.tag = i;
         // 计算布局
         rectangleTagLabel.py_x = rectangleTagLabel.py_width * (i % PYRectangleTagMaxCol);
         rectangleTagLabel.py_y = rectangleTagLabel.py_height * (i / PYRectangleTagMaxCol);
@@ -532,6 +538,7 @@
     for (int i = 0; i < tagTexts.count; i++) {
         UILabel *label = [self labelWithTitle:tagTexts[i]];
         [label addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tagDidCLick:)]];
+        label.tag = i;
         [contentView addSubview:label];
         [tagsM addObject:label];
     }
@@ -590,9 +597,9 @@
 - (void)setHotSearchTags:(NSArray<UILabel *> *)hotSearchTags
 {
     // 设置热门搜索时(标签tag为1，搜索历史为0)
-    for (UILabel *tagLabel in hotSearchTags) {
-        tagLabel.tag = 1;
-    }
+//    for (UILabel *tagLabel in hotSearchTags) {
+//        tagLabel.tag = 1;
+//    }
     _hotSearchTags = hotSearchTags;
 }
 
@@ -803,10 +810,20 @@
 - (void)tagDidCLick:(UITapGestureRecognizer *)gr
 {
     
-    UILabel *label = (UILabel *)gr.view;
-    self.searchBar.text = label.text;
-    [self searchBar:self.searchBar textDidChange:self.searchBar.text];
-
+//    self.searchBar.text = label.text;
+//    [self searchBar:self.searchBar textDidChange:self.searchBar.text];
+      //根据标签模糊查询
+     NSString *teachingtype_id = self.hotSearches_ids[gr.view.tag];
+     [[[HXCurriculumSearchAPI getsearchCurriculumListWithCurr_title:nil teachingtype_id:teachingtype_id]netWorkClient]postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+        self.searchVideoModel = [api.class mj_objectWithKeyValues:responseObject];
+        self.searchSuggestions = self.searchVideoModel.varList;
+         
+         self.searchSuggestionVC.view.hidden = NO;
+         // 放在最上层
+         [self.view bringSubviewToFront:self.searchSuggestionVC.view];
+    }];
+    
 }
 
 /** 添加标签 */
@@ -881,7 +898,7 @@
     // 放在最上层
     [self.view bringSubviewToFront:self.searchSuggestionVC.view];
     
-    // 如果代理实现了代理方法则调用代理方法
+//    // 如果代理实现了代理方法则调用代理方法
     if ([self.delegate respondsToSelector:@selector(searchViewController:searchTextDidChange:searchText:)]) {
         [self.delegate searchViewController:self searchTextDidChange:searchBar searchText:searchText];
     }

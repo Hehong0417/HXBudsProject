@@ -13,8 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
-    [self.ico lh_setRoundImageViewWithBorderWidth:0 borderColor:nil];
+
     
 }
 + (instancetype)initMessageCellWithXib{
@@ -25,8 +24,9 @@
 - (void)setModel:(HXMyMessageVarlistModel *)model {
 
     _model = model;
-
-
+    self.meassge_title.text = model.notification_title;
+    self.content.text = model.content;
+    self.ctime.text = model.ctime;
 }
 
 @end

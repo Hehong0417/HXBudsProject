@@ -9,7 +9,7 @@
 #import "HXOrganizationHeadView.h"
 #import "HXIndividualWorksVC.h"
 #import "HXMapVC.h"
-
+#import "HXIsLoginAPI.h"
 
 @implementation HXOrganizationHeadView
 
@@ -30,12 +30,12 @@
     [self.attentionBtn setTitleColor:kWhiteColor forState:UIControlStateSelected];
     [self.attentionBtn lh_setBackgroundColor:APP_COMMON_COLOR forState:UIControlStateSelected];
     [self.attentionBtn setTitle:@"已关注" forState:UIControlStateSelected];
+    
     [self.attentionBtn setTitleColor:APP_COMMON_COLOR forState:UIControlStateNormal];
     [self.attentionBtn lh_setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
     [self.attentionBtn setTitle:@"+ 关注" forState:UIControlStateNormal];
 //    //个人作品
 //    [self.individualWorksView setTapActionWithBlock:^{
-//        
 //        [self.nav pushVC:[HXIndividualWorksVC new]];
 //        
 //    }];
@@ -44,6 +44,7 @@
 
 - (IBAction)attentionAction:(UIButton *)sender {
     sender.selected = !sender.selected;
+    sender.highlighted = NO;
     if (sender.selected) {
         [self.attentionBtn lh_setCornerRadius:3 borderWidth:0 borderColor:APP_COMMON_COLOR];
         
@@ -64,6 +65,17 @@
 //    NSString *followtenum = pdModel.followtenum?pdModel.followtenum:@"0";
 //    self.followtenum.text = [NSString stringWithFormat:@"%@粉丝",followtenum];
     self.introduce.text = pdModel.hobby;
+    if ([pdModel.followState isEqualToString:@"yes"]) {
+        //判断是否登录
+        [self isLoginState:^(BOOL loginState) {
+    
+            self.attentionBtn.selected = loginState;
+        }];
+
+    }else if([pdModel.followState isEqualToString:@"no"]){
+        
+    self.attentionBtn.selected = NO;
+    }
 }
 - (void)setModel:(HXOrganizationPdModel *)model {
 
@@ -71,7 +83,28 @@
     [self.organizationIco sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.mechanism_logo)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
     self.nickName.text = model.mechanism_name;
     self.introduce.text = model.mechanism_desc;
-
+    if ([model.followState isEqualToString:@"yes"]) {
+        self.attentionBtn.selected = YES;
+    }else if([model.followState isEqualToString:@"no"]){
+        
+        self.attentionBtn.selected = NO;
+    }
+}
+- (void)isLoginState:(void(^)(BOOL loginState))loginState{
+    HJUser *user = [HJUser sharedUser];
+       ;
+    [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error) {
+            self.loginState = NO;
+        }
+        NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
+        if ([isLoginStr isEqualToString:@"no"]) {
+            self.loginState = NO;
+        }else if([isLoginStr isEqualToString:@"yes"]){
+            self.loginState = YES;
+        }
+    }];
+    loginState(self.loginState);
 }
 
 @end

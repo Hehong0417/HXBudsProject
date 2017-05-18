@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,6 +15,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="2PP-Ee-9Iu">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0t-DW-9AD">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                     <subviews>
@@ -61,7 +64,6 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.0078431372549019607" green="0.75294117647058822" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="HFr-re-c5F" firstAttribute="baseline" secondItem="9pZ-wG-oCH" secondAttribute="baseline" id="89y-Xt-1Tw"/>
                         <constraint firstAttribute="bottom" secondItem="HFr-re-c5F" secondAttribute="bottom" constant="14" id="9GR-jS-Z4I"/>
@@ -92,13 +94,17 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="2PP-Ee-9Iu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8ia-1u-grJ"/>
                 <constraint firstAttribute="bottom" secondItem="m0t-DW-9AD" secondAttribute="bottom" id="CEM-V7-5U2"/>
                 <constraint firstAttribute="trailing" secondItem="m0t-DW-9AD" secondAttribute="trailing" id="IVI-as-HkM"/>
                 <constraint firstItem="wCX-OB-4ra" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="KLx-7G-DCf"/>
                 <constraint firstItem="t18-ET-Y5b" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-51" id="LKV-5M-Ul6"/>
                 <constraint firstItem="m0t-DW-9AD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Qm8-F3-yVY"/>
+                <constraint firstItem="2PP-Ee-9Iu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="S9E-aS-ikc"/>
                 <constraint firstItem="m0t-DW-9AD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bBu-2z-KSZ"/>
                 <constraint firstItem="wCX-OB-4ra" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="iNC-AE-uPh"/>
+                <constraint firstAttribute="bottom" secondItem="2PP-Ee-9Iu" secondAttribute="bottom" id="jSG-J5-RBs"/>
+                <constraint firstAttribute="trailing" secondItem="2PP-Ee-9Iu" secondAttribute="trailing" id="ja0-kQ-O9i"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -110,4 +116,7 @@
             <point key="canvasLocation" x="26.5" y="51"/>
         </view>
     </objects>
+    <resources>
+        <image name="bg" width="375" height="150"/>
+    </resources>
 </document>

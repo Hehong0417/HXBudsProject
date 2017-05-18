@@ -10,6 +10,6 @@
 
 @interface HXTeacherListAPI : BaseAPI
 
-+(instancetype)getTeacherListWithWithLimit:(NSNumber*)limit isLogin:(BOOL)isLogin;
++(instancetype)getTeacherListWithWithLimit:(NSNumber*)limit State:(NSString *)state;
 
 @end

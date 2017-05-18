@@ -17,11 +17,12 @@
 @interface HXFamousTeacherVC ()<UITableViewDelegate,UITableViewDataSource,BMKLocationServiceDelegate>
 {
     
-    BOOL isLogin;
     BMKLocationService *_locService;
 }
 @property (nonatomic, strong)   UITableView *teacherListTable;
-@property (nonatomic, strong) HXTeacherListModel *teacherListModel;
+@property (nonatomic, strong)   HXTeacherListModel *teacherListModel;
+@property (nonatomic, strong)   NSMutableArray *recommonedArr;
+@property (nonatomic, strong)   BMKUserLocation *userLocation;
 
 @end
 
@@ -30,10 +31,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    [self getTeacherList];
+    [self getTeacherListState:self.typeNum];
+    
+    
     
 }
-
+- (NSMutableArray *)recommonedArr {
+    
+    if (!_recommonedArr) {
+        _recommonedArr = [NSMutableArray array];
+    }
+    return _recommonedArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"推荐名师";
@@ -66,32 +75,50 @@
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
     NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    self.userLocation = userLocation;
 }
-- (void)getTeacherList{
+- (void)getTeacherListState:(NSInteger)State{
     
-    //判断是否登录
-    HJUser *user = [HJUser sharedUser];
-    [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+    
+    NSString *recommend;
+    if (State == 1) {
+        //推荐机构
+        recommend = @"curriculum-recommend-tj";
+    }else if (State == 2){
+        //全部
+        recommend = nil;
+    }
+    
+    [[[HXTeacherListAPI getTeacherListWithWithLimit:@20 State:recommend] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
         
-        if (error) {
-            isLogin = NO;
-        }
-        NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
-        if ([isLoginStr isEqualToString:@"no"]) {
-            isLogin = NO;
-        }else {
-            isLogin = YES;
+        HXTeacherListModel *api = [HXTeacherListModel new];
+        
+        self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
+        
+        for (HXteacherVarListModel *model in self.teacherListModel.varList) {
+            
+            HXteacherVarListModel *vModel = [HXteacherVarListModel new];
+            CLLocationCoordinate2D coor2;
+            //            coor2.latitude = 39.90868;
+            //            coor2.longitude = 116.3956;
+            coor2.latitude = self.userLocation.location.coordinate.latitude;
+            coor2.longitude = self.userLocation.location.coordinate.longitude;
+            BMKMapPoint point1 = BMKMapPointForCoordinate(coor2);
+            BMKMapPoint point2 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(model.lat.floatValue,model.lng.floatValue));
+            CLLocationDistance distance = BMKMetersBetweenMapPoints(point1,point2);
+            vModel.theteacher_id = model.theteacher_id;
+            vModel.hobby = model.hobby;
+            vModel.the_headportrait = model.the_headportrait;
+            vModel.the_name = model.the_name;
+            vModel.distance = [NSString stringWithFormat:@"%.0f",distance];
+            NSLog(@"distance---%@",vModel.distance);
+            NSLog(@"userLocation---%.2f----%.2f",self.userLocation.location.coordinate.latitude,self.userLocation.location.coordinate.longitude);
+            NSLog(@"mechanismLocation---%.2f----%.2f",model.lat.floatValue,model.lng.floatValue);
+            
+            [self.recommonedArr addObject:vModel];
         }
         
-        [[[HXTeacherListAPI getTeacherListWithWithLimit:@10 isLogin:isLogin] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-            
-            HXTeacherListModel *api = [HXTeacherListModel new];
-            
-            self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
-            
-            [self.teacherListTable reloadData];
-            
-        }];
+        [self.teacherListTable reloadData];
         
     }];
 }
@@ -105,7 +132,7 @@
         cell = [HXOrganizationCell initOrganizationCellWithXib];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.teacherModel = self.teacherListModel.varList[indexPath.row];
+    cell.teacherModel = self.recommonedArr[indexPath.row];
 
     return cell;
 }
@@ -113,13 +140,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-  return self.teacherListModel.varList.count;
+  return self.recommonedArr.count;
 
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 85;
+    return 90;
 }
 
 
@@ -127,9 +154,8 @@
     
     
     HXOrganizationDetailVC *detailVC = [[HXOrganizationDetailVC alloc]init];
-    HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
+    HXteacherVarListModel *model = self.recommonedArr[indexPath.row];
     detailVC.teacher_Id = model.theteacher_id;
-    detailVC.isLogin = isLogin;
     detailVC.detailType = teacherDetailType;
 
     [self.navigationController pushViewController:detailVC animated:YES];
