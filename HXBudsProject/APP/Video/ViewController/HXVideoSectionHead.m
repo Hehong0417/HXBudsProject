@@ -55,7 +55,7 @@
 }
 - (void)layoutSubviews {
 
-    XYQButton *changeBtn = [XYQButton ButtonWithFrame:CGRectMake(SCREEN_WIDTH - WidthScaleSize_W(80), 2, 60, self.frame.size.height-2) imgaeName:@"more" titleName:self.rightBtnTitle contentType:self.contentType buttonFontAttributes:self.btnFontAttributes tapAction:^(XYQButton *button) {
+    XYQButton *changeBtn = [XYQButton ButtonWithFrame:CGRectMake(SCREEN_WIDTH - 60, 2, 60, self.frame.size.height-2) imgaeName:@"more" titleName:self.rightBtnTitle contentType:self.contentType buttonFontAttributes:self.btnFontAttributes tapAction:^(XYQButton *button) {
         
 //        [self.nav pushVC:[HXSubjectVideoVC new]];
         

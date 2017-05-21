@@ -26,7 +26,7 @@
     
     self.title = @"文章列表";
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-268) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-314) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.view.backgroundColor = kWhiteColor;
@@ -48,7 +48,7 @@
 //老师文章
 - (void)getTeacherArticleData {
    
-    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:self.teacher_Id mechanism_id:nil] netWorkClient]postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:self.teacher_Id mechanism_id:nil limit:@15] netWorkClient]postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         
         HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
 
@@ -62,7 +62,7 @@
 //机构文章
 - (void)getOrganizationArticleData{
 
-    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil mechanism_id:self.mechanism_id] netWorkClient]postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil mechanism_id:self.mechanism_id limit:@15] netWorkClient]postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
         
         self.articleModel = [api.class mj_objectWithKeyValues:responseObject];

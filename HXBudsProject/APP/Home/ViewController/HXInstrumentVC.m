@@ -26,7 +26,7 @@
     // Do any additional setup after loading the view.
     
     self.title = self.type_name;
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
@@ -68,7 +68,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 35;
+    return 40;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -92,7 +92,8 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     HXInstrumentSectionHead *sectionHead = [HXInstrumentSectionHead initInstrumentSectionHeadWithXib];
-  
+    sectionHead.backgroundColor = KVCBackGroundColor;
+    sectionHead.courseCount.text = [NSString stringWithFormat:@"共%ld门相关课程",self.instrumentModel.varList.count?self.instrumentModel.varList.count:0];
     return sectionHead;
 
 }

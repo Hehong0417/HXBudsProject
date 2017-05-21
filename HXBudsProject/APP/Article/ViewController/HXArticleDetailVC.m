@@ -19,7 +19,7 @@
 #import "HXLoginVC.h"
 #import "HXcollectionarticleAPI.h"
 #import <UShareUI/UShareUI.h>
-
+#import "HXArticleDetailAPI.h"
 
 @interface HXArticleDetailVC ()<WKUIDelegate,WKNavigationDelegate,InputViewDelegate,UIScrollViewDelegate,UIGestureRecognizerDelegate>
 
@@ -34,7 +34,8 @@
 
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) HJLoginModel *loginModel;
-
+@property (nonatomic, strong) HXInformationCommentView *commentView;
+@property (nonatomic, strong) NSString *collectionarticle;
 
 @end
 
@@ -59,6 +60,16 @@
 
     self.view.backgroundColor = kWhiteColor;
 
+    //获取文章详情数据
+    [[[HXArticleDetailAPI getArticleDetailWithArticle_id:self.articleModel.article_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+       
+        if (error) {
+          self.collectionarticle = @"no";
+        }else {
+          self.collectionarticle =  responseObject[@"pd"][@"collectionarticle"];
+        }
+    }];
+    
     //文章详情
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc]init];
      self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-114) configuration:config];
@@ -72,33 +83,33 @@
     [self.webView loadRequest:request];
     [self.view addSubview:self.webView];
     
-    //
-    HXInformationCommentView *commentView = [[HXInformationCommentView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50-64, SCREEN_WIDTH, 50)];
-    commentView.nav = self.navigationController;
-    //收藏文章
-    commentView.selectefinishBlock = ^(BOOL selected) {
-        if (self.isLogin) {
-            [[[HXcollectionarticleAPI collectionarticleWitharticle_id:self.articleModel.article_id state:selected?@"1":@"0"] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+    WEAK_SELF();
+    //收藏
+    self.commentView.selectefinishBlock = ^(BOOL selected) {
+    
+        if (weakSelf.isLogin) {
+            [[[HXcollectionarticleAPI collectionarticleWitharticle_id:weakSelf.articleModel.article_id state:selected?@"1":@"0"] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
                 
             }];
         }else{
-            [self.navigationController pushVC:[HXLoginVC new]];
+            [weakSelf.navigationController pushVC:[HXLoginVC new]];
         }
     };
+    
+    
     //分享
-    [commentView.shareBtn setTapActionWithBlock:^{
+    [self.commentView.shareBtn setTapActionWithBlock:^{
         
         [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
             // 根据获取的platformType确定所选平台进行下一步操作
             
-            [self shareVedioToPlatformType:platformType];
+            [weakSelf shareVedioToPlatformType:platformType];
             
         }];
         
         
     }];
-    [commentView lh_setCornerRadius:0 borderWidth:1 borderColor:KVCBackGroundColor];
-    [self.view addSubview:commentView];
+    
     
     //键盘弹出后的评论框
     self.inputView = [[HXInputView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 100)];
@@ -109,7 +120,9 @@
     [self.inputView.sendBtn addTarget:self action:@selector(sendCommentAction) forControlEvents:UIControlEventTouchUpInside];
     
 
-    UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 60, 60) target:self action:@selector(ActionClisk) image:nil title:@"评论" titleColor:kBlackColor font:FONT(14)];
+    UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 60, 60) target:self action:@selector(shareAction) image:[UIImage imageNamed:@"share"] title:@"" titleColor:kBlackColor font:FONT(14)];
+    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -15)];
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
 
     self.loginModel = [HJUser sharedUser].pd;
@@ -166,13 +179,14 @@
     return modifiedString;
 }
 
-- (void)ActionClisk {
+- (void)shareAction {
     
-    HXArewardVC *vc = [HXArewardVC new];
-    vc.article_id = self.articleModel.article_id;
-    [self.navigationController pushVC:vc];
-    
-
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        // 根据获取的platformType确定所选平台进行下一步操作
+        
+        [self shareVedioToPlatformType:platformType];
+        
+    }];
 }
 #pragma mark-------inputViewDelegate代理方法-----------
 
@@ -183,9 +197,10 @@
     //动画弹出键盘和输入框
     [UIView animateKeyframesWithDuration:duration delay:0.0 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
         //输入框紧贴键盘
-        self.inputView.bottom = SCREEN_HEIGHT - keyboardHeight-40;
+        self.inputView.bottom = SCREEN_HEIGHT - keyboardHeight - 65;
         [self.inputView.inputView becomeFirstResponder];
     } completion:^(BOOL finished) {
+        
         
     }];
     
@@ -221,12 +236,13 @@
         [[[HXarticleReviewAPI articlereviewAddWitharticle_id:self.articleModel.article_id review_content:content] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
             
             [self.inputView.inputView resignFirstResponder];
-            
+            self.inputView.inputView.text = @"";
             NSString *js3 = [NSString stringWithFormat:@"refresh()"];
            
             [self.webView evaluateJavaScript:js3 completionHandler:^(id _Nullable, NSError * _Nullable error) {
                 NSLog(@"error::%@",error);
             }];
+//            [self.webView reload];
             
         }];
     }else{
@@ -247,23 +263,37 @@
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
 
     
-
 }
  //页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
 
     [LWActiveIncator hideInViwe:self.view];
 
-    NSString *js = [NSString stringWithFormat:@"textnum(%@)",self.articleModel.article_id];
+    NSString *js = [NSString stringWithFormat:@"textnum(%@,%@,%@)",self.articleModel.article_id,self.loginModel.users_id?self.loginModel.users_id:@"0",[NSString stringWithFormat:@"%d",self.isLogin]];
     NSLog(@"js---%@",js);
     [webView evaluateJavaScript:js completionHandler:^(id _Nullable, NSError * _Nullable error) {
         NSLog(@"error::%@",error);
     }];
-    NSString *js1 = [NSString stringWithFormat:@"click(%@,%@)",self.loginModel.users_id?self.loginModel.users_id:@"0",[NSString stringWithFormat:@"%d",self.isLogin]];
-    NSLog(@"js---%@",js1);
-    [webView evaluateJavaScript:js1 completionHandler:^(id _Nullable, NSError * _Nullable error) {
-        NSLog(@"error::%@",error);
-    }];
+//    NSString *js1 = [NSString stringWithFormat:@"click(%@,%@)",self.loginModel.users_id?self.loginModel.users_id:@"0",[NSString stringWithFormat:@"%d",self.isLogin]];
+//    NSLog(@"js---%@",js1);
+//    [webView evaluateJavaScript:js1 completionHandler:^(id _Nullable, NSError * _Nullable error) {
+//        NSLog(@"error::%@",error);
+//        
+//        加载完成后添加评论框
+//        收藏文章
+        if (self.isLogin) {
+            if ([self.collectionarticle isEqualToString:@"yes"]) {
+                self.commentView.collectionBtn.selected = YES;
+                
+            }else if([self.collectionarticle isEqualToString:@"no"]){
+                self.commentView.collectionBtn.selected = NO;
+            }
+        }else{
+            self.commentView.collectionBtn.selected = NO;
+        }
+                [self.view addSubview:self.commentView];
+
+//    }];
 
 }
 // 页面加载失败时调用
@@ -272,7 +302,16 @@
 
 
 }
+- (HXInformationCommentView *)commentView{
 
+    if (!_commentView) {
+        _commentView = [[HXInformationCommentView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50-64, SCREEN_WIDTH, 50)];
+        _commentView.nav = self.navigationController;
+        [_commentView lh_setCornerRadius:0 borderWidth:1 borderColor:KVCBackGroundColor];
+
+    }
+    return _commentView;
+}
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
     
     NSLog(@"request*****%@",navigationAction.request.URL);

@@ -11,5 +11,6 @@
 @interface HXInstrumentSectionHead : UIView
 
 + (instancetype)initInstrumentSectionHeadWithXib;
+@property (weak, nonatomic) IBOutlet UILabel *courseCount;
 
 @end

@@ -7,90 +7,109 @@
 //
 
 #import "HXSubjectVideoVC.h"
-#import "HXSujectVideoListCell.h"
+#import "HXvideoCollectionCell.h"
+#import "HXVideoSectionHead.h"
 #import "HXCourseDetailAnotherVC.h"
+#import "HXSubjectVideoVC.h"
 #import "HXSubjectVideoAPI.h"
 #import "HXSubjectVideoListModel.h"
+#import "HXvideoCollectionCell.h"
 
-@interface HXSubjectVideoVC ()<UITableViewDelegate,UITableViewDataSource>
 
-@property(nonatomic,strong)UITableView *tableView;
-
+@interface HXSubjectVideoVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
+@property(nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
+@property (nonatomic, strong) HXSubjectVideoListModel *ArtVideoListModel;
 
 @end
 
 @implementation HXSubjectVideoVC
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    [self getSubjectVideoList];
-
-    self.title = self.videoTitle?self.videoTitle:@"专题视频";
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT) style:UITableViewStyleGrouped];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    [self.view addSubview:self.tableView];
-
-}
-- (void)getSubjectVideoList {
-    
-    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@4 theteacherId:nil curriculum­­_status:self.curriculum­­_status isLogin:NO] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+    //专题视频
+    [self getSubjectVideoListWithCurriculum­­_status:@"recommend-status-rm" completeHandle:^(id responseObject) {
         
         HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
         
         self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+        NSLog(@"count---%ld",self.SubjectVideoListModel.varList.count);
+        [self.collectionView reloadData];
         
-        [self.tableView reloadData];
     }];
     
 }
 
-#pragma mark - Table view data source
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.title = @"热门视频";
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:layout];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"HXvideoCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXvideoCollectionCell"];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.collectionView.showsVerticalScrollIndicator = NO;
+    [self.view addSubview:self.collectionView];
+    self.collectionView.backgroundColor = kWhiteColor;
+    self.view.backgroundColor = KVCBackGroundColor;
+    
+}
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (void)getSubjectVideoListWithCurriculum­­_status:(NSString *)curriculum_status completeHandle:(void(^)(id responseObject))completeHandle {
+    
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@15 theteacherId:nil  curriculum­­_status:curriculum_status  isLogin:NO ] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        
+        completeHandle(responseObject);
+        
+    }];
+    
+}
+
+#pragma mark <UICollectionViewDataSource>
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
     
     return self.SubjectVideoListModel.varList.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
-    return WidthScaleSize_H(0.01);
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    return WidthScaleSize_H(0.01);
-    
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return 80;
-    
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    HXSujectVideoListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXSujectVideoListCell"];
-    if(!cell){
-        
-        cell = [HXSujectVideoListCell initSubjectVideoListCellWithXib];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
-    cell.model = model;
-    
+    HXvideoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXvideoCollectionCell" forIndexPath:indexPath];
+    cell.model = self.SubjectVideoListModel.varList[indexPath.row];
+    cell.nav = self.navigationController;
     return cell;
     
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return CGSizeMake((SCREEN_WIDTH - 35)/2, 165);
+
+}
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    
+    
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+    
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    
+    return   CGSizeMake(SCREEN_WIDTH, 0.01);
+    
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
     HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
@@ -101,7 +120,6 @@
     [self.navigationController pushVC:vc];
     
 }
-
 
 
 

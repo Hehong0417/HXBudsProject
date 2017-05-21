@@ -22,9 +22,10 @@
 #import "HXpurchaseCourseAPI.h"
 #import "WXApi.h"
 #import "HXWXPayAPI.h"
+#import "HXVideoCatalogueAPI.h"
+#import "HXVideoCatalogueModel.h"
 
-@interface HXCourseDetailAnotherVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate,WXApiDelegate>{
-    
+@interface HXCourseDetailAnotherVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate,WXApiDelegate,CourseDetailTwoDelegate>{
     
     
 }
@@ -38,6 +39,8 @@
 @property(nonatomic,strong) UIImageView *playImgV;
 @property(nonatomic,strong) CLPlayerView *playerView;
 @property(nonatomic,strong) UIImageView *videoDetailBgImageV;
+@property (nonatomic, strong) HXVideoCatalogueModel *catalogueModel;
+@property (nonatomic, retain)NSString * URLString;
 
 @end
 
@@ -75,6 +78,10 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 - (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:animated];
+    
+    //获取播放的目录和url
+    
+    
     //判断是否已登录
     HJUser *user = [HJUser sharedUser];
     [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
@@ -88,7 +95,21 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
             [self isSubcribeAdd];
         }
     }];
+    
+    [self getVideoCatalogueData];
 }
+- (void)getVideoCatalogueData{
+    
+    [[[HXVideoCatalogueAPI getVideoCatalogueWithWithCurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        HXVideoCatalogueModel *api = [HXVideoCatalogueModel new];
+        self.catalogueModel = [api.class mj_objectWithKeyValues:responseObject];
+        HXCataloguePdModel *model = self.catalogueModel.varList[0];
+        self.URLString = model.videos_file;
+        
+    }];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -111,90 +132,14 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
     //rightBarButton、分享按钮
     UIButton *rightBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 50, 50) target:self action:@selector(shareAction) image:[UIImage imageNamed:@"share"]];
+    [rightBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     [self.videoDetailBgImageV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(self.playImageStr)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
+  
     //加入学习
-    WEAK_SELF();
-    self.buyBottomView.addSubscribeBlock = ^{
-        //未加入且已登录
-        if (!weakSelf.IsAddSubscrib&&weakSelf.isLogin) {
-            
-            //判断是否免费
-            if (![weakSelf.charge_status_text isEqualToString:@"免费"]) {
-                
-                [weakSelf purchaseCourse:weakSelf.curriculum_price];
-            }else{
-            
-                [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:weakSelf.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-                    
-                    weakSelf.buyBottomView.consultBtn.titleLabel.text = @"已加入";
-                    weakSelf.IsAddSubscrib = YES;
-                    weakSelf.buyBottomView.consultBtn.enabled = NO;
-                }];
-            }
-        }
-        //未加入且未登录
-        if (!weakSelf.IsAddSubscrib&&!weakSelf.isLogin) {
-            
-            [weakSelf.navigationController pushVC:[HXLoginVC new]];
-        }
-        //已加入
-        if (weakSelf.IsAddSubscrib) {
-            
-           weakSelf.buyBottomView.consultBtn.enabled = NO;
-        }
-    };
-}
-//购买课程
-- (void)purchaseCourse:(NSString *)curriculum_price{
-    //后台支付接口
-    [[[HXpurchaseCourseAPI purchaseCourseWithCurriculum_id:self.curriculum_id curriculum_price:@"0.01"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
-        NSString *transaction = responseObject[@"pd"][@"transaction"];
-        if ([transaction isEqualToString:@"ok"]) {
-            //购买成功
-            [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-                
-                self.buyBottomView.consultBtn.titleLabel.text = @"已加入";
-                [SVProgressHUD showInfoWithStatus:@"加入成功"];
-            }];
-            
-        }else if ([transaction isEqualToString:@"no"]){
-            //余额不足，调用微信支付接口
-            [[[HXWXPayAPI wxPayWithopcash:@"0.01" wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-                
-                [self payWithResponse:responseObject];
-            }];
-        }else{
-            
-            [SVProgressHUD showInfoWithStatus:@"加入失败"];
-        }
-    }];
-
-
-}
-
-//是否加入学习
-- (void)isSubcribeAdd{
-
-    [[[HXIsSubscribAddAPI IsSubscribWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-       
-        NSString *statestr = responseObject[@"pd"][@"state"];
-        NSInteger state = statestr.integerValue;
-        if (state > 0) {
-            //已加入
-            self.IsAddSubscrib = YES;
-            [self.buyBottomView.consultBtn setTitle:@"已加入" forState:UIControlStateNormal];
-            
-            self.buyBottomView.consultBtn.enabled = NO;
-
-        }else{
-           //未加入
-            self.IsAddSubscrib = NO;
-            self.buyBottomView.consultBtn.titleLabel.text = @"加入学习";
-
-        }
-    }];
+    [self AddSubscrib];
+    
+   
 }
 - (void)setupSegmentedControl {
     
@@ -222,36 +167,125 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     self.SG.titleColorStateSelected = APP_COMMON_COLOR;
     self.SG.indicatorColor = APP_COMMON_COLOR;
     [self.view addSubview:_SG];
-
+    
+    
+    //添加播放器
+    self.playerView.url = [NSURL URLWithString:self.URLString];
+    if (!self.URLString) {
+        self.URLString = @"error";
+    }
+    [self.playerView pausePlay];
+    self.playerView.vc = self;
+    [self.view addSubview:self.playerView];
     
     WEAK_SELF();
     [self.playImgV setTapActionWithBlock:^{
         //**********播放器**************//
-        
         if (weakSelf.IsAddSubscrib) {
-            weakSelf.playerView = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
             
-            if (!weakSelf.URLString) {
-                weakSelf.URLString = @"error";
-            }
+            [weakSelf.playerView playVideo];
 
-            weakSelf.playerView.url = [NSURL URLWithString:video_testUrl];
-//            weakSelf.playerView.url = [NSURL URLWithString:@"http://yycloudvod2109130935.bs2dl.yy.com/djhmZjcyZTExZDRiZmY1Yzg0NzhlM2Q5MWVjZjRhYzY1MTUzNDQxMjM1Mg"];
-            
-            weakSelf.playerView.vc = weakSelf;
-            [weakSelf.view addSubview:weakSelf.playerView];
+            //weakSelf.playerView.url = [NSURL URLWithString:@"http://yycloudvod2109130935.bs2dl.yy.com/djhmZjcyZTExZDRiZmY1Yzg0NzhlM2Q5MWVjZjRhYzY1MTUzNDQxMjM1Mg"];
+           
         }else{
             
             [SVProgressHUD showInfoWithStatus:@"请先加入学习"];
             
         }
         //***************************//
-
+        
     }];
     
 }
-    
-    
+
+- (void)AddSubscrib {
+
+    //加入学习
+    WEAK_SELF();
+    self.buyBottomView.addSubscribeBlock = ^{
+        //未加入且已登录
+        if (!weakSelf.IsAddSubscrib&&weakSelf.isLogin) {
+            
+            //判断是否免费
+            if (![weakSelf.charge_status_text isEqualToString:@"免费"]) {
+                
+                [weakSelf purchaseCourse:weakSelf.curriculum_price];
+            }else{
+                
+                [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:weakSelf.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+                    
+                    weakSelf.buyBottomView.consultBtn.titleLabel.text = @"已加入";
+                    weakSelf.IsAddSubscrib = YES;
+                    weakSelf.buyBottomView.consultBtn.enabled = NO;
+                }];
+            }
+        }
+        //未加入且未登录
+        if (!weakSelf.IsAddSubscrib&&!weakSelf.isLogin) {
+            
+            [weakSelf.navigationController pushVC:[HXLoginVC new]];
+        }
+        //已加入
+        if (weakSelf.IsAddSubscrib) {
+            
+            weakSelf.buyBottomView.consultBtn.enabled = NO;
+        }
+    };
+
+}
+//购买课程
+- (void)purchaseCourse:(NSString *)curriculum_price{
+    //后台支付接口
+    [[[HXpurchaseCourseAPI purchaseCourseWithCurriculum_id:self.curriculum_id curriculum_price:self.curriculum_price] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        
+        NSString *transaction = responseObject[@"pd"][@"transaction"];
+        if ([transaction isEqualToString:@"ok"]) {
+            //购买成功
+            [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+                
+                self.buyBottomView.consultBtn.titleLabel.text = @"已加入";
+                [SVProgressHUD showInfoWithStatus:@"加入成功"];
+            }];
+            
+        }else if ([transaction isEqualToString:@"no"]){
+            //余额不足，调用微信支付接口
+            [[[HXWXPayAPI wxPayWithopcash:self.curriculum_price wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+                
+                [self payWithResponse:responseObject];
+            }];
+        }else{
+            
+            [SVProgressHUD showInfoWithStatus:@"加入失败"];
+        }
+    }];
+
+
+}
+
+//是否加入学习
+- (void)isSubcribeAdd{
+
+    [[[HXIsSubscribAddAPI IsSubscribWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+       
+        NSString *statestr = responseObject[@"pd"][@"state"];
+        NSInteger state = statestr.integerValue;
+        if (state > 0) {
+            //已加入
+            self.IsAddSubscrib = YES;
+            [self.buyBottomView.consultBtn setTitle:@"已加入" forState:UIControlStateNormal];
+            self.buyBottomView.consultBtn.enabled = NO;
+            [self SGSegmentedControl:self.SG didSelectBtnAtIndex:1];
+            [self.SG titleBtnSelectedWithScrollView:self.mainScrollView];
+            
+        }else{
+           //未加入
+            self.IsAddSubscrib = NO;
+            self.buyBottomView.consultBtn.titleLabel.text = @"加入学习";
+
+        }
+    }];
+}
+
 - (void)SGSegmentedControl:(SGSegmentedControl *)segmentedControl didSelectBtnAtIndex:(NSInteger)index {
     // 1 计算滚动的位置
     CGFloat offsetX = index * self.view.frame.size.width;
@@ -271,6 +305,7 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
     // 电视剧
     HXCourseDetailTwoVC *twoVC = [[HXCourseDetailTwoVC alloc] init];
+    twoVC.delegate = self;
     twoVC.curriculum_id = self.curriculum_id;
     [self addChildViewController:twoVC];
     
@@ -294,7 +329,17 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     [self.mainScrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(offsetX, 0, self.view.frame.size.width, self.view.frame.size.height);
 }
+
+#pragma mark - CourseDetailTwoDelegate
+
+- (void)categoryDidSelectIndex:(NSInteger)index {
+
+    HXCataloguePdModel *model = self.catalogueModel.varList[index];
+    self.URLString = model.videos_file;
+    [self.playerView playVideo];
     
+}
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
@@ -333,12 +378,23 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     NSLog(@"partid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\n sign=%@",req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
     NSLog(@"success--%d",success);
     if (success) {
-        //加入学习
-        [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+    
+        [[[HXpurchaseCourseAPI purchaseCourseWithCurriculum_id:self.curriculum_id curriculum_price:self.curriculum_price] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
             
-            self.buyBottomView.consultBtn.titleLabel.text = @"已加入";
-            self.IsAddSubscrib = YES;
-            [SVProgressHUD showInfoWithStatus:@"加入成功"];
+            NSString *transaction = responseObject[@"pd"][@"transaction"];
+            if ([transaction isEqualToString:@"ok"]) {
+                //加入学习
+                [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+                    
+                    self.buyBottomView.consultBtn.titleLabel.text = @"已加入";
+                    self.IsAddSubscrib = YES;
+                    [SVProgressHUD showInfoWithStatus:@"加入成功"];
+                }];
+            }
+            if (error) {
+                [SVProgressHUD showInfoWithStatus:@"加入失败"];
+            }
+            
         }];
     }
 }
@@ -405,7 +461,14 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     return _buyBottomView;
     
 }
+- (CLPlayerView *)playerView {
 
+    if (!_playerView) {
+        _playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
+    }
+    return _playerView;
+
+}
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 

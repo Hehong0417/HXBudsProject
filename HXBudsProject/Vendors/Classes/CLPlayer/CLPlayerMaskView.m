@@ -16,9 +16,9 @@
 //进度条颜色
 #define ProgressColor     [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000]
 //缓冲颜色
-#define ProgressTintColor [UIColor orangeColor]
+#define ProgressTintColor [UIColor whiteColor]
 //播放完成颜色
-#define PlayFinishColor   [UIColor whiteColor]
+#define PlayFinishColor [UIColor orangeColor]
 
 
 @interface CLPlayerMaskView ()

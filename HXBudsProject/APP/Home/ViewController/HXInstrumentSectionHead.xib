@@ -57,6 +57,9 @@
                 <constraint firstAttribute="bottom" secondItem="uJu-rO-EeL" secondAttribute="bottom" id="mFm-ZE-okk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="courseCount" destination="EiI-AW-v91" id="sYY-lV-mCZ"/>
+            </connections>
             <point key="canvasLocation" x="48.5" y="60"/>
         </view>
     </objects>

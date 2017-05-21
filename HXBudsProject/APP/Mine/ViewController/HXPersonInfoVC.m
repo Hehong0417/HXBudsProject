@@ -20,7 +20,7 @@
 @property(nonatomic,strong)NSString *phone;
 @property(nonatomic,strong)NSString *name;
 @property(nonatomic,strong)NSString *hobby;
-@property(nonatomic,strong)IQTextView *introduce;
+@property(nonatomic,strong)UITextView *introduce;
 @property(nonatomic,strong)NSString *sex;
 @property(nonatomic,strong)NSString *age;
 @property(nonatomic,strong)UILabel *sexLabel;
@@ -42,7 +42,7 @@
     UIBarButtonItem *rightBarItem =  [[UIBarButtonItem alloc]initWithCustomView:saveBtn];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     saveBtn.titleLabel.textAlignment = NSTextAlignmentRight;
-    [saveBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [saveBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
     self.tableV.backgroundColor = KVCBackGroundColor;
     
     

@@ -73,6 +73,18 @@
     
     return 0.01;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.textColor = APP_COMMON_COLOR;
+    
+    if ([self.delegate respondsToSelector:@selector(categoryDidSelectIndex:)]) {
+        
+        [self.delegate categoryDidSelectIndex:indexPath.row];
+        
+    }
+
+
+}
 
 @end

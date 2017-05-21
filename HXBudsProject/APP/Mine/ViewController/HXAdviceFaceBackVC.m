@@ -19,9 +19,8 @@
 
     self.title = @"意见反馈";
 
-    IQTextView  *adviceTextView = [[IQTextView alloc]initWithFrame:CGRectMake(20, 10, SCREEN_WIDTH - 40, 300)];
+    UITextView  *adviceTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 10, SCREEN_WIDTH - 40, 300)];
     adviceTextView.font= FONT(14);
-    adviceTextView.placeholder = @"意见";
     
     
     UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, CGRectGetMaxY(adviceTextView.frame)+10, SCREEN_WIDTH ,30 ) target:self action:@selector(adviceFacebackAction) title:@"提交反馈" titleColor:kGrayColor font:FONT(14) backgroundColor:kWhiteColor];

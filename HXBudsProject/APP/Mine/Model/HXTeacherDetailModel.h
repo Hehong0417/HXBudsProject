@@ -24,5 +24,9 @@
 @property(nonatomic,copy) NSString *hobby;
 @property(nonatomic,copy) NSString *followState;
 @property(nonatomic,copy) NSString *theteacher_id;
+@property(nonatomic,copy) NSString *lat;
+@property(nonatomic,copy) NSString *lng;
+@property(nonatomic,copy) NSString *city_text;
+@property(nonatomic,copy) NSString *address;
 
 @end

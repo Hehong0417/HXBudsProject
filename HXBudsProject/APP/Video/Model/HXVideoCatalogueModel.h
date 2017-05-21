@@ -14,7 +14,6 @@
 
 @end
 @interface HXCataloguePdModel : BaseModel
-
 @property(nonatomic,copy) NSString *curr_title;
 @property(nonatomic,copy) NSString *curriculum_id;
 @property(nonatomic,copy) NSString *videos_file;

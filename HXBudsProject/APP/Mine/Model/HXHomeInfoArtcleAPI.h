@@ -12,5 +12,5 @@
 
 @interface HXHomeInfoArtcleAPI : BaseAPI
 
-+ (instancetype)getHomeInfoArticleWithTheteacherId:(NSString *)theteacher_id mechanism_id:(NSString *)mechanism_id;
++ (instancetype)getHomeInfoArticleWithTheteacherId:(NSString *)theteacher_id mechanism_id:(NSString *)mechanism_id limit:(NSNumber *)limit;
 @end

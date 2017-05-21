@@ -910,6 +910,7 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
 }
 #pragma mark - 销毁播放器
 - (void)destroyPlayer{
+    
     //销毁定时器
     [self destroyAllTimer];
     //暂停
@@ -917,6 +918,8 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
     //清除
     [_player.currentItem cancelPendingSeeks];
     [_player.currentItem.asset cancelLoading];
+
+    _player = nil;
     //移除
     [self removeFromSuperview];
 

@@ -94,10 +94,10 @@
     
 }
 
-- (IQTextView *)inputView {
+- (UITextView *)inputView {
 
     if (!_inputView) {
-        _inputView = [[IQTextView alloc]initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 60)];
+        _inputView = [[UITextView alloc]initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 60)];
     }
     return _inputView;
 }

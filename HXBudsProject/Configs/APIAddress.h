@@ -6,6 +6,7 @@
 //  Copyright (c) 2013年 ganguo. All rights reserved.
 //
 
+//SKU  MengYa
 
 //#ifdef DEBUG
 //// 本地
@@ -45,7 +46,7 @@
 #import "HJUser.h"
 
 //
-#define article_detail_url  @"http://192.168.0.108/my/menya/Mengya/index.html"
+#define article_detail_url  @"http://192.168.0.119/my/menya/Mengya/index.html"
 
 /**
  *  登录注册

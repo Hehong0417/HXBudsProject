@@ -11,7 +11,6 @@
 
 @interface HXCourseDetailAnotherVC : UIViewController
 
-@property (nonatomic, retain)NSString * URLString;
 
 @property (nonatomic, retain)NSString * curriculum_id;
 

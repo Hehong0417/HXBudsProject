@@ -7,10 +7,9 @@
 //
 
 #import "HXArticleCellTwo.h"
-#import "HXMyLikeVC.h"
 #import "HXSubjectListTVC.h"
 #import "UIView+WHC_AutoLayout.h"
-
+#import "HXOrganizationDetailVC.h"
 
 @implementation HXArticleCellTwo
 
@@ -38,8 +37,8 @@
 
     [self.teacherIconImagV whc_LeftSpace:15];
     [self.teacherIconImagV whc_TopSpace:8];
-    [self.teacherIconImagV whc_Width:35];
-    [self.teacherIconImagV whc_Height:35];
+    [self.teacherIconImagV whc_Width:30];
+    [self.teacherIconImagV whc_Height:30];
     
     [self.teacherNameLab whc_HeightEqualView:self.teacherIconImagV];
     [self.teacherNameLab whc_LeftSpace:10 toView:self.teacherIconImagV];
@@ -149,20 +148,35 @@
 //    self.commentCountLab.text = [NSString stringWithFormat:@"收藏|%@",];
     
     [self.teacherIconImagV setTapActionWithBlock:^{
-        HXMyLikeVC *vc = [HXMyLikeVC new];
-        vc.dynamicType = himDynamicType;
-        vc.titleStr = @"他的主页";
-        vc.users_id = model.users_id;
-        [self.nav pushVC:vc];
+        HXOrganizationDetailVC *detailVC = [[HXOrganizationDetailVC alloc]init];
+
+        if (model.theteacher_id) {
+            detailVC.teacher_Id = model.theteacher_id;
+            detailVC.detailType = teacherDetailType;
+        }
+        if (model.mechanism_id) {
+            detailVC.organization_Id = model.mechanism_id;
+            detailVC.detailType = organizationType;
+        }
+        
+        [self.nav pushViewController:detailVC animated:YES];
         
     }];
     self.teacherNameLab.userInteractionEnabled = YES;
     [self.teacherNameLab setTapActionWithBlock:^{
-        HXMyLikeVC *vc = [HXMyLikeVC new];
-        vc.dynamicType = himDynamicType;
-        vc.users_id = model.users_id;
-        vc.titleStr = @"他的主页";
-        [self.nav pushVC:vc];
+        HXOrganizationDetailVC *detailVC = [[HXOrganizationDetailVC alloc]init];
+        
+        if (model.theteacher_id) {
+            detailVC.teacher_Id = model.theteacher_id;
+            detailVC.detailType = teacherDetailType;
+        }
+        if (model.mechanism_id) {
+            detailVC.organization_Id = model.mechanism_id;
+            detailVC.detailType = organizationType;
+        }
+        
+        [self.nav pushViewController:detailVC animated:YES];
+
     }];
 
 }

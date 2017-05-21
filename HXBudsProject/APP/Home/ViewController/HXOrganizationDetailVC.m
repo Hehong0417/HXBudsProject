@@ -8,8 +8,6 @@
 //
 
 #import "HXOrganizationDetailVC.h"
-
-#import "HXMyLikeVC.h"
 #import "SGSegmentedControl.h"
 #import "HXMyAttetionVC.h"
 #import "HXMyVideoVC.h"
@@ -29,13 +27,13 @@
 #import "HXFollowOrganizationAPI.h"
 
 @interface HXOrganizationDetailVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate>
-@property(nonatomic,strong)SGSegmentedControl *SG;
+@property (nonatomic,strong)  SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
 @property (nonatomic, strong) NSArray *title_arr;
-@property(nonatomic,assign) BOOL isMyHomeInfo;
-@property (nonatomic, strong) HXTeacherDetailModel *teacherDetailModel;
+@property (nonatomic,assign)  BOOL isMyHomeInfo;
 @property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
 @property (nonatomic, strong) HXOrganizationHeadView *organizationHeadView;
+@property (nonatomic, strong) HXTeacherDetailModel *teacherDetailModel;
 @property (nonatomic, strong) HXOrganizationDeetailModel *organizationDetailModel;
 
 @end
@@ -45,7 +43,7 @@
 - (void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
     //判断是否登录
     [self isLoginState];
     
@@ -76,9 +74,29 @@
     };
     //地址
     [self.organizationHeadView.addressView setTapActionWithBlock:^{
-        HXMapVC *mapVc = [HXMapVC new];
         
-        [self.navigationController pushVC:[HXMapVC new]];
+        HXMapVC *mapVc = [HXMapVC new];
+        switch (self.detailType) {
+            case teacherDetailType:{
+                mapVc.latitude = self.teacherDetailModel.pd.lat;
+                mapVc.longitude = self.teacherDetailModel.pd.lng;
+                mapVc.name = self.teacherDetailModel.pd.nickname;
+                mapVc.address = self.teacherDetailModel.pd.address?self.teacherDetailModel.pd.address:@" ";
+            }
+                break;
+            case organizationType:{
+                mapVc.latitude = self.organizationDetailModel.pd.mechanism_lat;
+                mapVc.longitude = self.organizationDetailModel.pd.mechanism_lng;
+                mapVc.address = self.organizationDetailModel.pd.mechanism_address?self.organizationDetailModel.pd.mechanism_address:@" ";
+                mapVc.name = self.organizationDetailModel.pd.mechanism_name;
+
+            }
+                break;
+            default:
+                break;
+        }
+        
+        [self.navigationController pushVC:mapVc];
     }];
 
 }
@@ -181,7 +199,7 @@
     }
     // 创建底部滚动视图
     self.mainScrollView = [[UIScrollView alloc] init];
-    _mainScrollView.frame = CGRectMake(0, 320, self.view.frame.size.width, self.view.frame.size.height- 320);
+    _mainScrollView.frame = CGRectMake(0, 314, self.view.frame.size.width, self.view.frame.size.height);
     _mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width * self.title_arr.count, 0);
     _mainScrollView.backgroundColor = [UIColor whiteColor];
     // 开启分页

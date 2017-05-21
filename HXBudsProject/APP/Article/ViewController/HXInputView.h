@@ -20,7 +20,7 @@
 
 @interface HXInputView : UIView
 
-@property(nonatomic,strong)IQTextView *inputView;
+@property(nonatomic,strong)UITextView *inputView;
 @property(nonatomic,strong)UIButton *sendBtn;
 @property (weak, nonatomic) id<InputViewDelegate> delegate;
 

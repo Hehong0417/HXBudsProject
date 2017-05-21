@@ -65,12 +65,14 @@
         if (indexPath.row == 0) {
           
             HXArewardCellOne *cell = [tableView dequeueReusableCellWithIdentifier:@"HXArewardCellOne"];
-            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
             
         }else {
             
             HXArewardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXArewardCell"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             cell.tabControl.selectTabControlBlock = ^(NSString *money) {
                 NSLog(@"money-%@",money);
                 self.money = money;

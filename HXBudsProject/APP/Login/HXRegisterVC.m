@@ -159,6 +159,11 @@
     
     phoneNumTextFiled.delegate = self;
 }
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    [self.view endEditing:YES];
+    
+}
 - (void)registerAction:(UIButton *)btn{
 
   NSString *validStr =  [self validAllMsg];

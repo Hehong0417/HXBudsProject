@@ -23,8 +23,10 @@
 @property(nonatomic,copy) NSString *livepicture;
 @property(nonatomic,copy) NSString *mechanism_desc;
 @property(nonatomic,copy) NSString *mechanism_address;
-@property(nonatomic,copy) NSString *mechanism_Lng;//经度
-@property(nonatomic,copy) NSString *mechanism_Lat;//经度
+@property(nonatomic,copy) NSString *mechanism_lng;//经度
+@property(nonatomic,copy) NSString *mechanism_lat;//经度
 @property(nonatomic,copy) NSString *followState;
+@property(nonatomic,copy) NSString *mechanism_city_text;
+
 
 @end

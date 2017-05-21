@@ -39,7 +39,49 @@
     
     [self getArticleListData];
     [self getArticleTypeList];
+    
+     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+    dispatch_sync(queue, ^{
+        
+        //文章
+                [self getArticleListData];
+        //类型
+                [self getArticleTypeList];
+
+    });
 }
+//- (void)dispatchRequest {
+//    
+//    //    /创建信号量/
+//    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+//    //    /创建全局并行/
+//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    dispatch_group_t group = dispatch_group_create();
+//    dispatch_group_async(group, queue, ^{
+//        NSLog(@"处理事件A");
+//        //文章
+//        [self getArticleListData];
+//        dispatch_semaphore_signal(semaphore);
+//        
+//    });
+//    dispatch_group_async(group, queue, ^{
+//        NSLog(@"处理事件B");
+//        //类型
+//        [self getArticleTypeList];
+//        dispatch_semaphore_signal(semaphore);
+//        
+//    });
+//    dispatch_group_notify(group, queue, ^{
+//        //       /四个请求对应四次信号等待/
+//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+//        NSLog(@"处理事件E");
+//        
+//    });
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,7 +100,7 @@
 }
 - (void)getArticleListData {
 
-    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil mechanism_id:nil] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil mechanism_id:nil limit:@10] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
         
         self.articleModel = [api.class mj_objectWithKeyValues:responseObject];

@@ -8,185 +8,125 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 		<key>Aspects.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>CocoaLumberjack.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>FXBlurView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>IQKeyboardManager.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>JSONModel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>9</integer>
 		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>10</integer>
 		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>11</integer>
 		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>8</integer>
 		</dict>
 		<key>NSObject-SafeExpectations.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>12</integer>
 		</dict>
 		<key>Pods-HXBudsProject.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>13</integer>
 		</dict>
 		<key>SDCycleScrollView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>14</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>15</integer>
 		</dict>
 		<key>SVProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>16</integer>
 		</dict>
 		<key>UIAlertView+Blocks.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>17</integer>
 		</dict>
 		<key>WYPopoverController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>23</integer>
 		</dict>
 		<key>WordPress-Editor-iOS-Extension-WordPress-Editor-iOS-Extension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>19</integer>
 		</dict>
 		<key>WordPress-Editor-iOS-Extension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>18</integer>
 		</dict>
 		<key>WordPress-iOS-Shared-WordPress-iOS-Shared.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>21</integer>
 		</dict>
 		<key>WordPress-iOS-Shared.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>20</integer>
 		</dict>
 		<key>WordPressCom-Analytics-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>22</integer>
 		</dict>
 		<key>YYCategories.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>24</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>01CA2AFDD08F9AA140F0F59533AEB1EF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>0586BC250DFCD75B630309A2DADC258E</key>
 		<dict>
 			<key>primary</key>
@@ -202,12 +142,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>25C1F3A90872608F2DA95A7A57E655C8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2CF1A324B3ED4B58F5475DC748C743F0</key>
+		<key>37F8E3079D5C1C86FC8966C76F7D1915</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -217,7 +152,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4CA171C40306BED33FBB94EB87F65981</key>
+		<key>4A8D3EBC61A060886EB8D1274FF6227A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -227,12 +162,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>833E397C56EC612289707C84709ACB98</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>84E4CC661487C678E8CEA9077A06C476</key>
+		<key>60073A7541BF5C1AAF0F686D89928D95</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -242,22 +172,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8E230579133F0BF4F67F01FDAACDEA7C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8FE394C39AC89A793C75CF8D2E6C8643</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AAD5074F74C8E9C74A7F881974D24C13</key>
+		<key>91079B766DDC88F1AC0FF85A3E79073E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B1764FD6F65218CC41666D53C52F52A4</key>
+		<key>93AD7662BA776F15E5FA7915C7CBC3D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B27DB4B8A27EB9D75D7E91D4C199381B</key>
+		<key>A10B57EC81A090BA835954F0F51C8847</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -267,12 +202,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C2D9E780D33FF60BBDF48A15421DFFFD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C36CB2CB977A4E7D954935096D00A1ED</key>
+		<key>BF0D36AC52E107A981948AA210F83B5E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -282,12 +212,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CB8F418053CBCD25B5DA7C96D10A87C8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CD9A839F8FD8AB2750E8FCEB3F67D20D</key>
+		<key>D10880C52D6E220886FA41D38B32BAE9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -302,7 +227,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>D7B1A95CBA3A4CAA7B3B2180832DCC04</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E14A62900910444707A5504D25EC98DC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E7182FEB0392ED77AA614F47BA798F7A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F503229E940EB8AC92EA1FA5016965B0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

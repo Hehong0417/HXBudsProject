@@ -23,7 +23,6 @@
 @property(nonatomic,strong) NSString *ctime;
 @property(nonatomic,strong) NSString *comment;
 @property(nonatomic,strong) NSString *reading;
-@property(nonatomic,strong) NSString *users_id;
 @property(nonatomic,strong) NSString *The_headportrait;
 @property(nonatomic,strong) NSString *article_cover;
 @property(nonatomic,strong) NSString *appreciate;
@@ -31,5 +30,8 @@
 @property(nonatomic,strong) NSString *areward;
 @property(nonatomic,strong) NSString *head;
 @property(nonatomic,strong) NSString *name;
+@property(nonatomic,strong) NSString *users_id;
+@property(nonatomic,strong) NSString *mechanism_id;
+@property(nonatomic,strong) NSString *theteacher_id;
 
 @end

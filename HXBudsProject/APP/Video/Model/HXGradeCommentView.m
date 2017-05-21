@@ -12,7 +12,7 @@
 
 @interface HXGradeCommentView ()<UITextViewDelegate>{
     
-    IQTextView *commentTextView;
+    UITextView *commentTextView;
     CGFloat value;
 }
 
@@ -37,12 +37,12 @@
     [commentBgView addSubview:recommend];
     
     //评论框
-    commentTextView = [[IQTextView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(recommend.frame), SCREEN_WIDTH - 160, WidthScaleSize_H(85))];
+    commentTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(recommend.frame), SCREEN_WIDTH - 160, WidthScaleSize_H(85))];
     commentTextView.delegate = self;
     
     commentTextView.font = FONT(12);
     commentTextView.backgroundColor = KVCBackGroundColor;
-    commentTextView.placeholder = @"评论，100字内";
+//    commentTextView.placeholder = @"评论，100字内";
     [commentBgView addSubview:commentTextView];
     
     

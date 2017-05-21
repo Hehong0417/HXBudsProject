@@ -85,10 +85,10 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    HXMyLikeVC *vc = [HXMyLikeVC new];
-    vc.titleStr = @"他的网页";
-    vc.dynamicType = himDynamicType;
-    [self.navigationController pushViewController:vc animated:YES];
+//    HXMyLikeVC *vc = [HXMyLikeVC new];
+//    vc.titleStr = @"他的网页";
+//    vc.dynamicType = himDynamicType;
+//    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

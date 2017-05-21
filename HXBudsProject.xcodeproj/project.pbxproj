@@ -271,6 +271,7 @@
 		0DBA4D591E5E892D00E549A5 /* HXPayInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DBA4D571E5E892D00E549A5 /* HXPayInformationCell.xib */; };
 		0DBA4D5D1E5E8CDE00E549A5 /* HXPayWaysCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBA4D5B1E5E8CDE00E549A5 /* HXPayWaysCell.m */; };
 		0DBA4D5E1E5E8CDE00E549A5 /* HXPayWaysCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DBA4D5C1E5E8CDE00E549A5 /* HXPayWaysCell.xib */; };
+		0DC803151ECEFCE60006036D /* HXJXVideoCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC803141ECEFCE60006036D /* HXJXVideoCVC.m */; };
 		0DCC4F541E67B4C800B7294B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCC4F531E67B4C800B7294B /* MediaPlayer.framework */; };
 		0DCC4F561E67B4D500B7294B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCC4F551E67B4D500B7294B /* AVFoundation.framework */; };
 		0DCC4F5A1E67B5DA00B7294B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCC4F591E67B5DA00B7294B /* CoreMedia.framework */; };
@@ -871,6 +872,8 @@
 		0DBA4D5A1E5E8CDE00E549A5 /* HXPayWaysCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPayWaysCell.h; sourceTree = "<group>"; };
 		0DBA4D5B1E5E8CDE00E549A5 /* HXPayWaysCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPayWaysCell.m; sourceTree = "<group>"; };
 		0DBA4D5C1E5E8CDE00E549A5 /* HXPayWaysCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXPayWaysCell.xib; sourceTree = "<group>"; };
+		0DC803131ECEFCE60006036D /* HXJXVideoCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXJXVideoCVC.h; sourceTree = "<group>"; };
+		0DC803141ECEFCE60006036D /* HXJXVideoCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXJXVideoCVC.m; sourceTree = "<group>"; };
 		0DCC4F531E67B4C800B7294B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0DCC4F551E67B4D500B7294B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0DCC4F591E67B5DA00B7294B /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -1591,6 +1594,8 @@
 				0D7286CD1E83BE1B00025AF0 /* HXSujectVideoListCell.h */,
 				0D7286CE1E83BE1B00025AF0 /* HXSujectVideoListCell.m */,
 				0D7286CF1E83BE1B00025AF0 /* HXSujectVideoListCell.xib */,
+				0DC803131ECEFCE60006036D /* HXJXVideoCVC.h */,
+				0DC803141ECEFCE60006036D /* HXJXVideoCVC.m */,
 				0D7286911E83BDE600025AF0 /* HXBuyBottomView.h */,
 				0D7286921E83BDE600025AF0 /* HXBuyBottomView.m */,
 				0D7286931E83BDE600025AF0 /* HXCommentAlertView.h */,
@@ -2436,7 +2441,7 @@
 				TargetAttributes = {
 					0DEA8EF51E486FC10052C459 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = KGWAJ8P3WV;
+						DevelopmentTeam = C27P4G356D;
 						ProvisioningStyle = Automatic;
 					};
 					0DEA8F0E1E486FC10052C459 = {
@@ -2787,6 +2792,7 @@
 				0DEA90521E4877BC0052C459 /* WBTableViewDelegate.m in Sources */,
 				0D3987171EB2D6B900AEDE68 /* HXCommitPassWordVC.m in Sources */,
 				0D71D9D41EBABCD100C088A1 /* HXBroserRecordVideoAPI.m in Sources */,
+				0DC803151ECEFCE60006036D /* HXJXVideoCVC.m in Sources */,
 				0D4242AB1EC2AFBF0040B7C7 /* HXMapVC.m in Sources */,
 				0D6EDFF51E6D47F10093F6CC /* HXCommonPickView.m in Sources */,
 				0D710EDC1E4C3C6300DA30FD /* HXMineLearnCell.m in Sources */,
@@ -3029,7 +3035,7 @@
 				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = KGWAJ8P3WV;
+				DEVELOPMENT_TEAM = C27P4G356D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3052,8 +3058,9 @@
 				);
 				OTHER_CFLAGS = "$(inherited)";
 				PODS_ROOT = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya111;
+				PRODUCT_BUNDLE_IDENTIFIER = MENGya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -3068,7 +3075,7 @@
 				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = KGWAJ8P3WV;
+				DEVELOPMENT_TEAM = C27P4G356D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3091,8 +3098,9 @@
 				);
 				OTHER_CFLAGS = "$(inherited)";
 				PODS_ROOT = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya111;
+				PRODUCT_BUNDLE_IDENTIFIER = MENGya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};

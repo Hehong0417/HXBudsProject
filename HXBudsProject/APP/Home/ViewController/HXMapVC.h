@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface HXMapVC : UIViewController
-@property(nonatomic,assign)CGFloat latitude;
-@property(nonatomic,assign)CGFloat longitude;
+@property(nonatomic,strong)NSString *latitude;
+@property(nonatomic,strong)NSString *longitude;
 @property (nonatomic, strong) BMKUserLocation *userLocation;
-
+@property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) NSString *name;
 
 @end

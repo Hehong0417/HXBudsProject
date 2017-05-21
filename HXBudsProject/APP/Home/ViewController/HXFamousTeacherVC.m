@@ -19,10 +19,10 @@
     
     BMKLocationService *_locService;
 }
+@property (nonatomic, strong)   BMKUserLocation *userLocation;
 @property (nonatomic, strong)   UITableView *teacherListTable;
 @property (nonatomic, strong)   HXTeacherListModel *teacherListModel;
 @property (nonatomic, strong)   NSMutableArray *recommonedArr;
-@property (nonatomic, strong)   BMKUserLocation *userLocation;
 
 @end
 
@@ -69,12 +69,12 @@
 //处理方向变更信息
 - (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
 {
-    NSLog(@"heading is %@",userLocation.heading);
+//    NSLog(@"heading is %@",userLocation.heading);
 }
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
-    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+//    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     self.userLocation = userLocation;
 }
 - (void)getTeacherListState:(NSInteger)State{

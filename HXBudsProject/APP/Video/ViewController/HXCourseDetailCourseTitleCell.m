@@ -7,7 +7,6 @@
 //
 
 #import "HXCourseDetailCourseTitleCell.h"
-#import "HXMyLikeVC.h"
 
 
 @implementation HXCourseDetailCourseTitleCell
@@ -22,15 +21,11 @@
     [self.starView addSubview:iconImgV];
     [self.starView addSubview:teacherNameLab];
     self.starView.userInteractionEnabled = YES;
+    
     [self.starView setTapActionWithBlock:^{
-        HXMyLikeVC *vc = [HXMyLikeVC new];
-        vc.titleStr = @"他的主页";
-        vc.dynamicType = teacherDynamicType;
-        [self.nav pushVC:vc];
-
+        
+        
     }];
-
-
 }
 + (instancetype)initCourseDetailCourseTitleCellWithXib{
 
@@ -59,6 +54,7 @@
     }
     self.read.text = [NSString stringWithFormat:@"%@人看过",pdModel.read?pdModel.read:@"0"];
     self.when_long.text = [NSString stringWithFormat:@"时长:%@分钟",pdModel.when_long?pdModel.when_long:@"0"];
+
 
 }
 @end

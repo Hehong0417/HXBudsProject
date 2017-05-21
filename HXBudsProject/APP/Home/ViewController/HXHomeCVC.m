@@ -12,7 +12,6 @@
 #import "HXTeacherCollectionCell.h"
 #import "HXHomeReusableHeadView.h"
 #import "HXVideoSectionHead.h"
-#import "HXSubjectVideoVC.h"
 #import "HXMyLikeVC.h"
 #import "HXAdvertisementAPI.h"
 #import "HXAdvListModel.h"
@@ -33,11 +32,14 @@
 #import "HXSectionFootView.h"
 #import "HXCurriculumSearchAPI.h"
 #import "HXSubjectVideoListModel.h"
+#import "HXVideoCVC.h"
+#import "HXSubjectVideoVC.h"
+#import "HXJXVideoCVC.h"
 
 @interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,SearchViewControllerDelegate>
 {
      BOOL isLogin;
-  
+   
 }
 @property (nonatomic,strong)UICollectionView *collectionView;
 
@@ -64,24 +66,64 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+//     // 轮播图
+//    [self getList_online];
+//    //热门课程
+//    [self getHotVideoList];
+//    //精选好课
+//    [self getFeaturedVideoList];
+//
+//    //课程类型
+//    [self getTeachingTypeList];
+    
+       [self dispatchRequest];
 
-    [self getList_online];
-    //热门课程
-    [self getHotVideoList];
-    //精选好课
-    [self getFeaturedVideoList];
-//    http://192.168.0.128:8080/goaling/curriculum/list_anon?limit=4&recommend_status=recommend-status-jx
-    //课程类型
-    [self getTeachingTypeList];
 }
 - (void)dispatchRequest {
-        
+    
+//    /创建信号量/
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+//    /创建全局并行/
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_async(group, queue, ^{
+        NSLog(@"处理事件A");
+        //轮播图
         [self getList_online];
+                dispatch_semaphore_signal(semaphore);
+
+    });
+    dispatch_group_async(group, queue, ^{
+        NSLog(@"处理事件B");
         //热门课程
         [self getHotVideoList];
+        dispatch_semaphore_signal(semaphore);
+
+    });
+    dispatch_group_async(group, queue, ^{
+        NSLog(@"处理事件C");
         //精选好课
         [self getFeaturedVideoList];
+        dispatch_semaphore_signal(semaphore);
+
+    });
+    dispatch_group_async(group, queue, ^{
+        NSLog(@"处理事件D");
+        //精选好课
+        [self getTeachingTypeList];
+        dispatch_semaphore_signal(semaphore);
+
+    });
     
+    dispatch_group_notify(group, queue, ^{
+//       /四个请求对应四次信号等待/
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        NSLog(@"处理事件E");
+
+    });
 }
 
 - (void)getTeachingTypeList{
@@ -90,7 +132,7 @@
         
         HXTeachingTypeListModel *api = [HXTeachingTypeListModel new];
         self.teachingTypeListModel = [api.class mj_objectWithKeyValues:responseObject];
-        
+//        dispatch_semaphore_signal(semaphore);
     }];
 
 }
@@ -108,6 +150,8 @@
          [self.varListArr addObject:kAPIImageFromUrl(model.picture)];
             
         }
+//        dispatch_semaphore_signal(semaphore);
+
         [self.collectionView reloadData];
     }];
 
@@ -122,6 +166,7 @@
         
         self.RmVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
         [self.collectionView reloadData];
+//        dispatch_semaphore_signal(semaphore);
 
     }];
     
@@ -135,6 +180,7 @@
         
         self.JxVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
         [self.collectionView reloadData];
+//        dispatch_semaphore_signal(semaphore);
 
     }];
 
@@ -143,7 +189,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    [self dispatchRequest];
+    [self dispatchRequest];
     
     self.page = 1;
     
@@ -320,6 +366,7 @@
             sectionHead.btnFontAttributes = [FontAttributes fontAttributesWithFontColor:RGB(186, 186, 186) fontsize:13];
             [sectionHead setTapActionWithBlock:^{
                 HXSubjectVideoVC *vc = [HXSubjectVideoVC new];
+                vc.videoTitle = @"热门视频";
                 [self.navigationController pushVC:vc];
             }];
             return sectionHead;
@@ -334,7 +381,9 @@
             sectionHead.imageName = @"jingxuan";
             sectionHead.btnFontAttributes = [FontAttributes fontAttributesWithFontColor:RGB(186, 186, 186) fontsize:13];
             [sectionHead setTapActionWithBlock:^{
-                [self.navigationController pushVC:[HXLoginVC new]];
+                HXJXVideoCVC *vc = [HXJXVideoCVC new];
+                [self.navigationController pushVC:vc];
+
             }];
             return sectionHead;
         }

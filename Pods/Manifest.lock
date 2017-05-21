@@ -32,7 +32,6 @@ PODS:
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
   - FXBlurView (1.6.4)
-  - IQKeyboardManager (4.0.9)
   - JCore (1.1.2)
   - JPush (3.0.2):
     - JCore (~> 1.1.1)
@@ -94,7 +93,6 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - FMDB
   - FXBlurView
-  - IQKeyboardManager
   - JPush (= 3.0.2)
   - JSONModel (~> 1.1.2)
   - Masonry
@@ -120,7 +118,6 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
-  IQKeyboardManager: 322c7405df3eb5f7e50dede32ea937bf3d4364e0
   JCore: 9e9bd280a38090d66aca0a7547581cd29804c6eb
   JPush: 01a693fafe51b93eafc2e368bbc7a7cc07e12ce4
   JSONModel: 216584d0311b053ff714f1d6cb700dbf890847bc
@@ -140,6 +137,6 @@ SPEC CHECKSUMS:
   WYPopoverController: a9db25ac2841a686acdc0f3a99bdb21545db32f4
   YYCategories: 3c7e012ac4573b1fc432f9a2eac15109857391d2
 
-PODFILE CHECKSUM: 26e277577dc4e9202d5dca26b68442c3f6b43761
+PODFILE CHECKSUM: d69fd3423087404bfa1a1bb6fa9305f312982a68
 
 COCOAPODS: 1.2.0

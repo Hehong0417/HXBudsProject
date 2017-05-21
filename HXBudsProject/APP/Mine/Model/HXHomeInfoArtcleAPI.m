@@ -10,7 +10,7 @@
 
 @implementation HXHomeInfoArtcleAPI
 
-+ (instancetype)getHomeInfoArticleWithTheteacherId:(NSString *)theteacher_id mechanism_id:(NSString *)mechanism_id{
++ (instancetype)getHomeInfoArticleWithTheteacherId:(NSString *)theteacher_id mechanism_id:(NSString *)mechanism_id limit:(NSNumber *)limit{
 
     HXHomeInfoArtcleAPI *api = [HXHomeInfoArtcleAPI new];
     api.subUrl = API_GET_ARTICLE;
@@ -19,6 +19,9 @@
     }
     if (mechanism_id) {
         [api.parameters setObject:mechanism_id forKey:@"mechanism_id"];
+    }
+    if (limit) {
+        [api.parameters setObject:limit forKey:@"limit"];
     }
     api.parametersAddToken = NO;
     return api;

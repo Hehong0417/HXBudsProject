@@ -11,7 +11,7 @@
 #import "HXMyLikeVC.h"
 #import "HXMyattetionTeacherAPI.h"
 #import "HXTeacherListModel.h"
-
+#import "HXOrganizationDetailVC.h"
 
 @interface HXMyAttetionVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -97,11 +97,13 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    HXMyLikeVC *vc = [HXMyLikeVC new];
-    vc.titleStr = @"他的网页";
-    vc.dynamicType = teacherDynamicType;
-    [self.navigationController pushViewController:vc animated:YES];
+    HXOrganizationDetailVC *detailVC = [[HXOrganizationDetailVC alloc]init];
     
+    HXteacherVarListModel *model = self.teacherListModel.varList[indexPath.row];
+    detailVC.teacher_Id = model.theteacher_id;
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
+
 }
 
 

@@ -63,14 +63,14 @@
     
     //未登录的HeadView
     self.NoLoginMineHeadView = [HXMineHeadView initmineHeadViewWithXib];
-    self.NoLoginMineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
+    self.NoLoginMineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(150));
     self.NoLoginMineHeadView.nav = self.navigationController;
     
     self.tableV.tableHeaderView =  self.NoLoginMineHeadView;
 
     //登录后的HeadView
     self.mineHeadView = [HXMineLoginHeadView initMineLoginHeadViewWithXib];
-    self.mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(120));
+    self.mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(150));
     self.mineHeadView.nav = self.navigationController;
     
     
@@ -179,7 +179,7 @@
     
     if (indexPath.section == 0) {
         
-        return 85;
+        return 75;
     }
     return 44;
     

@@ -13,7 +13,7 @@
 + (instancetype)getArticleDetailWithArticle_id:(NSString *)article_id{
 
     HXArticleDetailAPI *api = [HXArticleDetailAPI new];
-    api.subUrl = API_GET_TEACHER_DDETAIL;
+    api.subUrl = API_GET_ARTICLE_DETAIL;
     if (article_id) {
         [api.parameters setObject:article_id forKey:@"article_id"];
     }

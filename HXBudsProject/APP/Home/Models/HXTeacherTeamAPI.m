@@ -12,7 +12,7 @@
 + (instancetype)getTeacherTeamWithmechanism_id:(NSString *)mechanism_id{
 
     HXTeacherTeamAPI *api = [HXTeacherTeamAPI new];
-    api.subUrl = API_mechanism_detail;
+    api.subUrl = API_teacherteam_list;
     if (mechanism_id) {
         [api.parameters setObject:mechanism_id forKey:@"mechanism_id"];
     }

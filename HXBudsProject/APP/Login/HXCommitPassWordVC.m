@@ -137,6 +137,11 @@
     
     
 }
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    [self.view endEditing:YES];
+    
+}
 - (void)registerAction:(UIButton *)btn{
     
     //判断密码是否相同

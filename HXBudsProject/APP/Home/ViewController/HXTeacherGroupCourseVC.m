@@ -25,9 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    self.title = @"课程列表";
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-268) collectionViewLayout:layout];
     
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-314) collectionViewLayout:layout];
     [self.collectionView registerNib:[UINib nibWithNibName:@"HXTeacherCourseCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"HXTeacherCourseCell"];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
