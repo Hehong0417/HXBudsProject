@@ -62,7 +62,7 @@
     self.nickName.text = pdModel.nickname;
     
     [self.organizationIco sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(pdModel.the_headportrait)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
-    self.addressLab.text = [NSString stringWithFormat:@"%@%@",pdModel.city_text?pdModel.city_text:@" ",pdModel.address?pdModel.address:@" "];
+    self.addressLab.text = [NSString stringWithFormat:@"%@",pdModel.address?pdModel.address:@" "];
 //    NSString *followtenum = pdModel.followtenum?pdModel.followtenum:@"0";
 //    self.followtenum.text = [NSString stringWithFormat:@"%@粉丝",followtenum];
     self.introduce.text = pdModel.hobby;
@@ -82,10 +82,10 @@
 - (void)setModel:(HXOrganizationPdModel *)model {
 
     _model = model;
-    [self.organizationIco sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.mechanism_logo)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
+    [self.organizationIco sd_setImageWithURL:[NSURL URLWithString:kAPImechanismFromUrl(model.mechanism_logo)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
     self.nickName.text = model.mechanism_name;
     self.introduce.text = model.mechanism_desc;
-    self.addressLab.text = [NSString stringWithFormat:@"%@%@",model.mechanism_city_text?model.mechanism_city_text:@" ",model.mechanism_address?model.mechanism_address:@" "];
+    self.addressLab.text = [NSString stringWithFormat:@"%@",model.mechanism_address?model.mechanism_address:@" "];
 
     if ([model.followState isEqualToString:@"yes"]) {
         //判断是否登录

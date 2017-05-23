@@ -30,7 +30,7 @@
         
     }];
     [self.rightIconImgV lh_setCornerRadius:3 borderWidth:0 borderColor:nil];
-    
+    self.contentLab.font = FONT(16);
     
 }
 - (void)setLayout{

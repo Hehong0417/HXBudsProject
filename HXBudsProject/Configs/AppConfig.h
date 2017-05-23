@@ -1,6 +1,11 @@
 
 //API
 
+
+
+
+
+
 //导航栏标题字体大小
 #define JDNavigationFont [UIFont systemFontOfSize:20]
 #define FontBigSize [UIFont systemFontOfSize:16]
@@ -9,6 +14,9 @@
 //公用颜色
 #define JDCommonColor [UIColor colorWithRed:0.478 green:0.478 blue:0.478 alpha:1]
 #define APP_COMMON_COLOR RGB(72, 210, 213)
+
+#define APP_green_COLOR RGB(190, 225, 255)
+
 #define KVCBackGroundColor RGB(245, 245, 245)
 //#define KVCBackGroundColor RGB(250,250, 250)
 

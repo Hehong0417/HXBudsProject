@@ -110,8 +110,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,assign) BOOL   isDisappear;
 
 
-/**播放器*/
-@property (nonatomic,strong) AVPlayer         *player;
+
 /**playerLayer*/
 @property (nonatomic,strong) AVPlayerLayer    *playerLayer;
 /**播放器item*/
@@ -897,6 +896,7 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
 - (void)pausePlay{
     self.maskView.playButton.selected = NO;
     [_player pause];
+    
 }
 #pragma mark - 播放
 - (void)playVideo{
@@ -920,6 +920,7 @@ NSString * calculateTimeWithTimeFormatter(long long timeSecond){
     [_player.currentItem.asset cancelLoading];
 
     _player = nil;
+    
     //移除
     [self removeFromSuperview];
 

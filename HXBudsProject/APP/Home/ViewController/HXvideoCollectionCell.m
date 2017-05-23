@@ -77,6 +77,7 @@
         vc.playImageStr = model.curr_picture;
         vc.curriculum_price = model.curriculum_price;
         vc.charge_status_text = model.charge_status_text;
+        vc.model = model;
         [self.nav pushVC:vc];
     }];
     [self.videoTitleLab setTapActionWithBlock:^{
@@ -86,6 +87,7 @@
         vc.playImageStr = model.curr_picture;
         vc.curriculum_price = model.curriculum_price;
         vc.charge_status_text = model.charge_status_text;
+        vc.model = model;
         [self.nav pushVC:vc];
         
     }];

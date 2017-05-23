@@ -21,5 +21,6 @@
 @property(nonatomic,copy) NSString *videos_long;
 @property(nonatomic,copy) NSString *videos_order;
 @property(nonatomic,copy) NSString *videos_title;
+@property(nonatomic,copy) NSString *watchvideos_id;
 
 @end

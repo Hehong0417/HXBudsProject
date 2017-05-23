@@ -8,10 +8,11 @@
 
 
 //#import "SegmentPageBaseViewController.h"
+typedef void(^didselectBlock)(NSString *urlStr);
 
 @protocol CourseDetailTwoDelegate <NSObject>
 
-- (void)categoryDidSelectIndex:(NSInteger)index;
+- (void)categoryDidSelectIndex:(NSString *)urlStr;
 
 @end
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong)NSString * curriculum_id;
 
 @property (nonatomic, copy) id <CourseDetailTwoDelegate> delegate;
+@property (nonatomic, copy) didselectBlock didselectBlock;
 
 
 @end

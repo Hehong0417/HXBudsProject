@@ -149,7 +149,7 @@
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
     //创建视频内容对象
-    UMShareVideoObject *shareObject = [UMShareVideoObject shareObjectWithTitle:self.articleModel.article_title descr:self.articleModel.article_content thumImage:[UIImage imageNamed:self.articleModel.article_cover]];
+    UMShareVideoObject *shareObject = [UMShareVideoObject shareObjectWithTitle:self.articleModel.article_title descr:self.articleModel.article_content thumImage:kAPIImageFromUrl(self. articleModel.article_cover)];
     
     //设置视频网页播放地址
 //    shareObject.videoUrl = video_testUrl;

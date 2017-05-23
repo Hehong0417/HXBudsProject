@@ -37,7 +37,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如果你无法简洁的表达你的如果你如果你无法简洁的表" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O17-rN-jhh">
-                        <rect key="frame" x="80" y="40" width="269" height="14"/>
+                        <rect key="frame" x="80" y="47" width="269" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="Q9T-hL-5Cr"/>
                         </constraints>
@@ -68,7 +68,7 @@
                     <constraint firstItem="jx4-ng-1Nl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="Tv1-HM-efG"/>
                     <constraint firstItem="O17-rN-jhh" firstAttribute="leading" secondItem="Bfd-tb-0Gb" secondAttribute="leading" id="g8Z-ke-rvO"/>
                     <constraint firstAttribute="bottomMargin" secondItem="jx4-ng-1Nl" secondAttribute="bottom" constant="13" id="juD-ez-2wz"/>
-                    <constraint firstItem="O17-rN-jhh" firstAttribute="top" secondItem="Bfd-tb-0Gb" secondAttribute="bottom" constant="5" id="jzV-In-q5b"/>
+                    <constraint firstItem="O17-rN-jhh" firstAttribute="top" secondItem="Bfd-tb-0Gb" secondAttribute="bottom" constant="12" id="jzV-In-q5b"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

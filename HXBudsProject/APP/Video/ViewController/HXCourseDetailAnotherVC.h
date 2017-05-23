@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HXSubjectVideoListModel.h"
 
 @interface HXCourseDetailAnotherVC : UIViewController
-
 
 @property (nonatomic, retain)NSString * curriculum_id;
 
@@ -19,5 +18,7 @@
 @property(nonatomic,strong) NSString *curriculum_price;
 
 @property(nonatomic,strong) NSString *charge_status_text;
+
+@property(nonatomic,strong) HXSubjectVideoModel *model;
 
 @end

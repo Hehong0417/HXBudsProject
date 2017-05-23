@@ -36,6 +36,7 @@
 #import "HXSubjectVideoVC.h"
 #import "HXJXVideoCVC.h"
 
+
 @interface HXHomeCVC ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,SearchViewControllerDelegate>
 {
      BOOL isLogin;
@@ -57,6 +58,7 @@
 @property (nonatomic, strong) HXTeachingTypeListModel *teachingTypeListModel;
 @property (nonatomic, strong) NSArray *followList;
 
+@property (nonatomic, strong) NSMutableArray *GroupArr;
 
 @property (nonatomic, strong) HXSubjectVideoListModel *searchVideoModel;
 
@@ -174,18 +176,70 @@
 //精选好课
 - (void)getFeaturedVideoList {
 
-    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@4 theteacherId:nil curriculum­­_status:@"recommend-status-jx" isLogin:NO] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+    [self.GroupArr removeAllObjects];
+    
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@(10*self.page) theteacherId:nil curriculum­­_status:@"recommend-status-jx" isLogin:NO] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         
         HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
         
         self.JxVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+        
+        [self loadDataFinish:self.JxVideoListModel.varList];
+
         [self.collectionView reloadData];
-//        dispatch_semaphore_signal(semaphore);
 
     }];
 
 }
+/**
+ *  加载数据完成
+ */
+- (void)loadDataFinish:(NSArray *)arr {
+    
+    // 添加数据
+    if (self.page > 1) {
+        
+        [self.GroupArr addObjectsFromArray:arr];
+    } else {
+        
+        self.GroupArr = arr.mutableCopy;
+    }
+    
+    // 判断还有没有数据
+//    if (arr.count == 0) {
+//        
+//        [SVProgressHUD showInfoWithStatus:@"暂无更多数据"];
+//    }
+//    
+    
+    BOOL noMoreData = (arr.count == 0 || arr.count < KpageSize);
+    
+    
+    [self endRefreshing:noMoreData];
+}
 
+/**
+ *  结束刷新
+ */
+- (void)endRefreshing:(BOOL)noMoreData {
+    // 取消刷新
+    if (self.collectionView.mj_header.isRefreshing) {
+        [self.collectionView.mj_header endRefreshing];
+    }
+    else if (self.collectionView.mj_footer.isRefreshing) {
+        [self.collectionView.mj_footer endRefreshing];
+    }
+    // 数据重载
+    [self.collectionView reloadData];
+    
+}
+#pragma mark - Setter_Getter
+- (NSMutableArray *)GroupArr {
+    if (!_GroupArr) {
+        _GroupArr = [NSMutableArray array];
+    }
+    return _GroupArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -218,9 +272,9 @@
 - (void)addHeaderRefresh{
 
     MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        
-        [self.collectionView.mj_header endRefreshing];
+        self.page = 1;
 
+        [self getFeaturedVideoList];
     }];
     self.collectionView.mj_header = refreshHeader;
 
@@ -229,8 +283,8 @@
 - (void)addFooterRefresh {
     
     MJRefreshAutoNormalFooter  *refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-       
-        [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+        self.page++;
+        [self getFeaturedVideoList];
 
     }];
     
@@ -257,7 +311,7 @@
     }else {
     
         HXChoicenessCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXChoicenessCell" forIndexPath:indexPath];
-        cell.model = self.JxVideoListModel.varList[indexPath.row];
+        cell.model = self.GroupArr[indexPath.row];
         cell.nav = self.navigationController;
         return cell;
     }
@@ -278,7 +332,7 @@
         
     }else {
         
-        return self.JxVideoListModel.varList.count;
+        return self.GroupArr.count;
     }
 }
 
@@ -340,6 +394,7 @@
         vc.playImageStr = model.curr_picture;
         vc.curriculum_price = model.curriculum_price;
         vc.charge_status_text = model.charge_status_text;
+        vc.model = model;
         [self.navigationController pushVC:vc];
     
     }

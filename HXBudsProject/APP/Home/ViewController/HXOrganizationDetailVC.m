@@ -157,9 +157,7 @@
         [self.navigationController pushVC:[HXLoginVC new]];
     }
     
-    
 }
-
 
 - (void)getTeacherDetailData {
     

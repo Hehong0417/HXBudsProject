@@ -100,6 +100,7 @@
           vModel.mechanism_desc = model.mechanism_desc;
           vModel.mechanism_logo = model.mechanism_logo;
           vModel.mechanism_name = model.mechanism_name;
+          vModel.mechanism_address = model.mechanism_address;
           vModel.distance = [NSString stringWithFormat:@"%.0f",distance];
           NSLog(@"distance---%@",vModel.distance);
           NSLog(@"userLocation---%.2f----%.2f",self.userLocation.location.coordinate.latitude,self.userLocation.location.coordinate.longitude);
@@ -135,7 +136,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return WidthScaleSize_H(90);
+    return WidthScaleSize_H(95);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -45,7 +45,7 @@
 - (void)setHeadtitle:(NSString *)headtitle {
     _headtitle = headtitle;
     CGSize nameSize = [self.headtitle lh_sizeWithFont:[UIFont systemFontOfSize:self.labFont] constrainedToSize:CGSizeMake(SCREEN_WIDTH, 25)];
-    self.headTitleLab.frame = CGRectMake(25, 0, nameSize.width+5, 35);
+    self.headTitleLab.frame = CGRectMake(30, 0, nameSize.width+5, 35);
     self.headTitleLab.text = _headtitle;
 }
 - (void)setDiscribText:(NSString *)discribText {

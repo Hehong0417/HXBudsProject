@@ -29,7 +29,7 @@
     [super viewWillAppear:animated];
     
     //专题视频
-    [self getSubjectVideoListWithCurriculum­­_status:@"recommend-status-jx" completeHandle:^(id responseObject) {
+    [self getSubjectVideoListWithCurriculum­­_status:@"recommend-status-jx" completeHandle:^(id responseObject) {
         
         HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
         
@@ -116,6 +116,7 @@
     vc.playImageStr = model.curr_picture;
     vc.curriculum_price = model.curriculum_price;
     vc.charge_status_text = model.charge_status_text;
+    vc.model = model;
     [self.navigationController pushVC:vc];
     
 }

@@ -50,10 +50,11 @@
 
 - (void)setOrganizationModel:(HXOrganizationVarListModel *)organizationModel {
     _organizationModel = organizationModel;
-    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(organizationModel.mechanism_logo)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
+    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPImechanismFromUrl(organizationModel.mechanism_logo)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
     
     self.teacherNameLab.text = organizationModel.mechanism_name;
-    self.introduceLab.text = organizationModel.mechanism_desc;
+    self.introduceLab.text = [NSString stringWithFormat:@"%@",organizationModel.mechanism_address];
+    
     UIColor *backgroud = organizationModel.mechanism_name ?kWhiteColor:KPlaceHoldColor;
     if (!organizationModel.mechanism_name) {
         self.introduceLab.height = 21;

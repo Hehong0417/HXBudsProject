@@ -27,6 +27,8 @@
 @property(nonatomic,assign)BOOL isViewMore;
 @property(nonatomic,strong)HXHomeInfoArticleModel *articleModel;
 @property(nonatomic,strong)HXArticleTypeModel *articleTypeModel;
+@property(nonatomic,assign)NSInteger page;
+@property (nonatomic, strong) NSMutableArray *GroupArr;
 
 
 @end
@@ -36,6 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:animated];
+    self.page = 1;
     
     [self getArticleListData];
     [self getArticleTypeList];
@@ -51,37 +54,6 @@
 
     });
 }
-//- (void)dispatchRequest {
-//    
-//    //    /创建信号量/
-//    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-//    //    /创建全局并行/
-//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//    dispatch_group_t group = dispatch_group_create();
-//    dispatch_group_async(group, queue, ^{
-//        NSLog(@"处理事件A");
-//        //文章
-//        [self getArticleListData];
-//        dispatch_semaphore_signal(semaphore);
-//        
-//    });
-//    dispatch_group_async(group, queue, ^{
-//        NSLog(@"处理事件B");
-//        //类型
-//        [self getArticleTypeList];
-//        dispatch_semaphore_signal(semaphore);
-//        
-//    });
-//    dispatch_group_notify(group, queue, ^{
-//        //       /四个请求对应四次信号等待/
-//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-//        NSLog(@"处理事件E");
-//        
-//    });
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -92,23 +64,97 @@
     [self.view addSubview:self.tabView];
     self.tabView.showsVerticalScrollIndicator = NO;
     
-//    NSArray *arr = @[@"#智商·情商#",@"#叶文有话要说#",@"#单田方#",@"#城市#",@"#美女#",@"#社交恐惧#",@"#家庭矛盾#",@"#社交恐惧#",@"#家庭矛盾#"];
-//    [self.subjectArr addObjectsFromArray:arr];
     [self.tabView registerClass:[HXArticleCellOne class] forCellReuseIdentifier:@"HXArticleCellOne"];
     self.tabView.backgroundColor = kWhiteColor;
     self.view.backgroundColor = kWhiteColor;
+    
+    
+    [self addHeaderRefresh];
+    [self addFooterRefresh];
+    
 }
+- (void)addHeaderRefresh{
+    
+    MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.page = 1;
+        
+        [self getArticleListData];
+    }];
+    self.tabView.mj_header = refreshHeader;
+    
+}
+
+- (void)addFooterRefresh {
+    
+    MJRefreshAutoNormalFooter  *refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        self.page++;
+        [self getArticleListData];
+        
+    }];
+    
+    self.tabView.mj_footer = refreshFooter;
+    
+    
+}
+
 - (void)getArticleListData {
 
-    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil mechanism_id:nil limit:@10] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+    [self.GroupArr removeAllObjects];
+    
+    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil mechanism_id:nil limit:@(10*self.page)] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
         
         self.articleModel = [api.class mj_objectWithKeyValues:responseObject];
+        
+        [self loadDataFinish:self.articleModel.varList];
+
         [self.tabView reloadData];
         
     }];
 
 }
+/**
+ *  加载数据完成
+ */
+- (void)loadDataFinish:(NSArray *)arr {
+    
+    // 添加数据
+    if (self.page > 1) {
+        
+        [self.GroupArr addObjectsFromArray:arr];
+    } else {
+        
+        self.GroupArr = arr.mutableCopy;
+    }
+    
+//    // 判断还有没有数据
+//    if (arr.count == 0) {
+//        
+//        [SVProgressHUD showInfoWithStatus:@"暂无更多数据"];
+//    }
+    
+    BOOL noMoreData = (arr.count == 0 || arr.count < KpageSize);
+    
+    
+    [self endRefreshing:noMoreData];
+}
+
+/**
+ *  结束刷新
+ */
+- (void)endRefreshing:(BOOL)noMoreData {
+    // 取消刷新
+    if (self.tabView.mj_header.isRefreshing) {
+        [self.tabView.mj_header endRefreshing];
+    }
+    else if (self.tabView.mj_footer.isRefreshing) {
+        [self.tabView.mj_footer endRefreshing];
+    }
+    // 数据重载
+    [self.tabView reloadData];
+    
+}
+
 - (void)getArticleTypeList {
 
      [[[HXArticleTypeAPI getArticleTypeList] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
@@ -145,7 +191,7 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.articleType = homeArticle;
-    cell.model = self.articleModel.varList[indexPath.row];
+    cell.model = self.GroupArr[indexPath.row];
     cell.nav = self.navigationController;
     return cell;
     }
@@ -161,7 +207,7 @@
     if (section == 0) {
         return 1;
     }else{
-        return self.articleModel.varList.count;
+        return self.GroupArr.count;
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -307,5 +353,12 @@
         _subjectArr = [NSMutableArray array];
     }
     return _subjectArr;
+}
+#pragma mark - Setter_Getter
+- (NSMutableArray *)GroupArr {
+    if (!_GroupArr) {
+        _GroupArr = [NSMutableArray array];
+    }
+    return _GroupArr;
 }
 @end

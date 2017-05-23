@@ -163,7 +163,7 @@
             NSString *transaction = responseObject[@"pd"][@"transaction"];
             if ([transaction isEqualToString:@"no"]) {
                 //余额不足
-                [[[HXWXPayAPI wxPayWithopcash:@"0.01" wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+                [[[HXWXPayAPI wxPayWithopcash:self.money wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
                     
                     [self payWithResponse:responseObject];
                     

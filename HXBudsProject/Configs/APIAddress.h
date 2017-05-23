@@ -14,10 +14,15 @@
 // 本地图片
 #define API_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/upload/task"
 //老师头像图片
-#define API_Teacher_IMAGE_HOST @"http://192.168.0.128:8080"
+#define API_Teacher_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/theteacher"
 
 //用户头像图片
 #define API_User_IMAGE_HOST @"http://192.168.0.128:8080"
+
+//机构头像图片
+#define API_mechanism_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/mechanism"
+
+
 
 #define APP_key @"59334e721bcd31"
 #define APP_scode @"15ca7554e8cb486f3b8cbe1fa166c75b"// [NSString md5:[APP_key stringByAppendingString:@"trans"]]
@@ -40,13 +45,22 @@
 #define kAPIUserImageFromUrl(url) [[NSString stringWithFormat:@"%@/%@", API_User_IMAGE_HOST, url]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 
 
+//机构头像
+#define kAPImechanismFromUrl(url) [[NSString stringWithFormat:@"%@/%@", API_mechanism_IMAGE_HOST, url]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+
 
 #define video_testUrl @"http://1253712797.vod2.myqcloud.com/e8f61ed3vodtransgzp1253712797/863fe8399031868222929787287/f0.f20.mp4"
 
 #import "HJUser.h"
 
 //
-#define article_detail_url  @"http://192.168.0.119/my/menya/Mengya/index.html"
+#define article_detail_url  @"http://192.168.0.105/my/menya/Mengya/index.html"
+
+
+
+#define KJust_WIFI_Play_Notification @"KJust_WIFI_Play_Notification" //开启4G网络下播放通知
+
+#define KpageSize 15
 
 /**
  *  登录注册
@@ -79,6 +93,7 @@
 #define API_VERIFY_CODE API_SUB_URL(@"user/verifyCode.do")
 //1.9根据经纬度获取配送点列表
 #define API_GET_SEND_POINT_BY_XY API_SUB_URL(@"user/getSendPointByXY.do")
+
 /**
  *  首页
  */
@@ -151,6 +166,14 @@
 #define API_collectioncurriculum_isAdd  API_SUB_URL(@"collectioncurriculum/isAdd")//*
 //5.8 评论点赞
 #define API_GET_SPOTFABULOUS  API_SUB_URL(@"curriculumreview/spotFabulous")
+
+
+//5.8 添加教程
+#define API_watchvideos_add  API_SUB_URL(@"watchvideos/add")
+//5.8 查看用户观看教程观看记录
+#define API_watchvideos_list  API_SUB_URL(@"watchvideos/list_anon")
+
+
 
 
 //5.8 课程模糊查询

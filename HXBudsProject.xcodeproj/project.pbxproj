@@ -237,6 +237,8 @@
 		0D9BC2851EA4AC5900EC2315 /* UIView+WHC_AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC27F1EA4AC5900EC2315 /* UIView+WHC_AutoLayout.m */; };
 		0D9BC2861EA4AC5900EC2315 /* UIView+WHC_Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC2811EA4AC5900EC2315 /* UIView+WHC_Frame.m */; };
 		0D9BC2871EA4AC5900EC2315 /* WHC_StackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC2831EA4AC5900EC2315 /* WHC_StackView.m */; };
+		0DA05C171ED2D93D00E27D90 /* HXAddWatchvideosRecordAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA05C161ED2D93D00E27D90 /* HXAddWatchvideosRecordAPI.m */; };
+		0DA05C1A1ED2DBE000E27D90 /* HXWatchVideoListAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA05C191ED2DBE000E27D90 /* HXWatchVideoListAPI.m */; };
 		0DA098BD1EC19866004BB09A /* HXFamousTeacherSGVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA098BC1EC19866004BB09A /* HXFamousTeacherSGVC.m */; };
 		0DA098C01EC19ACE004BB09A /* HXFamousTeacherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA098BF1EC19ACE004BB09A /* HXFamousTeacherVC.m */; };
 		0DAE8AA71EC04C2B00CA0619 /* HXChoicenessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE8AA51EC04C2B00CA0619 /* HXChoicenessCell.m */; };
@@ -810,6 +812,10 @@
 		0D9BC2811EA4AC5900EC2315 /* UIView+WHC_Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WHC_Frame.m"; sourceTree = "<group>"; };
 		0D9BC2821EA4AC5900EC2315 /* WHC_StackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHC_StackView.h; sourceTree = "<group>"; };
 		0D9BC2831EA4AC5900EC2315 /* WHC_StackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHC_StackView.m; sourceTree = "<group>"; };
+		0DA05C151ED2D93D00E27D90 /* HXAddWatchvideosRecordAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAddWatchvideosRecordAPI.h; sourceTree = "<group>"; };
+		0DA05C161ED2D93D00E27D90 /* HXAddWatchvideosRecordAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAddWatchvideosRecordAPI.m; sourceTree = "<group>"; };
+		0DA05C181ED2DBE000E27D90 /* HXWatchVideoListAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXWatchVideoListAPI.h; sourceTree = "<group>"; };
+		0DA05C191ED2DBE000E27D90 /* HXWatchVideoListAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXWatchVideoListAPI.m; sourceTree = "<group>"; };
 		0DA098BB1EC19866004BB09A /* HXFamousTeacherSGVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXFamousTeacherSGVC.h; sourceTree = "<group>"; };
 		0DA098BC1EC19866004BB09A /* HXFamousTeacherSGVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXFamousTeacherSGVC.m; sourceTree = "<group>"; };
 		0DA098BE1EC19ACE004BB09A /* HXFamousTeacherVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXFamousTeacherVC.h; sourceTree = "<group>"; };
@@ -882,7 +888,7 @@
 		0DCC4F611E67C73A00B7294B /* HXMineHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HXMineHeadView.xib; sourceTree = "<group>"; };
 		0DD00F1C1E8E569600823BDA /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		0DD00F1E1E8E56FD00823BDA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		0DD36B101E8E4A5A00F817CF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0DD36B101E8E4A5A00F817CF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Plus/Images.xcassets; sourceTree = "<group>"; };
 		0DD36B121E8E4A5A00F817CF /* LNNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotification.h; sourceTree = "<group>"; };
 		0DD36B131E8E4A5A00F817CF /* LNNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotification.m; sourceTree = "<group>"; };
 		0DD36B141E8E4A5A00F817CF /* LNNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationCenter.h; sourceTree = "<group>"; };
@@ -1562,6 +1568,10 @@
 				0DAEA5211EB032A0009AF9D9 /* HXVideoCatalogueAPI.m */,
 				0DAEA5261EB03376009AF9D9 /* HXVideoCatalogueModel.h */,
 				0DAEA5271EB03376009AF9D9 /* HXVideoCatalogueModel.m */,
+				0DA05C151ED2D93D00E27D90 /* HXAddWatchvideosRecordAPI.h */,
+				0DA05C161ED2D93D00E27D90 /* HXAddWatchvideosRecordAPI.m */,
+				0DA05C181ED2DBE000E27D90 /* HXWatchVideoListAPI.h */,
+				0DA05C191ED2DBE000E27D90 /* HXWatchVideoListAPI.m */,
 				0D757FE31EB1E664001E37E8 /* HXcurriculumreviewAPI.h */,
 				0D757FE41EB1E664001E37E8 /* HXcurriculumreviewAPI.m */,
 				0D757FE61EB1E67B001E37E8 /* HXcurriculumreviewModel.h */,
@@ -1775,7 +1785,6 @@
 		0DD36B0D1E8E4A5A00F817CF /* Plus */ = {
 			isa = PBXGroup;
 			children = (
-				0DD36B101E8E4A5A00F817CF /* Images.xcassets */,
 				0DD36B111E8E4A5A00F817CF /* LNNotificationsUI */,
 				0DD36B1B1E8E4A5A00F817CF /* publishedArticleViewModel.h */,
 				0DD36B1C1E8E4A5A00F817CF /* publishedArticleViewModel.m */,
@@ -1888,6 +1897,7 @@
 		0DEA8F421E4877BB0052C459 /* APP */ = {
 			isa = PBXGroup;
 			children = (
+				0DD36B101E8E4A5A00F817CF /* Images.xcassets */,
 				0D8C87BA1EB97B2200863FFF /* L_01.jpg */,
 				0D8C87BB1EB97B2200863FFF /* L_02.jpg */,
 				0D8C87BC1EB97B2200863FFF /* L_03.jpg */,
@@ -2441,17 +2451,18 @@
 				TargetAttributes = {
 					0DEA8EF51E486FC10052C459 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = C27P4G356D;
+						DevelopmentTeam = 48ETSEYB67;
 						ProvisioningStyle = Automatic;
 					};
 					0DEA8F0E1E486FC10052C459 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = F972623DL2;
+						DevelopmentTeam = 48ETSEYB67;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 0DEA8EF51E486FC10052C459;
 					};
 					0DEA8F191E486FC10052C459 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 48ETSEYB67;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 0DEA8EF51E486FC10052C459;
 					};
@@ -2768,6 +2779,7 @@
 				0D27AFED1E94D07800E93EC0 /* HCSStarRatingView.m in Sources */,
 				0D6CA0741EC44D18007F131A /* HXSystemNotificationAPI.m in Sources */,
 				0D9BC2871EA4AC5900EC2315 /* WHC_StackView.m in Sources */,
+				0DA05C171ED2D93D00E27D90 /* HXAddWatchvideosRecordAPI.m in Sources */,
 				0DEA90171E4877BB0052C459 /* NSNumber+LH.m in Sources */,
 				0DAE8AB31EC068FD00CA0619 /* HXAccountSecutityVC.m in Sources */,
 				0D3A74181EC99C220071D0D0 /* HXCurriSearchResultVC.m in Sources */,
@@ -2813,6 +2825,7 @@
 				0DEA90341E4877BC0052C459 /* UIView+Utils.m in Sources */,
 				0DEA902D1E4877BC0052C459 /* UIImage+Extension.m in Sources */,
 				0D8E3CA41EC8298500C127EC /* HXOrganizationDetailAPI.m in Sources */,
+				0DA05C1A1ED2DBE000E27D90 /* HXWatchVideoListAPI.m in Sources */,
 				0D764BAE1EC5A6EC001C41C6 /* HXcollectionarticleAPI.m in Sources */,
 				0D757FDF1EB1C916001E37E8 /* HXuploadImageAPI.m in Sources */,
 				0D39871F1EB2D9DA00AEDE68 /* HXRegisterAPI.m in Sources */,
@@ -2957,6 +2970,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -3005,6 +3019,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3035,7 +3050,7 @@
 				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = C27P4G356D;
+				DEVELOPMENT_TEAM = 48ETSEYB67;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3058,7 +3073,7 @@
 				);
 				OTHER_CFLAGS = "$(inherited)";
 				PODS_ROOT = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = MENGya;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya000;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3075,7 +3090,7 @@
 				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = C27P4G356D;
+				DEVELOPMENT_TEAM = 48ETSEYB67;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3098,7 +3113,7 @@
 				);
 				OTHER_CFLAGS = "$(inherited)";
 				PODS_ROOT = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = MENGya;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Duoyimeng.Mengya000;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3110,7 +3125,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = F972623DL2;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 48ETSEYB67;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HXBudsProjectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3124,7 +3140,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = F972623DL2;
+				DEVELOPMENT_TEAM = 48ETSEYB67;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HXBudsProjectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3137,10 +3153,13 @@
 		0DEA8F2A1E486FC10052C459 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 48ETSEYB67;
 				INFOPLIST_FILE = HXBudsProjectUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Owater.HXBudsProjectUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_TARGET_NAME = HXBudsProject;
 			};
 			name = Debug;
@@ -3148,10 +3167,13 @@
 		0DEA8F2B1E486FC10052C459 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 48ETSEYB67;
 				INFOPLIST_FILE = HXBudsProjectUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Owater.HXBudsProjectUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_TARGET_NAME = HXBudsProject;
 			};
 			name = Release;

@@ -25,13 +25,12 @@
 #import "HXVideoCatalogueAPI.h"
 #import "HXVideoCatalogueModel.h"
 
-@interface HXCourseDetailAnotherVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate,WXApiDelegate,CourseDetailTwoDelegate>{
+@interface HXCourseDetailAnotherVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate,WXApiDelegate,CourseDetailTwoDelegate,NSCopying>{
     
-    
+    AFNetworkReachabilityManager *_Reachabilitymanager;
 }
 @property(nonatomic,assign)BOOL isLogin;
 @property(nonatomic,assign)BOOL IsAddSubscrib;
-
 @property(nonatomic,strong)SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
 @property(nonatomic,strong) UIView *headView;
@@ -41,6 +40,7 @@
 @property(nonatomic,strong) UIImageView *videoDetailBgImageV;
 @property (nonatomic, strong) HXVideoCatalogueModel *catalogueModel;
 @property (nonatomic, retain)NSString * URLString;
+@property (nonatomic, strong)NSMutableArray * categoryArr;
 
 @end
 
@@ -98,6 +98,19 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
     [self getVideoCatalogueData];
 }
+- (id)copyWithZone:(NSZone *)zone
+{
+    id copy = [[[self class] alloc] init];
+    
+    
+    return copy;
+}
+- (NSMutableArray *)categoryArr{
+    if (!_categoryArr) {
+        _categoryArr = [NSMutableArray array];
+    }
+    return _categoryArr;
+}
 - (void)getVideoCatalogueData{
     
     [[[HXVideoCatalogueAPI getVideoCatalogueWithWithCurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
@@ -105,6 +118,8 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
         self.catalogueModel = [api.class mj_objectWithKeyValues:responseObject];
         HXCataloguePdModel *model = self.catalogueModel.varList[0];
         self.URLString = model.videos_file;
+        [self.categoryArr addObjectsFromArray:self.catalogueModel.varList];
+//        NSLog(@"HXCataloguePdModel--%@",model);
         
     }];
     
@@ -113,6 +128,9 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+
     
     self.navigationItem.titleView = [UILabel lh_labelWithFrame:CGRectMake(0, 0, 50, 44) text:@"课程详情" textColor:kBlackColor font:FONT(20) textAlignment:NSTextAlignmentCenter backgroundColor:kClearColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -170,20 +188,45 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
     
     //添加播放器
-    self.playerView.url = [NSURL URLWithString:self.URLString];
-    if (!self.URLString) {
-        self.URLString = @"error";
-    }
-    [self.playerView pausePlay];
-    self.playerView.vc = self;
-    [self.view addSubview:self.playerView];
-    
+    NSLog(@"URLString--%@",self.URLString);
+
+
     WEAK_SELF();
     [self.playImgV setTapActionWithBlock:^{
         //**********播放器**************//
         if (weakSelf.IsAddSubscrib) {
-            
-            [weakSelf.playerView playVideo];
+          
+         NSNumber *on =   [[NSUserDefaults standardUserDefaults] objectForKey:@"swi_State"];
+            if (on.boolValue) {
+           //仅在WIFI下
+            //检测网络
+            [weakSelf ReachabilityStatus:^(NSInteger status) {
+                //继续
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"继续播放会关闭仅WIFI播放模式，播放会消耗流量" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                [alert addAction:action1];
+                UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"继续播放" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"swi_State"];
+                    weakSelf.playerView.url = [NSURL URLWithString:weakSelf.URLString];
+                    weakSelf.playerView.vc = weakSelf;
+                    [weakSelf.view addSubview:weakSelf.playerView];
+                }];
+                [alert addAction:action2];
+                [weakSelf presentViewController:alert animated:YES completion:nil];
+                
+            }];
+            }else{
+             //4G下可播放
+                weakSelf.playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
+                weakSelf.playerView.url = [NSURL URLWithString:weakSelf.URLString];
+                weakSelf.playerView.vc = weakSelf;
+                [weakSelf.view addSubview:weakSelf.playerView];
+
+
+            }
 
             //weakSelf.playerView.url = [NSURL URLWithString:@"http://yycloudvod2109130935.bs2dl.yy.com/djhmZjcyZTExZDRiZmY1Yzg0NzhlM2Q5MWVjZjRhYzY1MTUzNDQxMjM1Mg"];
            
@@ -197,7 +240,44 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     }];
     
 }
+- (void)ReachabilityStatus:(void(^)(NSInteger status))reachabilityStatus{
 
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        switch (status) {
+                
+            case AFNetworkReachabilityStatusNotReachable:{
+            
+                NSLog(@"无网络");
+                reachabilityStatus(0);
+            }
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:{
+                
+                NSLog(@"WiFi网络");
+                reachabilityStatus(1);
+
+            }
+                break;
+                
+            case AFNetworkReachabilityStatusReachableViaWWAN:{
+                
+                NSLog(@"3G网络");
+                reachabilityStatus(2);
+                
+            }
+                break;
+                
+            default:
+                
+                break;
+                
+        }
+        
+    }];
+
+}
 - (void)AddSubscrib {
 
     //加入学习
@@ -274,8 +354,8 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
             self.IsAddSubscrib = YES;
             [self.buyBottomView.consultBtn setTitle:@"已加入" forState:UIControlStateNormal];
             self.buyBottomView.consultBtn.enabled = NO;
-            [self SGSegmentedControl:self.SG didSelectBtnAtIndex:1];
-            [self.SG titleBtnSelectedWithScrollView:self.mainScrollView];
+//            [self SGSegmentedControl:self.SG didSelectBtnAtIndex:1];
+//            [self.SG titleBtnSelectedWithScrollView:self.mainScrollView];
             
         }else{
            //未加入
@@ -305,7 +385,25 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
     // 电视剧
     HXCourseDetailTwoVC *twoVC = [[HXCourseDetailTwoVC alloc] init];
-    twoVC.delegate = self;
+    
+    twoVC.didselectBlock = ^(NSString *urlStr) {
+        if (self.IsAddSubscrib) {
+            [self.playerView destroyPlayer];
+            self.playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
+            self.URLString = urlStr;
+            self.playerView.url = [NSURL URLWithString:urlStr];
+            NSLog(@"url---%@",urlStr);
+            self.playerView.vc = self;
+            [self.view addSubview:self.playerView];
+            
+        }else{
+        
+            [SVProgressHUD showInfoWithStatus:@"请先加入学习"];
+        
+        }
+     
+    };
+    
     twoVC.curriculum_id = self.curriculum_id;
     [self addChildViewController:twoVC];
     
@@ -332,15 +430,9 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 
 #pragma mark - CourseDetailTwoDelegate
 
-- (void)categoryDidSelectIndex:(NSInteger)index {
-
-    HXCataloguePdModel *model = self.catalogueModel.varList[index];
-    self.URLString = model.videos_file;
-    [self.playerView playVideo];
-    
-}
 
 #pragma mark - UIScrollViewDelegate
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
     // 计算滚动到哪一页
@@ -355,12 +447,14 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 //分享
 - (void)shareAction {
     
+
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         // 根据获取的platformType确定所选平台进行下一步操作
         
         [self shareVedioToPlatformType:platformType];
         
     }];
+    
 }
 
 - (void)payWithResponse:(NSDictionary *)response{
@@ -414,10 +508,10 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
     //创建视频内容对象
-    UMShareVideoObject *shareObject = [UMShareVideoObject shareObjectWithTitle:@"分享标题" descr:@"分享内容描述" thumImage:[UIImage imageNamed:@"courseDetail"]];
+    UMShareVideoObject *shareObject = [UMShareVideoObject shareObjectWithTitle:self.model.curr_title descr:self.model.introduction  thumImage:kAPIImageFromUrl(self.model.curr_picture)];
     
     //设置视频网页播放地址
-    shareObject.videoUrl = video_testUrl;
+    shareObject.videoUrl = self.URLString;
     
     //            shareObject.videoStreamUrl = @"这里设置视频数据流地址（如果有的话，而且也要看所分享的平台支不支持）";
     
@@ -461,14 +555,14 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     return _buyBottomView;
     
 }
-- (CLPlayerView *)playerView {
-
-    if (!_playerView) {
-        _playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
-    }
-    return _playerView;
-
-}
+//- (CLPlayerView *)playerView {
+//
+//    if (!_playerView) {
+//        _playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
+//    }
+//    return _playerView;
+//
+//}
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 

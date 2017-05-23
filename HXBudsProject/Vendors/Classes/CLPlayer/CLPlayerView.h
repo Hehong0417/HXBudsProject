@@ -83,6 +83,8 @@ typedef void(^BeyondBlock)();
 /**拉伸方式，默认全屏填充*/
 @property (nonatomic,assign) VideoFillMode fillMode;
 
+/**播放器*/
+@property (nonatomic,strong) AVPlayer         *player;
 
 /**播放*/
 - (void)playVideo;

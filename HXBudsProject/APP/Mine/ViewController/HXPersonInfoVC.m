@@ -189,7 +189,12 @@
     
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.row == 0) {
+        if ([self.userModel.pd.headportrait containsString:@"http:"]) {
+            [self.cellHeadImageView sd_setImageWithURL:[NSURL URLWithString:self.userModel.pd.headportrait] placeholderImage:[UIImage imageNamed:@"person_ico"]];
+        }else{
+            
         [self.cellHeadImageView sd_setImageWithURL:[NSURL URLWithString:kAPIUserImageFromUrl(self.userModel.pd.headportrait)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
+        }
     }
         return cell;
 

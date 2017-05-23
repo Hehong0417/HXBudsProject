@@ -16,7 +16,7 @@
     // Initialization code
 
     UIImageView *iconImgV = [UIImageView lh_imageViewWithFrame:CGRectMake(0,0,30, self.starView.mj_h) image:[UIImage imageNamed:@"videoIcon"] userInteractionEnabled:YES];
-
+    [iconImgV lh_setRoundImageViewWithBorderWidth:0 borderColor:nil];
     UILabel *teacherNameLab = [UILabel lh_labelWithFrame:CGRectMake(CGRectGetMaxX(iconImgV.frame)+6, 0, self.starView.mj_w - 30 - 6, 27) text:@"图图老师" textColor:RGB(255, 201, 20) font:FONT(13) textAlignment:NSTextAlignmentLeft backgroundColor:kWhiteColor];
     [self.starView addSubview:iconImgV];
     [self.starView addSubview:teacherNameLab];
