@@ -116,11 +116,13 @@
         if (error) {
             self.isLogin = NO;
         }
+        if (error==nil) {
         NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
         if ([isLoginStr isEqualToString:@"no"]) {
             self.isLogin = NO;
         }else if([isLoginStr isEqualToString:@"yes"]){
             self.isLogin = YES;
+        }
         }
     }];
     
@@ -162,24 +164,24 @@
 - (void)getTeacherDetailData {
     
     [[[HXTeacherDetailAPI getTeacherDetailWithTeacherId:self.teacher_Id users_id:nil]netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         HXTeacherDetailModel *api = [HXTeacherDetailModel new];
         self.teacherDetailModel = [api.class mj_objectWithKeyValues:responseObject];
         
         self.organizationHeadView.pdModel = self.teacherDetailModel.pd;
-        
+        }
     }];
     
 }
 - (void)getOrganizationDetailData {
 
-    [[[HXOrganizationDetailAPI getOrganizationListWithmechanism_id:self.organization_Id] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
+    [[[HXOrganizationDetailAPI getOrganizationListWithmechanism_id:self.organization_Id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
         HXOrganizationDeetailModel *api = [HXOrganizationDeetailModel new];
         self.organizationDetailModel = [api.class mj_objectWithKeyValues:responseObject];
         
         self.organizationHeadView.model = self.organizationDetailModel.pd;
-
+        }
     }];
 }
 
@@ -215,6 +217,7 @@
     self.SG.titleColorStateNormal = kBlackColor;
     self.SG.titleColorStateSelected = APP_COMMON_COLOR;
     self.SG.indicatorColor = APP_COMMON_COLOR;
+    self.SG.backgroundColor = KVCBackGroundColor;
     self.SG.title_fondOfSize = FONT(14);
 //    self.SG.showsBottomScrollIndicator = NO;
     [self.view addSubview:_SG];

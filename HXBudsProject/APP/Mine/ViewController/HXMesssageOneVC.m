@@ -11,7 +11,7 @@
 #import "HXMyMessageAPI.h"
 #import "HXMyMessageModel.h"
 
-@interface HXMesssageOneVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface HXMesssageOneVC ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource>
 
 @property(nonatomic,strong)UITableView *tabView;
 @property(nonatomic,strong)HXMyMessageModel *myMessageModel;
@@ -29,6 +29,8 @@
     [self.view addSubview:self.tabView];
     self.tabView.showsVerticalScrollIndicator = NO;
     self.tabView.backgroundColor = kWhiteColor;
+    self.tabView.emptyDataSetDelegate = self;
+    self.tabView.emptyDataSetSource = self;
     [self getMyMessageData];
     
     
@@ -36,12 +38,21 @@
 - (void)getMyMessageData {
 
    [[[HXMyMessageAPI getMyMessage] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-       
+       if (error==nil) {
        HXMyMessageModel *api = [HXMyMessageModel new];
        self.myMessageModel = [api.class mj_objectWithKeyValues:responseObject];
        [self.tabView reloadData];
+       }
    }];
 }
+
+#pragma mark - DZNEmptyDataSetDelegate
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+    
+    return [UIImage imageNamed:@"no-massage"];
+}
+
 #pragma mark --- tableView delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -70,9 +81,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
         return 80;
-
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     

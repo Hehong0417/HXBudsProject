@@ -134,7 +134,7 @@
     }
     self.timeLab.text = model.ctime;
     
-    [self.teacherIconImagV sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.head)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
+    [self.teacherIconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIArticleFromUrl(model.head)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
     [self.rightIconImgV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.article_cover)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
     self.teacherNameLab.text = model.name;
     self.contentLab.text = model.article_title;
@@ -150,11 +150,13 @@
     [self.teacherIconImagV setTapActionWithBlock:^{
         HXOrganizationDetailVC *detailVC = [[HXOrganizationDetailVC alloc]init];
 
-        if (model.theteacher_id) {
+        if (![model.theteacher_id isEqualToString:@"0"]) {
+            
             detailVC.teacher_Id = model.theteacher_id;
             detailVC.detailType = teacherDetailType;
         }
-        if (model.mechanism_id) {
+        if (![model.mechanism_id isEqualToString:@"0"]) {
+            
             detailVC.organization_Id = model.mechanism_id;
             detailVC.detailType = organizationType;
         }
@@ -166,11 +168,11 @@
     [self.teacherNameLab setTapActionWithBlock:^{
         HXOrganizationDetailVC *detailVC = [[HXOrganizationDetailVC alloc]init];
         
-        if (model.theteacher_id) {
+        if (![model.theteacher_id isEqualToString:@"0"]) {
             detailVC.teacher_Id = model.theteacher_id;
             detailVC.detailType = teacherDetailType;
         }
-        if (model.mechanism_id) {
+        if (![model.mechanism_id isEqualToString:@"0"]) {
             detailVC.organization_Id = model.mechanism_id;
             detailVC.detailType = organizationType;
         }

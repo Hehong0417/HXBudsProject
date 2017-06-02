@@ -12,7 +12,7 @@
 #import "HXMyArticleAPI.h"
 
 
-@interface HXMyProductVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface HXMyProductVC ()<UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong) HXHomeInfoArticleModel *infoArticleListModel;
@@ -26,26 +26,35 @@
     
     self.title = @"我发布的";
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = kWhiteColor;
     [self.view addSubview:self.tableView];
     
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
     
     [self getMyproductData];
 }
 - (void)getMyproductData{
 
     [[[HXMyArticleAPI getMyArticleData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
         
         self.infoArticleListModel = [api.class mj_objectWithKeyValues:responseObject];
         
         [self.tableView reloadData];
+        }
     }];
+}
+#pragma mark - DZNEmptyDataSetDelegate
 
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
+
+    return [UIImage imageNamed:@"no-content"];
 
 }
 
@@ -59,6 +68,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return self.infoArticleListModel.varList.count;
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

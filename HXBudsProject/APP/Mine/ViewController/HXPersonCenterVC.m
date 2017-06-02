@@ -82,12 +82,11 @@
             [self isNoLoginState];
         }
     }];
-    
 }
 - (void)getMyInfoData{
     
     [[[HXgetUserInfoAPI getUserInfo] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         self.mineHeadView.nameLab.text = responseObject[@"pd"][@"nickname"];
         NSString *icostr = responseObject[@"pd"][@"headportrait"];
 //        NSLog(@"icostr:%@",kAPIImageFromUrl(icostr));
@@ -97,6 +96,7 @@
         [self.mineHeadView.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIUserImageFromUrl(icostr)] placeholderImage:[UIImage imageNamed:@"person_ico"]];
         }
         self.tableV.tableHeaderView = self.mineHeadView;
+        }
     }];
     
 }
@@ -125,7 +125,7 @@
 
     HJLoginModel *loginModel = [HJUser sharedUser].pd;
     [[[HXIsLoginAPI isLoginWithToken:loginModel.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
         if ([isLoginStr isEqualToString:@"no"]) {
             self.isLogin = NO;
@@ -136,6 +136,7 @@
             self.isLogin = NO;
         }
         CompleteHandle(self.isLogin);
+        }
     }];
     
 }

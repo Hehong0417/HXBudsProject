@@ -29,6 +29,7 @@
 @property(nonatomic,strong)HXArticleTypeModel *articleTypeModel;
 @property(nonatomic,assign)NSInteger page;
 @property (nonatomic, strong) NSMutableArray *GroupArr;
+@property (nonatomic, strong) MJRefreshNormalHeader *refreshHeader;
 
 
 @end
@@ -40,25 +41,12 @@
     [super viewWillAppear:animated];
     self.page = 1;
     
-    [self getArticleListData];
-    [self getArticleTypeList];
-    
-     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-
-    dispatch_sync(queue, ^{
-        
-        //文章
-                [self getArticleListData];
-        //类型
-                [self getArticleTypeList];
-
-    });
+    [self.tabView.mj_header beginRefreshing];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
     self.tabView = [UITableView lh_tableViewWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) tableViewStyle:UITableViewStyleGrouped delegate:self dataSourec:self];
     self.tabView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tabView];
@@ -67,20 +55,18 @@
     [self.tabView registerClass:[HXArticleCellOne class] forCellReuseIdentifier:@"HXArticleCellOne"];
     self.tabView.backgroundColor = kWhiteColor;
     self.view.backgroundColor = kWhiteColor;
-    
-    
     [self addHeaderRefresh];
     [self addFooterRefresh];
     
 }
 - (void)addHeaderRefresh{
-    
-    MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    [self.GroupArr removeAllObjects];
+    self.refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.page = 1;
-        
+        [self getArticleTypeList];
         [self getArticleListData];
     }];
-    self.tabView.mj_header = refreshHeader;
+    self.tabView.mj_header = self.refreshHeader;
     
 }
 
@@ -98,17 +84,19 @@
 }
 
 - (void)getArticleListData {
-
-    [self.GroupArr removeAllObjects];
     
-    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil mechanism_id:nil limit:@(10*self.page)] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
-        
-        self.articleModel = [api.class mj_objectWithKeyValues:responseObject];
-        
-        [self loadDataFinish:self.articleModel.varList];
+    [self.GroupArr removeAllObjects];
 
-        [self.tabView reloadData];
+    [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil mechanism_id:nil limit:@(5*self.page)] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
+            
+            HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
+            
+            self.articleModel = [api.class mj_objectWithKeyValues:responseObject];
+            
+            [self loadDataFinish:self.articleModel.varList];
+
+        }
         
     }];
 
@@ -158,12 +146,12 @@
 - (void)getArticleTypeList {
 
      [[[HXArticleTypeAPI getArticleTypeList] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
          HXArticleTypeModel *api = [HXArticleTypeModel new];
          self.articleTypeModel = [api.class mj_objectWithKeyValues:responseObject];
 
          [self.tabView reloadData];
-         
+        }
      }];
 
 }
@@ -191,7 +179,9 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.articleType = homeArticle;
-    cell.model = self.GroupArr[indexPath.row];
+        if (self.GroupArr.count>0) {
+            cell.model = self.GroupArr[indexPath.row];
+        }
     cell.nav = self.navigationController;
     return cell;
     }
@@ -299,11 +289,7 @@
         HXArticleDetailVC *vc = [HXArticleDetailVC new];
         vc.articleModel = self.articleModel.varList[indexPath.row];
         [self.navigationController pushVC:vc];
-//        HXtestWebView *vc = [HXtestWebView new];
-//        [self.navigationController pushVC:vc];
-        
     }
-    
 }
 
 - (CGFloat)calculteCellHeightWithSubjectArr{

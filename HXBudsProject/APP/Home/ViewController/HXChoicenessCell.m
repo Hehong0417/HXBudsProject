@@ -22,7 +22,6 @@
     
     _model = model;
     
-    self.the_name.text = model.the_name;
     [self.curr_picture sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.curr_picture)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
     self.curr_title.text = model.curr_title;
     NSString *read;
@@ -42,9 +41,18 @@
     }
     self.read.text = [NSString stringWithFormat:@"%@人看过",read];
     self.comment.text = [NSString stringWithFormat:@"%@人评论过",comment];
-    [self.The_headportrait  sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
-    
-    
+    if ([model.mechanism_id isEqualToString:@"0"]) {
+        
+        [self.The_headportrait  sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
+        self.the_name.text = model.the_name;
+
+    }else{
+        
+        [self.The_headportrait  sd_setImageWithURL:[NSURL URLWithString:kAPImechanismFromUrl(model.mechanism_logo)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
+        self.the_name.text = model.mechanism_name;
+
+    }
+
     [self.curr_picture setTapActionWithBlock:^{
         
         HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];

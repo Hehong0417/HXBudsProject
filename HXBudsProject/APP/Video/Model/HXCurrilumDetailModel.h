@@ -25,5 +25,9 @@
 @property(nonatomic,copy) NSString *when_long;
 @property(nonatomic,copy) NSString *read;
 @property(nonatomic,copy) NSString *introduction;
+@property(nonatomic,copy) NSString *mechanism_logo;
+@property(nonatomic,copy) NSString *mechanism_id;
+@property(nonatomic,copy) NSString *mechanism_name;
+
 
 @end

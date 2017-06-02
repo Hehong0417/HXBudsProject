@@ -12,6 +12,7 @@
 #import "HXMyAssetAPI.h"
 #import "HXDealRecordVC.h"
 #import "HXAccountReChargeVC.h"
+#import "HXSmallChargeVC.h"
 
 @interface HXMyAccountInfoVC ()
 {
@@ -25,18 +26,24 @@
 
 @implementation HXMyAccountInfoVC
 
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
+    [self getMyAssetData];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
    self.title = @"我的资产";
   
-    [self getMyAssetData];
     
     headView = [HXAccountHead initWithAccountHeadWithXib];
     headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 200);
     self.tableV.tableHeaderView = headView;
 
-    UIButton *dealRecordBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0,80, 60) target:self action:@selector(dealRecordAction) backgroundImage:nil title:@"交易记录" titleColor:kDarkGrayColor font:FONT(16)];
+    UIButton *dealRecordBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0,80, 60) target:self action:@selector(dealRecordAction) backgroundImage:nil title:@"零钱明细" titleColor:kDarkGrayColor font:FONT(16)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:dealRecordBtn];
                 
                 
@@ -44,10 +51,11 @@
 - (void)getMyAssetData{
 
   [[[HXMyAssetAPI getMyAsset] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-     
+     if (error==nil) {
       headView.balanceLabel.text = [NSString stringWithFormat:@"￥%@",responseObject[@"pd"][@"balance"]];
       self.balance = [NSString stringWithFormat:@"%@",responseObject[@"pd"][@"balance"]] ;
       [self.tableView reloadData];
+     }
   }];
 
 }
@@ -80,9 +88,8 @@
     }
 }
 - (void)dealRecordAction {
-
-    HXDealRecordVC *vc = [HXDealRecordVC new];
+ 
+    HXSmallChargeVC *vc = [HXSmallChargeVC new];
     [self.navigationController pushVC:vc];
-
 }
 @end

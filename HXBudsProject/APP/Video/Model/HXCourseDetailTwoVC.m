@@ -36,13 +36,14 @@
 - (void)getVideoCatalogueData{
     
     [[[HXVideoCatalogueAPI getVideoCatalogueWithWithCurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
         HXVideoCatalogueModel *api = [HXVideoCatalogueModel new];
         self.catalogueModel = [api.class mj_objectWithKeyValues:responseObject];
         
         [self getWithchVideoRecordData];
         
        [self.tableView reloadData];
-        
+        }
     }];
     
 }
@@ -86,11 +87,11 @@
     HXCataloguePdModel *model = self.catalogueModel.varList[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"   %@、%@",model.videos_order,model.videos_title];
     
-    for (HXCataloguePdModel *model1 in self.witchVideoModel.varList) {
-        if ([model.videos_id isEqualToString:model1.videos_id]) {
-            cell.textLabel.textColor = APP_COMMON_COLOR;
-        }
-    }
+//    for (HXCataloguePdModel *model1 in self.witchVideoModel.varList) {
+//        if ([model.videos_id isEqualToString:model1.videos_id]) {
+//            cell.textLabel.textColor = APP_COMMON_COLOR;
+//        }
+//    }
     cell.textLabel.font = FONT(14);
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

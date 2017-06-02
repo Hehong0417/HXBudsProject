@@ -11,11 +11,16 @@
 #import "HXCourseDetailIntroduceCell.h"
 #import "HXCurriculumDetailAPI.h"
 #import "HXCurrilumDetailModel.h"
+#import "HXVideoCatalogueAPI.h"
+#import "HXVideoCatalogueModel.h"
 
 @interface HXCourseDetailOneVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) HXCurrilumDetailModel *curriculumDetailModel;
+@property (nonatomic, strong) HXVideoCatalogueModel *catalogueModel;
+
+
 @end
 
 @implementation HXCourseDetailOneVC
@@ -26,14 +31,27 @@
     // Do any additional setup after loading the view.
     
     [self getCurriculumDetailData];
+    [self getVideoCatalogueData];
+}
+- (void)getVideoCatalogueData{
+    
+    [[[HXVideoCatalogueAPI getVideoCatalogueWithWithCurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
+        HXVideoCatalogueModel *api = [HXVideoCatalogueModel new];
+        self.catalogueModel = [api.class mj_objectWithKeyValues:responseObject];
+        [self.tableView reloadData];
+        }
+    }];
     
 }
 - (void)getCurriculumDetailData{
 
     [[[HXCurriculumDetailAPI getCurriculumDetailWithWithCurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
         HXCurrilumDetailModel *model = [HXCurrilumDetailModel new];
         self.curriculumDetailModel = [model.class mj_objectWithKeyValues:responseObject];
         [self.tableView reloadData];
+        }
     }];
 
 
@@ -48,7 +66,7 @@
     _tableView.rowHeight = 44;
     _tableView.backgroundColor = kWhiteColor;
     [self.view addSubview:_tableView];
-    
+    NSLog(@"countcountcountcount%@",self.count);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -90,9 +108,9 @@
             cell = [HXCourseDetailCourseTitleCell initCourseDetailCourseTitleCellWithXib];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        
         cell.nav = self.navigationController;
         cell.pdModel = self.curriculumDetailModel.pd;
+        cell.count = [NSString stringWithFormat:@"%ld",self.catalogueModel.varList.count];
         return cell;
         
     }else {

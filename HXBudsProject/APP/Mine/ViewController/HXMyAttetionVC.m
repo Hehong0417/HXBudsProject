@@ -48,10 +48,11 @@
 - (void)getMyattetionTeacherData {
 
     [[[HXMyattetionTeacherAPI getMyattetionTeacher] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
         HXTeacherListModel *api = [HXTeacherListModel new];
         self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
         [self.tableView reloadData];
-        
+        }
     }];
 }
 

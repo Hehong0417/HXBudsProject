@@ -246,13 +246,16 @@
 //    self.baseSearchTableView.hidden = NO;
     // 回收键盘
     [self.searchBar resignFirstResponder];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
 }
 
 /** 控制器销毁 */
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+//- (void)dealloc
+//{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
 /** 初始化 */
 - (void)setup
@@ -815,6 +818,7 @@
       //根据标签模糊查询
      NSString *teachingtype_id = self.hotSearches_ids[gr.view.tag];
      [[[HXCurriculumSearchAPI getsearchCurriculumListWithCurr_title:nil teachingtype_id:teachingtype_id]netWorkClient]postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+         if (error==nil) {
         HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
         self.searchVideoModel = [api.class mj_objectWithKeyValues:responseObject];
         self.searchSuggestions = self.searchVideoModel.varList;
@@ -822,6 +826,7 @@
          self.searchSuggestionVC.view.hidden = NO;
          // 放在最上层
          [self.view bringSubviewToFront:self.searchSuggestionVC.view];
+         }
     }];
     
 }
@@ -958,8 +963,8 @@
     }
     
     // 设置数据
-    cell.imageView.image = PYSearchHistoryImage;
-    cell.textLabel.text = self.searchHistories[indexPath.row];
+//    cell.imageView.image = PYSearchHistoryImage;
+//    cell.textLabel.text = self.searchHistories[indexPath.row];
     
     return cell;
 }

@@ -21,7 +21,21 @@
     _model = model;
     self.titleLab.text = model.descs;
     self.ctimeLab.text = model.ctime;
-    self.tran_money.text = model.con_money;
+    if ([model.con_type_text isEqualToString:@"充值"]) {
+        self.tran_money.text = [NSString stringWithFormat:@"+%@",model.con_money];
+    }else if([model.con_type_text isEqualToString:@"支出"]){
+        self.tran_money.text = [NSString stringWithFormat:@"-%@",model.con_money];
+    }
+    
 }
+- (void)setWithDrawmodel:(HXConsumptionVarListModel *)withDrawmodel {
+
+    _withDrawmodel = withDrawmodel;
+    self.titleLab.text = [NSString stringWithFormat:@"提现到%@",withDrawmodel.with_acc];
+    self.ctimeLab.text = withDrawmodel.ctime;
+    self.tran_money.text = [NSString stringWithFormat:@"-%@",withDrawmodel.with_money];
+
+}
+
 
 @end

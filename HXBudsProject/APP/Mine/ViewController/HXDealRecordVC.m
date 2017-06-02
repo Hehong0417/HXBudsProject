@@ -24,7 +24,7 @@
     
     self.title = @"交易记录";
     //tableView
-    self.dealRecordTable = [[UITableView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT- 64) style:UITableViewStylePlain];
+    self.dealRecordTable = [[UITableView alloc]initWithFrame:CGRectMake(0,50, SCREEN_WIDTH, SCREEN_HEIGHT- 64-50) style:UITableViewStylePlain];
     self.dealRecordTable.delegate = self;
     self.dealRecordTable.dataSource = self;
     self.dealRecordTable.showsVerticalScrollIndicator = NO;
@@ -35,9 +35,11 @@
 - (void)getData{
 
   [[[HXConsumptionAPI getConsumptionData] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+      if (error==nil) {
       HXConsumptionModel *api = [HXConsumptionModel new];
       self.consumptionModel = [api.class mj_objectWithKeyValues:responseObject];
       [self.dealRecordTable reloadData];
+      }
   }];
 
 }

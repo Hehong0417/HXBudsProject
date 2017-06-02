@@ -20,7 +20,7 @@
 
     self.title = self.titleStr;
     self.textView = [[UITextView alloc] init];
-    
+    self.textView.font = FONT(14);
     self.view.backgroundColor = KVCBackGroundColor;
     if (self.personIntroduce) {
         self.textView.frame = CGRectMake(0, 10, SCREEN_WIDTH, 80);

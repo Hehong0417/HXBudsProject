@@ -19,5 +19,9 @@
 @property(nonatomic,copy) NSString *transaction_id;
 @property(nonatomic,copy) NSString *ctime;
 @property(nonatomic,copy) NSString *descs;
+@property(nonatomic,copy) NSString *with_acc;
+@property(nonatomic,copy) NSString *with_money;
+@property(nonatomic,copy) NSString *con_type_text;
+
 
 @end

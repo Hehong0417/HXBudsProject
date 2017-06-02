@@ -21,25 +21,25 @@
     [self.videoIconImgV lh_setRoundImageViewWithBorderWidth:0 borderColor:nil];
     
     
-    self.videoIconImgV.userInteractionEnabled = YES;
+//    self.videoIconImgV.userInteractionEnabled = YES;
     
-    [self.videoIconImgV setTapActionWithBlock:^{
-        
-        HXMyLikeVC *vc = [HXMyLikeVC new];
-        vc.titleStr = @"他的主页";
-        vc.dynamicType = teacherDynamicType;
-        [self.nav pushVC:vc];
-    }];
-    self.teacherNameLab.userInteractionEnabled = YES;
-
-    [self.teacherNameLab setTapActionWithBlock:^{
-        
-        HXMyLikeVC *vc = [HXMyLikeVC new];
-        vc.titleStr = @"他的主页";
-        vc.dynamicType = teacherDynamicType;
-        [self.nav pushVC:vc];
-    }];
-    self.videoTitleLab.userInteractionEnabled = YES;
+//    [self.videoIconImgV setTapActionWithBlock:^{
+//        
+//        HXMyLikeVC *vc = [HXMyLikeVC new];
+//        vc.titleStr = @"他的主页";
+//        vc.dynamicType = teacherDynamicType;
+//        [self.nav pushVC:vc];
+//    }];
+//    self.teacherNameLab.userInteractionEnabled = YES;
+//
+//    [self.teacherNameLab setTapActionWithBlock:^{
+//        
+//        HXMyLikeVC *vc = [HXMyLikeVC new];
+//        vc.titleStr = @"他的主页";
+//        vc.dynamicType = teacherDynamicType;
+//        [self.nav pushVC:vc];
+//    }];
+//    self.videoTitleLab.userInteractionEnabled = YES;
     
    
 
@@ -48,7 +48,6 @@
 
     _model = model;
     
-    self.teacherNameLab.text = model.the_name;
     [self.videoImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.curr_picture)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
     self.videoTitleLab.text = model.curr_title;
     NSString *read;
@@ -68,7 +67,16 @@
     }
     self.viewsLab.text = [NSString stringWithFormat:@"%@人看过",read];
     self.commentLab.text = [NSString stringWithFormat:@"%@人评论过",comment];
-    [self.videoIconImgV  sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
+        if ([model.mechanism_id isEqualToString:@"0"]) {
+    
+        [self.videoIconImgV  sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.The_headportrait)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
+        self.teacherNameLab.text = model.the_name;
+
+    }else {
+    
+     [self.videoIconImgV  sd_setImageWithURL:[NSURL URLWithString:kAPImechanismFromUrl(model.mechanism_logo)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
+        self.teacherNameLab.text = model.mechanism_name;
+    }
     
     [self.videoImagV setTapActionWithBlock:^{
         

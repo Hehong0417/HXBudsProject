@@ -24,10 +24,14 @@
 #import "HXWXPayAPI.h"
 #import "HXVideoCatalogueAPI.h"
 #import "HXVideoCatalogueModel.h"
+#import "HXSWiStateModel.h"
 
-@interface HXCourseDetailAnotherVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate,WXApiDelegate,CourseDetailTwoDelegate,NSCopying>{
+
+
+@interface HXCourseDetailAnotherVC ()<UIScrollViewDelegate,SGSegmentedControlDelegate,WXApiDelegate,CourseDetailTwoDelegate,NSCopying,SKPaymentTransactionObserver,SKProductsRequestDelegate>{
     
     AFNetworkReachabilityManager *_Reachabilitymanager;
+    NSInteger  state;
 }
 @property(nonatomic,assign)BOOL isLogin;
 @property(nonatomic,assign)BOOL IsAddSubscrib;
@@ -41,6 +45,7 @@
 @property (nonatomic, strong) HXVideoCatalogueModel *catalogueModel;
 @property (nonatomic, retain)NSString * URLString;
 @property (nonatomic, strong)NSMutableArray * categoryArr;
+@property (nonatomic, assign)AFNetworkReachabilityStatus status;
 
 @end
 
@@ -79,13 +84,18 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 
     [super viewWillAppear:animated];
     
-    //获取播放的目录和url
+    //检测网络
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [self ReachabilityStatus];
+
     
-    
+    //课程目录
+    [self getVideoCatalogueData];
+
     //判断是否已登录
     HJUser *user = [HJUser sharedUser];
     [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
         if ([isLoginStr isEqualToString:@"no"]) {
             self.isLogin = NO;
@@ -94,10 +104,13 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
             //判断是否已加入学习
             [self isSubcribeAdd];
         }
+        }
     }];
     
-    [self getVideoCatalogueData];
+    state = 1;
+    
 }
+
 - (id)copyWithZone:(NSZone *)zone
 {
     id copy = [[[self class] alloc] init];
@@ -114,13 +127,15 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 - (void)getVideoCatalogueData{
     
     [[[HXVideoCatalogueAPI getVideoCatalogueWithWithCurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
         HXVideoCatalogueModel *api = [HXVideoCatalogueModel new];
         self.catalogueModel = [api.class mj_objectWithKeyValues:responseObject];
-        HXCataloguePdModel *model = self.catalogueModel.varList[0];
-        self.URLString = model.videos_file;
+        if (self.catalogueModel.varList >0) {
+            HXCataloguePdModel *model = self.catalogueModel.varList[0];
+            self.URLString = model.videos_file;
+        }
         [self.categoryArr addObjectsFromArray:self.catalogueModel.varList];
-//        NSLog(@"HXCataloguePdModel--%@",model);
-        
+        }
     }];
     
 }
@@ -128,14 +143,16 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-
-    
+//    [self getVideoCatalogueData];
     self.navigationItem.titleView = [UILabel lh_labelWithFrame:CGRectMake(0, 0, 50, 44) text:@"课程详情" textColor:kBlackColor font:FONT(20) textAlignment:NSTextAlignmentCenter backgroundColor:kClearColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self.view addSubview:self.headView];
+    
+    
+    //微信支付通知
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(wxPaySucessCourse) name:KWX_Pay_Sucess_Notification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(wxPayFailCourse) name:KWX_Pay_Fail_Notification object:nil];
     
     
     // 1.添加所有子控制器
@@ -149,16 +166,64 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     
     
     //rightBarButton、分享按钮
-    UIButton *rightBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 50, 50) target:self action:@selector(shareAction) image:[UIImage imageNamed:@"share"]];
-    [rightBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
+//    UIButton *rightBtn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 50, 50) target:self action:@selector(shareAction) image:[UIImage imageNamed:@"share"]];
+//    [rightBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     [self.videoDetailBgImageV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(self.playImageStr)] placeholderImage:[UIImage imageWithColor:KPlaceHoldColor]];
   
+    
     //加入学习
     [self AddSubscrib];
     
-   
+    
+    //Apple Pay
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    
+    
 }
+- (void)wxPaySucessCourse{
+    
+    [self  purchaseCourseRequest];
+
+}
+- (void)purchaseCourseRequest{
+
+    [[[HXpurchaseCourseAPI purchaseCourseWithCurriculum_id:self.curriculum_id curriculum_price:self.curriculum_price] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        NSLog(@"购买课程回调");
+        if (error==nil) {
+        NSString *transaction = responseObject[@"pd"][@"transaction"];
+        if ([transaction isEqualToString:@"ok"]) {
+            //加入学习
+            [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+                if (error==nil) {
+                [self.buyBottomView.consultBtn setTitle:@"已加入" forState:UIControlStateNormal];
+                self.IsAddSubscrib = YES;
+                [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+                [SVProgressHUD showInfoWithStatus:@"加入成功"];
+                }
+            }];
+        }if ([transaction isEqualToString:@"no"]) {
+            
+            [self purchaseCourseRequest];
+        }
+            
+            
+        }
+        if (error) {
+            [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+            [SVProgressHUD showInfoWithStatus:@"加入失败"];
+        }
+    }];
+    
+
+}
+- (void)wxPayFailCourse {
+    [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
+    [SVProgressHUD showErrorWithStatus:@"课程加入支付失败"];
+    
+}
+
 - (void)setupSegmentedControl {
     
     NSArray *title_arr = @[@"简介", @"课时", @"评价"];
@@ -186,85 +251,129 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     self.SG.indicatorColor = APP_COMMON_COLOR;
     [self.view addSubview:_SG];
     
-    
-    //添加播放器
+//    
+//    //添加播放器
     NSLog(@"URLString--%@",self.URLString);
+    //播放视频
+    [self payVideoAction];
 
+    
+}
+#pragma mark - 点击播放视频
+- (void)payVideoAction {
 
     WEAK_SELF();
     [self.playImgV setTapActionWithBlock:^{
+        
         //**********播放器**************//
         if (weakSelf.IsAddSubscrib) {
-          
-         NSNumber *on =   [[NSUserDefaults standardUserDefaults] objectForKey:@"swi_State"];
-            if (on.boolValue) {
-           //仅在WIFI下
-            //检测网络
-            [weakSelf ReachabilityStatus:^(NSInteger status) {
-                //继续
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"继续播放会关闭仅WIFI播放模式，播放会消耗流量" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                [alert addAction:action1];
-                UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"继续播放" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                    [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"swi_State"];
-                    weakSelf.playerView.url = [NSURL URLWithString:weakSelf.URLString];
-                    weakSelf.playerView.vc = weakSelf;
-                    [weakSelf.view addSubview:weakSelf.playerView];
-                }];
-                [alert addAction:action2];
-                [weakSelf presentViewController:alert animated:YES completion:nil];
+            
+            HXSWiStateModel *model = [HXSWiStateModel read];
+            
+            if (model.state) {
+                //只在WIFI下
+                switch (weakSelf.status) {
+                    case AFNetworkReachabilityStatusReachableViaWWAN:{
+                        
+                        [weakSelf alertReachabilityStatusReachableViaWWAN:weakSelf.URLString];
+                    }
+                        break;
+                    case AFNetworkReachabilityStatusNotReachable:{
+                        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+                        [SVProgressHUD showInfoWithStatus:@"网络未连接"];
+                    }
+                        break;
+                    case AFNetworkReachabilityStatusReachableViaWiFi:{
+                        //不限制网络
+                        weakSelf.playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
+                        weakSelf.playerView.url = [NSURL URLWithString:weakSelf.URLString];
+                        weakSelf.playerView.vc = weakSelf;
+                        [weakSelf.view addSubview:weakSelf.playerView];
+
+                    }
+                        break;
+
+                    default:
+                        break;
+                }
                 
-            }];
             }else{
-             //4G下可播放
+                
+                //不限制网络
                 weakSelf.playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
                 weakSelf.playerView.url = [NSURL URLWithString:weakSelf.URLString];
                 weakSelf.playerView.vc = weakSelf;
+                
                 [weakSelf.view addSubview:weakSelf.playerView];
-
-
+                
             }
-
-            //weakSelf.playerView.url = [NSURL URLWithString:@"http://yycloudvod2109130935.bs2dl.yy.com/djhmZjcyZTExZDRiZmY1Yzg0NzhlM2Q5MWVjZjRhYzY1MTUzNDQxMjM1Mg"];
            
-        }else{
             
+        }else{
+            [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
             [SVProgressHUD showInfoWithStatus:@"请先加入学习"];
             
         }
         //***************************//
         
     }];
-    
-}
-- (void)ReachabilityStatus:(void(^)(NSInteger status))reachabilityStatus{
 
+}
+//是否同意4G播放弹框
+- (void)alertReachabilityStatusReachableViaWWAN:(NSString *)urlStr{
+
+    [self.playerView destroyPlayer];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"继续播放会关闭仅WIFI播放模式，播放会消耗流量" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alert addAction:action1];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"继续播放" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        HXSWiStateModel *model = [HXSWiStateModel read];
+        model.state = NO;
+        [model write];
+        self.playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
+        self.URLString = urlStr;
+        self.playerView.url = [NSURL URLWithString:urlStr];
+        NSLog(@"url---%@",urlStr);
+        self.playerView.vc = self;
+        [self.view addSubview:self.playerView];
+        
+    }];
+    [alert addAction:action2];
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+#pragma mark--检测网络
+- (void)ReachabilityStatus{
     
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         
         switch (status) {
                 
             case AFNetworkReachabilityStatusNotReachable:{
-            
+                
+                self.status = AFNetworkReachabilityStatusNotReachable;
                 NSLog(@"无网络");
-                reachabilityStatus(0);
             }
                 break;
             case AFNetworkReachabilityStatusReachableViaWiFi:{
                 
+                self.status = AFNetworkReachabilityStatusReachableViaWiFi;
+
                 NSLog(@"WiFi网络");
-                reachabilityStatus(1);
 
             }
                 break;
                 
             case AFNetworkReachabilityStatusReachableViaWWAN:{
                 
+                self.status = AFNetworkReachabilityStatusReachableViaWWAN;
+
                 NSLog(@"3G网络");
-                reachabilityStatus(2);
                 
             }
                 break;
@@ -278,9 +387,11 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     }];
 
 }
+
+#pragma mark--加入学习
+
 - (void)AddSubscrib {
 
-    //加入学习
     WEAK_SELF();
     self.buyBottomView.addSubscribeBlock = ^{
         //未加入且已登录
@@ -290,13 +401,17 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
             if (![weakSelf.charge_status_text isEqualToString:@"免费"]) {
                 
                 [weakSelf purchaseCourse:weakSelf.curriculum_price];
+                
             }else{
                 
                 [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:weakSelf.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-                    
-                    weakSelf.buyBottomView.consultBtn.titleLabel.text = @"已加入";
+                    if (error==nil) {
+                    [weakSelf.buyBottomView.consultBtn setTitle:@"已加入" forState:UIControlStateNormal];
                     weakSelf.IsAddSubscrib = YES;
-                    weakSelf.buyBottomView.consultBtn.enabled = NO;
+                    if (weakSelf.IsAddSubscrib) {
+                        weakSelf.buyBottomView.consultBtn.enabled = NO;
+                        }
+                    }
                 }];
             }
         }
@@ -317,25 +432,60 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 - (void)purchaseCourse:(NSString *)curriculum_price{
     //后台支付接口
     [[[HXpurchaseCourseAPI purchaseCourseWithCurriculum_id:self.curriculum_id curriculum_price:self.curriculum_price] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         NSString *transaction = responseObject[@"pd"][@"transaction"];
+        //余额足
         if ([transaction isEqualToString:@"ok"]) {
             //购买成功
             [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-                
-                self.buyBottomView.consultBtn.titleLabel.text = @"已加入";
+                if (error==nil) {
+                [self.buyBottomView.consultBtn setTitle:@"已加入" forState:UIControlStateNormal];
+                [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
                 [SVProgressHUD showInfoWithStatus:@"加入成功"];
+                }
             }];
             
         }else if ([transaction isEqualToString:@"no"]){
-            //余额不足，调用微信支付接口
-            [[[HXWXPayAPI wxPayWithopcash:self.curriculum_price wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-                
-                [self payWithResponse:responseObject];
-            }];
-        }else{
             
+            //测试账号(Apple Pay)
+            HJUser *user = [HJUser sharedUser];
+            if ([user.pd.users_id isEqualToString:@"3"]) {
+                //**********Apple Pay*************
+                if ([SKPaymentQueue canMakePayments]) {
+                    //是否允许程序内付费购买
+                    [[[HXWXPayAPI wxPayWithopcash:self.curriculum_price wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+                        if (error==nil) {
+                            [self payWithResponse:responseObject];
+                        }
+                    }];
+                    NSLog(@"允许程序内付费购买");
+                }
+                else
+                {
+                    NSLog(@"不允许程序内付费购买");
+                    UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                        message:@"您的手机没有打开程序内付费购买"
+                                                                       delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+                    [alerView show];
+                }
+                //****************************
+                
+            }else{
+
+            //(其他账号)余额不足，调用微信支付接口
+            [[[HXWXPayAPI wxPayWithopcash:self.curriculum_price wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+                if (error==nil) {
+                [self payWithResponse:responseObject];
+                }
+              }];
+            }
+            
+            
+        }else{
+            [SVProgressHUD setMinimumDismissTimeInterval:1.0];
             [SVProgressHUD showInfoWithStatus:@"加入失败"];
+        }
         }
     }];
 
@@ -346,7 +496,7 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 - (void)isSubcribeAdd{
 
     [[[HXIsSubscribAddAPI IsSubscribWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-       
+       if (error==nil) {
         NSString *statestr = responseObject[@"pd"][@"state"];
         NSInteger state = statestr.integerValue;
         if (state > 0) {
@@ -354,8 +504,6 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
             self.IsAddSubscrib = YES;
             [self.buyBottomView.consultBtn setTitle:@"已加入" forState:UIControlStateNormal];
             self.buyBottomView.consultBtn.enabled = NO;
-//            [self SGSegmentedControl:self.SG didSelectBtnAtIndex:1];
-//            [self.SG titleBtnSelectedWithScrollView:self.mainScrollView];
             
         }else{
            //未加入
@@ -363,6 +511,7 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
             self.buyBottomView.consultBtn.titleLabel.text = @"加入学习";
 
         }
+       }
     }];
 }
 
@@ -386,18 +535,57 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     // 电视剧
     HXCourseDetailTwoVC *twoVC = [[HXCourseDetailTwoVC alloc] init];
     
+    //******选择章节目录播放*******
     twoVC.didselectBlock = ^(NSString *urlStr) {
         if (self.IsAddSubscrib) {
-            [self.playerView destroyPlayer];
-            self.playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
-            self.URLString = urlStr;
-            self.playerView.url = [NSURL URLWithString:urlStr];
-            NSLog(@"url---%@",urlStr);
-            self.playerView.vc = self;
-            [self.view addSubview:self.playerView];
             
-        }else{
-        
+            ////*****销毁播放器*******
+            [self.playerView destroyPlayer];
+            
+            //判断是否打开了WIFI开关
+            HXSWiStateModel *model = [HXSWiStateModel read];
+            
+            if (model.state) {
+                //*******WIFI下能播放********
+                switch (self.status) {
+                    case AFNetworkReachabilityStatusReachableViaWWAN:{
+                        [self alertReachabilityStatusReachableViaWWAN:urlStr];
+                    }
+                        break;
+                    case AFNetworkReachabilityStatusNotReachable:{
+                        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+                        [SVProgressHUD showInfoWithStatus:@"网络未连接"];
+                    }
+                        break;
+                    case AFNetworkReachabilityStatusReachableViaWiFi:{
+                        
+                        [self.playerView destroyPlayer];
+                        self.playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
+                        self.URLString = urlStr;
+                        self.playerView.url = [NSURL URLWithString:urlStr];
+                        NSLog(@"url---%@",urlStr);
+                        self.playerView.vc = self;
+                        [self.view addSubview:self.playerView];
+                        
+                    }
+                        break;
+                    default:
+                        break;
+                }
+            }else{
+            //*****4G和WiFI情况下都能播放*******
+                [self.playerView destroyPlayer];
+                self.playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
+                self.URLString = urlStr;
+                self.playerView.url = [NSURL URLWithString:urlStr];
+                NSLog(@"url---%@",urlStr);
+                self.playerView.vc = self;
+                [self.view addSubview:self.playerView];
+            }
+            
+            }else{
+            [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
             [SVProgressHUD showInfoWithStatus:@"请先加入学习"];
         
         }
@@ -428,8 +616,6 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     vc.view.frame = CGRectMake(offsetX, 0, self.view.frame.size.width, self.view.frame.size.height);
 }
 
-#pragma mark - CourseDetailTwoDelegate
-
 
 #pragma mark - UIScrollViewDelegate
 
@@ -447,7 +633,6 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 //分享
 - (void)shareAction {
     
-
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         // 根据获取的platformType确定所选平台进行下一步操作
         
@@ -459,6 +644,23 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
 
 - (void)payWithResponse:(NSDictionary *)response{
     
+    //测试账号(Apple Pay)
+    HJUser *user = [HJUser sharedUser];
+    if ([user.pd.users_id isEqualToString:@"3"]) {
+        //**********Apple Pay*************
+        //Apple  Pay
+        NSLog(@"---------请求对应的产品信息------------");
+        NSArray *product = nil;
+        product = [[NSArray alloc] initWithObjects:ProductID_MENYA,nil];
+        NSSet *nsset = [NSSet setWithArray:product];
+        SKProductsRequest *request=[[SKProductsRequest alloc] initWithProductIdentifiers: nsset];
+        request.delegate=self;
+        [request start];
+        //****************************
+    
+    }else{
+    
+    //微信支付(其他账号)
     PayReq * req = [[PayReq alloc] init];
     req.partnerId           = response[@"pd"][@"partner"];
     req.prepayId            = response[@"pd"][@"prepay_id"];
@@ -471,49 +673,25 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     //日志输出
     NSLog(@"partid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\n sign=%@",req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
     NSLog(@"success--%d",success);
-    if (success) {
-    
-        [[[HXpurchaseCourseAPI purchaseCourseWithCurriculum_id:self.curriculum_id curriculum_price:self.curriculum_price] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-            
-            NSString *transaction = responseObject[@"pd"][@"transaction"];
-            if ([transaction isEqualToString:@"ok"]) {
-                //加入学习
-                [[[HXSubscribeAddAPI addSubscribeWithcurriculum_id:self.curriculum_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-                    
-                    self.buyBottomView.consultBtn.titleLabel.text = @"已加入";
-                    self.IsAddSubscrib = YES;
-                    [SVProgressHUD showInfoWithStatus:@"加入成功"];
-                }];
-            }
-            if (error) {
-                [SVProgressHUD showInfoWithStatus:@"加入失败"];
-            }
-            
-        }];
-    }
-}
-//微信支付回调
-- (void)onResp:(BaseResp *)resp  {
-    
-    
-    
-    
+        
+       }
 }
 
 //分享到不同平台
 - (void)shareVedioToPlatformType:(UMSocialPlatformType)platformType
 {
-    
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
     //创建视频内容对象
-    UMShareVideoObject *shareObject = [UMShareVideoObject shareObjectWithTitle:self.model.curr_title descr:self.model.introduction  thumImage:kAPIImageFromUrl(self.model.curr_picture)];
+    NSString *imageStr = kAPIImageFromUrl(self.model.curr_picture);
+    NSLog(@"imageStr---%@",imageStr);
+    UMShareVideoObject *shareObject = [UMShareVideoObject shareObjectWithTitle:self.model.curr_title descr:self.model.introduction  thumImage:imageStr];
     
     //设置视频网页播放地址
     shareObject.videoUrl = self.URLString;
     
-    //            shareObject.videoStreamUrl = @"这里设置视频数据流地址（如果有的话，而且也要看所分享的平台支不支持）";
+    // shareObject.videoStreamUrl = @"这里设置视频数据流地址（如果有的话，而且也要看所分享的平台支不支持）";
     
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
@@ -555,29 +733,195 @@ static CGFloat const headViewHeight = WidthScaleSize_H(200);
     return _buyBottomView;
     
 }
-//- (CLPlayerView *)playerView {
-//
-//    if (!_playerView) {
-//        _playerView  = [[CLPlayerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headViewHeight)];
-//    }
-//    return _playerView;
-//
-//}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-
+    
+    NSLog(@"视频控制器销毁了！！！");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.playerView destroyPlayer];
     
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+    NSLog(@"viewDidDisappear");
     [self.playerView destroyPlayer];
 
 }
 - (void)dealloc{
+    
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];//解除监听
 
     [self.playerView destroyPlayer];
-
 }
+#pragma mark - <SKProductsRequestDelegate>
+
+//收到商品信息
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
+    NSLog(@"-----------收到产品反馈信息--------------");
+    NSArray *myProduct = response.products;
+    NSLog(@"产品Product ID:%@",response.invalidProductIdentifiers);
+    NSLog(@"产品付费数量: %d", (int)[myProduct count]);
+    // populate UI
+    for(SKProduct *product in myProduct){
+        NSLog(@"product info");
+        NSLog(@"SKProduct 描述信息%@", [product description]);
+        NSLog(@"产品标题 %@" , product.localizedTitle);
+        NSLog(@"产品描述信息: %@" , product.localizedDescription);
+        NSLog(@"价格: %@" , product.price);
+        NSLog(@"Product id: %@" , product.productIdentifier);
+    }
+    
+    SKPayment *payment = nil;
+    if (myProduct.count > 0) {
+        payment  = [SKPayment paymentWithProduct:myProduct[0]];    //支付25
+        NSLog(@"---------发送购买请求------------");
+        [[SKPaymentQueue defaultQueue] addPayment:payment];
+    }
+    
+}
+- (void)request:(SKRequest *)request didFailWithError:(NSError *)error{
+    NSLog(@"-------弹出错误信息----------");
+    UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Alert",NULL) message:[error localizedDescription]
+                                                       delegate:nil cancelButtonTitle:NSLocalizedString(@"Close",nil) otherButtonTitles:nil];
+    [alerView show];
+    
+}
+-(void) PurchasedTransaction: (SKPaymentTransaction *)transaction{
+    NSLog(@"-----PurchasedTransaction----");
+    NSArray *transactions =[[NSArray alloc] initWithObjects:transaction, nil];
+    [self paymentQueue:[SKPaymentQueue defaultQueue] updatedTransactions:transactions];
+}
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions//交易结果
+{
+    NSLog(@"-----paymentQueue--------");
+    for (SKPaymentTransaction *transaction in transactions)
+    {
+        switch (transaction.transactionState)
+        {
+            case SKPaymentTransactionStatePurchased:{//交易完成
+                [self completeTransaction:transaction];
+                NSLog(@"-----交易完成 --------");
+                
+                UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:@""
+                                                                    message:@"购买成功"
+                                                                   delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+                
+                [alerView show];
+                
+            } break;
+            case SKPaymentTransactionStateFailed://交易失败
+            { [self failedTransaction:transaction];
+                NSLog(@"-----交易失败 --------");
+                UIAlertView *alerView2 =  [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                     message:@"购买失败，请重新尝试购买"
+                                                                    delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+                
+                [alerView2 show];
+                
+            }break;
+            case SKPaymentTransactionStateRestored://已经购买过该商品
+                [self restoreTransaction:transaction];
+                NSLog(@"-----已经购买过该商品 --------");
+            case SKPaymentTransactionStatePurchasing:      //商品添加进列表
+                NSLog(@"-----商品添加进列表 --------");
+                break;
+            default:
+                break;
+        }
+    }
+}
+- (void) completeTransaction: (SKPaymentTransaction *)transaction
+
+{
+    NSLog(@"-----completeTransaction--------");
+    // Your application should implement these two methods.
+    NSString *product = transaction.payment.productIdentifier;
+    if ([product length] > 0) {
+        
+        NSArray *tt = [product componentsSeparatedByString:@"."];
+        NSString *bookid = [tt lastObject];
+        if ([bookid length] > 0) {
+            [self recordTransaction:bookid];
+            [self provideContent:bookid];
+        }
+    }
+    
+    // Remove the transaction from the payment queue.
+    
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    
+}
+
+//记录交易
+-(void)recordTransaction:(NSString *)product{
+    NSLog(@"-----记录交易--------");
+}
+
+//处理下载内容
+-(void)provideContent:(NSString *)product{
+    NSLog(@"-----下载--------");
+}
+
+- (void) failedTransaction: (SKPaymentTransaction *)transaction{
+    NSLog(@"失败");
+    if (transaction.error.code != SKErrorPaymentCancelled)
+    {
+        
+    }
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    
+}
+-(void) paymentQueueRestoreCompletedTransactionsFinished: (SKPaymentTransaction *)transaction{
+    
+}
+
+- (void) restoreTransaction: (SKPaymentTransaction *)transaction
+{
+    NSLog(@" 交易恢复处理");
+    
+}
+
+-(void) paymentQueue:(SKPaymentQueue *) paymentQueue restoreCompletedTransactionsFailedWithError:(NSError *)error{
+    NSLog(@"-------paymentQueue----");
+}
+
+#pragma mark connection delegate
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    NSLog(@"%@",  [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+}
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
+    switch([(NSHTTPURLResponse *)response statusCode]) {
+        case 200:
+        case 206:
+            break;
+        case 304:
+            break;
+        case 400:
+            break;
+        case 404:
+            break;
+        case 416:
+            break;
+        case 403:
+            break;
+        case 401:
+        case 500:
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"test");
+}
+
+//*******************************//
 
 @end

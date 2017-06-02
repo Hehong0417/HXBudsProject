@@ -106,6 +106,7 @@
         if (error) {
             self.loginState = NO;
         }
+        if (error==nil) {
         NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
         if ([isLoginStr isEqualToString:@"no"]) {
             self.loginState = NO;
@@ -113,6 +114,7 @@
             self.loginState = YES;
         }
         loginState(self.loginState);
+        }
     }];
 }
 

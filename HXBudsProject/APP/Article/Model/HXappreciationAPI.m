@@ -18,7 +18,7 @@
         [api.parameters setObject:article_id forKey:@"article_id"];
     }
     if (app_money) {
-        [api.parameters setObject:article_id forKey:@"app_money"];
+        [api.parameters setObject:app_money forKey:@"app_money"];
     }
     api.subUrl = API_appreciation_add;
     api.parametersAddToken = YES;

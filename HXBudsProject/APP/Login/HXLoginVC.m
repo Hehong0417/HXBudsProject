@@ -14,6 +14,7 @@
 #import "HJUser.h"
 #import "HXWXLoginAPI.h"
 #import "HXFindPwdVC.h"
+#import "WXApi.h"
 
 @interface HXLoginVC ()<UITextFieldDelegate>
 {
@@ -209,7 +210,19 @@
         make.height.width.mas_equalTo(btn_W);
         
     }];
+    if ([WXApi isWXAppInstalled]&&[WXApi isWXAppSupportApi]){
     
+        weChatBtn.hidden = NO;
+        centerBtn.hidden = NO;
+        leftLine.hidden = NO;
+        rightLine.hidden = NO;
+    }else{
+    
+        weChatBtn.hidden = YES;
+        centerBtn.hidden = YES;
+        leftLine.hidden = YES;
+        rightLine.hidden = YES;
+    }
     //微博
     UIButton *weiboBtn = [UIButton lh_buttonWithFrame:CGRectZero target:self action:@selector(weiboLoginAction:) image:[UIImage imageNamed:@""]];
     [bgView addSubview:weiboBtn];
@@ -261,7 +274,8 @@
         [self loginRequest];
 
     }else {
-    
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
         [SVProgressHUD showInfoWithStatus:isVaildStr];
     }
     
@@ -271,14 +285,17 @@
 
     NSString *passWordmd5Str = [passWordTextFiled.text md5String];
    [[[HXLoginAPI loginWithPhoneNum:phoneNumTextFiled.text password:passWordmd5Str] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-       
+       if (error==nil) {
        //保存登录模型
        HJUser *user = [[HJUser sharedUser].class mj_objectWithKeyValues:responseObject];
        [user write];
        if ([user.pd.state isEqualToString:@"0"]) {
+           [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
            [SVProgressHUD showInfoWithStatus:@"帐号或密码错误"];
        }else{
          [self.navigationController popToRootVC];
+       }
        }
    }];
 }
@@ -328,11 +345,13 @@
             NSLog(@"Wechat originalResponse: %@", resp.originalResponse);
             NSString *sex = resp.originalResponse[@"sex"];
             [[[HXWXLoginAPI WXloginWithoptionid:resp.openid headportrait:resp.iconurl sex:sex nickname:resp.name] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+                if (error==nil) {
                 //保存登录模型
                 HJUser *user = [[HJUser sharedUser].class mj_objectWithKeyValues:responseObject];
                 [user write];
                 
                 [self.navigationController popToRootVC];
+                }
             }];
             
         }

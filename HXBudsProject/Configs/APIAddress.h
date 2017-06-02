@@ -10,22 +10,40 @@
 
 //#ifdef DEBUG
 //// 本地
-#define API_HOST @"http://192.168.0.128:8080"
-// 本地图片
-#define API_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/upload/task"
+//#define API_HOST @"http://192.168.0.128:8080"
+//
+//// 本地图片
+//#define API_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/upload/task"
+////老师头像图片
+//#define API_Teacher_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/theteacher"
+//
+////用户头像图片
+//#define API_User_IMAGE_HOST @"http://192.168.0.128:8080"
+//
+////机构头像图片
+//#define API_mechanism_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/mechanism"
+//
+
+
+//阿里云
+#define API_HOST @"http://www.duoyimeng.com"
+// 阿里云图片
+#define API_IMAGE_HOST @"http://www.duoyimeng.com/html/goaling/images/upload/task"
 //老师头像图片
-#define API_Teacher_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/theteacher"
+#define API_Teacher_IMAGE_HOST @"http://www.duoyimeng.com/html/goaling/images/theteacher"
 
 //用户头像图片
-#define API_User_IMAGE_HOST @"http://192.168.0.128:8080"
+#define API_User_IMAGE_HOST @"http://www.duoyimeng.com"
 
 //机构头像图片
-#define API_mechanism_IMAGE_HOST @"http://192.168.0.128:8080/html/goaling/images/mechanism"
+#define API_mechanism_IMAGE_HOST @"http://www.duoyimeng.com/html/goaling/images/mechanism"
+
 
 
 
 #define APP_key @"59334e721bcd31"
-#define APP_scode @"15ca7554e8cb486f3b8cbe1fa166c75b"// [NSString md5:[APP_key stringByAppendingString:@"trans"]]
+#define APP_scode @"15ca7554e8cb486f3b8cbe1fa166c75b"
+// [NSString md5:[APP_key stringByAppendingString:@"trans"]]
 
 //MD5加密（APP_key+”weicai”）
 #define API_APP_BASE_URL @"goaling"
@@ -47,18 +65,41 @@
 
 //机构头像
 #define kAPImechanismFromUrl(url) [[NSString stringWithFormat:@"%@/%@", API_mechanism_IMAGE_HOST, url]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-
+//文章
+#define kAPIArticleFromUrl(url) [[NSString stringWithFormat:@"%@/%@",API_HOST , url]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 
 #define video_testUrl @"http://1253712797.vod2.myqcloud.com/e8f61ed3vodtransgzp1253712797/863fe8399031868222929787287/f0.f20.mp4"
 
 #import "HJUser.h"
 
-//
-#define article_detail_url  @"http://192.168.0.105/my/menya/Mengya/index.html"
+//本地
+//#define article_detail_url  @"http://192.168.0.105/my/menya/Mengya/index.html"
+//阿里云
+#define article_detail_url  @"http://www.duoyimeng.com/html/goaling/mengya/index.html"
 
-
-
+//通知
 #define KJust_WIFI_Play_Notification @"KJust_WIFI_Play_Notification" //开启4G网络下播放通知
+//购买课程
+#define KWX_Pay_Sucess_Notification @"KWX_Pay_Sucess_Notification" //微信支付成功通知
+#define KWX_Pay_Fail_Notification @"KWX_Pay_Fail_Notification" //微信支付失败通知
+
+
+//wiFi开关是否开启通知
+#define KWIFI_OPen_Notification @"KWI-FI_OPen_Notification"
+#define KSwi_State @"swiState"
+
+
+
+
+//文章打赏
+#define KWX_Article_Pay_Sucess_Notification @"KWX_Article_Pay_Sucess_Notification" //微信支付成功通知
+#define KWX_Article_Pay_Fail_Notification @"KWX_Article_Pay_Fail_Notification" //微信支付失败通知
+
+#define KWX_UpdateIcon_Notification @"KWX_UpdateIcon_Notification" //更新头像通知
+
+
+//在内购项目中创的商品单号
+#define ProductID_MENYA @"ProductID_MENYA"//20
 
 #define KpageSize 15
 
@@ -82,7 +123,6 @@
 #define API_GET_FORGET_PWD API_SUB_URL(@"users/forgetPwd")
 //1.2修改密码
 #define API_GET_EDIT_PWD API_SUB_URL(@"users/editPwd")
-
 
 
 //1.5QQ绑定手机号
@@ -199,6 +239,9 @@
 #define API_GET_followTheteacher  API_SUB_URL(@"myinformation/followTheteacher")
 //2.4关注的用户列表
 #define API_GET_followUsers  API_SUB_URL(@"myinformation/followUsers")
+//2.4关注的机构列表
+#define API_GET_followUsers  API_SUB_URL(@"myinformation/followUsers")
+
 //2.4浏览文章记录
 #define API_GET_browseArticle  API_SUB_URL(@"myinformation/browseArticle")
 //2.4浏览教程记录
@@ -208,7 +251,8 @@
 
 //2.4申请提现
 #define API_GET_withdrawals API_SUB_URL(@"withdrawals/add")
-
+//2.4提现记录
+#define API_withdrawals_list API_SUB_URL(@"withdrawals/list_anon")
 
 
 //2.4系统通知

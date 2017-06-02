@@ -10,19 +10,30 @@
 #import "HXAccountSecutityVC.h"
 #import "HXIsLoginAPI.h"
 #import "HXLoginVC.h"
+#import "HXSWiStateModel.h"
 @interface HXSetVC ()
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, strong) UISwitch *swi;
 
+@property (nonatomic, assign) BOOL swiState;
+
 @end
 
 @implementation HXSetVC
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
+    
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
       self.title = @"设置";
     
     UIView *footView = [UIView lh_viewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80) backColor:KVCBackGroundColor];
+    
     
     UIButton *exitBtn = [UIButton lh_buttonWithFrame:CGRectMake(30, 30, SCREEN_WIDTH - 60, 35) target:self action:@selector(exitBtnAction) image:nil];
     [exitBtn setTitleColor:kRedColor forState:UIControlStateNormal];
@@ -34,19 +45,19 @@
     
     HJLoginModel *loginModel = [HJUser sharedUser].pd;
     [[[HXIsLoginAPI isLoginWithToken:loginModel.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
         if ([isLoginStr isEqualToString:@"no"]) {
             self.isLogin = NO;
         }else {
             self.isLogin = YES;
         }
+        }
         if (error) {
             self.isLogin = NO;
         }
     }];
 
-    
 }
 - (NSArray *)groupTitles {
     
@@ -67,8 +78,9 @@
    
         UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.row == 1) {
-        NSNumber *on =  [[NSUserDefaults standardUserDefaults]objectForKey:@"swi_State"];
-        [self.swi setOn:on.boolValue];
+
+        HXSWiStateModel *model = [HXSWiStateModel read];
+        [self.swi setOn:model.state];
         cell.accessoryView = self.swi;
 
     }
@@ -90,8 +102,10 @@
     }
 }
 - (void)swiValueChange:(UISwitch *)swi{
- 
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:swi.isOn] forKey:@"swi_State"];
+
+    HXSWiStateModel *model = [HXSWiStateModel read];
+    model.state = swi.isOn;
+    [model write];
 }
 - (UISwitch *)swi {
 

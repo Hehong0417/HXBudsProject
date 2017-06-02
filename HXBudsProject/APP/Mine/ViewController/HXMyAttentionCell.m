@@ -29,7 +29,7 @@
     
     self.hobbyLab.text = model.hobby;
     self.nameLab.text = model.the_name;
-    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPIImageFromUrl(model.the_headportrait)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
+    [self.iconImagV sd_setImageWithURL:[NSURL URLWithString:kAPITeacherImageFromUrl(model.the_headportrait)] placeholderImage:[UIImage imageNamed:@"article_ico"]];
 
 }
 - (void)setFriendsModel:(HXAttentionFriendVarlistModel *)friendsModel {

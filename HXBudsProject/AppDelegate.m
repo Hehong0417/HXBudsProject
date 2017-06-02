@@ -26,7 +26,7 @@
 #define baiduMap_Key  @"Ns6jXZ3k1SUKTk2Tdt15ADXHsy9Qwd88"
 #import "HWNEWfeatureViewController.h"
 
-
+#import "HXSWiStateModel.h"
 
 //// 引入JPush功能所需头文件
 //#import "JPUSHService.h"
@@ -62,6 +62,13 @@
     // Override point for customization after application launch.
     
     
+    //创建一个model
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        HXSWiStateModel *model = [HXSWiStateModel new];
+        model.state = YES;
+        [model write];
+    });
     //*************//
     //配置 IQKeyboardManager
 //    [self IQKeyboardManagerConfig];
@@ -140,23 +147,7 @@
     [WXApi registerApp:Wechat_AppKey ];
 
 }
-//- (void)JpushConfigWithOptions:(NSDictionary *)launchOptions{
-//
-//    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-//    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
-//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-//        // 可以添加自定义categories
-//        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
-//        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
-//    }
-//    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-//   NSString *channel = @"App Store";
-//    BOOL isProduction = 0;
-//    [JPUSHService setupWithOption:launchOptions appKey:JPush_APPKEY
-//                          channel:channel
-//                 apsForProduction:isProduction
-//            advertisingIdentifier:nil];
-//}
+
 - (void)UMSocialConfig{
     
     /* 打开调试日志 */
@@ -187,7 +178,6 @@
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:Weibo_appKey  appSecret:Weibo_appSecret redirectURL:article_detail_url];
     
 }
-
 //设置系统回调
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -197,17 +187,17 @@
     if (!result) {
        //其他SDK如支付宝回调
         //微信SDK
-        return [WXApi handleOpenURL:url delegate:self];
+//        return [WXApi handleOpenURL:url delegate:self];
         
     }
     return result;
 }
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-
-    //微信SDK
-    return [WXApi handleOpenURL:url delegate:self];
-    
-}
+//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+//
+//    //微信SDK
+////    return [WXApi handleOpenURL:url delegate:self];
+//    
+//}
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
 {
@@ -249,6 +239,30 @@
         //---------------------------
     }
     return result;
+}
+- (void)onResp:(BaseResp *)resp {
+
+    if ([resp isKindOfClass:[PayResp class]]){
+        PayResp*response=(PayResp*)resp;
+        switch(response.errCode){
+            case WXSuccess:{
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                [[NSNotificationCenter defaultCenter]postNotificationName:KWX_Pay_Sucess_Notification object:@""];
+                [[NSNotificationCenter defaultCenter]postNotificationName:KWX_Article_Pay_Sucess_Notification object:@""];
+                
+                NSLog(@"支付成功");
+                
+            }
+                break;
+            default:{
+                [[NSNotificationCenter defaultCenter]postNotificationName:KWX_Pay_Fail_Notification object:@""];
+                [[NSNotificationCenter defaultCenter]postNotificationName:KWX_Article_Pay_Fail_Notification object:@""];
+
+                NSLog(@"支付失败，retcode=%d",resp.errCode);
+            }
+                break;
+        }
+    }
 }
 //**********//
 - (void)applicationWillResignActive:(UIApplication *)application {

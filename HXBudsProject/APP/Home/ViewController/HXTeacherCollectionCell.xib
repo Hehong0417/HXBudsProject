@@ -19,39 +19,24 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="缪晓铮" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ChY-Ck-Jxn">
-                        <rect key="frame" x="110" y="23" width="90" height="21"/>
+                        <rect key="frame" x="110" y="23" width="143" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Rv5-c8-oCI"/>
-                            <constraint firstAttribute="width" constant="90" id="b64-KT-COd"/>
+                            <constraint firstAttribute="width" constant="143" id="b64-KT-COd"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.36078431370000003" green="0.82352941180000006" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="琵琶/国家一级演员" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oG-eA-zy1">
-                        <rect key="frame" x="110" y="48" width="124" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="琵琶/国家一级演员" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oG-eA-zy1">
+                        <rect key="frame" x="110" y="48" width="236" height="17"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="124" id="Lnk-EK-vnz"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="dtG-VJ-Zmi"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="1" green="0.78823529410000004" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8s-nD-nRS">
-                        <rect key="frame" x="284" y="34" width="75" height="30"/>
-                        <color key="backgroundColor" red="0.0078431372550000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="75" id="5QA-Rd-NIW"/>
-                            <constraint firstAttribute="height" constant="30" id="PYd-tR-YpM"/>
-                        </constraints>
-                        <state key="normal" title="+ 关注">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="attentionAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="KiF-yE-2bV"/>
-                        </connections>
-                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testIcon" translatesAutoresizingMaskIntoConstraints="NO" id="9dr-fY-FvQ">
                         <rect key="frame" x="22" y="14" width="74" height="74"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -65,15 +50,13 @@
             <constraints>
                 <constraint firstItem="4oG-eA-zy1" firstAttribute="top" secondItem="ChY-Ck-Jxn" secondAttribute="bottom" constant="4" id="1MV-mK-JCT"/>
                 <constraint firstItem="ChY-Ck-Jxn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="23" id="4Xt-gn-L5H"/>
-                <constraint firstItem="c8s-nD-nRS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="34" id="CSB-gc-7Yp"/>
                 <constraint firstItem="9dr-fY-FvQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="22" id="Osg-7o-F76"/>
                 <constraint firstItem="9dr-fY-FvQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="14" id="Yz1-e6-Shk"/>
                 <constraint firstItem="4oG-eA-zy1" firstAttribute="leading" secondItem="ChY-Ck-Jxn" secondAttribute="leading" id="awH-6o-VXZ"/>
+                <constraint firstAttribute="trailing" secondItem="4oG-eA-zy1" secondAttribute="trailing" constant="29" id="iVw-M8-zgK"/>
                 <constraint firstItem="ChY-Ck-Jxn" firstAttribute="leading" secondItem="9dr-fY-FvQ" secondAttribute="trailing" constant="14" id="nWQ-SR-9aR"/>
-                <constraint firstAttribute="trailing" secondItem="c8s-nD-nRS" secondAttribute="trailing" constant="16" id="uuL-hc-3wG"/>
             </constraints>
             <connections>
-                <outlet property="attentionBtn" destination="c8s-nD-nRS" id="aOk-dI-Ba0"/>
                 <outlet property="iconImagV" destination="9dr-fY-FvQ" id="LXM-2F-Npc"/>
                 <outlet property="introduceLab" destination="4oG-eA-zy1" id="PGa-io-gsu"/>
                 <outlet property="teacherNameLab" destination="ChY-Ck-Jxn" id="eaH-Mv-oa8"/>

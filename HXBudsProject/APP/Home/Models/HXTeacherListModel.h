@@ -25,4 +25,10 @@
 @property(nonatomic,copy) NSString *lat;//经度
 @property(nonatomic,copy) NSString *distance;//距离
 
+@property(nonatomic,copy) NSString *teacherteam_name;
+@property(nonatomic,copy) NSString *teacherteam_desc;
+@property(nonatomic,copy) NSString *headportrait;
+@property(nonatomic,copy) NSString *teacherteam_id;
+
+
 @end

@@ -81,7 +81,7 @@
     [self.sortedArray removeAllObjects];
     [self.nearByArr removeAllObjects];
     [[[HXOrganizationListAPI getOrganizationListWithmechanism_id:nil Limit:@"30" recommend:nil] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         HXOrganizationListModel *api = [HXOrganizationListModel new];
         self.OrganizationListModel = [api.class mj_objectWithKeyValues:responseObject];
         
@@ -120,7 +120,7 @@
         NSLog(@"sortArr---%@",self.sortedArray);
 
         [self.organizationListTable reloadData];
-        
+        }
     }];
     
 }

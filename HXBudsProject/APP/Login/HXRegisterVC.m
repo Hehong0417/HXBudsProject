@@ -171,6 +171,8 @@
     if (!validStr) {
         [self checkVerifyCode];
     }else {
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
         [SVProgressHUD showInfoWithStatus:validStr];
         
     }
@@ -213,12 +215,13 @@
 - (void)getVerifyCodeAction:(LHVerifyCodeButton *)btn{
     
     if (phoneNumTextFiled.text.length == 0) {
-        
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
         [SVProgressHUD showInfoWithStatus:@"请填写手机号"];
     }else{
     
         BOOL isvalidPhone = [NSString valiMobile:phoneNumTextFiled.text];
         if (!isvalidPhone) {
+            [SVProgressHUD setMinimumDismissTimeInterval:1.0];
             [SVProgressHUD showInfoWithStatus:@"请输入正确的手机号"];
         }else {
         
@@ -235,15 +238,17 @@
 {
 
     [[[HXVerifyPhoneNumAPI verifyPhoneNumWithPhoneNum:phoneNumTextFiled.text] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         NSNumber *state = responseObject[@"pd"][@"state"];
         if ([state isEqual:@0]) {
             
         [self sendverifyCodeRequest];
 
         }else if ([state isEqual:@1]){
-        
+            [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
             [SVProgressHUD showInfoWithStatus:@"手机号已注册"];
+        }
         }
     }];
         
@@ -254,12 +259,16 @@
 {
     [[[HXGetVerifyCodeAPI getVerifyCodeWithPhoneNum:phoneNumTextFiled.text] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
        
-        [verifyCodeBtn startTimer:60];
-        
-        NSString *verifyCodeStr = responseObject[@"pd"][@"smscode"];
-        
-        verifyCode = verifyCodeStr;
-    
+        if (error == nil) {
+            
+            [verifyCodeBtn startTimer:60];
+            
+            NSString *verifyCodeStr = responseObject[@"pd"][@"smscode"];
+            
+            verifyCode = verifyCodeStr;
+            
+        }
+      
     }];
     
 }
@@ -274,7 +283,8 @@
             [self.navigationController pushVC:vc];
 
     }else {
-    
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
         [SVProgressHUD showErrorWithStatus:@"验证码输入不正确"];
     }
 

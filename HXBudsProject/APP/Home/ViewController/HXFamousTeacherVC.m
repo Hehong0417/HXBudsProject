@@ -31,6 +31,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    
     [self getTeacherListState:self.typeNum];
     
     
@@ -47,6 +48,13 @@
     [super viewDidLoad];
     self.title = @"推荐名师";
     
+    //地图定位
+    //初始化BMKLocationService
+    _locService = [[BMKLocationService alloc]init];
+    _locService.delegate = self;
+    //启动LocationService
+    [_locService startUserLocationService];
+    
     //tableView
     self.teacherListTable = [[UITableView alloc]initWithFrame:CGRectMake(0,WidthScaleSize_H(44), SCREEN_WIDTH, SCREEN_HEIGHT- 64 - WidthScaleSize_H(44)) style:UITableViewStylePlain];
     self.teacherListTable.delegate = self;
@@ -55,12 +63,7 @@
     [self.view addSubview:self.teacherListTable];
     
     
-    //地图定位
-    //初始化BMKLocationService
-    _locService = [[BMKLocationService alloc]init];
-    _locService.delegate = self;
-    //启动LocationService
-    [_locService startUserLocationService];
+
     
     
 }
@@ -90,7 +93,7 @@
     }
     
     [[[HXTeacherListAPI getTeacherListWithWithLimit:@20 State:recommend] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         HXTeacherListModel *api = [HXTeacherListModel new];
         
         self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
@@ -119,7 +122,7 @@
         }
         
         [self.teacherListTable reloadData];
-        
+        }
     }];
 }
 

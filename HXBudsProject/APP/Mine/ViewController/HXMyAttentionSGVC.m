@@ -75,7 +75,6 @@
 // 添加所有子控制器
 - (void)setupChildViewController {
     
-
     HXMyAttetionVC *vc4 = [HXMyAttetionVC new];
     vc4.attentionType = mineType;
     [self addChildViewController:vc4];

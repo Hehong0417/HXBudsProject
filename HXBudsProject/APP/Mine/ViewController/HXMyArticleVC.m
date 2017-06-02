@@ -62,12 +62,14 @@
 - (void)getArticleData{
     
     [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:self.theteacher_id mechanism_id:nil limit:@10] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
         NSLog(@"responseObject--%@",responseObject);
         HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
         
         self.infoArticleListModel = [api.class mj_objectWithKeyValues:responseObject];
         
         [self.tableView reloadData];
+        }
     }];
 }
 

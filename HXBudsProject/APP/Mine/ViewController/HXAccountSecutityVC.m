@@ -8,6 +8,8 @@
 
 #import "HXAccountSecutityVC.h"
 #import "HXEditPwdVC.h"
+#import "HXPersonInfoVC.h"
+
 
 @interface HXAccountSecutityVC ()
 
@@ -31,7 +33,6 @@
     return @[@[@"",@"",@"",@""]];
 }
 
-
 - (NSArray *)groupDetials {
     
     return @[@[@"",@"13825645589",@"",@""]];
@@ -39,7 +40,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 2) {
+    if (indexPath.row == 0) {
+        
+        [self.navigationController pushVC:[HXPersonInfoVC new]];
+        
+    }else if (indexPath.row == 2) {
         
         [self.navigationController  pushVC:[HXEditPwdVC new]];
     }

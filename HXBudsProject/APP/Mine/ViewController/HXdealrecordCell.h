@@ -11,6 +11,7 @@
 
 @interface HXdealrecordCell : UITableViewCell
 @property(nonatomic,strong) HXConsumptionVarListModel *model;
+@property(nonatomic,strong) HXConsumptionVarListModel *withDrawmodel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 
 @property (weak, nonatomic) IBOutlet UILabel *ctimeLab;

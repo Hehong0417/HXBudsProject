@@ -81,14 +81,14 @@
     }
     cell.leftTextLabel.text = self.leftTitleArr[indexPath.row];
     if (indexPath.row == 0) {
-        cell.textFiled.rightView = [UILabel lh_labelWithFrame:CGRectMake(0, 0, 80, 44) text:@"中国大陆+86" textColor:kBlackColor font:FONT(14) textAlignment:NSTextAlignmentCenter backgroundColor:kWhiteColor];
+        cell.textFiled.rightView = [UILabel lh_labelWithFrame:CGRectMake(0, 0, 100, 44) text:@"中国大陆+86" textColor:kBlackColor font:FONT(14) textAlignment:NSTextAlignmentCenter backgroundColor:kWhiteColor];
         cell.textFiled.rightViewMode = UITextFieldViewModeAlways;
         cell.textFiled.secureTextEntry = NO;
         cell.textFiled.delegate = self;
 
     }else if (indexPath.row == 1){
         
-        self.verifyCodeBtn = [[LHVerifyCodeButton alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
+        self.verifyCodeBtn = [[LHVerifyCodeButton alloc]initWithFrame:CGRectMake(0, 4, 80, 36)];
         [self.verifyCodeBtn addTarget:self action:@selector(sendVerifyCode) forControlEvents:UIControlEventTouchUpInside];
         [self.verifyCodeBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
         [self.verifyCodeBtn setTitleColor:kGrayColor forState:UIControlStateNormal];
@@ -116,20 +116,35 @@
 {
     HXTextFieldCell *cell = (HXTextFieldCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     if (cell.textFiled.text.length == 0) {
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
         [SVProgressHUD showInfoWithStatus:@"请先填写手机号"];
     }else{
-    [[[HXVerifyPhoneNumAPI verifyPhoneNumWithPhoneNum:cell.textFiled.text] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         
-        NSNumber *state = responseObject[@"pd"][@"state"];
-        if ([state isEqual:@0]) {
+        BOOL isvalidPhone = [NSString valiMobile:cell.textFiled.text];
+        if (!isvalidPhone) {
+            [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
+            [SVProgressHUD showInfoWithStatus:@"请输入正确的手机号"];
+        }else {
             
-            [SVProgressHUD showInfoWithStatus:@"手机号不存在，请先进行注册"];
+            [[[HXVerifyPhoneNumAPI verifyPhoneNumWithPhoneNum:cell.textFiled.text] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+                if (error==nil) {
+                NSNumber *state = responseObject[@"pd"][@"state"];
+                if ([state isEqual:@0]) {
+                    [SVProgressHUD setMinimumDismissTimeInterval:1.0];
 
-        }else if ([state isEqual:@1]){
-            [self sendverifyCodeRequest:cell.textFiled.text];
-
+                    [SVProgressHUD showInfoWithStatus:@"手机号不存在，请先进行注册"];
+                    
+                }else if ([state isEqual:@1]){
+                    
+                    [self sendverifyCodeRequest:cell.textFiled.text];
+                    
+                }
+                }
+            }];
         }
-    }];
+    
   }
 }
 #pragma mark-发送验证码请求
@@ -138,13 +153,17 @@
 {
     [[[HXGetVerifyCodeAPI getVerifyCodeWithPhoneNum:phoneNum] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
         
-        [self.verifyCodeBtn startTimer:60];
+        if (error==nil) {
+            
+            [self.verifyCodeBtn startTimer:60];
+            
+            NSString *verifyCodeStr = responseObject[@"pd"][@"smscode"];
+            
+            self.verifyCode = verifyCodeStr;
+            
+        }
         
-        NSString *verifyCodeStr = responseObject[@"pd"][@"smscode"];
-        
-        self.verifyCode = verifyCodeStr;
-        
-    }];
+      }];
 }
 
 - (NSString *)isValidWithphoneStr:(NSString *)phoneStr verifyCodeStr:(NSString *)verifyCodeStr  newPwdStr:(NSString *)newPwdStr commitPwdStr:(NSString *)commitPwdStr{
@@ -196,12 +215,18 @@
     if (!isValid) {
         
         [[[HXForgetPwdAPI FindPwdWithAcc:phoneStr NewPwd:newPwdStr.md5String] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-            [SVProgressHUD showSuccessWithStatus:@"修改密码成功"];
-            [self.navigationController pushVC:[HXLoginVC new]];
+            if (error==nil) {
+                [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+                
+                [SVProgressHUD showSuccessWithStatus:@"修改密码成功"];
+                [self.navigationController pushVC:[HXLoginVC new]];
+            }
+           
         }];
 
     }else{
-        
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
         [SVProgressHUD showInfoWithStatus:isValid];
     }
     

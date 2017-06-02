@@ -30,23 +30,42 @@
     
     
     if (self.wechatAccountTextfield.text.length == 0) {
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
         [SVProgressHUD showInfoWithStatus:@"请先输入微信号"];
     }else{
     
     if (self.with_moneyTextFiled.text.floatValue >self.balance.floatValue) {
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
         [SVProgressHUD showInfoWithStatus:@"金额已超过可用提现金额"];
-    }else {
-    
+    }else if(self.with_moneyTextFiled.text.floatValue < 100){
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
+        [SVProgressHUD showInfoWithStatus:@"100元起提现"];
+        
+    }else{
+        
+        CGFloat money =  self.with_moneyTextFiled.text.floatValue;
+        NSString *moneyStr;
+        if (money >1) {
+            moneyStr = [NSString stringWithFormat:@"%.2f",money*0.05];
+        }else{
+         moneyStr = [NSString stringWithFormat:@"%.2f",money];
+        }
         [[[HXwithdrawalsAPI withdrawWithMoney:self.with_moneyTextFiled.text with_acc:self.wechatAccountTextfield.text] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+            if (error==nil) {
             NSString *withdrawals = responseObject[@"pd"][@"withdrawals"];
             if ([withdrawals isEqualToString:@"ok"]) {
-                [SVProgressHUD showSuccessWithStatus:@"申请提现成功！"];
+                [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
+                [SVProgressHUD showSuccessWithStatus:@"申请成功！"];
                 [self.navigationController popVC];
             }else{
-                [SVProgressHUD showSuccessWithStatus:@"申请提现失败！"];
+                [SVProgressHUD setMinimumDismissTimeInterval:1.0];
 
+                [SVProgressHUD showSuccessWithStatus:@"申请失败！"];
             }
-            
+            }
         }];
         
           }

@@ -20,6 +20,8 @@
 @property(nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic, strong) HXSubjectVideoListModel *SubjectVideoListModel;
 @property (nonatomic, strong) HXSubjectVideoListModel *ArtVideoListModel;
+@property (nonatomic, assign) NSInteger page;
+@property (nonatomic, strong) NSMutableArray *GroupArr;
 
 @end
 
@@ -28,17 +30,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //专题视频
-    [self getSubjectVideoListWithCurriculum­­_status:nil completeHandle:^(id responseObject) {
-        
-        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
-        
-        self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
-        NSLog(@"count---%ld",self.SubjectVideoListModel.varList.count);
-        [self.collectionView reloadData];
-        
-    }];
-
+    [self.collectionView.mj_header beginRefreshing];
+    
 }
 
 - (void)viewDidLoad {
@@ -55,18 +48,94 @@
     [self.view addSubview:self.collectionView];
     self.collectionView.backgroundColor = kWhiteColor;
     self.view.backgroundColor = KVCBackGroundColor;
+    [self addHeaderRefresh];
+    [self addFooterRefresh];
+    
+}
+- (void)getSubjectVideoData {
+    [self.GroupArr removeAllObjects];
+    
+    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@(10*self.page) theteacherId:nil  curriculum­­_status:nil  isLogin:NO ] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
+        HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
+        
+        self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
+
+        [self.GroupArr addObjectsFromArray:self.SubjectVideoListModel.varList];
+        [self loadDataFinish:self.GroupArr];
+        }
+    }];
+
+}
+#pragma mark - Setter_Getter
+- (NSMutableArray *)GroupArr {
+    if (!_GroupArr) {
+        _GroupArr = [NSMutableArray array];
+    }
+    return _GroupArr;
+}
+- (void)addHeaderRefresh{
+    
+    MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.page = 1;
+        
+        [self getSubjectVideoData];
+    }];
+    self.collectionView.mj_header = refreshHeader;
     
 }
 
-- (void)getSubjectVideoListWithCurriculum­­_status:(NSString *)curriculum_status completeHandle:(void(^)(id responseObject))completeHandle {
+- (void)addFooterRefresh {
     
-    [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@15 theteacherId:nil  curriculum­­_status:curriculum_status  isLogin:NO ] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        
-        completeHandle(responseObject);
+    MJRefreshAutoNormalFooter  *refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        self.page++;
+        [self getSubjectVideoData];
         
     }];
     
+    self.collectionView.mj_footer = refreshFooter;
+    
+    
 }
+
+/**
+ *  加载数据完成
+ */
+- (void)loadDataFinish:(NSArray *)arr {
+    
+    // 添加数据
+    if (self.page > 1) {
+        
+        [self.GroupArr addObjectsFromArray:arr];
+    } else {
+        
+        self.GroupArr = arr.mutableCopy;
+    }
+
+    
+    BOOL noMoreData = (arr.count == 0 || arr.count < KpageSize);
+    
+    
+    [self endRefreshing:noMoreData];
+}
+
+/**
+ *  结束刷新
+ */
+- (void)endRefreshing:(BOOL)noMoreData {
+    // 取消刷新
+    if (self.collectionView.mj_header.isRefreshing) {
+        [self.collectionView.mj_header endRefreshing];
+    }
+    else if (self.collectionView.mj_footer.isRefreshing) {
+        [self.collectionView.mj_footer endRefreshing];
+    }
+    // 数据重载
+    [self.collectionView reloadData];
+    
+}
+
+
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -86,7 +155,11 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     HXChoicenessCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HXChoicenessCell" forIndexPath:indexPath];
-    cell.model = self.SubjectVideoListModel.varList[indexPath.row];
+    if (self.GroupArr.count>1) {
+        
+        cell.model = self.GroupArr[indexPath.row];
+
+    }
     cell.nav = self.navigationController;
     return cell;
 
@@ -111,7 +184,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     HXCourseDetailAnotherVC *vc = [HXCourseDetailAnotherVC new];
-    HXSubjectVideoModel *model = self.SubjectVideoListModel.varList[indexPath.row];
+    HXSubjectVideoModel *model = self.GroupArr[indexPath.row];
     vc.curriculum_id = model.curriculum_id;
     vc.playImageStr = model.curr_picture;
     vc.curriculum_price = model.curriculum_price;

@@ -50,11 +50,12 @@
 - (void)getTeacherVideoData{
     
     [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@20 theteacherId:nil curriculum­­_status:nil isLogin:NO] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
         
         self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
         [self.collectionView reloadData];
+        }
     }];
     
 }
@@ -62,9 +63,10 @@
   
   [[[HXOrganizationCourseAPI getOrganizationVideoWithmechanism_id:self.mechanism_id Limit:@20] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
       HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
-      
+      if (error==nil) {
       self.SubjectVideoListModel = [api.class mj_objectWithKeyValues:responseObject];
       [self.collectionView reloadData];
+      }
   }];
     
 }

@@ -9,6 +9,8 @@
 #import "HXEditPwdVC.h"
 #import "HXTextFieldCell.h"
 #import "HXEditPwdAPI.h"
+#import "HXLoginVC.h"
+
 
 @interface HXEditPwdVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -101,17 +103,31 @@
    
     
     NSString *isValid =  [self isValidWitholdPwdStr:oldPwdStr newPwdStr:newPwdStr commitPwdStr:commitPwdStr];
-    
-   
+    NSLog(@"%@---%@",oldPwdStr,newPwdStr);
     if (!isValid) {
         
        [[[HXEditPwdAPI editPwdWithOldpassword:oldPwdStr.md5String NewPwd:newPwdStr.md5String] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+           if (error==nil) {
+           NSString *pwdNo = responseObject[@"pd"][@"state"];
            
-           
+           if ([pwdNo isEqualToString:@"pwdNo"]) {
+               [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
+               [SVProgressHUD showInfoWithStatus:@"原密码输入错误！"];
+               
+           }else if ([pwdNo isEqualToString:@"yes"]){
+               [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
+               [SVProgressHUD showSuccessWithStatus:@"密码修改成功"];
+               [self.navigationController popToRootVC];
+           }
+           }
        }];
     }else{
-    
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
         [SVProgressHUD showInfoWithStatus:isValid];
+        
     }
     
     

@@ -26,7 +26,7 @@
         //列数
         NSInteger lineCount = 4;
         NSArray *titleArr = @[@"西洋乐器",@"民族乐器",@"舞蹈",@"书法",@"绘画",@"声乐",@"武术",@"语言艺术"];
-        NSArray *imageArr = @[@"minzuyueqi",@"xiyangyueqi",@"wudao",@"shufa",@"huihua",@"shengyue",@"wushu",@"yuyanyish"];
+        NSArray *imageArr = @[@"xiyangyueqi",@"minzuyueqi",@"wudao",@"shufa",@"huihua",@"shengyue",@"wushu",@"yuyanyish"];
         
         [self getTeachingTypeDataCompleteHandle:^(HXTeachingTypeListModel *model) {
             for (NSInteger i = 0; i< 8; i++) {
@@ -67,10 +67,11 @@
 
     
         [[[HXTeachingTypeListAPI getTeachingTypeList] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-            
+            if (error==nil) {
             HXTeachingTypeListModel *api = [HXTeachingTypeListModel new];
             self.teachingTypeListModel = [api.class mj_objectWithKeyValues:responseObject];
             completeHandle(self.teachingTypeListModel);
+            }
         }];
 
 }

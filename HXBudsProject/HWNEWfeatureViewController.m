@@ -8,7 +8,7 @@
 
 #import "HWNEWfeatureViewController.h"
 #import "HJTabBarController.h"
-#define HWNEWfeatureCount 4
+#define HWNEWfeatureCount 3
 
 @interface HWNEWfeatureViewController ()<UIScrollViewDelegate>
 

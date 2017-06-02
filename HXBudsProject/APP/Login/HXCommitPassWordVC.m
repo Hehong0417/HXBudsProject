@@ -150,7 +150,8 @@
         //注册
         [self registerRequest];
     }else {
-        
+    [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+   
     [SVProgressHUD showInfoWithStatus:validMsg];
         
     }
@@ -182,9 +183,9 @@
     NSString *md5PwdStr = [passWordTextFiled.text md5String];
     
      [[[HXRegisterAPI registerWithPhoneNum:self.phoneNum password:md5PwdStr] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-     
+     if (error==nil) {
          [self loginRequest];
-
+     }
      }];
 
 }
@@ -194,11 +195,12 @@
 
    [[[HXLoginAPI loginWithPhoneNum:self.phoneNum password:md5PwdStr] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
        
+       if (error==nil) {
        //保存登录模型
        self.user = [[HJUser sharedUser].class mj_objectWithKeyValues:responseObject];
        [self.user write];
        [self.navigationController popToRootVC];
-       
+       }
    }];
 
 }

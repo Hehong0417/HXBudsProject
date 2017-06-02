@@ -62,12 +62,12 @@
                             </constraints>
                             <state key="normal" image="next"/>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州市天河区天河南路" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wk-0d-Sbe">
-                            <rect key="frame" x="59" y="0.0" width="243" height="44"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州市天河区天河南路" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wk-0d-Sbe">
+                            <rect key="frame" x="59" y="0.0" width="264" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="243" id="9R9-w1-AIi"/>
+                                <constraint firstAttribute="width" constant="264" id="9R9-w1-AIi"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -80,6 +80,7 @@
                         <constraint firstAttribute="height" constant="44" id="N9L-Xa-BOT"/>
                         <constraint firstItem="9wk-0d-Sbe" firstAttribute="leading" secondItem="VO5-Ne-u8x" secondAttribute="trailing" constant="15" id="TGO-yW-NUS"/>
                         <constraint firstItem="VO5-Ne-u8x" firstAttribute="top" secondItem="AAr-ER-vf6" secondAttribute="top" id="ab3-IE-F2n"/>
+                        <constraint firstItem="QvS-DZ-z45" firstAttribute="leading" secondItem="9wk-0d-Sbe" secondAttribute="trailing" constant="8" id="eQl-wS-s41"/>
                         <constraint firstItem="9wk-0d-Sbe" firstAttribute="top" secondItem="AAr-ER-vf6" secondAttribute="top" id="jGY-MG-vTd"/>
                         <constraint firstAttribute="trailing" secondItem="QvS-DZ-z45" secondAttribute="trailing" id="na2-Ag-kes"/>
                         <constraint firstItem="VO5-Ne-u8x" firstAttribute="leading" secondItem="AAr-ER-vf6" secondAttribute="leading" id="o8Q-7P-TUa"/>
@@ -106,9 +107,9 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="机构名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNK-gl-uKR">
-                    <rect key="frame" x="112" y="115" width="151" height="22"/>
+                    <rect key="frame" x="112" y="115" width="159" height="22"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="151" id="I2C-RD-bpd"/>
+                        <constraint firstAttribute="width" constant="159" id="I2C-RD-bpd"/>
                         <constraint firstAttribute="height" constant="22" id="nc8-64-3iN"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>

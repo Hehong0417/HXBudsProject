@@ -42,10 +42,9 @@
 
 }
 - (void)btnAction:(UIButton *)btn{
-   
+    
     [self.delegate gradeCommentStarAction:btn];
     
-
 }
 
 @end

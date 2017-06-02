@@ -11,5 +11,6 @@
 @interface HXCourseDetailOneVC : UIViewController
 
 @property (nonatomic, retain)NSString * curriculum_id;
+@property (nonatomic, retain)NSString * count;
 
 @end

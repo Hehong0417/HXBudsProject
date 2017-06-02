@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-   self.title = @"好友";
+   self.title = @"机构";
    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
     
     self.tableView.dataSource = self;
@@ -36,10 +36,11 @@
     self.tableView.backgroundColor = kWhiteColor;
 
     [[[HXMyAttentionFrendsAPI getMyAttentionFrends] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
         HXAttentionFriendModel *api = [HXAttentionFriendModel new];
         self.attentionFriendModel = [api.class mj_objectWithKeyValues:responseObject];
         [self.tableView reloadData];
-        
+        }
     }];
     
 }

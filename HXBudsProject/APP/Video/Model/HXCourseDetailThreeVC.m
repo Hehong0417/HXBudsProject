@@ -37,12 +37,13 @@
     //判断是否已登录
     HJUser *user = [HJUser sharedUser];
     [[[HXIsLoginAPI isLoginWithToken:user.pd.token] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
         if ([isLoginStr isEqualToString:@"no"]) {
             self.isLogin = NO;
         }else {
             self.isLogin = YES;
+        }
         }
     }];
     
@@ -52,9 +53,11 @@
 - (void)getcurriculumreviewData{
     
     [[[HXcurriculumreviewAPI getcurriculumReviewWithCurriculum_id:self.curriculum_id limit:@4] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
         HXcurriculumreviewModel *api = [HXcurriculumreviewModel new];
         self.reviewModel = [api.class mj_objectWithKeyValues:responseObject];
         [self.tableView reloadData];
+        }
     }];
     
 }
@@ -108,7 +111,7 @@
             cell = [[HXGradeCommentCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HXGradeCommentCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.delegate = self;
+            cell.delegate = self;
         return cell;
         
     }else {
@@ -127,13 +130,14 @@
         [cell.tip setTapActionWithBlock:^{
             if (self.isLogin) {
                 [[[HXSpotFabulousAPI addSpotFabulousWithcurriculumreview_id:model.curriculumreview_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+                    if (error==nil) {
                     NSString *status = responseObject[@"pd"][@"status"];
                     if ([status isEqualToString:@"no"]) {
                         [self getcurriculumreviewData];
 
                         }else {
                     }
-                  
+                    }
                 }];
                 
             }else{
@@ -161,20 +165,25 @@
 
 - (void)gradeCommentStarAction:(UIButton *)button {
 
-  //弹框
-    HXGradeCommentView *commentView = [[HXGradeCommentView alloc]init];
-    commentView.addReviewBlock = ^(NSString *content, NSNumber *starNum){
-      
-     [[[HXReViewAddAPI addReViewWithcurriculum_id:self.curriculum_id review_content:content star:starNum] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-         
-         [self getcurriculumreviewData];
-
-     }];
+    if (self.isLogin) {
         
-    };
-    [commentView showAnimated:YES];
-
-
+        //弹框
+        HXGradeCommentView *commentView = [[HXGradeCommentView alloc]init];
+        commentView.addReviewBlock = ^(NSString *content, NSNumber *starNum){
+            
+            [[[HXReViewAddAPI addReViewWithcurriculum_id:self.curriculum_id review_content:content star:starNum] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+                if (error==nil) {
+                [self getcurriculumreviewData];
+                }
+            }];
+            
+        };
+        [commentView showAnimated:YES];
+    }else{
+    
+        [self.navigationController pushVC:[HXLoginVC new]];
+    
+    }
 }
 
 

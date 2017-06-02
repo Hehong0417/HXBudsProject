@@ -80,7 +80,7 @@
     [self.nearByArr removeAllObjects];
     
     [[[HXTeacherListAPI getTeacherListWithWithLimit:@20 State:nil] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         HXTeacherListModel *api = [HXTeacherListModel new];
         
         self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
@@ -119,7 +119,8 @@
         
 
         [self.organizationListTable reloadData];
-        
+        }
+    
     }];
 }
 

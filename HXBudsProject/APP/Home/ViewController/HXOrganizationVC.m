@@ -27,20 +27,24 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //初始化BMKLocationService
-    _locService = [[BMKLocationService alloc]init];
-    _locService.delegate = self;
-    //启动LocationService
-    [_locService startUserLocationService];
+
     [self getOrganizationListDataWithState:self.typeNum];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
-    self.title = @"推荐机构";
     
+    //初始化BMKLocationService
+    _locService = [[BMKLocationService alloc]init];
+    _locService.delegate = self;
+    
+    //启动LocationService
+    [_locService startUserLocationService];
+    
+    self.title = @"推荐机构";
+    [self getOrganizationListDataWithState:self.typeNum];
+
     //tableView
     self.organizationListTable = [[UITableView alloc]initWithFrame:CGRectMake(0,WidthScaleSize_H(44), SCREEN_WIDTH, SCREEN_HEIGHT- 64 - WidthScaleSize_H(44)) style:UITableViewStylePlain];
     self.organizationListTable.delegate = self;
@@ -82,7 +86,7 @@
     }
     
   [[[HXOrganizationListAPI getOrganizationListWithmechanism_id:nil Limit:@"30" recommend:recommend] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-      
+      if (error==nil) {
       HXOrganizationListModel *api = [HXOrganizationListModel new];
       self.OrganizationListModel = [api.class mj_objectWithKeyValues:responseObject];
       for (HXOrganizationVarListModel *model in self.OrganizationListModel.varList) {
@@ -109,7 +113,7 @@
           [self.recommonedArr addObject:vModel];
       }
       [self.organizationListTable reloadData];
-      
+      }
   }];
 
 }

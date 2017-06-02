@@ -17,6 +17,7 @@
     if (acc) {
         [api.parameters setObject:acc forKey:@"p"];
     }
+    api.parametersAddToken = NO;
     return api;
 }
 

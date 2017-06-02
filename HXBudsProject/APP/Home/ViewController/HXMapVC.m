@@ -56,41 +56,41 @@
     
     
     // 添加一个PointAnnotation
-//    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
+    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
     CLLocationCoordinate2D coor;
     coor.latitude = self.latitude.floatValue;
     coor.longitude = self.longitude.floatValue;
     
-//    annotation.coordinate = coor;
-//    annotation.title = self.address;
-    
+    annotation.coordinate = coor;
+//  annotation.title = self.address;
     [_mapView setCenterCoordinate:coor animated:YES];
-//    [_mapView addAnnotation:annotation];
-    
-
+    [_mapView addAnnotation:annotation];
     
  //添加底部视图
-    UIView *bottomView  = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 80, SCREEN_WIDTH, 80)];
+    UIView *bottomView  = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT  -  80-64, SCREEN_WIDTH, 80)];
+    bottomView.backgroundColor = kWhiteColor;
     //标题
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 100, 40)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH - 125, 40)];
     titleLabel.font = FONT(14);
     titleLabel.textAlignment = NSTextAlignmentLeft;
     titleLabel.text = self.name;
     [bottomView addSubview:titleLabel];
     //地址
-    UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH - 100, 30)];
+    CGSize size = [self.address lh_sizeWithFont:FONT(13) constrainedToSize:CGSizeMake(SCREEN_WIDTH - 120, MAXFLOAT)];
+    UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 40, SCREEN_WIDTH - 120, size.height)];
+    addressLabel.numberOfLines = 2;
     addressLabel.font = FONT(13);
     addressLabel.textColor = kGrayColor;
     addressLabel.textAlignment = NSTextAlignmentLeft;
     addressLabel.text = self.address;
     [bottomView addSubview:addressLabel];
     //本机地图
-    UIButton *mapBtn = [UIButton lh_buttonWithFrame:CGRectMake(SCREEN_WIDTH - 105, 0,90, 40) target:self action:@selector(navigationAction) image:nil title:@"" titleColor:kGrayColor font:FONT(14)];
+    UIButton *mapBtn = [UIButton lh_buttonWithFrame:CGRectMake(CGRectGetMaxX(titleLabel.frame), 20,90, 30) target:self action:@selector(navigationAction) image:nil title:@"本机地图" titleColor:kGrayColor font:FONT(14)];
+    mapBtn.backgroundColor = KVCBackGroundColor;
+    [mapBtn lh_setCornerRadius:3 borderWidth:1 borderColor:kLightGrayColor];
     [bottomView addSubview:mapBtn];
     
     [self.view addSubview:bottomView];
-    
-    
     
     self.urlScheme = @"demoURI://";
     self.appName = @"demoURI";

@@ -51,6 +51,8 @@
 - (void)getMyInfoData{
     
     [[[HXgetUserInfoAPI getUserInfo] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
+        
         HXUserInfoModel *api = [HXUserInfoModel new];
         self.userModel = [api.class mj_objectWithKeyValues:responseObject];
         
@@ -81,6 +83,7 @@
         HJSettingItem *selectItem6 = [self settingItemInIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
         selectItem6.detailTitle = self.userModel.pd.hobby?self.userModel.pd.hobby:@"0";
         [self.tableV reloadData];
+        }
     }];
     
 }
@@ -124,11 +127,13 @@
 //    }else{
 //
     [[[HXModifyUserInfoAPI ModifyUserInfoWithNickname:nickName username:userName phone:phone sex:sex age:birthDay hobby:desc headportrait:self.uploadIconModel.path] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
+            [SVProgressHUD setMinimumDismissTimeInterval:1.0];
         [SVProgressHUD showSuccessWithStatus:@"保存成功"];
         [self.navigationController popVC];
+        }
     }];
     
-//    }
 
 }
 - (NSString *)validMsg{
@@ -189,7 +194,8 @@
     
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.row == 0) {
-        if ([self.userModel.pd.headportrait containsString:@"http:"]) {
+        if ([self.userModel.pd.headportrait containsString:@"https:"]) {
+            
             [self.cellHeadImageView sd_setImageWithURL:[NSURL URLWithString:self.userModel.pd.headportrait] placeholderImage:[UIImage imageNamed:@"person_ico"]];
         }else{
             

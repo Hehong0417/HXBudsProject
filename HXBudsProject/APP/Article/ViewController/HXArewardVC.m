@@ -12,6 +12,7 @@
 #import "HXappreciationAPI.h"
 #import "HXWXPayAPI.h"
 #import "WXApi.h"
+#import "HXArticleDetailVC.h"
 
 @interface HXArewardVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,WXApiDelegate>
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong)   NSString *money;
 @property (nonatomic, strong)   UITextField *moneyTextfiled;
 @property (nonatomic, strong)   NSString *inputmoney;
+@property (nonatomic, strong)   NSString *commitMoney;
 
 @end
 
@@ -43,8 +45,54 @@
     [reChargeBtn lh_setCornerRadius:3 borderWidth:0 borderColor:nil];
     [footView addSubview:reChargeBtn];
     self.accountReChargeTable.tableFooterView = footView;
+    
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(wxPaySucess) name:KWX_Article_Pay_Sucess_Notification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(wxPayFail) name:KWX_Article_Pay_Fail_Notification object:nil];
 }
 //
+- (void)wxPaySucess{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    [self appreciationRequest];
+    
+}
+- (void)appreciationRequest{
+
+    [[[HXappreciationAPI appreciationarticleWitharticle_id:self.article_id app_money:self.commitMoney] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
+            NSString *transaction = responseObject[@"pd"][@"transaction"];
+            NSLog(@"文章打赏回调");
+            if ([transaction isEqualToString:@"no"]) {
+                
+                [self appreciationRequest];
+                
+            }else if([transaction isEqualToString:@"ok"]){
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:KWX_UpdateIcon_Notification object:nil];
+                [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+                [SVProgressHUD showSuccessWithStatus:@"打赏成功"];
+                
+            }else{
+                [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+                [SVProgressHUD showSuccessWithStatus:@"打赏失败"];
+            }
+ 
+        }else{
+            [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+             [SVProgressHUD showSuccessWithStatus:@"打赏失败"];
+        }
+    }];
+
+}
+
+- (void)wxPayFail {
+    
+    [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+    [SVProgressHUD showErrorWithStatus:@"打赏失败"];
+
+}
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
    self.money = @"";
     HXArewardCell *cell = (HXArewardCell *)[self.accountReChargeTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
@@ -72,7 +120,7 @@
             
             HXArewardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HXArewardCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+         
             cell.tabControl.selectTabControlBlock = ^(NSString *money) {
                 NSLog(@"money-%@",money);
                 self.money = money;
@@ -91,7 +139,7 @@
             self.moneyTextfiled = [UITextField lh_textFieldWithFrame:CGRectMake(100, 0, SCREEN_WIDTH - 150, 44) placeholder:@"0.00" font:FONT(14) textAlignment:NSTextAlignmentRight backgroundColor:kWhiteColor];
             self.moneyTextfiled.delegate = self;
             [cell.contentView addSubview:self.moneyTextfiled];
-            
+            self.moneyTextfiled.returnKeyType = UIReturnKeyDone;
             self.money = self.moneyTextfiled.text;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -101,6 +149,7 @@
     
     return nil;
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
     return 2;
@@ -146,7 +195,12 @@
     return 0.01;
     
 }
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
 
+    [self.view endEditing:YES];
+    
+    return YES;
+}
 - (void)reChargeAction {
 
      UITableViewCell *cell = [self.accountReChargeTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
@@ -155,48 +209,78 @@
         if ([subView isKindOfClass:[UITextField class]]) {
             UITextField *textFiled = (UITextField *)subView;
             self.inputmoney = textFiled.text;
-       
             }
     }
-    if (self.money) {
+    if (self.money.floatValue == 0&&self.inputmoney.floatValue == 0 ) {
+        
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+        [SVProgressHUD showInfoWithStatus:@"金额必须大于0"];
+        return;
+    }
+    if (self.money.floatValue > 0) {
+        self.commitMoney = self.money;
         [[[HXappreciationAPI appreciationarticleWitharticle_id:self.article_id app_money:self.money] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+            if (error==nil) {
+                
             NSString *transaction = responseObject[@"pd"][@"transaction"];
+            
             if ([transaction isEqualToString:@"no"]) {
+                NSLog(@"第一次");
+
                 //余额不足
                 [[[HXWXPayAPI wxPayWithopcash:self.money wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
                     
                     [self payWithResponse:responseObject];
-                    
+
                 }];
             }else if([transaction isEqualToString:@"ok"]){
-            
+                [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
                 [SVProgressHUD showSuccessWithStatus:@"打赏成功"];
                 [self.navigationController popVC];
             }else{
-                [SVProgressHUD setMinimumDismissTimeInterval:2];
-                [SVProgressHUD showErrorWithStatus:@"打赏失败"];
+
+                [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+               [SVProgressHUD showErrorWithStatus:@"请求超时"];
             
+            }
             }
             
                }];
-    }else {
-    
+            
+
+    }else if(self.inputmoney.floatValue>0){
+        
+        self.commitMoney = self.inputmoney;
+
         [[[HXappreciationAPI appreciationarticleWitharticle_id:self.article_id app_money:self.inputmoney] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+            
+            if (error==nil) {
+
             NSString *transaction = responseObject[@"pd"][@"transaction"];
+            
             if ([transaction isEqualToString:@"no"]) {
+                NSLog(@"第一次");
+
                 //余额不足
-                [[[HXWXPayAPI wxPayWithopcash:@"0.01" wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-                    
-                    [self payWithResponse:responseObject];
+                [[[HXWXPayAPI wxPayWithopcash:self.inputmoney wxpaytype:@"APP"] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+                    if (error==nil) {
+                        [self payWithResponse:responseObject];
+                    }
                     
                 }];
             }else if([transaction isEqualToString:@"ok"]){
-                
+                [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
                 [SVProgressHUD showSuccessWithStatus:@"打赏成功"];
                 [self.navigationController popVC];
             }else{
+                [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+
                 [SVProgressHUD showSuccessWithStatus:@"打赏失败"];
             }
+            }
+            
         }];
     }
 
@@ -222,16 +306,17 @@
     NSLog(@"success--%d",success);
     
 }
-//微信支付回调
-- (void)onResp:(BaseResp *)resp  {
+- (void)viewWillDisappear:(BOOL)animated {
+
+    [super viewWillDisappear:animated];
     
-    
-    
-    
+    NSLog(@"打赏控制器销毁了！！");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
 }
+- (void)dealloc {
+    
 
-
-
-
+}
 
 @end

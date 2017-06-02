@@ -49,12 +49,12 @@
 - (void)getTeacherArticleData {
    
     [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:self.teacher_Id mechanism_id:nil limit:@15] netWorkClient]postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
 
         self.articleModel = [api.class mj_objectWithKeyValues:responseObject];
         [self.tableView reloadData];
-        
+        }
     } ];
     
 
@@ -63,11 +63,12 @@
 - (void)getOrganizationArticleData{
 
     [[[HXHomeInfoArtcleAPI getHomeInfoArticleWithTheteacherId:nil mechanism_id:self.mechanism_id limit:@15] netWorkClient]postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (!error) {
         HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
         
         self.articleModel = [api.class mj_objectWithKeyValues:responseObject];
         [self.tableView reloadData];
-
+        }
     } ];
 
 
@@ -117,7 +118,9 @@
     
     
     HXArticleDetailVC *vc = [HXArticleDetailVC new];
+    HXInfoArticleListModel *model = self.articleModel.varList[indexPath.row];
     
+    vc.articleModel = model;
     [self.navigationController pushVC:vc];
     
     

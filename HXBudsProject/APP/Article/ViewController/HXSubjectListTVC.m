@@ -38,12 +38,12 @@
 - (void)getSubjectArticleData {
 
    [[[HXSubjectArticleAPI getSubjectArticleWithArticletype_id:self.articletype_id] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-       
+       if (error==nil) {
        HXHomeInfoArticleModel *api = [HXHomeInfoArticleModel new];
        
        self.articleModel = [api.class mj_objectWithKeyValues:responseObject];
        [self.tableView reloadData];
-       
+       }
    }];
 
 }

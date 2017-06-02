@@ -31,7 +31,7 @@
     if ([model.headportrait containsString:@"http"]) {
         urlStr = model.headportrait;
     }else{
-        urlStr = kAPIImageFromUrl(model.headportrait);
+        urlStr = kAPIArticleFromUrl(model.headportrait);
     }
     
     [self.commentIco_ImagV sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"article_ico"]];

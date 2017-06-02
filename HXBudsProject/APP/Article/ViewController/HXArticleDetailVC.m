@@ -40,21 +40,26 @@
 @end
 
 @implementation HXArticleDetailVC
-//- (void) viewWillAppear: (BOOL)animated {
-//    
-//    //关闭键盘事件相应
-//    [IQKeyboardManager sharedManager].enable = NO;
-//    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-//
-//}
-//
-//- (void) viewWillDisappear: (BOOL)animated {
-//    
-//    //打开键盘事件相应
-//    [IQKeyboardManager sharedManager].enable = YES;
-//    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
-//
-//}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
+    
+    //键盘弹出后的评论框
+    self.inputView = [[HXInputView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 100)];
+    self.inputView.backgroundColor = KVCBackGroundColor;
+    self.inputView.delegate = self;
+    [self.view addSubview:self.inputView];
+    
+    [self.inputView.sendBtn addTarget:self action:@selector(sendCommentAction) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    //注册打赏成功通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(arewardSucess) name:KWX_UpdateIcon_Notification object:nil];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -72,7 +77,7 @@
     
     //文章详情
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc]init];
-     self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-114) configuration:config];
+     self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-50) configuration:config];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:article_detail_url]];
 //        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.jianshu.com/p/f79589c21dc4"]];
     self.webView.navigationDelegate = self;
@@ -82,6 +87,8 @@
     self.webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
     [self.webView loadRequest:request];
     [self.view addSubview:self.webView];
+    
+    
     
     WEAK_SELF();
     //收藏
@@ -111,36 +118,43 @@
     }];
     
     
-    //键盘弹出后的评论框
-    self.inputView = [[HXInputView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 100)];
-    self.inputView.backgroundColor = KVCBackGroundColor;
-    self.inputView.delegate = self;
-    [self.view addSubview:self.inputView];
-    
-    [self.inputView.sendBtn addTarget:self action:@selector(sendCommentAction) forControlEvents:UIControlEventTouchUpInside];
-    
 
-    UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 60, 60) target:self action:@selector(shareAction) image:[UIImage imageNamed:@"share"] title:@"" titleColor:kBlackColor font:FONT(14)];
-    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -15)];
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
-
+//    UIButton *btn = [UIButton lh_buttonWithFrame:CGRectMake(0, 0, 60, 60) target:self action:@selector(shareAction) image:[UIImage imageNamed:@"share"] title:@"" titleColor:kBlackColor font:FONT(14)];
+//    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -15)];
+//
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
+//
     self.loginModel = [HJUser sharedUser].pd;
     [[[HXIsLoginAPI isLoginWithToken:self.loginModel.token] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
         
+        if (error==nil) {
+            
         NSString *isLoginStr = responseObject[@"pd"][@"islogin"];
         if ([isLoginStr isEqualToString:@"no"]) {
             self.isLogin = NO;
         }else {
             self.isLogin = YES;
+              }
         }
+        
         if (error) {
             self.isLogin = NO;
         }
+            
     }];
     
     
 }
+- (void)arewardSucess {
+
+    NSString *js = [NSString stringWithFormat:@"put(%@)",self.articleModel.article_id];
+    NSLog(@"js---%@",js);
+    [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable, NSError * _Nullable error) {
+        NSLog(@"error::%@",error);
+    }];
+   
+}
+
 //分享到不同平台
 - (void)shareVedioToPlatformType:(UMSocialPlatformType)platformType
 {
@@ -148,13 +162,13 @@
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
-    //创建视频内容对象
-    UMShareVideoObject *shareObject = [UMShareVideoObject shareObjectWithTitle:self.articleModel.article_title descr:self.articleModel.article_content thumImage:kAPIImageFromUrl(self. articleModel.article_cover)];
+    //创建Webpage内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.articleModel.article_title descr:@"" thumImage:kAPIImageFromUrl(self. articleModel.article_cover)];
     
-    //设置视频网页播放地址
-//    shareObject.videoUrl = video_testUrl;
     
-    //            shareObject.videoStreamUrl = @"这里设置视频数据流地址（如果有的话，而且也要看所分享的平台支不支持）";
+    //设置Webpage地址
+    shareObject.webpageUrl = article_detail_url;
+    
     
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
@@ -197,7 +211,7 @@
     //动画弹出键盘和输入框
     [UIView animateKeyframesWithDuration:duration delay:0.0 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
         //输入框紧贴键盘
-        self.inputView.bottom = SCREEN_HEIGHT - keyboardHeight - 65;
+        self.inputView.bottom = SCREEN_HEIGHT - keyboardHeight;
         [self.inputView.inputView becomeFirstResponder];
     } completion:^(BOOL finished) {
         
@@ -222,10 +236,17 @@
 //打赏
 - (void)areward {
 
-    HXArewardVC *vc = [HXArewardVC new];
-    vc.article_id = self.articleModel.article_id;
-    [self.navigationController pushVC:vc];
+    if (self.isLogin) {
+        
+        HXArewardVC *vc = [HXArewardVC new];
+        vc.article_id = self.articleModel.article_id;
+        [self.navigationController pushVC:vc];
+    }else{
     
+        [self.navigationController pushVC:[HXLoginVC new]];
+
+    }
+ 
 }
 //发送评论
 - (void)sendCommentAction {
@@ -235,6 +256,8 @@
     if (self.isLogin) {
         [[[HXarticleReviewAPI articlereviewAddWitharticle_id:self.articleModel.article_id review_content:content] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
             
+            if (error==nil) {
+
             [self.inputView.inputView resignFirstResponder];
             self.inputView.inputView.text = @"";
             NSString *js3 = [NSString stringWithFormat:@"refresh()"];
@@ -242,8 +265,7 @@
             [self.webView evaluateJavaScript:js3 completionHandler:^(id _Nullable, NSError * _Nullable error) {
                 NSLog(@"error::%@",error);
             }];
-//            [self.webView reload];
-            
+               }
         }];
     }else{
     
@@ -305,7 +327,7 @@
 - (HXInformationCommentView *)commentView{
 
     if (!_commentView) {
-        _commentView = [[HXInformationCommentView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50-64, SCREEN_WIDTH, 50)];
+        _commentView = [[HXInformationCommentView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
         _commentView.nav = self.navigationController;
         [_commentView lh_setCornerRadius:0 borderWidth:1 borderColor:KVCBackGroundColor];
 
@@ -320,10 +342,27 @@
         decisionHandler(WKNavigationActionPolicyCancel);
 
     }
+    
+    if ([[NSString stringWithFormat:@"%@",navigationAction.request.URL] containsString:@"https://hao.360.cn"]) {
+        
+        decisionHandler(WKNavigationActionPolicyCancel);
+
+    }
     decisionHandler(WKNavigationActionPolicyAllow);
 
 }
+- (void)viewWillDisappear:(BOOL)animated {
 
+    [super viewWillDisappear:animated];
+    NSLog(@"控制器销毁了？？？？");
+    [[NSNotificationCenter defaultCenter] removeObserver:self.inputView];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+}
+- (void)dealloc {
+
+    
+}
 //#pragma mark-------UIWebViewDelegate代理方法-----------
 //-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 //{

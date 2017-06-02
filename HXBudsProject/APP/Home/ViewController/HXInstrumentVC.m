@@ -26,7 +26,7 @@
     // Do any additional setup after loading the view.
     
     self.title = self.type_name;
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT- 64) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
@@ -34,15 +34,17 @@
     [self getInstrumentData];
     
 }
+
 - (void)getInstrumentData{
 
-    [[[HXCurriculumSearchAPI getsearchCurriculumListWithCurr_title:nil teachingtype_id:self.teachingtype_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-       
+    [[[HXCurriculumSearchAPI getsearchCurriculumListWithCurr_title:nil teachingtype_id:self.teachingtype_id] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
+       if (error==nil) {
         HXSubjectVideoListModel *api = [HXSubjectVideoListModel new];
         
         self.instrumentModel = [api.class mj_objectWithKeyValues:responseObject];
 
         [self.tableView reloadData];
+       }
     }];
     
 

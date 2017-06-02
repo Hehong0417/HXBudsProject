@@ -61,9 +61,9 @@
 - (void)getSubjectVideoListWithCurriculum­­_status:(NSString *)curriculum_status completeHandle:(void(^)(id responseObject))completeHandle {
     
     [[[HXSubjectVideoAPI getSubjectVideoWithLimit:@15 theteacherId:nil  curriculum­­_status:curriculum_status  isLogin:NO ] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
-        
+        if (error==nil) {
         completeHandle(responseObject);
-        
+        }
     }];
     
 }

@@ -19,6 +19,7 @@
         
         //
         self.reViewTextField = [UITextField lh_textFieldWithFrame:CGRectMake(CGRectGetMaxX(self.backBtn.frame)+10, 5, frame.size.width - 2*47-self.backBtn.frame.size.width - 10, 35) placeholder:@"单行输入"  font:FONT(14) textAlignment:NSTextAlignmentLeft backgroundColor:kWhiteColor];
+        self.reViewTextField.centerY = 25;
         self.reViewTextField.borderStyle = UITextBorderStyleRoundedRect;
         [self addSubview:self.reViewTextField];
         

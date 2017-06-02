@@ -26,7 +26,7 @@
     [head addSubview:categoryImageV];
     
     
-    CGSize nameSize = [headtitle lh_sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(SCREEN_WIDTH, 30)];
+    CGSize nameSize = [headtitle lh_sizeWithFont:FONT(14) constrainedToSize:CGSizeMake(SCREEN_WIDTH, 30)];
     //标题
     UILabel *headTitleLab = [UILabel lh_labelWithFrame:CGRectMake(10, 0, nameSize.width, frame.size.height) text:headtitle textColor:kBlackColor font:labFont textAlignment:NSTextAlignmentLeft backgroundColor:kClearColor];
     [head addSubview:headTitleLab];

@@ -54,11 +54,12 @@
 
 - (void)getTeacherTeamList{
   
-    [[[HXTeacherTeamAPI getTeacherTeamWithmechanism_id:self.mechanism_id] netWorkClient] postRequestInView:self.view finishedBlock:^(id responseObject, NSError *error) {
-        
+    [[[HXTeacherTeamAPI getTeacherTeamWithmechanism_id:self.mechanism_id] netWorkClient] postRequestInView:nil finishedBlock:^(id responseObject, NSError *error) {
+        if (error==nil) {
         HXTeacherListModel *api = [HXTeacherListModel new];
         self.teacherListModel = [api.class mj_objectWithKeyValues:responseObject];
         [self.collectionView reloadData];
+        }
     }];
 
 }
@@ -81,7 +82,6 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-        
         return self.teacherListModel.varList.count;
 }
 

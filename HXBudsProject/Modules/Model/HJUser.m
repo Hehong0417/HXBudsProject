@@ -33,7 +33,13 @@ singleton_m(User)
     
     return _instance;
 }
-
+- (id)copyWithZone:(NSZone *)zone
+{
+    id copy = [[[self class] alloc] init];
+    
+    
+    return copy;
+}
 
 //- (HJLoginModel *)userModel {
 //    if (!_userModel) {
