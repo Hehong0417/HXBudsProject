@@ -89,7 +89,11 @@
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         }
-        cell.textLabel.text = @"微信支付";
+        if([self.user.pd.users_id isEqualToString:@"3"]){
+            cell.textLabel.text = @"";
+        }else{
+         cell.textLabel.text = @"微信支付";
+        }
         return cell;
     }else {
         

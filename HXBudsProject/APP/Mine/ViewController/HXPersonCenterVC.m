@@ -45,15 +45,6 @@
 
     [super viewWillAppear:animated];
     
-    [self isLoginCompleteHandle:^(BOOL isLogin) {
-        if (self.isLogin) {
-            [self isLoginState];
-        }else{
-            
-            [self isNoLoginState];
-        }
-    }];
-    
 }
 
 - (void)viewDidLoad {
@@ -65,9 +56,7 @@
     self.NoLoginMineHeadView = [HXMineHeadView initmineHeadViewWithXib];
     self.NoLoginMineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(150));
     self.NoLoginMineHeadView.nav = self.navigationController;
-    
-    self.tableV.tableHeaderView =  self.NoLoginMineHeadView;
-
+    self.tableV.tableHeaderView = self.NoLoginMineHeadView;
     //登录后的HeadView
     self.mineHeadView = [HXMineLoginHeadView initMineLoginHeadViewWithXib];
     self.mineHeadView.frame = CGRectMake(0, -20, SCREEN_WIDTH, WidthScaleSize_H(150));
@@ -109,15 +98,9 @@
     
     [self getMyInfoData];
     
-//      self.mineHeadView.model = self.teacherDetailModel.pd;
         WEAK_SELF();
         [self.mineHeadView setTapActionWithBlock:^{
             HXPersonInfoVC *vc = [HXPersonInfoVC new];
-//            HXMyLikeVC *vc = [HXMyLikeVC new];
-//            vc.titleStr = @"我的主页";
-//            vc.dynamicType = mineDynamicType;
-//            HJUser *user = [HJUser sharedUser];
-//            vc.users_id = user.pd.users_id;
             [weakSelf.navigationController pushVC:vc];
         }];
 }
@@ -149,7 +132,6 @@
     
   return @[@[@" "],@[@"fo",@"collect_mine",@"sent"],@[@"set"]];
 }
-
 
 
 - (NSArray *)groupDetials {
@@ -184,6 +166,13 @@
     }
     return 44;
     
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+
+    NSLog(@"contentOffset:%.2f",scrollView.contentOffset.y);
+    
+    self.tableV.tableHeaderView.frame = CGRectMake(scrollView.contentOffset.y, scrollView.contentOffset.y,SCREEN_WIDTH - 2*scrollView.contentOffset.y, WidthScaleSize_H(150) - scrollView.contentOffset.y);
+
 }
 - (void)myAccountAction {
     

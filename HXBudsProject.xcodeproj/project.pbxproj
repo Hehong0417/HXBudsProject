@@ -2479,6 +2479,7 @@
 				TargetAttributes = {
 					0DEA8EF51E486FC10052C459 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = C27P4G356D;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
@@ -3084,8 +3085,8 @@
 				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_ENTITLEMENTS = HXBudsProject/HXBudsProject.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = C27P4G356D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3110,8 +3111,8 @@
 				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = MENYA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "58c48e58-35b2-40e3-ab41-e8f483ac8bd9";
+				PROVISIONING_PROFILE_SPECIFIER = applePayAPPStore;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -3125,8 +3126,8 @@
 				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_ENTITLEMENTS = HXBudsProject/HXBudsProject.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = C27P4G356D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3151,8 +3152,8 @@
 				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = MENYA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "58c48e58-35b2-40e3-ab41-e8f483ac8bd9";
+				PROVISIONING_PROFILE_SPECIFIER = applePayAPPStore;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
